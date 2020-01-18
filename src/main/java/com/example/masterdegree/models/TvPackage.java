@@ -7,13 +7,19 @@ public class TvPackage {
     private String name;
     private Double price;
     private String type;
-    private List<ChannelObject> canalObject;
+    private String link;
+    private String term;
+    private String status;
+    private List<ChannelObject> channelsObject;
 
-    public TvPackage(String name, Double price, String type, List<ChannelObject> canalObject) {
+    public TvPackage(String name, Double price, String type, String link, String term, String status, List<ChannelObject> channelsObject) {
         this.name = name;
         this.price = price;
         this.type = type;
-        this.canalObject = canalObject;
+        this.link = link;
+        this.term = term;
+        this.status = status;
+        this.channelsObject = channelsObject;
     }
 
     public String getName() {
@@ -40,11 +46,35 @@ public class TvPackage {
         this.type = type;
     }
 
-    public List<ChannelObject> getCanalObject() {
-        return canalObject;
+    public String getLink() {
+        return link;
     }
 
-    public void setCanalObject(List<ChannelObject> canalObject) {
-        this.canalObject = canalObject;
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getTerm() {
+        return term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public List<ChannelObject> getChannelsObject() {
+        return channelsObject;
+    }
+
+    public void setChannelsObject(List<ChannelObject> channelsObject) {
+        this.channelsObject = channelsObject;
     }
 }

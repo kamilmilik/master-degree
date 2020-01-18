@@ -1,0 +1,29 @@
+{
+  "name": "master-degree-react-front",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.19.1",
+    "formik": "^2.1.2",
+    "rc-slider": "^8.7.1",
+    "react": "^16.12.0",
+    "react-addons-update": "^15.6.2",
+    "react-dom": "^16.12.0",
+    "react-form-stepper": "^1.2.3",
+    "react-image-picker": "^1.1.1",
+    "react-input-range": "^1.3.0",
+    "react-rangeslider": "^2.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "0.9.x",
+    "react-scroll": "^1.7.15",
+    "redux": "^4.0.5",
+    "semantic-ui-react": "^0.88.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

@@ -18,14 +18,15 @@ public class MongoDBConfig {
     @Bean
     CommandLineRunner commandLineRunner(OperatorsRepository operatorsRepository, ChannelsRepository channelsRepository){
         return args -> {
-            operatorsRepository.deleteAll();
-            Channel eurosport1 = new Channel("Eurosport1", "Kanal euro sport", "src img");
-            Channel nsport = new Channel("nsport", "Kanal n sport", "src img");
+            // ladowac z pliku json
+            // endpoint aktualizujacy dana oferte
+            Channel eurosport1 = new Channel("Eurosport1", "Kanal euro sport", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Eurosport_Logo.svg/1200px-Eurosport_Logo.svg.png");
+            Channel nsport = new Channel("nsport", "Kanal n sport", "http://ocdn.eu/images/program-tv/OWI7MDA_/518e09a968bd9238a72d45e37e9c8ac4.png");
             List<Channel> channelList = new ArrayList<>();
             channelList.add(eurosport1); channelList.add(nsport);
 
-            Channel euroNews = new Channel("EuroNews", "Informacja euro", "src");
-            Channel bloomberg = new Channel("Bloomberg", "Informacja bloom", "src");
+            Channel euroNews = new Channel("EuroNews", "Informacja euro", "https://static.ftpn.pl/imgcache/640x365/c//uploads/cropit/15578520321d3a3fff9e90f37a15a1de260cc0b3720c0b1a5ce8bcb2750fb9fe38295e4141.jpg");
+            Channel bloomberg = new Channel("Bloomberg", "Informacja bloom", "https://pbs.twimg.com/profile_images/1016326195221352450/KCcdUN0v.jpg");
             List<Channel> channelList1 = new ArrayList<>();
             channelList1.add(euroNews); channelList1.add(bloomberg);
 
@@ -34,15 +35,21 @@ public class MongoDBConfig {
             List<ChannelObject> canalObjects = new ArrayList<>();
             canalObjects.add(canalObjectSport); canalObjects.add(canalObjectInfo);
 
-            TvPackage tvPackageComfort = new TvPackage("Comfort +", 39.99, "main", canalObjects);
+            String canalPlusComfortLink = "https://sklep.pl.canalplus.com/oferta/comfortplus-ns";
+            TvPackage tvPackageComfort = new TvPackage("Comfort +", 39.99, "main", canalPlusComfortLink, "24 miesiace", "0", canalObjects);
             List<TvPackage> tvPackageList = new ArrayList<>();
             tvPackageList.add(tvPackageComfort);
-            operatorsRepository.save(new Operator(ObjectId.get(), "Canal+", tvPackageList));
-            operatorsRepository.save(new Operator(ObjectId.get(), "nc+", tvPackageList));
+            String canalPlusImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Platforma_Canal%2B.svg/1200px-Platforma_Canal%2B.svg.png";
+            operatorsRepository.deleteAll();
+            operatorsRepository.save(new Operator(ObjectId.get(), "Canal+", canalPlusImg, tvPackageList));
+            operatorsRepository.save(new Operator(ObjectId.get(), "nc+", canalPlusImg, tvPackageList));
+            operatorsRepository.save(new Operator(ObjectId.get(), "cyfrowy polsat+", canalPlusImg, tvPackageList));
 
             channelsRepository.deleteAll();
             channelsRepository.save(canalObjectSport);
             channelsRepository.save(canalObjectInfo);
+            ChannelObject canalObjectFilm = new ChannelObject("Film", channelList1);
+            channelsRepository.save(canalObjectFilm);
         };
     }
 

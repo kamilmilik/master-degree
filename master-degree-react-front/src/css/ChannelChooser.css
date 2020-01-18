@@ -1,0 +1,35 @@
+
+.mainChannelChooserContainer {
+    text-align:center;
+    position: relative;
+    height: fit-content;
+    min-height: 100% !important;
+}
+
+.categoryImageChannelSection{
+    min-height: 80px;
+    height: auto;
+}
+
+.channelsImageClicked, .channelsImageClicked:target{
+    background: rgba(0, 0, 0, .6);
+}
+
+.channelsImage:hover {
+    border: 3px solid green;
+}
+
+.categoryImageChannelSection  img{
+    zoom: 0.08;
+}
+.channelCategoryTitle{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.channelImageList{
+    width: 50%;
+    height: 100%;
+    float: right;
+}
