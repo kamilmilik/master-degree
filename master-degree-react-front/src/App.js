@@ -19,9 +19,9 @@ class App extends Component {
       // </div>
         <div className="App">
             <Navbar />
-                <Container className={"mainContainer"} >
+                <div className={"container-fluid"} id={"mainContainer"} >
                     <MainFormFilter />
-                </Container>
+                </div>
             {/*<Section*/}
             {/*    Component={MainFormFilter}*/}
             {/*    dark={true}*/}

@@ -8,40 +8,59 @@ class TermChooser extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
-
-
 
 
     render() {
         const {values} = this.props;
         return (
-               <div className={"mainTermChooserContainer"}>
-                   <ul>
-                       <li>
-                           <a>
-                               12
-                               <span>miesiecy</span>
-                           </a>
-                       </li>
-                       <li>
-                           <a>
-                               15
-                               <span>miesiecy</span>
-                           </a>
-                       </li>
-                       <li>
-                           <a>
-                               24
-                               <span>miesiece</span>
-                           </a>
-                       </li>
-                   </ul>
-               </div>
-        );
-    }
-}
+            <div className={"container-fluid"} id={"mainTermChooserContainer"}>
+                {/*<ul>*/}
+                {/*    <li>*/}
+                {/*        <a>*/}
+                {/*            12*/}
+                {/*            <span>miesiecy</span>*/}
+                {/*        </a>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <a>*/}
+                {/*            15*/}
+                {/*            <span>miesiecy</span>*/}
+                {/*        </a>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <a>*/}
+                {/*            24*/}
+                {/*            <span>miesiece</span>*/}
+                {/*        </a>*/}
+                {/*    </li>*/}
+                {/*</ul>*/}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <a>
+                                12
+                                <span>miesiecy</span>
+                            </a>
+                        </div>
+                            <div class="col-sm">
+                                <a>
+                                    15
+                                    <span>miesiecy</span>
+                                </a>
+                            </div>
+                            <div class="col-sm">
+                                <a>
+                                    24
+                                    <span>miesiece</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                );
+                }
+                }
 
-export default TermChooser;
+                export default TermChooser;

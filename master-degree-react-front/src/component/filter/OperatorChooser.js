@@ -30,7 +30,7 @@ class OperatorChooser extends Component {
     render() {
         const {values} = this.props;
         return (
-            <div className={'mainOperatorChooserContainer'}>
+            <div className={'container-fluid'} id={"mainOperatorChooserContainer"}>
                 <ImagePicker
                     images={values.operators.map((operator, indexOfOperator) => ({
                         src: operator.imgSrc, value: operator

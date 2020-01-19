@@ -55,7 +55,7 @@ class MainFormFilter extends Component {
         const values = {operators, channelsObject};
 
         return (
-            <div className={"mainFormFilter"}
+            <div className={"container-fluid"} id={"mainFormFilter"}
                 // style={{
                 //     backgroundColor: 'blue',
                 // }}

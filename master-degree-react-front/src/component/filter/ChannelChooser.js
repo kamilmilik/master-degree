@@ -61,12 +61,12 @@ class ChannelChooser extends Component {
     render() {
         const {values} = this.props;
         return (
-            <div className={"mainChannelChooserContainer"}
-                style={{
-                // zoom: 0.08,
-                // // display: 'flex',
-                // alignItems: 'center'
-            }}>
+            <div className={"container-fluid"} id={"mainChannelChooserContainer"}
+                 style={{
+                     // zoom: 0.08,
+                     // // display: 'flex',
+                     // alignItems: 'center'
+                 }}>
                 {
                     // values.channelsObject.map((channelObject)=>{
                     //     channelObject.channels.map((channel) =>{
@@ -95,28 +95,56 @@ class ChannelChooser extends Component {
                     //             })
                 }
 
+
                 {
                     values.channelsObject.map((channelObject) => (
-                        <div className={"categoryImageChannelSection"}>
-                            <div className={"channelCategoryTitle"}>
-                                <p>{channelObject.categoryName}</p>
-                            </div>
 
-                            <div className={"channelImageList"}>
-                                {
-                                    channelObject.channels.map((channel, i) => {
-                                        return (
-                                            <img
-                                                className={this.state.selectedChannel.indexOf(channel) !== -1 ? 'channelsImageClicked' : 'channelsImage'}
-                                                // <img className={this.state.active ? 'channelsImageClicked': ''}
-                                                src={channel.imgSrc}
-                                                onClick={() => this.handleClick(channel)}
-                                            />
-                                        )
-                                    })
-                                }
-                            </div>
+                        <div className={"mdb-lightbox no-margin"} id={"categoryImageChannelSection"}>
+                            <ul className={"list-group"}>
+                                <li className={"list-group-item"}>
+                                    <div className={"category-type-title"}>
+                                        <p>{channelObject.categoryName}</p>
+                                    </div>
+                                    <div className={"col-md-12"} id={"category-channel-list"}>
+                                        <div className="mdb-lightbox no-margin">
+
+                                            {
+                                                channelObject.channels.map((channel, i) => {
+                                                    return (
+                                                            <img
+                                                                className={this.state.selectedChannel.indexOf(channel) !== -1 ? 'channelsImageClicked' : 'channelsImage'}
+                                                                // <img className={this.state.active ? 'channelsImageClicked': ''}
+                                                                src={channel.imgSrc}
+                                                                onClick={() => this.handleClick(channel)}
+                                                            />
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            {/*<div className={"channelCategoryTitle"}>*/}
+                            {/*    <p>{channelObject.categoryName}</p>*/}
+                            {/*</div>*/}
+
+                            {/*<div className={"channelImageList"}>*/}
+                            {/*    {*/}
+                            {/*        channelObject.channels.map((channel, i) => {*/}
+                            {/*            return (*/}
+                            {/*                <img*/}
+                            {/*                    className={this.state.selectedChannel.indexOf(channel) !== -1 ? 'channelsImageClicked' : 'channelsImage'}*/}
+                            {/*                    // <img className={this.state.active ? 'channelsImageClicked': ''}*/}
+                            {/*                    src={channel.imgSrc}*/}
+                            {/*                    onClick={() => this.handleClick(channel)}*/}
+                            {/*                />*/}
+                            {/*            )*/}
+                            {/*        })*/}
+                            {/*    }*/}
+                            {/*</div>*/}
                         </div>
+
                     ))
                 }
 

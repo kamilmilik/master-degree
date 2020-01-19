@@ -1,26 +1,65 @@
 
-.mainChannelChooserContainer {
-    text-align:center;
-    position: relative;
-    height: fit-content;
-    min-height: 100% !important;
+/*#mainChannelChooserContainer {*/
+/*    text-align:center;*/
+/*    position: relative;*/
+/*    height: fit-content;*/
+/*    !*min-height: 100% !important;*!*/
+/*}*/
+
+/*.categoryImageChannelSection{*/
+/*    height: auto;*/
+
+/*}*/
+
+.category-type-title{
+    /*margin-right: 0px !important;*/
+    width: 50%;
+    /*min-height: 100% !important;*/
+    height: 100%;
+    float: left;
+    left: 0;
+
 }
 
-.categoryImageChannelSection{
-    min-height: 80px;
-    height: auto;
+/*.category-type-title p{*/
+/*    margin: auto;*/
+/*    width: 50%;*/
+/*    padding: 10px;*/
+/*}*/
+
+#category-channel-list{
+    width: 50%;
+    height: 100%;
+    float: right;
+    right: 0;
+    margin: 0;
 }
+
+/*.tv-channel-logo{*/
+/*    width: fit-content;*/
+/*    position: absolute;*/
+/*}*/
+
+/*.category-chanel-list img{*/
+/*    margin: auto;*/
+/*    width: 50%;*/
+
+
+/*}*/
 
 .channelsImageClicked, .channelsImageClicked:target{
     background: rgba(0, 0, 0, .6);
+    border: 3px solid green;
 }
 
 .channelsImage:hover {
     border: 3px solid green;
 }
 
-.categoryImageChannelSection  img{
-    zoom: 0.08;
+#categoryImageChannelSection  img{
+    width: 60px;
+    height: 100%;
+    margin-right: 10px;
 }
 .channelCategoryTitle{
     width: 50%;
@@ -28,8 +67,8 @@
     float: left;
 }
 
-.channelImageList{
-    width: 50%;
-    height: 100%;
-    float: right;
-}
+/*.channelImageList{*/
+/*    width: 50%;*/
+/*    height: 100%;*/
+/*    float: right;*/
+/*}*/
