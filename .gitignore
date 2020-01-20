@@ -213,3 +213,5 @@ python2-venv
 !/src/main/resources/application.properties
 /src/main/resources/application.properties
 !/package-lock.json
+
+node_modules
