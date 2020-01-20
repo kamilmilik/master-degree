@@ -3,7 +3,7 @@ import {Form, Button} from 'semantic-ui-react';
 import {Step, Stepper} from 'react-form-stepper';
 import ImagePicker from "react-image-picker";
 import 'react-image-picker/dist/index.css'
-import '../../css/OperatorChooser.css';
+import './OperatorChooser.css';
 
 
 class OperatorChooser extends Component {

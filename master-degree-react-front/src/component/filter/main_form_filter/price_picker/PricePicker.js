@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Slider, {createSliderWithTooltip} from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import '../../css/PricePicker.css';
+import './PricePicker.css';
 
 
 // const Range = createSliderWithTooltip(Slider.Range);

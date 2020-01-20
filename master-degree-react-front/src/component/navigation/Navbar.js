@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "../../logo.svg";
 import { Link, animateScroll as scroll } from "react-scroll";
-import '../../css/Navigation.css';
+import './Navigation.css';
 
 export default class Navbar extends Component {
     scrollToTop = () => {

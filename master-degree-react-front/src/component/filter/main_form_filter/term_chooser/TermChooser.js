@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import 'react-image-picker/dist/index.css'
-import App from "../../App";
-import '../../css/App.css';
-import '../../css/TermChooser.css';
+import App from "../../../../App";
+import '../../../../App.css';
+import './TermChooser.css';
 
 class TermChooser extends Component {
 

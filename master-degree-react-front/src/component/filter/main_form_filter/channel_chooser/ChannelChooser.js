@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import ImagePicker from "react-image-picker";
 import 'react-image-picker/dist/index.css'
-import App from "../../App";
-import '../../css/App.css';
-import '../../css/ChannelChooser.css';
+import App from "../../../../App";
+import '../../../../App.css';
+import './ChannelChooser.css';
 
 const imageList = ['https://pbs.twimg.com/profile_images/1016326195221352450/KCcdUN0v.jpg', 'https://pbs.twimg.com/profile_images/1016326195221352450/KCcdUN0v.jpg']
 

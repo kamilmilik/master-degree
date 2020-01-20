@@ -13,12 +13,13 @@
 
 .category-type-title{
     /*margin-right: 0px !important;*/
-    width: 50%;
+    width: 10%;
     /*min-height: 100% !important;*/
     height: 100%;
-    float: left;
-    left: 0;
-
+    /*float: left;*/
+    /*left: 0;*/
+    display: table-cell;
+    vertical-align: middle;
 }
 
 /*.category-type-title p{*/
@@ -30,9 +31,11 @@
 #category-channel-list{
     width: 50%;
     height: 100%;
-    float: right;
+    /*float: right;*/
     right: 0;
     margin: 0;
+    display: table-cell;
+    text-align: left;
 }
 
 /*.tv-channel-logo{*/
@@ -57,14 +60,17 @@
 }
 
 #categoryImageChannelSection  img{
-    width: 60px;
-    height: 100%;
+    width: 4em;
+    height: 3em;
     margin-right: 10px;
 }
 .channelCategoryTitle{
     width: 50%;
     height: 100%;
     float: left;
+}
+.list-group-item{
+    display: table;
 }
 
 /*.channelImageList{*/

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import OperatorDataService from "../../service/OperatorDataService";
-import OperatorChooser from "./OperatorChooser";
-import PricePicker from "./PricePicker";
-import ChannelDataService from "../../service/ChannelDataService";
+import OperatorDataService from "../../../service/OperatorDataService";
+import OperatorChooser from "./operator_chooser/OperatorChooser";
+import PricePicker from "./price_picker/PricePicker";
+import ChannelDataService from "../../../service/ChannelDataService";
 import {Link, animateScroll as scroll} from "react-scroll";
-import ChannelChooser from "./ChannelChooser";
-import TermChooser from "./TermChooser";
-import '../../css/MainFormFilter.css';
+import ChannelChooser from "./channel_chooser/ChannelChooser";
+import TermChooser from "./term_chooser/TermChooser";
+import './MainFormFilter.css';
 
 
 class MainFormFilter extends Component {
