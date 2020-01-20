@@ -36,21 +36,21 @@ class TermChooser extends Component {
                 {/*        </a>*/}
                 {/*    </li>*/}
                 {/*</ul>*/}
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm">
                             <a>
                                 12
                                 <span>miesiecy</span>
                             </a>
                         </div>
-                            <div class="col-sm">
+                            <div className="col-sm">
                                 <a>
                                     15
                                     <span>miesiecy</span>
                                 </a>
                             </div>
-                            <div class="col-sm">
+                            <div className="col-sm">
                                 <a>
                                     24
                                     <span>miesiece</span>

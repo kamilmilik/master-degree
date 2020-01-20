@@ -72,6 +72,17 @@
 .list-group-item{
     display: table;
 }
+#category-button {
+    background:transparent none !important;
+}
+
+#category-button:hover {
+    background: #E0E1E3 !important;
+}
+
+#category-button-clicked {
+    background: #E0E1E3 !important;
+}
 
 /*.channelImageList{*/
 /*    width: 50%;*/
