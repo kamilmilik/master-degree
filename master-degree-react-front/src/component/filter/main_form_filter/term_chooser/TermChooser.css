@@ -1,13 +1,9 @@
-/*.mainTermChooserContainer{*/
-/*    height: 30%;*/
-/*}*/
-
-#mainTermChooserContainer{
+#main-term-chooser-container{
     margin-top: 45px;
     text-align: center;
 }
 
-#mainTermChooserContainer li {
+#term-text {
     float: left;
     position: relative;
     padding: 0 18px 0 55px;
@@ -16,7 +12,7 @@
     cursor: pointer;
 }
 
-#mainTermChooserContainer a > span {
+#term-text a > span {
     display: block;
     font-size: 18px;
 }

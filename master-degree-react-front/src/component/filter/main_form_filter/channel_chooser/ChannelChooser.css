@@ -1,32 +1,9 @@
-
-/*#mainChannelChooserContainer {*/
-/*    text-align:center;*/
-/*    position: relative;*/
-/*    height: fit-content;*/
-/*    !*min-height: 100% !important;*!*/
-/*}*/
-
-/*.categoryImageChannelSection{*/
-/*    height: auto;*/
-
-/*}*/
-
 .category-type-title{
-    /*margin-right: 0px !important;*/
     width: 10%;
-    /*min-height: 100% !important;*/
     height: 100%;
-    /*float: left;*/
-    /*left: 0;*/
     display: table-cell;
     vertical-align: middle;
 }
-
-/*.category-type-title p{*/
-/*    margin: auto;*/
-/*    width: 50%;*/
-/*    padding: 10px;*/
-/*}*/
 
 #category-channel-list{
     width: 50%;
@@ -38,41 +15,26 @@
     text-align: left;
 }
 
-/*.tv-channel-logo{*/
-/*    width: fit-content;*/
-/*    position: absolute;*/
-/*}*/
 
-/*.category-chanel-list img{*/
-/*    margin: auto;*/
-/*    width: 50%;*/
-
-
-/*}*/
-
-.channelsImageClicked, .channelsImageClicked:target{
+.channel-image-clicked, .channel-image-clicked:target{
     background: rgba(0, 0, 0, .6);
     border: 3px solid green;
 }
 
-.channelsImage:hover {
+.channel-image:hover {
     border: 3px solid green;
 }
 
-#categoryImageChannelSection  img{
+#category-image-channel-section  img{
     width: 4em;
     height: 3em;
     margin-right: 10px;
 }
-.channelCategoryTitle{
-    width: 50%;
-    height: 100%;
-    float: left;
-}
+
 .list-group-item{
     display: table;
 }
-#category-button {
+#category-button #category-button:target{
     background:transparent none !important;
 }
 
@@ -84,8 +46,3 @@
     background: #E0E1E3 !important;
 }
 
-/*.channelImageList{*/
-/*    width: 50%;*/
-/*    height: 100%;*/
-/*    float: right;*/
-/*}*/

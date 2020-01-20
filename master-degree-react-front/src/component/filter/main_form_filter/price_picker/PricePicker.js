@@ -24,7 +24,7 @@ class PricePicker extends Component {
 
     render() {
         return (
-            <div className={"container-fluid"} id={"mainPricePickerContainer"}>
+            <div className={"container-fluid"} id={"main-price-picker-container"}>
                 <SliderWithTooltip
                     min={0}
                     max={400}

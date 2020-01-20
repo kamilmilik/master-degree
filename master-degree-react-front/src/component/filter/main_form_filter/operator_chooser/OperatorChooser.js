@@ -15,6 +15,7 @@ class OperatorChooser extends Component {
             selectedOperators: [],
         };
         this.onPick = this.onPick.bind(this)
+        this.handleImageClick = this.handleImageClick.bind(this)
     }
 
 
@@ -27,17 +28,45 @@ class OperatorChooser extends Component {
         this.setState({selectedOperators: images});
     }
 
+    handleImageClick(operator) {
+        const selectedArray = this.state.selectedOperators.slice();
+        const indexOfSelected = selectedArray.indexOf(operator);
+        if(indexOfSelected !== -1) {
+            selectedArray.splice(indexOfSelected, 1);
+        } else {
+            selectedArray.push(operator);
+        }
+        this.setState({selectedOperators: selectedArray})
+    }
+
     render() {
         const {values} = this.props;
         return (
-            <div className={'container-fluid'} id={"mainOperatorChooserContainer"}>
-                <ImagePicker
-                    images={values.operators.map((operator, indexOfOperator) => ({
-                        src: operator.imgSrc, value: operator
-                    }))}
-                    onPick={this.onPick}
-                    multiple
-                />
+            <div className={'container-fluid'} id={"main-operator-chooser-container"}>
+                <div className={"col-md-12"} id={"operators-list"}>
+                    <div className="mdb-lightbox no-margin">
+
+                        {
+                            values.operators.map((operator) => {
+                                return (
+                                    <img
+                                        className={this.state.selectedOperators.indexOf(operator) !== -1 ? 'operator-image-clicked' : 'operator-image'}
+                                        src={operator.imgSrc}
+                                        onClick={() => this.handleImageClick(operator)}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+
+                {/*<ImagePicker*/}
+                {/*    images={values.operators.map((operator, indexOfOperator) => ({*/}
+                {/*        src: operator.imgSrc, value: operator*/}
+                {/*    }))}*/}
+                {/*    onPick={this.onPick}*/}
+                {/*    multiple*/}
+                {/*/>*/}
             </div>
 
         )

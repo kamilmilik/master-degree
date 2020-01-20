@@ -5,13 +5,6 @@ import App from "../../../../App";
 import '../../../../App.css';
 import './ChannelChooser.css';
 import {Button} from "semantic-ui-react";
-
-const imageList = ['https://pbs.twimg.com/profile_images/1016326195221352450/KCcdUN0v.jpg', 'https://pbs.twimg.com/profile_images/1016326195221352450/KCcdUN0v.jpg']
-
-function getImage() {
-    return {active: false};
-}
-
 class ChannelChooser extends Component {
 
     constructor(props) {
@@ -20,10 +13,8 @@ class ChannelChooser extends Component {
             channelsObject: [],
             selectedChannels: [],
             selectedCategories: [],
-            imageList: [],
-            active: [],
         };
-        this.handleImageClick = this.handleImageClick.bind(this)
+        this.handleImageClick = this.handleImageClick.bind(this);
         this.handleCategoryClick = this.handleCategoryClick.bind(this)
     }
 
@@ -72,12 +63,12 @@ class ChannelChooser extends Component {
     render() {
         const {values} = this.props;
         return (
-            <div className={"container-fluid"} id={"mainChannelChooserContainer"}>
+            <div className={"container-fluid"} id={"main-channel-chooser-container"}>
 
                 {
                     values.channelsObject.map((channelObject) => (
 
-                        <div className={"mdb-lightbox no-margin"} id={"categoryImageChannelSection"}>
+                        <div className={"mdb-lightbox no-margin"} id={"category-image-channel-section"}>
                             <ul className={"list-group"}>
                                 <li className={"list-group-item"}>
                                     <div className={"category-type-title"}>
@@ -93,7 +84,7 @@ class ChannelChooser extends Component {
                                                 channelObject.channels.map((channel, i) => {
                                                     return (
                                                         <img
-                                                            className={this.state.selectedChannels.indexOf(channel) !== -1 ? 'channelsImageClicked' : 'channelsImage'}
+                                                            className={this.state.selectedChannels.indexOf(channel) !== -1 ? 'channel-image-clicked' : 'channel-image'}
                                                             src={channel.imgSrc}
                                                             onClick={() => this.handleImageClick(channel)}
                                                         />

@@ -212,3 +212,4 @@ python3-venv
 python2-venv
 !/src/main/resources/application.properties
 /src/main/resources/application.properties
+!/package-lock.json
