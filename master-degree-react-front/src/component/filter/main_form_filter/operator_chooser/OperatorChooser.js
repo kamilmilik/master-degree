@@ -4,6 +4,8 @@ import {Step, Stepper} from 'react-form-stepper';
 import ImagePicker from "react-image-picker";
 import 'react-image-picker/dist/index.css'
 import './OperatorChooser.css';
+import {setAllChannels, setAllOperators, setSelectedOperators} from "../../../../reducers/actions/actions";
+import {connect} from "react-redux";
 
 
 class OperatorChooser extends Component {
@@ -25,18 +27,20 @@ class OperatorChooser extends Component {
             console.log("Selected ");
             console.log(selectedOperator);
         });
-        this.setState({selectedOperators: images});
+        // this.setState({selectedOperators: images});
+        //     this.props.setSelectedOperators(image)
     }
 
     handleImageClick(operator) {
-        const selectedArray = this.state.selectedOperators.slice();
+        const selectedArray = this.props.selectedOperators.slice();
         const indexOfSelected = selectedArray.indexOf(operator);
         if(indexOfSelected !== -1) {
             selectedArray.splice(indexOfSelected, 1);
         } else {
             selectedArray.push(operator);
         }
-        this.setState({selectedOperators: selectedArray})
+        // this.setState({selectedOperators: selectedArray})
+        this.props.setSelectedOperators(selectedArray);
     }
 
     render() {
@@ -50,7 +54,7 @@ class OperatorChooser extends Component {
                             values.operators.map((operator) => {
                                 return (
                                     <img
-                                        className={this.state.selectedOperators.indexOf(operator) !== -1 ? 'operator-image-clicked' : 'operator-image'}
+                                        className={this.props.selectedOperators.indexOf(operator) !== -1 ? 'operator-image-clicked' : 'operator-image'}
                                         src={operator.imgSrc}
                                         onClick={() => this.handleImageClick(operator)}
                                     />
@@ -59,18 +63,26 @@ class OperatorChooser extends Component {
                         }
                     </div>
                 </div>
-
-                {/*<ImagePicker*/}
-                {/*    images={values.operators.map((operator, indexOfOperator) => ({*/}
-                {/*        src: operator.imgSrc, value: operator*/}
-                {/*    }))}*/}
-                {/*    onPick={this.onPick}*/}
-                {/*    multiple*/}
-                {/*/>*/}
             </div>
 
         )
     }
 }
 
-export default OperatorChooser;
+const mapStateToProps = (state) => {
+    return {
+        operators: state.formReducer.operators,
+        selectedOperators: state.formReducer.selectedOperators
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+
+    return {
+        setSelectedOperators: (selectedOperators) => {
+            dispatch(setSelectedOperators(selectedOperators))
+        },
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(OperatorChooser)

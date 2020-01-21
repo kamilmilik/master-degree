@@ -1,152 +1,88 @@
-
 import {
     ADD_TO_CART,
     REMOVE_ITEM,
     SUB_QUANTITY,
     ADD_QUANTITY,
     ADD_SHIPPING,
-    ADD_ORDER_STATE, CLEAR_ADDED_ITEMS, SET_IS_ADMIN, SET_IS_LOGIN
+    ADD_ORDER_STATE,
+    CLEAR_ADDED_ITEMS,
+    SET_IS_ADMIN,
+    SET_IS_LOGIN,
+    FILTER_OPERATOR,
+    SET_ALL_OPERATORS,
+    SET_ALL_CHANNELS,
+    SET_SELECTED_OPERATORS, SET_SELECTED_CHANNELS, SET_SELECTED_CATEGORIES, SET_SELECTED_PRICE, SET_SELECTED_TERM
 } from './actions/actions-type'
+import {DEFAULT_PRICE_FILTER_VALUE} from "../component/filter/main_form_filter/Const";
 
 
 const initState = {
-    items: [],
-    addedItems:[],
-    order: [],
-    total: 0,
-    isAdmin: false,
-    isLogin: false
-
+    operators: [],
+    channelsObject: [],
+    selectedChannels: [],
+    selectedCategories: [],
+    selectedOperators: [],
+    selectedPrice: DEFAULT_PRICE_FILTER_VALUE,
+    selectedTerm: ''
 };
 
+// reducers: these are functions that implement the behavior of the actions. They change the state of the app, based on the action description and the state change description.
+const formReducer = (state = initState, action) => {
 
-const formReducer = (state = initState, action)=>{
-
-    //INSIDE HOME COMPONENT
-    if(action.type === ADD_TO_CART){
-        let addedItem = action.product;
-        //check if the action id exists in the addedItems
-        let existed_item= state.addedItems.find(item=> action.product.id === item.id);
-        if(existed_item)
-        {
-            // TODO zmiana
-            // addedItem.quantity += 1;
-            existed_item.quantity += 1;
-            return{
+    switch (action.type) {
+        case SET_ALL_OPERATORS: {
+            let operators = action.operators;
+            return {
                 ...state,
-                total: state.total + existed_item.price
-            }
+                operators: operators
+            };
         }
-        else{
-            addedItem.quantity = 1;
-            //calculating the total
-            // TODO zmiana
-            let newTotal = state.total + addedItem.price;
-
-            return{
+        case SET_ALL_CHANNELS: {
+            let channels = action.channelsObject;
+            return {
                 ...state,
-                addedItems: [...state.addedItems, addedItem],
-                total : newTotal
-            }
-
+                channelsObject: channels
+            };
         }
-    }
-    if(action.type === REMOVE_ITEM){
-        let itemToRemove= action.product;
-        let new_items = state.addedItems.filter(item=> action.product.id !== item.id);
-
-        //calculating the total
-        let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity );
-        console.log(itemToRemove);
-        return{
-            ...state,
-            addedItems: new_items,
-            total: newTotal
-        }
-    }
-    //INSIDE CART COMPONENT
-    if(action.type=== ADD_QUANTITY){
-        // TODO zmiana
-        // let addedItem = state.items.find(item=> item.id === action.id);
-        let addedItem = action.product;
-        addedItem.quantity += 1;
-        let newTotal = state.total + addedItem.price;
-        return{
-            ...state,
-            total: newTotal
-        }
-    }
-    if(action.type=== SUB_QUANTITY){
-        let addedItem = action.product;
-        //if the qt == 0 then it should be removed
-        if(addedItem.quantity === 1){
-            let new_items = state.addedItems.filter(item=>item.id !== action.product.id);
-            let newTotal = state.total - addedItem.price;
-            return{
+        case SET_SELECTED_CHANNELS: {
+            let selectedChannels = action.selectedChannels;
+            return {
                 ...state,
-                addedItems: new_items,
-                total: newTotal
-            }
+                selectedChannels: selectedChannels
+            };
         }
-        else {
-            addedItem.quantity -= 1;
-            let newTotal = state.total - addedItem.price;
-            return{
+        case SET_SELECTED_CATEGORIES: {
+            let selectedCategories = action.selectedCategories;
+            return {
                 ...state,
-                total: newTotal
-            }
+                selectedCategories: selectedCategories
+            };
+        }
+        case SET_SELECTED_PRICE: {
+            let selectedPrice = action.selectedPrice;
+            return {
+                ...state,
+                selectedPrice: selectedPrice
+            };
+        }
+        case SET_SELECTED_TERM: {
+            let selectedTerm = action.selectedTerm;
+            return {
+                ...state,
+                selectedTerm: selectedTerm
+            };
+        }
+        case SET_SELECTED_OPERATORS: {
+            let operators = action.selectedOperators;
+            return {
+                ...state,
+                selectedOperators: operators
+            };
         }
 
+        default:
+            return state
     }
-
-    if(action.type=== ADD_SHIPPING){
-        return{
-            ...state,
-            total: state.total + 6
-        }
-    }
-
-    if(action.type=== 'SUB_SHIPPING'){
-        return{
-            ...state,
-            total: state.total - 6
-        }
-    }
-
-    if (action.type === ADD_ORDER_STATE) {
-        let newOrder = action.order;
-        return {
-            ...state,
-            order: newOrder
-        };
-    }
-
-    if (action.type === CLEAR_ADDED_ITEMS) {
-        return {
-            ...state,
-            addedItems: [],
-            order: [],
-            total: 0
-        };
-    }
-
-    if (action.type === SET_IS_ADMIN) {
-        return {
-            ...state,
-            isAdmin: action.isAdmin
-        };
-    }
-
-    if (action.type === SET_IS_LOGIN) {
-        return {
-            ...state,
-            isLogin: action.isLogin
-        };
-    }
-
-    return {
-        ...state
-    };
 };
 
 export default formReducer

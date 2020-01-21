@@ -7,6 +7,9 @@ import {Link, animateScroll as scroll} from "react-scroll";
 import ChannelChooser from "./channel_chooser/ChannelChooser";
 import TermChooser from "./term_chooser/TermChooser";
 import './MainFormFilter.css';
+import SearchButton from "./search/SearchButton";
+import {setAllChannels, setAllOperators} from "../../../reducers/actions/actions";
+import {connect} from "react-redux";
 
 
 class MainFormFilter extends Component {
@@ -55,7 +58,7 @@ class MainFormFilter extends Component {
         const values = {operators, channelsObject};
 
         return (
-            <div className={"container-fluid"} id={"mainFormFilter"}
+            <div className={"container-fluid"} id={"main-formM-filter"}
                 // style={{
                 //     backgroundColor: 'blue',
                 // }}
@@ -75,10 +78,36 @@ class MainFormFilter extends Component {
                     values={{values}}
                 />
 
+                {/*<SearchButton*/}
+                {/*    values={values}*/}
+                {/*/>*/}
+
             </div>
 
         )
     }
 }
 
-export default MainFormFilter;
+// export default MainFormFilter;
+
+const mapStateToProps = (state) => {
+    return {
+        // To chyba bierze z tego reducera wpisane z palca dane i daje do items
+        operators: state.formReducer.operators,
+        channelsObject: state.formReducer.channelsObject
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+
+    return {
+        setAllOperators: (operators) => {
+            dispatch(setAllOperators(operators))
+        },
+        setAllChannels: (channels) => {
+            dispatch(setAllChannels(channels))
+        },
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(MainFormFilter)

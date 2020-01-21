@@ -4,10 +4,7 @@ import formReducer from "../reducers/formReducer";
 
 const rootReducer = combineReducers({
     // reducer: formReducer
-    form: formReducer
+    formReducer
 });
-
-const store = createStore(rootReducer);
-
 
 export default rootReducer;

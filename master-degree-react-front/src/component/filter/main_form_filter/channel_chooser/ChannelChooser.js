@@ -5,6 +5,8 @@ import App from "../../../../App";
 import '../../../../App.css';
 import './ChannelChooser.css';
 import {Button} from "semantic-ui-react";
+import {setSelectedCategories, setSelectedChannels} from "../../../../reducers/actions/actions";
+import {connect} from "react-redux";
 class ChannelChooser extends Component {
 
     constructor(props) {
@@ -20,7 +22,7 @@ class ChannelChooser extends Component {
 
 
     handleCategoryClick(channelObject) {
-        const selectedArray = this.state.selectedCategories.slice();
+        const selectedArray = this.props.selectedCategories.slice();
         const indexOfSelected = selectedArray.indexOf(channelObject.categoryName);
         if(indexOfSelected !== -1) {
             selectedArray.splice(indexOfSelected, 1);
@@ -29,11 +31,12 @@ class ChannelChooser extends Component {
             selectedArray.push(channelObject.categoryName);
             this.setAllChannelsFromCategorySelected(channelObject, true)
         }
-        this.setState({selectedCategories: selectedArray})
+        // this.setState({selectedCategories: selectedArray})
+        this.props.setSelectedCategories(selectedArray);
     }
 
     setAllChannelsFromCategorySelected(channelObject, isSelectAll) {
-        const selectedArray = this.state.selectedChannels.slice();
+        const selectedArray = this.props.selectedChannels.slice();
         channelObject.channels.map((channel, i) => {
             const indexOfSelected = selectedArray.indexOf(channel);
             if(isSelectAll){
@@ -46,18 +49,20 @@ class ChannelChooser extends Component {
                 }
             }
         });
-            this.setState({selectedChannels: selectedArray})
+            this.props.setSelectedChannels(selectedArray)
+            // this.setState({selectedChannels: selectedArray})
     }
 
     handleImageClick(channel) {
-        const selectedArray = this.state.selectedChannels.slice();
+        const selectedArray = this.props.selectedChannels.slice();
         const indexOfSelected = selectedArray.indexOf(channel);
         if(indexOfSelected !== -1) {
             selectedArray.splice(indexOfSelected, 1);
         } else {
             selectedArray.push(channel);
         }
-        this.setState({selectedChannels: selectedArray})
+        // this.setState({selectedChannels: selectedArray})
+        this.props.setSelectedChannels(selectedArray);
     }
 
     render() {
@@ -72,7 +77,7 @@ class ChannelChooser extends Component {
                             <ul className={"list-group"}>
                                 <li className={"list-group-item"}>
                                     <div className={"category-type-title"}>
-                                        <Button basic id={this.state.selectedCategories.indexOf(channelObject.categoryName) !== -1 ? "category-button-clicked" : "category-button"}
+                                        <Button basic id={this.props.selectedCategories.indexOf(channelObject.categoryName) !== -1 ? "category-button-clicked" : "category-button"}
                                         onClick={() => this.handleCategoryClick(channelObject)}>
                                             {channelObject.categoryName}
                                         </Button>
@@ -84,7 +89,7 @@ class ChannelChooser extends Component {
                                                 channelObject.channels.map((channel, i) => {
                                                     return (
                                                         <img
-                                                            className={this.state.selectedChannels.indexOf(channel) !== -1 ? 'channel-image-clicked' : 'channel-image'}
+                                                            className={this.props.selectedChannels.indexOf(channel) !== -1 ? 'channel-image-clicked' : 'channel-image'}
                                                             src={channel.imgSrc}
                                                             onClick={() => this.handleImageClick(channel)}
                                                         />
@@ -105,4 +110,27 @@ class ChannelChooser extends Component {
     }
 }
 
-export default ChannelChooser;
+// export default ChannelChooser;
+
+
+const mapStateToProps = (state) => {
+    return {
+        channelsObject: state.formReducer.channelsObject,
+        selectedCategories: state.formReducer.selectedCategories,
+        selectedChannels: state.formReducer.selectedChannels
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+
+    return {
+        setSelectedCategories: (selectedCategories) => {
+            dispatch(setSelectedCategories(selectedCategories))
+        },
+        setSelectedChannels: (selectedChannels) => {
+            dispatch(setSelectedChannels(selectedChannels))
+        },
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(ChannelChooser)

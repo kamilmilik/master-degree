@@ -9,6 +9,7 @@ import MainFormFilter from "./component/filter/main_form_filter/MainFormFilter";
 import Navbar from "./component/navigation/Navbar";
 import Section from "./component/navigation/Section";
 import dummyText from "./component/navigation/DummyText";
+import MainSearchResultComponent from "./component/search_result/MainSearchResultComponent";
 
 
 class App extends Component {
@@ -19,8 +20,9 @@ class App extends Component {
       // </div>
         <div className="App">
             <Navbar />
-                <div className={"container-fluid"} id={"mainContainer"} >
+                <div className={"container-fluid"} id={"main-container"} >
                     <MainFormFilter />
+                    <MainSearchResultComponent/>
                 </div>
             {/*<Section*/}
             {/*    Component={MainFormFilter}*/}

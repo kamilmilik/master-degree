@@ -1,0 +1,6 @@
+export const DEFAULT_PRICE_FILTER_VALUE = 200;
+export const MAX_PRICE_FILTER_VALUE = 400;
+export const MIN_PRICE_FILTER_VALUE = 0;
+export const NUMBER_OF_MONTHS_VALUE_1 = 12;
+export const NUMBER_OF_MONTHS_VALUE_2 = 15;
+export const NUMBER_OF_MONTHS_VALUE_3 = 24;

@@ -38,8 +38,13 @@
     background:transparent none !important;
 }
 
+.ui.basic.button, .ui.basic.buttons .button {
+    border-radius: 12px !important;
+}
+
 #category-button:hover {
     background: #E0E1E3 !important;
+    border-radius: 12px
 }
 
 #category-button-clicked {
