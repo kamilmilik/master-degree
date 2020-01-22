@@ -1,15 +1,15 @@
 import React from "react";
-import './Navigation.css';
+import './Section.css';
 
 
-export default function Section({Component, dark, id}) {
+export default function Section({Component, dark, id, ref}) {
 
 
 
 
     return (
         <div className={"section" + (dark ? " section-dark" : "")}>
-            <div className="section-content" id={id}>
+            <div className="section-content" id={id} ref={ref}>
                 <Component/>
             </div>
         </div>

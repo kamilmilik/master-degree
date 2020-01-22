@@ -42,7 +42,6 @@ class PricePicker extends Component {
     }
 }
 
-// export default PricePicker;
 const mapStateToProps = (state) => {
     return {
         maxPrice: state.formReducer.selectedPrice

@@ -1,8 +1,8 @@
 import {
     SET_ALL_CHANNELS,
-    SET_ALL_OPERATORS,
+    SET_ALL_OPERATORS, SET_SECTION1_REF, SET_SECTION2_REF,
     SET_SELECTED_CATEGORIES,
-    SET_SELECTED_CHANNELS,
+    SET_SELECTED_CHANNELS, SET_SELECTED_CHANNELS_BY_CATEGORY,
     SET_SELECTED_OPERATORS, SET_SELECTED_PRICE, SET_SELECTED_TERM
 } from "./actions-type";
 
@@ -35,6 +35,13 @@ export const setSelectedChannels=(selectedChannels)=>{
     }
 };
 
+export const setSelectedChannelsByCategory=(selectedChannelsByCategory)=>{
+    return{
+        type: SET_SELECTED_CHANNELS_BY_CATEGORY,
+        selectedChannelsByCategory: selectedChannelsByCategory
+    }
+};
+
 export const setSelectedCategories=(selectedCategories)=>{
     return{
         type: SET_SELECTED_CATEGORIES,
@@ -55,4 +62,3 @@ export const setSelectedPrice=(selectedPrice)=>{
         selectedPrice: selectedPrice
     }
 };
-

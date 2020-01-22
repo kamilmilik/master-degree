@@ -11,19 +11,32 @@ import {
     FILTER_OPERATOR,
     SET_ALL_OPERATORS,
     SET_ALL_CHANNELS,
-    SET_SELECTED_OPERATORS, SET_SELECTED_CHANNELS, SET_SELECTED_CATEGORIES, SET_SELECTED_PRICE, SET_SELECTED_TERM
+    SET_SELECTED_OPERATORS,
+    SET_SELECTED_CHANNELS,
+    SET_SELECTED_CATEGORIES,
+    SET_SELECTED_PRICE,
+    SET_SELECTED_TERM,
+    SET_SECTION1_REF, SET_SECTION2_REF, SET_SELECTED_CHANNELS_BY_CATEGORY
 } from './actions/actions-type'
 import {DEFAULT_PRICE_FILTER_VALUE} from "../component/filter/main_form_filter/Const";
+import React from "react";
 
 
 const initState = {
     operators: [],
     channelsObject: [],
+    selectedChannelsByCategory: {},
+    //     [{
+    //     category:'',
+    //     selectedChannels: ''
+    // }],
     selectedChannels: [],
     selectedCategories: [],
     selectedOperators: [],
     selectedPrice: DEFAULT_PRICE_FILTER_VALUE,
-    selectedTerm: ''
+    selectedTerm: '',
+    section1Ref: React.createRef(),
+    section2ef: React.createRef()
 };
 
 // reducers: these are functions that implement the behavior of the actions. They change the state of the app, based on the action description and the state change description.
@@ -49,6 +62,21 @@ const formReducer = (state = initState, action) => {
             return {
                 ...state,
                 selectedChannels: selectedChannels
+            };
+        }
+        case SET_SELECTED_CHANNELS_BY_CATEGORY: {
+            let selectedChannelsByCategory = Object.assign({}, action.selectedChannelsByCategory)
+
+            // Object.keys(selectedChannelsByCategory).map(function (key) {
+            //     //     let channel = this.props.selectedChannelsByCategory[key];
+            //     //     return channel.name + ", ";
+            //     //     return[key]: selectedChannelsByCategory[key]
+            //
+            //     });
+
+            return {
+                ...state,
+                selectedChannelsByCategory: selectedChannelsByCategory
             };
         }
         case SET_SELECTED_CATEGORIES: {
@@ -79,6 +107,7 @@ const formReducer = (state = initState, action) => {
                 selectedOperators: operators
             };
         }
+
 
         default:
             return state

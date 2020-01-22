@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import {Form, Button} from 'semantic-ui-react';
-import {Step, Stepper} from 'react-form-stepper';
-import ImagePicker from "react-image-picker";
 import 'react-image-picker/dist/index.css'
 import './OperatorChooser.css';
-import {setAllChannels, setAllOperators, setSelectedOperators} from "../../../../reducers/actions/actions";
+import {setSelectedOperators} from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
 
 

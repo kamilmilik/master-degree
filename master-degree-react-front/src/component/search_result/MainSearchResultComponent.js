@@ -11,26 +11,46 @@ class MainSearchResultComponent extends Component {
 
     render() {
 
+        let selectedChannelsByCategory = this.props.selectedChannelsByCategory
         return (
             <div className={"container-fluid"} id={"main-search-result-component-content"}>
-                <div id={"result-container"}>
+                <div className={"result-container"}>
                     <div>Filters</div>
                     <div>Okres: {this.props.selectedTerm}</div>
-                    <div>Cena: {this.props.selectedPrice}</div>
+                    <div>Cena: {this.props.selectedPrice}zl</div>
                     <div>Operator:
                         {this.props.selectedOperators.map((operator) => {
-                                return  operator.name + ", "
+                            return operator.name + ", "
                         })}
                     </div>
                     <div>Kanaly:
-                        {this.props.selectedChannels.map((channel) =>{
-                            return channel.name + ", "
-                        })}
+                        {/*{this.props.selectedChannels.map((channel) =>{*/}
+                        {/*    return channel.name + ", "*/}
+                        {/*})}*/}
+
+                        {/*{*/}
+                        {/*    if(this.props.selectedChannelsByCategory !== 'undefined') {*/}
+                        {/*        return ''*/}
+                        {/*    } else {*/}
+                        {/*            return ''*/}
+                        {/*    }*/}
+                        {/*}*/}
+                        {
+                            Object.keys(selectedChannelsByCategory).map(function (key) {
+                            let selectedChannels = selectedChannelsByCategory[key];
+                            return selectedChannels.map((channel) =>{
+                                return channel.name + ", ";
+                            })
+                            // return channel.name + ", ";
+                        })
+
+
+                        }
                     </div>
                 </div>
             </div>
 
-        )
+        );
     }
 }
 
@@ -39,7 +59,8 @@ const mapStateToProps = (state) => {
         selectedTerm: state.formReducer.selectedTerm,
         selectedPrice: state.formReducer.selectedPrice,
         selectedOperators: state.formReducer.selectedOperators,
-        selectedChannels: state.formReducer.selectedChannels
+        selectedChannels: state.formReducer.selectedChannels,
+        selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory
     };
 };
 

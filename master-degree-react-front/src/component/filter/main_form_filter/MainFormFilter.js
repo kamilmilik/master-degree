@@ -3,7 +3,6 @@ import OperatorDataService from "../../../service/OperatorDataService";
 import OperatorChooser from "./operator_chooser/OperatorChooser";
 import PricePicker from "./price_picker/PricePicker";
 import ChannelDataService from "../../../service/ChannelDataService";
-import {Link, animateScroll as scroll} from "react-scroll";
 import ChannelChooser from "./channel_chooser/ChannelChooser";
 import TermChooser from "./term_chooser/TermChooser";
 import './MainFormFilter.css';
@@ -49,20 +48,12 @@ class MainFormFilter extends Component {
             )
     }
 
-    handleChange = input => event => {
-        this.setState({[input]: event.target.value})
-    };
-
     render() {
         const {operators, channelsObject} = this.state;
         const values = {operators, channelsObject};
 
         return (
-            <div className={"container-fluid"} id={"main-formM-filter"}
-                // style={{
-                //     backgroundColor: 'blue',
-                // }}
-            >
+            <div className={"container-fluid"} id={"main-formm-filter"}>
                 <OperatorChooser
                     values={values}
                 />
@@ -78,17 +69,15 @@ class MainFormFilter extends Component {
                     values={{values}}
                 />
 
-                {/*<SearchButton*/}
-                {/*    values={values}*/}
-                {/*/>*/}
+                <SearchButton
+                    values={values}
+                />
 
             </div>
 
         )
     }
 }
-
-// export default MainFormFilter;
 
 const mapStateToProps = (state) => {
     return {
