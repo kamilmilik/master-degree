@@ -1,8 +1,8 @@
 package com.example.masterdegree.controllers;
 
-import com.example.masterdegree.models.Channel;
-import com.example.masterdegree.models.ChannelObject;
-import com.example.masterdegree.repositories.ChannelsRepository;
+import com.example.masterdegree.models.ChannelsGroupByCategory;
+import com.example.masterdegree.services.ChannelsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,20 +12,21 @@ import java.util.List;
 @RequestMapping("/rest/channels")
 public class ChannelsController {
 
-    private ChannelsRepository channelsRepository;
+    private ChannelsService channelsService;
 
-    public ChannelsController(ChannelsRepository channelsRepository) {
-        this.channelsRepository = channelsRepository;
+    @Autowired
+    public ChannelsController(ChannelsService channelsService){
+        this.channelsService = channelsService;
     }
 
     @GetMapping("/all")
-    public List<ChannelObject> getAll(){
-        return channelsRepository.findAll();
+    public List<ChannelsGroupByCategory> getAll(){
+        return channelsService.findAll();
     }
 
     @PostMapping("/")
-    public ChannelObject createChannel(@Valid @RequestBody ChannelObject channelObject){
-        channelsRepository.save(channelObject);
-        return channelObject;
+    public ChannelsGroupByCategory createChannel(@Valid @RequestBody ChannelsGroupByCategory channelsGroupByCategory){
+        channelsService.save(channelsGroupByCategory);
+        return channelsGroupByCategory;
     }
 }

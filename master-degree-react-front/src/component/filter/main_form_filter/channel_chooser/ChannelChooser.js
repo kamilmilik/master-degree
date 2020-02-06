@@ -10,6 +10,7 @@ import {
 } from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
 
+// TODO refactor, przeniesc czesc funkcjonalnosci moze do jakiejs klasy o nazwie service
 class ChannelChooser extends Component {
 
     constructor(props) {
@@ -25,17 +26,17 @@ class ChannelChooser extends Component {
 
 
     handleCategoryClick(channelObject) {
-        const selectedArray = this.props.selectedCategories.slice();
-        const indexOfSelected = selectedArray.indexOf(channelObject.categoryName);
+        const selectedCategoriesArray = this.props.selectedCategories.slice();
+        const indexOfSelected = selectedCategoriesArray.indexOf(channelObject.categoryName);
         if(indexOfSelected !== -1) {
-            selectedArray.splice(indexOfSelected, 1);
+            selectedCategoriesArray.splice(indexOfSelected, 1);
             this.setAllChannelsFromCategorySelected(channelObject, false)
         } else {
-            selectedArray.push(channelObject.categoryName);
+            selectedCategoriesArray.push(channelObject.categoryName);
             this.setAllChannelsFromCategorySelected(channelObject, true)
         }
         // this.setState({selectedCategories: selectedArray})
-        this.props.setSelectedCategories(selectedArray);
+        this.props.setSelectedCategories(selectedCategoriesArray);
     }
 
     setAllChannelsFromCategorySelected(channelObject, isSelectAll) {
@@ -70,7 +71,7 @@ class ChannelChooser extends Component {
             selectedArray.push(channel);
             selectedChannelsByCategory[categoryKey] = selectedArray;
         } else {
-            const selectedArray = selectedChannelsByCategory[categoryKey]
+            let selectedArray = selectedChannelsByCategory[categoryKey];
             const indexOfSelected = selectedArray.indexOf(channel);
             if(indexOfSelected !== -1) {
                 selectedArray.splice(indexOfSelected, 1);
@@ -78,16 +79,31 @@ class ChannelChooser extends Component {
                 selectedArray.push(channel);
             }
         }
-        console.log(selectedChannelsByCategory[categoryKey])
-        if(selectedChannelsByCategory[categoryKey].length === channelObject.channels.length || selectedChannelsByCategory[categoryKey].length === 0){
+        console.log(selectedChannelsByCategory[categoryKey]);
+        if(this.isAllChannelsSelectedInCategory(selectedChannelsByCategory, categoryKey, channelObject)){
             this.handleCategoryClick(channelObject)
+        } else {
+            this.deleteSelectedCategory(categoryKey);
         }
         this.props.setSelectedChannelsByCategory(selectedChannelsByCategory);
     }
 
+    isAllChannelsSelectedInCategory(selectedChannelsByCategory, categoryKey, channelObject){
+        return (selectedChannelsByCategory[categoryKey].length === channelObject.channels.length)
+    }
+
+    deleteSelectedCategory(categoryKey){
+        const selectedCategoriesArray = this.props.selectedCategories.slice();
+        const indexOfSelected = selectedCategoriesArray.indexOf(categoryKey);
+        if(indexOfSelected !== -1){
+            selectedCategoriesArray.splice(indexOfSelected, 1);
+            this.props.setSelectedCategories(selectedCategoriesArray);
+        }
+    }
+
     render() {
         const {values} = this.props;
-        const selectedChannelsByCategory = this.props.selectedChannelsByCategory
+        const selectedChannelsByCategory = this.props.selectedChannelsByCategory;
 
         return (
             <div className={"container-fluid"} id={"main-channel-chooser-container"}>
@@ -121,7 +137,6 @@ class ChannelChooser extends Component {
                                                     }
                                                     return (
                                                         <img
-                                                            className={classNameString}
                                                             className={classNameString}
                                                             src={channel.imgSrc}
                                                             onClick={() => this.handleImageClick(channel, channelObject)}
