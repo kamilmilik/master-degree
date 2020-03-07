@@ -1,18 +1,21 @@
 package com.example.masterdegree.models;
 
+import lombok.EqualsAndHashCode;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Objects;
 
 @Document
 public class Operator {
 
     @Id
     private ObjectId id;
+
     private String name;
+
     private String imgSrc;
 
     private List<TvPackage> tvPackages;
@@ -54,5 +57,28 @@ public class Operator {
 
     public void setTvPackages(List<TvPackage> tvPackages) {
         this.tvPackages = tvPackages;
+    }
+
+    @Override
+    public String toString() {
+        return "Operator{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", imgSrc='" + imgSrc + '\'' +
+                ", tvPackages=" + tvPackages +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Operator)) return false;
+        Operator operator = (Operator) o;
+        return Objects.equals(getId(), operator.getId()) ;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

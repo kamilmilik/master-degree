@@ -16,21 +16,21 @@ class SearchButton extends Component {
         return (
             <div className={"container-fluid"} id={"main-search-container"}>
                 <div id={"button-container"}>
-                        <Link
-                            activeClass="active"
-                            to="result-container"
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={500}
-                        >
-                    <Button
-                        icon labelPosition='right'
+                    <Link
+                        activeClass="active"
+                        to="result-container"
+                        spy={true}
+                        smooth={true}
+                        offset={-70}
+                        duration={500}
                     >
-                        Wyszukaj oferty
-                        <Icon name='search'/>
-                    </Button>
-                        </Link>
+                        <Button
+                            icon labelPosition='right'
+                        >
+                            Wyszukaj oferty
+                            <Icon name='search'/>
+                        </Button>
+                    </Link>
                 </div>
             </div>
         );

@@ -3,7 +3,7 @@ import {
     SET_ALL_OPERATORS, SET_SECTION1_REF, SET_SECTION2_REF,
     SET_SELECTED_CATEGORIES,
     SET_SELECTED_CHANNELS, SET_SELECTED_CHANNELS_BY_CATEGORY,
-    SET_SELECTED_OPERATORS, SET_SELECTED_PRICE, SET_SELECTED_TERM
+    SET_SELECTED_OPERATORS, SET_SELECTED_PRICE, SET_SELECTED_TERM, SET_RESULT
 } from "./actions-type";
 
 // actions: these are objects that should have two properties, one describing the type of action, and one describing what should be changed in the app state.
@@ -60,5 +60,12 @@ export const setSelectedPrice=(selectedPrice)=>{
     return{
         type: SET_SELECTED_PRICE,
         selectedPrice: selectedPrice
+    }
+};
+
+export const setResult=(result)=>{
+    return{
+        type: SET_RESULT,
+        result: result
     }
 };

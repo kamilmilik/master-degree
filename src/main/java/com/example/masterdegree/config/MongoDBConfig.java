@@ -38,8 +38,10 @@ public class MongoDBConfig {
 
             String canalPlusComfortLink = "https://sklep.pl.canalplus.com/oferta/comfortplus-ns";
             TvPackage tvPackageComfort = new TvPackage("Comfort +", 39.99, "main", canalPlusComfortLink, "24 miesiace", "0", canalObjects);
+            TvPackage tvPackageSuperPremium = new TvPackage("SuperPremium +", 79.99, "main", canalPlusComfortLink, "24 miesiace", "0", canalObjects);
             List<TvPackage> tvPackageList = new ArrayList<>();
             tvPackageList.add(tvPackageComfort);
+            tvPackageList.add(tvPackageSuperPremium);
             String canalPlusImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Platforma_Canal%2B.svg/1200px-Platforma_Canal%2B.svg.png";
             operatorsRepository.deleteAll();
             operatorsRepository.save(new Operator(ObjectId.get(), "Canal+", canalPlusImg, tvPackageList));

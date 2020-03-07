@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import './MainSearchResultComponent.css'
+import ResultComponent from './result_component/ResultComponent';
 
 
 class MainSearchResultComponent extends Component {
@@ -24,29 +25,16 @@ class MainSearchResultComponent extends Component {
                         })}
                     </div>
                     <div>Kanaly:
-                        {/*{this.props.selectedChannels.map((channel) =>{*/}
-                        {/*    return channel.name + ", "*/}
-                        {/*})}*/}
-
-                        {/*{*/}
-                        {/*    if(this.props.selectedChannelsByCategory !== 'undefined') {*/}
-                        {/*        return ''*/}
-                        {/*    } else {*/}
-                        {/*            return ''*/}
-                        {/*    }*/}
-                        {/*}*/}
                         {
                             Object.keys(selectedChannelsByCategory).map(function (key) {
-                            let selectedChannels = selectedChannelsByCategory[key];
-                            return selectedChannels.map((channel) =>{
-                                return channel.name + ", ";
+                                let selectedChannels = selectedChannelsByCategory[key];
+                                return selectedChannels.map((channel) => {
+                                    return channel.name + ", ";
+                                })
                             })
-                            // return channel.name + ", ";
-                        })
-
-
                         }
                     </div>
+                    <ResultComponent {...this.props} />
                 </div>
             </div>
 

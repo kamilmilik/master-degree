@@ -1,12 +1,25 @@
 import axios from 'axios'
+axios.defaults.withCredentials = true;
 
-const COURSE_API_URL = 'http://localhost:8095';
-const INSTRUCTOR_API_URL = `${COURSE_API_URL}/api/operators`;
+const MAIN_URL = 'http://localhost:8095';
+const API = `${MAIN_URL}/api/operators`;
+const API_SELECTED = `${MAIN_URL}/api/operators/selected`;
+const API_NOT_SELECTED = `${MAIN_URL}/api/operators/not-selected`;
 
 class OperatorDataService {
     retrieveAllOperators() {
-        return axios.get(`${INSTRUCTOR_API_URL}`, {
-        });
+        return axios.get(`${API}`, {});
+    }
+
+
+    sendSelectedOperator(operator) {
+        return axios.post(`${API_SELECTED}`, operator)
+            .then(response => response.data);
+    }
+
+    sendNotSelectedOperator(operator) {
+        return axios.post(`${API_NOT_SELECTED}`, operator)
+            .then(response => response.data);
     }
 }
 
