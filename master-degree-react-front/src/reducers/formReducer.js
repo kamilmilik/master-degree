@@ -10,7 +10,7 @@ import {
     SET_SECTION1_REF, SET_SECTION2_REF, SET_SELECTED_CHANNELS_BY_CATEGORY,
     SET_RESULT
 } from './actions/actions-type'
-import {DEFAULT_PRICE_FILTER_VALUE} from "../component/filter/main_form_filter/Const";
+import {DEFAULT_MIN_PRICE_FILTER_VALUE} from "../component/filter/main_form_filter/Const";
 import React from "react";
 
 
@@ -25,7 +25,7 @@ const initState = {
     selectedChannels: [],
     selectedCategories: [],
     selectedOperators: [],
-    selectedPrice: DEFAULT_PRICE_FILTER_VALUE,
+    selectedPrice: DEFAULT_MIN_PRICE_FILTER_VALUE,
     selectedTerm: '',
     section1Ref: React.createRef(),
     section2ef: React.createRef(),

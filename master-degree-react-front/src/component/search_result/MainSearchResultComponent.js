@@ -18,7 +18,7 @@ class MainSearchResultComponent extends Component {
                 <div className={"result-container"}>
                     <div>Filters</div>
                     <div>Okres: {this.props.selectedTerm}</div>
-                    <div>Cena: {this.props.selectedPrice}zl</div>
+                    <div>Cena: {this.props.selectedPrice[0]}zl - {this.props.selectedPrice[1]}zl </div>
                     <div>Operator:
                         {this.props.selectedOperators.map((operator) => {
                             return operator.name + ", "

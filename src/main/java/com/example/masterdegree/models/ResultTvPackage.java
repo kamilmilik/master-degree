@@ -1,8 +1,12 @@
 package com.example.masterdegree.models;
 
+import org.bson.types.ObjectId;
+
 import java.util.Objects;
 
 public class ResultTvPackage {
+
+    private ObjectId operatorId;
 
     private String operatorName;
 
@@ -10,10 +14,19 @@ public class ResultTvPackage {
 
     private TvPackage tvPackage;
 
-    public ResultTvPackage(String operatorName, String operatorImg, TvPackage tvPackage) {
+    public ResultTvPackage(ObjectId operatorId, String operatorName, String operatorImg, TvPackage tvPackage) {
+        this.operatorId = operatorId;
         this.operatorName = operatorName;
         this.operatorImg = operatorImg;
         this.tvPackage = tvPackage;
+    }
+
+    public ObjectId getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(ObjectId operatorId) {
+        this.operatorId = operatorId;
     }
 
     public String getOperatorName() {
@@ -45,13 +58,14 @@ public class ResultTvPackage {
         if (this == o) return true;
         if (!(o instanceof ResultTvPackage)) return false;
         ResultTvPackage that = (ResultTvPackage) o;
-        return Objects.equals(getOperatorName(), that.getOperatorName()) &&
+        return Objects.equals(getOperatorId(), that.getOperatorId()) &&
+                Objects.equals(getOperatorName(), that.getOperatorName()) &&
                 Objects.equals(getOperatorImg(), that.getOperatorImg()) &&
                 Objects.equals(getTvPackage(), that.getTvPackage());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOperatorName(), getOperatorImg(), getTvPackage());
+        return Objects.hash(getOperatorId(), getOperatorName(), getOperatorImg(), getTvPackage());
     }
 }
