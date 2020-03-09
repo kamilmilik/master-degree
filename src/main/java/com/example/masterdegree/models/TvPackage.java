@@ -10,16 +10,16 @@ public class TvPackage {
     private String link;
     private String term;
     private String status;
-    private List<ChannelsGroupByCategory> channelsGroupByCategory;
+    private List<Channel> channels;
 
-    public TvPackage(String name, Double price, String type, String link, String term, String status, List<ChannelsGroupByCategory> channelsGroupByCategory) {
+    public TvPackage(String name, Double price, String type, String link, String term, String status, List<Channel> channels) {
         this.name = name;
         this.price = price;
         this.type = type;
         this.link = link;
         this.term = term;
         this.status = status;
-        this.channelsGroupByCategory = channelsGroupByCategory;
+        this.channels = channels;
     }
 
     public String getName() {
@@ -70,11 +70,11 @@ public class TvPackage {
         this.status = status;
     }
 
-    public List<ChannelsGroupByCategory> getChannelsGroupByCategory() {
-        return channelsGroupByCategory;
+    public List<Channel> getChannels() {
+        return channels;
     }
 
-    public void setChannelsGroupByCategory(List<ChannelsGroupByCategory> channelsGroupByCategory) {
-        this.channelsGroupByCategory = channelsGroupByCategory;
+    public void setChannels(List<Channel> channels) {
+        this.channels = channels;
     }
 }

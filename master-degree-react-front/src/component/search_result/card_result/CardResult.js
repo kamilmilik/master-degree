@@ -17,13 +17,13 @@ export default function CardResult({data}) {
                     {data.operatorName}
                 </Card.Header>
                 <Card.Meta >
-                    {data.tvPackage.term}
+                    {data.mainTPackage.term}
                 </Card.Meta>
 
             </CardContent>
             <CardContent>
                 <Card.Description>
-                    {data.tvPackage.name}  {data.tvPackage.price} {data.tvPackage.type}
+                    {data.mainTPackage.name}  {data.mainTPackage.price} {data.mainTPackage.type}
                 </Card.Description>
 
             </CardContent>

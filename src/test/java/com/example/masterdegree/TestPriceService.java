@@ -65,8 +65,8 @@ public class TestPriceService {
         Operator operatorCanalPlus = testDataGenerator.getOperatorCanalPlus();
         Operator operatorCyfrowyPolsat = testDataGenerator.getOperatorCyfrowyPolsat();
 
-        ResultTvPackage resultTvPackageCanalPlusComfort = new ResultTvPackage(operatorCanalPlus.getId(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), testDataGenerator.getTvPackageComfort());
-        ResultTvPackage resultTvPackageCyfrowyPolsatComfort = new ResultTvPackage(operatorCyfrowyPolsat.getId(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), testDataGenerator.getTvPackageComfort());
+        ResultTvPackage resultTvPackageCanalPlusComfort = new ResultTvPackage(operatorCanalPlus.getId(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), testDataGenerator.getTvPackageComfort(), null);
+        ResultTvPackage resultTvPackageCyfrowyPolsatComfort = new ResultTvPackage(operatorCyfrowyPolsat.getId(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), testDataGenerator.getTvPackageComfort(), null);
         List<ResultTvPackage> expectedResultTvPackages = new ArrayList<>();
         expectedResultTvPackages.add(resultTvPackageCanalPlusComfort);
         expectedResultTvPackages.add(resultTvPackageCyfrowyPolsatComfort);
@@ -74,8 +74,8 @@ public class TestPriceService {
 
         expectedResultTvPackages.clear();
         priceService.setSelectedRangePrice(new double[]{80.00, 20.00});
-        ResultTvPackage resultTvPackageCanalPlusSuperPremium = new ResultTvPackage(operatorCanalPlus.getId(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), testDataGenerator.getTvPackageSuperpremium());
-        ResultTvPackage resultTvPackageCyfrowyPolsatSuperPremium = new ResultTvPackage(operatorCyfrowyPolsat.getId(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), testDataGenerator.getTvPackageSuperpremium());
+        ResultTvPackage resultTvPackageCanalPlusSuperPremium = new ResultTvPackage(operatorCanalPlus.getId(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), testDataGenerator.getTvPackageSuperpremium(), null);
+        ResultTvPackage resultTvPackageCyfrowyPolsatSuperPremium = new ResultTvPackage(operatorCyfrowyPolsat.getId(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), testDataGenerator.getTvPackageSuperpremium(), null);
         expectedResultTvPackages.add(resultTvPackageCanalPlusComfort);
         expectedResultTvPackages.add(resultTvPackageCanalPlusSuperPremium);
         expectedResultTvPackages.add(resultTvPackageCyfrowyPolsatComfort);

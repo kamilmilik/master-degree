@@ -34,7 +34,7 @@ public class TestOperatorService {
 
         Operator operatorCanalPlus = testDataGenerator.getOperatorCanalPlus();
         operatorsService.addFetchedOperatorResourceToFetchedList((testDataGenerator.getOperatorCanalPlus()));
-        ResultTvPackage resultTvPackageComfort = new ResultTvPackage(operatorCanalPlus.getId(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), testDataGenerator.getTvPackageComfort());
+        ResultTvPackage resultTvPackageComfort = new ResultTvPackage(operatorCanalPlus.getId(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), testDataGenerator.getTvPackageComfort(), null);
         List<ResultTvPackage> expectedResultTvPackages = new ArrayList<>();
         expectedResultTvPackages.add(resultTvPackageComfort);
         assertThat(this.operatorsService.getResultByFetchedOperators(resultTvPackages)).isEqualTo(expectedResultTvPackages);
@@ -50,10 +50,10 @@ public class TestOperatorService {
 
         Operator operatorCanalPlus = testDataGenerator.getOperatorCanalPlus();
         Operator operatorCyfrowyPolsat = testDataGenerator.getOperatorCyfrowyPolsat();
-        ResultTvPackage resultTvPackageComfortCanalPlus = new ResultTvPackage(operatorCanalPlus.getId(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), testDataGenerator.getTvPackageComfort());
-        ResultTvPackage resultTvPackageSuperpremiumCanalPlus = new ResultTvPackage(operatorCanalPlus.getId(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), testDataGenerator.getTvPackageSuperpremium());
-        ResultTvPackage resultTvPackageComfortCyfrowyPolsat = new ResultTvPackage(operatorCyfrowyPolsat.getId(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), testDataGenerator.getTvPackageComfort());
-        ResultTvPackage resultTvPackageSuperpremiumCyfrowyPolsat = new ResultTvPackage(operatorCyfrowyPolsat.getId(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), testDataGenerator.getTvPackageSuperpremium());
+        ResultTvPackage resultTvPackageComfortCanalPlus = new ResultTvPackage(operatorCanalPlus.getId(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), testDataGenerator.getTvPackageComfort(), null);
+        ResultTvPackage resultTvPackageSuperpremiumCanalPlus = new ResultTvPackage(operatorCanalPlus.getId(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), testDataGenerator.getTvPackageSuperpremium(), null);
+        ResultTvPackage resultTvPackageComfortCyfrowyPolsat = new ResultTvPackage(operatorCyfrowyPolsat.getId(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), testDataGenerator.getTvPackageComfort(), null);
+        ResultTvPackage resultTvPackageSuperpremiumCyfrowyPolsat = new ResultTvPackage(operatorCyfrowyPolsat.getId(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), testDataGenerator.getTvPackageSuperpremium(), null);
 
         List<ResultTvPackage> expectedResultTvPackages = new ArrayList<>();
         expectedResultTvPackages.add(resultTvPackageComfortCanalPlus);

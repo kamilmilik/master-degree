@@ -31,8 +31,8 @@ public class ResultServiceImpl implements ResultService {
         System.out.println("createResultWithoutFilters size " + operatorsService.getAllOperatorsFromDb().size());
         List<ResultTvPackage> resultTvPackages = new ArrayList<>();
         for (Operator operator : operatorsService.getAllOperatorsFromDb()) {
-            for (TvPackage tvPackage : operator.getTvPackages()) {
-                resultTvPackages.add(new ResultTvPackage(operator.getId(), operator.getName(), operator.getImgSrc(), tvPackage));
+            for (TvPackage tvPackage : operator.getMainTvPackages()) {
+                resultTvPackages.add(new ResultTvPackage(operator.getId(), operator.getName(), operator.getImgSrc(), tvPackage, operator.getExtraTvPackages()));
             }
         }
         return resultTvPackages;

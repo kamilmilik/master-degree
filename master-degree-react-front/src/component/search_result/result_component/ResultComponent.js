@@ -10,6 +10,7 @@ class ResultComponent extends Component {
         super(props);
     }
 
+    // TODO Problem, nie wybrany operator, nie wybrane kanaly, zakres ceny caly, co pokazac jako result? Czy kazdy pakiet podstawowy z wszystkimi mozliwymi opcjami dodatkowymi(milion resultow) czy wszystkie pakiety podstawowe plus dodatkowe jako osobne resulty? Czy wyswietlic komunikat: Wybrales zbyt ogolne filtry prosze zawezic filtry?
     render() {
         console.log("Props " +  + " " + this.props.result);
         if (!(typeof this.props.result.resultTvPackages === 'undefined')) {

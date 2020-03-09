@@ -1,7 +1,6 @@
 package com.example.masterdegree.integration;
 
 import com.example.masterdegree.models.Channel;
-import com.example.masterdegree.models.ChannelsGroupByCategory;
 import com.example.masterdegree.models.Operator;
 import com.example.masterdegree.models.TvPackage;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +33,9 @@ public class TestOperatorsController {
     Channel eurosport1 = new Channel("Eurosport1", "Kanal euro sport", "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Eurosport_Logo.svg/1200px-Eurosport_Logo.svg.png");
     Channel nsport = new Channel("nsport", "Kanal n sport", "http://ocdn.eu/images/program-tv/OWI7MDA_/518e09a968bd9238a72d45e37e9c8ac4.png");
     List<Channel> channelList = new ArrayList<>();
-    ChannelsGroupByCategory canalObjectSport = new ChannelsGroupByCategory(ObjectId.get(), "Sport", channelList);
-    List<ChannelsGroupByCategory> canalObjects = new ArrayList<>();
-    TvPackage tvPackageComfort = new TvPackage("Comfort +", 39.99, "main", "https://sklep.pl.canalplus.com/oferta/comfortplus-ns", "24 miesiace", "0", canalObjects);
+    TvPackage tvPackageComfort = new TvPackage("Comfort +", 39.99, "main", "https://sklep.pl.canalplus.com/oferta/comfortplus-ns", "24 miesiace", "0", channelList);
     List<TvPackage> tvPackageList = new ArrayList<>();
-    Operator operator = new Operator(ObjectId.get(), "Test Canal+", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Platforma_Canal%2B.svg/1200px-Platforma_Canal%2B.svg.png", tvPackageList);
+    Operator operator = new Operator(ObjectId.get(), "Test Canal+", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Platforma_Canal%2B.svg/1200px-Platforma_Canal%2B.svg.png", tvPackageList, null);
     @Autowired
     private MockMvc mvc;
 
@@ -47,7 +43,6 @@ public class TestOperatorsController {
     public void setup() {
         channelList.add(eurosport1);
         channelList.add(nsport);
-        canalObjects.add(canalObjectSport);
         tvPackageList.add(tvPackageComfort);
     }
 

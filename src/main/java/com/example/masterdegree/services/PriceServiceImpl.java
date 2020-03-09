@@ -1,13 +1,8 @@
 package com.example.masterdegree.services;
 
-import com.example.masterdegree.models.Operator;
 import com.example.masterdegree.models.ResultTvPackage;
-import com.example.masterdegree.models.TvPackage;
-import com.example.masterdegree.repositories.OperatorsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +36,7 @@ public class PriceServiceImpl implements PriceService {
     @Override
     public List<ResultTvPackage> getResultByRangePrice(List<ResultTvPackage> resultTvPackages) {
         resultTvPackages = resultTvPackages.stream().
-                filter(resultTvPackage -> isTvPackagePriceInSelectedRangePrice(resultTvPackage.getTvPackage().getPrice()))
+                filter(resultTvPackage -> isTvPackagePriceInSelectedRangePrice(resultTvPackage.getMainTPackage().getPrice()))
                 .collect(Collectors.toList());
         return resultTvPackages;
     }

@@ -2,6 +2,7 @@ package com.example.masterdegree.models;
 
 import org.bson.types.ObjectId;
 
+import java.util.List;
 import java.util.Objects;
 
 public class ResultTvPackage {
@@ -12,13 +13,16 @@ public class ResultTvPackage {
 
     private String operatorImg;
 
-    private TvPackage tvPackage;
+    private TvPackage mainTPackage;
 
-    public ResultTvPackage(ObjectId operatorId, String operatorName, String operatorImg, TvPackage tvPackage) {
+    private List<TvPackage> extraTvPackages;
+
+    public ResultTvPackage(ObjectId operatorId, String operatorName, String operatorImg, TvPackage mainTPackage, List<TvPackage> extraTvPackages) {
         this.operatorId = operatorId;
         this.operatorName = operatorName;
         this.operatorImg = operatorImg;
-        this.tvPackage = tvPackage;
+        this.mainTPackage = mainTPackage;
+        this.extraTvPackages = extraTvPackages;
     }
 
     public ObjectId getOperatorId() {
@@ -45,12 +49,20 @@ public class ResultTvPackage {
         this.operatorImg = operatorImg;
     }
 
-    public TvPackage getTvPackage() {
-        return tvPackage;
+    public TvPackage getMainTPackage() {
+        return mainTPackage;
     }
 
-    public void setTvPackage(TvPackage tvPackage) {
-        this.tvPackage = tvPackage;
+    public void setMainTPackage(TvPackage mainTPackage) {
+        this.mainTPackage = mainTPackage;
+    }
+
+    public List<TvPackage> getExtraTvPackages() {
+        return extraTvPackages;
+    }
+
+    public void setExtraTvPackages(List<TvPackage> extraTvPackages) {
+        this.extraTvPackages = extraTvPackages;
     }
 
     @Override
@@ -61,11 +73,12 @@ public class ResultTvPackage {
         return Objects.equals(getOperatorId(), that.getOperatorId()) &&
                 Objects.equals(getOperatorName(), that.getOperatorName()) &&
                 Objects.equals(getOperatorImg(), that.getOperatorImg()) &&
-                Objects.equals(getTvPackage(), that.getTvPackage());
+                Objects.equals(getMainTPackage(), that.getMainTPackage()) &&
+                Objects.equals(getExtraTvPackages(), that.getExtraTvPackages());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOperatorId(), getOperatorName(), getOperatorImg(), getTvPackage());
+        return Objects.hash(getOperatorId(), getOperatorName(), getOperatorImg(), getMainTPackage(), getExtraTvPackages());
     }
 }

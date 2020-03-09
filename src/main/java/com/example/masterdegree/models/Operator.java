@@ -1,6 +1,5 @@
 package com.example.masterdegree.models;
 
-import lombok.EqualsAndHashCode;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,13 +17,16 @@ public class Operator {
 
     private String imgSrc;
 
-    private List<TvPackage> tvPackages;
+    private List<TvPackage> mainTvPackages;
 
-    public Operator(ObjectId id, String name, String imgSrc, List<TvPackage> tvPackages) {
+    private List<TvPackage> extraTvPackages;
+
+    public Operator(ObjectId id, String name, String imgSrc, List<TvPackage> mainTvPackages, List<TvPackage> extraTvPackages) {
         this.id = id;
         this.name = name;
         this.imgSrc = imgSrc;
-        this.tvPackages = tvPackages;
+        this.mainTvPackages = mainTvPackages;
+        this.extraTvPackages = extraTvPackages;
     }
 
     public ObjectId getId() {
@@ -51,12 +53,20 @@ public class Operator {
         this.imgSrc = imgSrc;
     }
 
-    public List<TvPackage> getTvPackages() {
-        return tvPackages;
+    public List<TvPackage> getMainTvPackages() {
+        return mainTvPackages;
     }
 
-    public void setTvPackages(List<TvPackage> tvPackages) {
-        this.tvPackages = tvPackages;
+    public void setMainTvPackages(List<TvPackage> mainTvPackages) {
+        this.mainTvPackages = mainTvPackages;
+    }
+
+    public List<TvPackage> getExtraTvPackages() {
+        return extraTvPackages;
+    }
+
+    public void setExtraTvPackages(List<TvPackage> extraTvPackages) {
+        this.extraTvPackages = extraTvPackages;
     }
 
     @Override
@@ -65,7 +75,8 @@ public class Operator {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", imgSrc='" + imgSrc + '\'' +
-                ", tvPackages=" + tvPackages +
+                ", mainTvPackages=" + mainTvPackages +
+                ", extraTvPackages=" + extraTvPackages +
                 '}';
     }
 
