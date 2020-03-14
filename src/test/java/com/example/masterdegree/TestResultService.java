@@ -1,22 +1,14 @@
 package com.example.masterdegree;
 
-import com.example.masterdegree.models.*;
-import com.example.masterdegree.services.OperatorsService;
-import com.example.masterdegree.services.ResultService;
-import com.example.masterdegree.services.ResultServiceImpl;
-import org.bson.types.ObjectId;
+import com.example.masterdegree.services.operator.OperatorsService;
+import com.example.masterdegree.services.result.ResultServiceImpl;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestResultService {

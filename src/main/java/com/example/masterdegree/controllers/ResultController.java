@@ -1,15 +1,13 @@
 package com.example.masterdegree.controllers;
 
-import com.example.masterdegree.models.Operator;
-import com.example.masterdegree.models.Result;
-import com.example.masterdegree.services.ResultService;
+import com.example.masterdegree.models.dto.ResultTvPackages;
+import com.example.masterdegree.services.result.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @RepositoryRestController
 @RequestMapping("/api")
@@ -23,9 +21,9 @@ public class ResultController {
     }
 
     @GetMapping("/result")
-    @ResponseBody
-    public Result getResult() {
-        return resultService.getResult();
+//    @ResponseBody
+    public ResponseEntity<ResultTvPackages> getResult() {
+        return new ResponseEntity<>(resultService.getResult(), HttpStatus.OK);
     }
 
 }

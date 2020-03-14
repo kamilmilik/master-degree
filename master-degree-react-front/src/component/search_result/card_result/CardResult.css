@@ -7,4 +7,15 @@
 #card-result_header {
     background-color: #F0F0F0;
 }
+#card-result-extra-package {
+    border-top: 1px solid rgba(34,36,38,.1);
+}
 
+
+#card-result-extra-name {
+    padding-bottom: 14px;
+}
+
+.ui.feed>.event>.label {
+    padding-top: 16px;
+}

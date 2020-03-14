@@ -1,6 +1,6 @@
 package com.example.masterdegree.config;
 
-import com.example.masterdegree.models.*;
+import com.example.masterdegree.models.entity.*;
 import com.example.masterdegree.repositories.ChannelsRepository;
 import com.example.masterdegree.repositories.OperatorsRepository;
 import org.bson.types.ObjectId;
@@ -26,6 +26,8 @@ public class MongoDBConfig {
             Channel eleven1 = new Channel("Eleven", "Informacja Eleven", "https://static.wirtualnemedia.pl/media/top/elevensportsnetwork-logo655.png");
             Channel eleven2 = new Channel("Eleven 2", "Informacja Eleven 2", "https://static.wirtualnemedia.pl/media/top/elevensportsnetwork-logo655.png");
 
+            Channel hbo = new Channel("Hbo", "Informacja Hbo", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSr_3rYMnQujDhcHH5a-xLDZXQoqvIwzQtd7cnpMGaz2_K8ny-5");
+            Channel hbo2 = new Channel("Hbo2", "Informacja Hbo2", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSr_3rYMnQujDhcHH5a-xLDZXQoqvIwzQtd7cnpMGaz2_K8ny-5");
 
             Channel euroNews = new Channel("EuroNews", "Informacja euro", "https://static.ftpn.pl/imgcache/640x365/c//uploads/cropit/15578520321d3a3fff9e90f37a15a1de260cc0b3720c0b1a5ce8bcb2750fb9fe38295e4141.jpg");
             Channel bloomberg = new Channel("Bloomberg", "Informacja bloom", "https://pbs.twimg.com/profile_images/1016326195221352450/KCcdUN0v.jpg");
@@ -40,23 +42,30 @@ public class MongoDBConfig {
             List<Channel> extraElevenCanalPlusChannels = new ArrayList<>();
             extraElevenCanalPlusChannels.add(eleven1); extraElevenCanalPlusChannels.add(eleven2);
 
+            List<Channel> extraHboCanalPlusChannels = new ArrayList<>();
+            extraHboCanalPlusChannels.add(hbo);extraHboCanalPlusChannels.add(hbo2);
+
             String canalPlusComfortLink = "https://sklep.pl.canalplus.com/oferta/comfortplus-ns";
-            TvPackage tvPackageComfort = new TvPackage("Comfort +", 39.99, "main", canalPlusComfortLink, "24 miesiace", "0", comfortCanalPlusChannels);
-            TvPackage tvPackageSuperPremium = new TvPackage("SuperPremium +", 79.99, "main", canalPlusComfortLink, "24 miesiace", "0", superPremiumCanalPlusChannels);
-            TvPackage tvPackageEleven = new TvPackage("Eleven sports +", 15.00, "extra", canalPlusComfortLink, "24 miesiace", "0", extraElevenCanalPlusChannels);
-            List<TvPackage> mainTvPackagesList = new ArrayList<>();
-            List<TvPackage> extraTvPackagesList = new ArrayList<>();
+            List<TvPackage> extraCanalPlusComfortPackage = new ArrayList<>();
+            extraCanalPlusComfortPackage.add(new TvPackage("Eleven sports +", 15.00, "extra", "https://static.wirtualnemedia.pl/media/top/elevensportsnetwork-logo655.png", canalPlusComfortLink, "24 miesiace", "0", extraElevenCanalPlusChannels));
+            extraCanalPlusComfortPackage.add(new TvPackage("Hbo", 20.00, "extra", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSr_3rYMnQujDhcHH5a-xLDZXQoqvIwzQtd7cnpMGaz2_K8ny-5", canalPlusComfortLink, "24 miesiace", "0", extraHboCanalPlusChannels));
+
+
+            List<TvPackage> extraCanalPlusSuperPremiumPackage = new ArrayList<>();
+            extraCanalPlusSuperPremiumPackage.add(new TvPackage("Eleven sports", 11.00, "extra", "https://static.wirtualnemedia.pl/media/top/elevensportsnetwork-logo655.png", canalPlusComfortLink, "24 miesiace", "0", extraElevenCanalPlusChannels));
+            MainTvPackage tvPackageComfort = new MainTvPackage("Comfort +", 39.99, "main", "",canalPlusComfortLink, "24 miesiace", "0", comfortCanalPlusChannels, extraCanalPlusComfortPackage);
+            MainTvPackage tvPackageSuperPremium = new MainTvPackage("SuperPremium +", 79.99, "main","", canalPlusComfortLink, "24 miesiace", "0", superPremiumCanalPlusChannels, extraCanalPlusSuperPremiumPackage);
+            List<MainTvPackage> mainTvPackagesList = new ArrayList<>();
             mainTvPackagesList.add(tvPackageComfort);
             mainTvPackagesList.add(tvPackageSuperPremium);
-            extraTvPackagesList.add(tvPackageEleven);
             String canalPlusImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Platforma_Canal%2B.svg/1200px-Platforma_Canal%2B.svg.png";
             operatorsRepository.deleteAll();
-            operatorsRepository.save(new Operator(ObjectId.get(), "Canal+", canalPlusImg, mainTvPackagesList, extraTvPackagesList));
-            operatorsRepository.save(new Operator(ObjectId.get(), "nc+", canalPlusImg, mainTvPackagesList, extraTvPackagesList));
-            operatorsRepository.save(new Operator(ObjectId.get(), "cyfrowy polsat+", canalPlusImg, mainTvPackagesList, extraTvPackagesList));
+            operatorsRepository.save(new Operator(ObjectId.get(), "Canal+", canalPlusImg, mainTvPackagesList));
+            operatorsRepository.save(new Operator(ObjectId.get(), "nc+", canalPlusImg, mainTvPackagesList));
+            operatorsRepository.save(new Operator(ObjectId.get(), "cyfrowy polsat+", canalPlusImg, mainTvPackagesList));
 
             List<Channel> channelList1 = new ArrayList<>();
-            channelList1.add(euroNews); channelList1.add(bloomberg);
+            channelList1.add(euroNews); channelList1.add(bloomberg);channelList1.add(hbo);channelList1.add(hbo2);
 
             List<Channel> channelList = new ArrayList<>();
             channelList.add(eurosport1); channelList.add(nsport); channelList.add(euroNews2);channelList.add(eleven1);channelList.add(eleven2);

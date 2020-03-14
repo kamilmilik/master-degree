@@ -19,11 +19,15 @@ class PricePicker extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            maxPrice: ''
+            rangePrice: ''
         };
         this.onPick = this.onPick.bind(this)
     }
 
+    componentDidMount() {
+        const selectedRangePrice = [MIN_PRICE_FILTER_VALUE, MAX_PRICE_FILTER_VALUE];
+        this.props.setSelectedPrice(selectedRangePrice);
+    }
 
     onPick(range) {
         this.props.setSelectedPrice(range);
@@ -50,9 +54,9 @@ class PricePicker extends Component {
                     range
                     min={MIN_PRICE_FILTER_VALUE}
                     max={MAX_PRICE_FILTER_VALUE}
-                    defaultValue={[DEFAULT_MIN_PRICE_FILTER_VALUE, DEFAULT_MAX_PRICE_FILTER_VALUE]}
+                    defaultValue={[MIN_PRICE_FILTER_VALUE, MAX_PRICE_FILTER_VALUE]}
                     tipFormatter={value => `${value}zl`}
-                    onChange={(e) => this.onPick(e)}
+                    onAfterChange={(e) => this.onPick(e)}
                     tooltipVisible
                 />
 
@@ -64,7 +68,7 @@ class PricePicker extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        maxPrice: state.formReducer.selectedPrice,
+        rangePrice: state.formReducer.selectedPrice,
         result: state.formReducer.result
     }
 };

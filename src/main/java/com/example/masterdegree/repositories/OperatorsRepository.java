@@ -1,6 +1,6 @@
 package com.example.masterdegree.repositories;
 
-import com.example.masterdegree.models.Operator;
+import com.example.masterdegree.models.entity.Operator;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

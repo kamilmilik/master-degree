@@ -1,7 +1,7 @@
 package com.example.masterdegree.controllers;
 
-import com.example.masterdegree.models.Operator;
-import com.example.masterdegree.services.OperatorsService;
+import com.example.masterdegree.models.entity.Operator;
+import com.example.masterdegree.services.operator.OperatorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +25,7 @@ public class OperatorsController {
         System.out.println("Jestem tutaj");
         operatorsService.addFetchedOperatorResourceToFetchedList(operator);
         System.out.println("Operatory: ");
-        operatorsService.getFetchedOperators().stream().forEach(System.out::println);
+        operatorsService.getFetchedSelectedOperators().stream().forEach(System.out::println);
     }
 
     @PostMapping("/operators/not-selected")
@@ -34,6 +34,7 @@ public class OperatorsController {
         System.out.println("Jestem tutaj not selected");
         operatorsService.removeFetchedOperatorResourceFromList(operator);
         System.out.println("Operatory: ");
-        operatorsService.getFetchedOperators().stream().forEach(System.out::println);
+        operatorsService.getFetchedSelectedOperators().stream().forEach(System.out::println);
     }
+
 }

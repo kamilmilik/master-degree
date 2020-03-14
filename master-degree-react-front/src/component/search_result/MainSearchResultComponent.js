@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import './MainSearchResultComponent.css'
 import ResultComponent from './result_component/ResultComponent';
+import ResultDataService from "../../service/ResultDataService";
+import {setResult, setSelectedPrice} from "../../reducers/actions/actions";
+import PricePickerDataService from "../../service/PricePickerDataService";
+import OperatorDataService from "../../service/OperatorDataService";
+import {MAX_PRICE_FILTER_VALUE, MIN_PRICE_FILTER_VALUE} from "../filter/main_form_filter/Const";
 
 
 class MainSearchResultComponent extends Component {
@@ -10,15 +15,50 @@ class MainSearchResultComponent extends Component {
         this.state = {};
     }
 
+    componentDidMount() {
+        this.sendAllSelectedDataAndAfterGetResult();
+    }
+
+    sendAllSelectedDataAndAfterGetResult(){
+        const promises = [];
+        promises.push(this.sendSelectedRangePrice(this.props.selectedPrice));
+        this.props.selectedOperators.map((operator) => {
+            promises.push(this.sendSelectedOperator(operator));
+        });
+        Promise.all(promises).then(values => {
+            this.getResult();
+        });
+        // TODO KM dopisac dodatkowe metody wysylajace kanaly i okres
+    }
+
+    sendSelectedRangePrice(range) {
+        if(range.length === 0){
+            range = [MIN_PRICE_FILTER_VALUE, MAX_PRICE_FILTER_VALUE];
+            this.props.setSelectedPrice(range);
+        }
+        return PricePickerDataService.sendSelectedPrice(range)
+
+    }
+
+    sendSelectedOperator(operator) {
+        return OperatorDataService.sendSelectedOperator(operator)
+    }
+
+    getResult() {
+        ResultDataService.retrieveResult().then(response => {
+            this.props.setResult(response.data);
+        });
+    }
+
     render() {
 
-        let selectedChannelsByCategory = this.props.selectedChannelsByCategory
+        let selectedChannelsByCategory = this.props.selectedChannelsByCategory;
         return (
             <div className={"container-fluid"} id={"main-search-result-component-content"}>
                 <div className={"result-container"}>
                     <div>Filters</div>
                     <div>Okres: {this.props.selectedTerm}</div>
-                    <div>Cena: {this.props.selectedPrice[0]}zl - {this.props.selectedPrice[1]}zl </div>
+                    <div>Cena: {this.props.selectedPrice[0]}zl - {this.props.selectedPrice[1]}zl</div>
                     <div>Operator:
                         {this.props.selectedOperators.map((operator) => {
                             return operator.name + ", "
@@ -48,13 +88,21 @@ const mapStateToProps = (state) => {
         selectedPrice: state.formReducer.selectedPrice,
         selectedOperators: state.formReducer.selectedOperators,
         selectedChannels: state.formReducer.selectedChannels,
-        selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory
+        selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory,
+        result: state.formReducer.result
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
 
-    return {}
+    return {
+        setSelectedPrice: (price) => {
+            dispatch(setSelectedPrice(price))
+        },
+        setResult: (result) => {
+            dispatch(setResult(result))
+        }
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainSearchResultComponent)

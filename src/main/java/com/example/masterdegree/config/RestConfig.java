@@ -1,7 +1,7 @@
 package com.example.masterdegree.config;
 
-import com.example.masterdegree.models.ChannelsGroupByCategory;
-import com.example.masterdegree.models.Operator;
+import com.example.masterdegree.models.entity.ChannelsGroupByCategory;
+import com.example.masterdegree.models.entity.Operator;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;

@@ -1,6 +1,11 @@
 package com.example.masterdegree;
 
-import com.example.masterdegree.models.*;
+import com.example.masterdegree.models.dto.FilteredTvPackage;
+import com.example.masterdegree.models.dto.ResultTvPackage;
+import com.example.masterdegree.models.entity.Channel;
+import com.example.masterdegree.models.entity.MainTvPackage;
+import com.example.masterdegree.models.entity.Operator;
+import com.example.masterdegree.models.entity.TvPackage;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
@@ -15,19 +20,19 @@ public class TestDataGenerator {
     Channel eleven2 = new Channel("Eleven 2", "Informacja Eleven 2", "https://static.wirtualnemedia.pl/media/top/elevensportsnetwork-logo655.png");
 
     List<Channel> extraElevenCanalPlusChannels = new ArrayList<>();
-    TvPackage tvPackageEleven = new TvPackage("Eleven sports +", 15.00, "extra", "https://sklep.pl.canalplus.com/oferta/comfortplus-ns", "24 miesiace", "0", extraElevenCanalPlusChannels);
+    TvPackage tvPackageEleven = new TvPackage("Eleven sports +", 15.00, "extra", "https://static.wirtualnemedia.pl/media/top/elevensportsnetwork-logo655.png", "https://sklep.pl.canalplus.com/oferta/comfortplus-ns", "24 miesiace", "0", extraElevenCanalPlusChannels);
     List<TvPackage> extraTvPackagesList = new ArrayList<>();
 
 
     private List<Channel> channelList = new ArrayList<>();
 
-    private TvPackage tvPackageComfort = new TvPackage("Comfort +", 39.99, "main", "https://sklep.pl.canalplus.com/oferta/comfortplus-ns", "24 miesiace", "0", channelList);
-    private TvPackage tvPackageSuperpremium = new TvPackage("Superpremium", 79.99, "main", "https://sklep.pl.canalplus.com/oferta/comfortplus-ns", "24 miesiace", "0", channelList);
-    private List<TvPackage> mainTvPackagesList = new ArrayList<>();
-    private Operator operatorCanalPlus = new Operator(ObjectId.get(), "Test Canal+", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Platforma_Canal%2B.svg/1200px-Platforma_Canal%2B.svg.png", mainTvPackagesList, extraTvPackagesList);
+    private MainTvPackage tvPackageComfort = new MainTvPackage("Comfort +", 39.99, "main", "","https://sklep.pl.canalplus.com/oferta/comfortplus-ns", "24 miesiace", "0", channelList, null);
+    private MainTvPackage tvPackageSuperpremium = new MainTvPackage("Superpremium", 79.99, "main","", "https://sklep.pl.canalplus.com/oferta/comfortplus-ns", "24 miesiace", "0", channelList, null);
+    private List<MainTvPackage> mainTvPackagesList = new ArrayList<>();
+    private Operator operatorCanalPlus = new Operator(ObjectId.get(), "Test Canal+", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Platforma_Canal%2B.svg/1200px-Platforma_Canal%2B.svg.png", mainTvPackagesList);
 
 
-    private Operator operatorCyfrowyPolsat = new Operator(ObjectId.get(), "Cyfrowy polsat", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Platforma_Canal%2B.svg/1200px-Platforma_Canal%2B.svg.png", mainTvPackagesList, extraTvPackagesList);
+    private Operator operatorCyfrowyPolsat = new Operator(ObjectId.get(), "Cyfrowy polsat", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Platforma_Canal%2B.svg/1200px-Platforma_Canal%2B.svg.png", mainTvPackagesList);
     private List<ResultTvPackage> resultTvPackages = new ArrayList<>();
 
     public void generateOperatorWithOneTvPackage() {
@@ -57,8 +62,9 @@ public class TestDataGenerator {
     }
 
     private void generateResultTvPackageForGivenOperator(Operator operator) {
-        for (TvPackage tvPackage : operator.getMainTvPackages()) {
-            resultTvPackages.add(new ResultTvPackage(operator.getId(), operator.getName(), operator.getImgSrc(), tvPackage, operator.getExtraTvPackages()));
+        for (MainTvPackage tvPackage : operator.getTvPackages()) {
+            FilteredTvPackage filteredTvPackage = new FilteredTvPackage(tvPackage, null, null);
+            resultTvPackages.add(new ResultTvPackage(operator.getId(), operator.getName(), operator.getImgSrc(), filteredTvPackage));
         }
     }
 
@@ -67,15 +73,15 @@ public class TestDataGenerator {
         mainTvPackagesList.clear();
     }
 
-    public TvPackage getTvPackageComfort() {
+    public MainTvPackage getTvPackageComfort() {
         return tvPackageComfort;
     }
 
-    public TvPackage getTvPackageSuperpremium() {
+    public MainTvPackage getTvPackageSuperpremium() {
         return tvPackageSuperpremium;
     }
 
-    public List<TvPackage> getMainTvPackagesList() {
+    public List<MainTvPackage> getMainTvPackagesList() {
         return mainTvPackagesList;
     }
 

@@ -4,83 +4,95 @@ import '../../../../App.css';
 import './ChannelChooser.css';
 import {Button} from "semantic-ui-react";
 import {
+    setResult,
     setSelectedCategories,
     setSelectedChannels,
     setSelectedChannelsByCategory
 } from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
+import ChannelDataService from "../../../../service/ChannelDataService";
+import ResultDataService from "../../../../service/ResultDataService";
 
 // TODO refactor, przeniesc czesc funkcjonalnosci moze do jakiejs klasy o nazwie service
 class ChannelChooser extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            channelsObject: [],
-            selectedChannels: [],
-            selectedCategories: [],
-        };
         this.handleImageClick = this.handleImageClick.bind(this);
         this.handleCategoryClick = this.handleCategoryClick.bind(this)
     }
 
 
     handleCategoryClick(channelObject) {
+        console.log("Handle category click");
         const selectedCategoriesArray = this.props.selectedCategories.slice();
         const indexOfSelected = selectedCategoriesArray.indexOf(channelObject.categoryName);
-        if(indexOfSelected !== -1) {
+        if (indexOfSelected !== -1) {
             selectedCategoriesArray.splice(indexOfSelected, 1);
-            this.setAllChannelsFromCategorySelected(channelObject, false)
+            this.setAllChannelsFromCategorySelectedOrNotSelected(channelObject, false)
         } else {
             selectedCategoriesArray.push(channelObject.categoryName);
-            this.setAllChannelsFromCategorySelected(channelObject, true)
+            this.setAllChannelsFromCategorySelectedOrNotSelected(channelObject, true)
         }
-        // this.setState({selectedCategories: selectedArray})
         this.props.setSelectedCategories(selectedCategoriesArray);
     }
 
-    setAllChannelsFromCategorySelected(channelObject, isSelectAll) {
+    setAllChannelsFromCategorySelectedOrNotSelected(channelObject, isSelectAll) {
+        const allSelectedOrAllNotSelectedChannels = [];
+
         const categoryKey = channelObject.categoryName;
         const selectedChannelsByCategory = this.props.selectedChannelsByCategory;
         channelObject.channels.map((channel, i) => {
-            if(typeof selectedChannelsByCategory[categoryKey] === 'undefined'){
+            if (typeof selectedChannelsByCategory[categoryKey] === 'undefined') {
                 const selectedArray = [];
                 selectedArray.push(channel);
+                allSelectedOrAllNotSelectedChannels.push(channel);
                 selectedChannelsByCategory[categoryKey] = selectedArray;
-            }else {
+            } else {
                 const indexOfSelected = selectedChannelsByCategory[categoryKey].indexOf(channel);
-                if(isSelectAll){
-                    if(indexOfSelected === -1) {
+                if (isSelectAll) {
+                    if (indexOfSelected === -1) {
                         selectedChannelsByCategory[categoryKey].push(channel);
+                        allSelectedOrAllNotSelectedChannels.push(channel);
                     }
                 } else {
-                    if(indexOfSelected !== -1) {
+                    if (indexOfSelected !== -1) {
                         selectedChannelsByCategory[categoryKey].splice(indexOfSelected, 1);
+                        allSelectedOrAllNotSelectedChannels.push(channel);
                     }
                 }
             }
         });
+        if(isSelectAll){
+            this.sendAllSelectedChannels(allSelectedOrAllNotSelectedChannels);
+        } else {
+            this.sendAllNotSelectedChannels(allSelectedOrAllNotSelectedChannels);
+        }
         this.props.setSelectedChannelsByCategory(selectedChannelsByCategory);
     }
 
     handleImageClick(channel, channelObject) {
+        console.log("Handle image click");
         const categoryKey = channelObject.categoryName;
         const selectedChannelsByCategory = this.props.selectedChannelsByCategory;
-        if(typeof selectedChannelsByCategory[categoryKey] === 'undefined'){
+        if (typeof selectedChannelsByCategory[categoryKey] === 'undefined') {
             const selectedArray = [];
             selectedArray.push(channel);
+            this.sendSelectedChannel(channel);
             selectedChannelsByCategory[categoryKey] = selectedArray;
         } else {
             let selectedArray = selectedChannelsByCategory[categoryKey];
             const indexOfSelected = selectedArray.indexOf(channel);
-            if(indexOfSelected !== -1) {
+            if (indexOfSelected !== -1) {
                 selectedArray.splice(indexOfSelected, 1);
+                this.sendNotSelectedChannel(channel);
             } else {
                 selectedArray.push(channel);
+                this.sendSelectedChannel(channel);
             }
         }
         console.log(selectedChannelsByCategory[categoryKey]);
-        if(this.isAllChannelsSelectedInCategory(selectedChannelsByCategory, categoryKey, channelObject)){
+        if (this.isAllChannelsSelectedInCategory(selectedChannelsByCategory, categoryKey, channelObject)) {
             this.handleCategoryClick(channelObject)
         } else {
             this.deleteSelectedCategory(categoryKey);
@@ -88,14 +100,49 @@ class ChannelChooser extends Component {
         this.props.setSelectedChannelsByCategory(selectedChannelsByCategory);
     }
 
-    isAllChannelsSelectedInCategory(selectedChannelsByCategory, categoryKey, channelObject){
+
+    sendSelectedChannel(channel) {
+        ChannelDataService.sendSelectedChannel(channel)
+            .then(response => {
+                this.getResult();
+            });
+    }
+
+    sendNotSelectedChannel(channel) {
+        ChannelDataService.sendNotSelectedChannel(channel)
+            .then(response => {
+                this.getResult();
+            });
+    }
+
+    sendAllSelectedChannels(channels) {
+        ChannelDataService.sendAllSelectedChannels(channels)
+            .then(response => {
+                this.getResult();
+            });
+    }
+
+    sendAllNotSelectedChannels(channels) {
+        ChannelDataService.sendAllNotSelectedChannels(channels)
+            .then(response => {
+                this.getResult();
+            });
+    }
+
+    getResult() {
+        ResultDataService.retrieveResult().then(response => {
+            this.props.setResult(response.data);
+        });
+    }
+
+    isAllChannelsSelectedInCategory(selectedChannelsByCategory, categoryKey, channelObject) {
         return (selectedChannelsByCategory[categoryKey].length === channelObject.channels.length)
     }
 
-    deleteSelectedCategory(categoryKey){
+    deleteSelectedCategory(categoryKey) {
         const selectedCategoriesArray = this.props.selectedCategories.slice();
         const indexOfSelected = selectedCategoriesArray.indexOf(categoryKey);
-        if(indexOfSelected !== -1){
+        if (indexOfSelected !== -1) {
             selectedCategoriesArray.splice(indexOfSelected, 1);
             this.props.setSelectedCategories(selectedCategoriesArray);
         }
@@ -115,8 +162,10 @@ class ChannelChooser extends Component {
                             <ul className={"list-group"}>
                                 <li className={"list-group-item"}>
                                     <div className={"category-type-title"}>
-                                        <Button basic id={this.props.selectedCategories.indexOf(channelObject.categoryName) !== -1 ? "category-button-clicked" : "category-button"}
-                                        onClick={() => this.handleCategoryClick(channelObject)}>
+                                        <Button basic
+                                                id={this.props.selectedCategories.indexOf(channelObject.categoryName) !== -1 ? "category-button-clicked" : "category-button"}
+                                                onClick={() => this.handleCategoryClick(channelObject)}
+                                        >
                                             {channelObject.categoryName}
                                         </Button>
                                     </div>
@@ -126,10 +175,10 @@ class ChannelChooser extends Component {
                                             {
                                                 channelObject.channels.map((channel, i) => {
                                                     let classNameString = '';
-                                                    if(!(channelObject.categoryName in selectedChannelsByCategory)){
+                                                    if (!(channelObject.categoryName in selectedChannelsByCategory)) {
                                                         classNameString = 'channel-image';
-                                                    }else {
-                                                        if(selectedChannelsByCategory[channelObject.categoryName].indexOf(channel) !== -1) {
+                                                    } else {
+                                                        if (selectedChannelsByCategory[channelObject.categoryName].indexOf(channel) !== -1) {
                                                             classNameString = 'channel-image-clicked';
                                                         } else {
                                                             classNameString = 'channel-image';
@@ -163,7 +212,8 @@ const mapStateToProps = (state) => {
         selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory,
         channelsObject: state.formReducer.channelsObject,
         selectedCategories: state.formReducer.selectedCategories,
-        selectedChannels: state.formReducer.selectedChannels
+        selectedChannels: state.formReducer.selectedChannels,
+        result: state.formReducer.result
     }
 };
 
@@ -173,13 +223,13 @@ const mapDispatchToProps = (dispatch) => {
         setSelectedCategories: (selectedCategories) => {
             dispatch(setSelectedCategories(selectedCategories))
         },
-        setSelectedChannels: (selectedChannels) => {
-            dispatch(setSelectedChannels(selectedChannels))
-        },
         setSelectedChannelsByCategory: (selectedChannelsByCategory) => {
             dispatch(setSelectedChannelsByCategory(selectedChannelsByCategory))
+        },
+        setResult: (result) => {
+            dispatch(setResult(result))
         },
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(ChannelChooser)
+export default connect(mapStateToProps, mapDispatchToProps)(ChannelChooser)

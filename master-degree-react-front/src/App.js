@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import MainFormFilter from "./component/filter/main_form_filter/MainFormFilter";
 import Navbar from "./component/navigation/Navbar";
-import Section from "./component/Section/Section";
+import Section from "./component/section/Section";
 import MainSearchResultComponent from "./component/search_result/MainSearchResultComponent";
 
 

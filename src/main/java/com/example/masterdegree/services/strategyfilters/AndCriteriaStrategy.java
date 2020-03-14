@@ -1,21 +1,21 @@
 package com.example.masterdegree.services.strategyfilters;
 
-import com.example.masterdegree.models.ResultTvPackage;
+import com.example.masterdegree.models.dto.ResultTvPackage;
 
 import java.util.List;
 
-public class AndCriteria implements Criteria {
+public class AndCriteriaStrategy implements CriteriaStrategy {
 
-    private Criteria[] criterias;
+    private CriteriaStrategy[] criterias;
 
-    public AndCriteria(Criteria... criterias) {
+    public AndCriteriaStrategy(CriteriaStrategy... criterias) {
         this.criterias = criterias;
     }
 
     @Override
     public List<ResultTvPackage> getFilteredResult(List<ResultTvPackage> resultTvPackages) {
         List<ResultTvPackage> filteredResultTvPackages = resultTvPackages;
-        for (Criteria criteria : criterias) {
+        for (CriteriaStrategy criteria : criterias) {
             filteredResultTvPackages = criteria.getFilteredResult(filteredResultTvPackages);
         }
         return filteredResultTvPackages;

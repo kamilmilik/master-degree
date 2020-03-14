@@ -25,7 +25,7 @@ const initState = {
     selectedChannels: [],
     selectedCategories: [],
     selectedOperators: [],
-    selectedPrice: DEFAULT_MIN_PRICE_FILTER_VALUE,
+    selectedPrice: [],
     selectedTerm: '',
     section1Ref: React.createRef(),
     section2ef: React.createRef(),
