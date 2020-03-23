@@ -7,14 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document
 @Data
 @AllArgsConstructor
+@Document(collection = "channelsgroupbycategory")
 public class ChannelsGroupByCategory {
 
     @Id
     @NonNull
-    private ObjectId id;
+    private ObjectId _id;
     @NonNull
     private String categoryName;
     @NonNull

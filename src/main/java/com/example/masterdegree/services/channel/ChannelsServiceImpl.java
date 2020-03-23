@@ -2,7 +2,10 @@ package com.example.masterdegree.services.channel;
 
 import com.example.masterdegree.models.dto.ResultTvPackage;
 import com.example.masterdegree.models.entity.Channel;
+import com.example.masterdegree.models.entity.ChannelsGroupByCategory;
 import com.example.masterdegree.models.entity.TvPackage;
+import com.example.masterdegree.repositories.ChannelsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,13 +15,22 @@ public class ChannelsServiceImpl implements ChannelsService {
 
     private Set<Channel> fetchedSelectedChannels;
 
-    public ChannelsServiceImpl() {
+    private ChannelsRepository channelsRepository;
+
+    @Autowired
+    public ChannelsServiceImpl(ChannelsRepository channelsRepository) {
         this.fetchedSelectedChannels = new HashSet<>();
+        this.channelsRepository = channelsRepository;
     }
 
     @Override
     public Set<Channel> getFetchedSelectedChannels() {
         return fetchedSelectedChannels;
+    }
+
+    @Override
+    public List<ChannelsGroupByCategory> getAllChannelsGroupByCategoryFromDb() {
+        return channelsRepository.findAll();
     }
 
     @Override

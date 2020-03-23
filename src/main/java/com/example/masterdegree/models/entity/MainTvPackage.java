@@ -11,8 +11,8 @@ public class MainTvPackage extends TvPackage {
 
     private List<TvPackage> extraTvPackages;
 
-    public MainTvPackage(String name, Double price, String type, String imgSrc,String link, String term, String status, List<Channel> channels, List<TvPackage> extraTvPackages) {
-        super(name, price, type, imgSrc, link, term, status, channels);
+    public MainTvPackage(@NonNull String name, String description, @NonNull Double price, @NonNull String type, String imgSrc, @NonNull String link, @NonNull String term, @NonNull String status, @NonNull List<Channel> channels, List<TvPackage> extraTvPackages) {
+        super(name, description, price, type, imgSrc, link, term, status, channels);
         this.extraTvPackages = extraTvPackages;
     }
 }

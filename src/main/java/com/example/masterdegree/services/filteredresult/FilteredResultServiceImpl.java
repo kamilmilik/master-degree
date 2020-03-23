@@ -1,4 +1,4 @@
-package com.example.masterdegree.services.result;
+package com.example.masterdegree.services.filteredresult;
 
 import com.example.masterdegree.models.dto.FilteredTvPackage;
 import com.example.masterdegree.models.dto.ResultTvPackage;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ResultServiceImpl implements ResultService {
+public class FilteredResultServiceImpl implements FilteredResultService {
 
     private OperatorsService operatorsService;
 
@@ -25,7 +25,7 @@ public class ResultServiceImpl implements ResultService {
     private ChannelsService channelsService;
 
     @Autowired
-    public ResultServiceImpl(OperatorsService operatorsService, PriceService priceService, ChannelsService channelsService) {
+    public FilteredResultServiceImpl(OperatorsService operatorsService, PriceService priceService, ChannelsService channelsService) {
         this.operatorsService = operatorsService;
         this.priceService = priceService;
         this.channelsService = channelsService;
@@ -37,14 +37,14 @@ public class ResultServiceImpl implements ResultService {
         for (Operator operator : operatorsService.getAllOperatorsFromDb()) {
             for (MainTvPackage tvPackage : operator.getTvPackages()) {
                 FilteredTvPackage filteredTvPackage = new FilteredTvPackage(tvPackage, new ArrayList<>(), tvPackage.getExtraTvPackages());
-                resultTvPackages.add(new ResultTvPackage(operator.getId(), operator.getName(), operator.getImgSrc(), filteredTvPackage));
+                resultTvPackages.add(new ResultTvPackage(operator.get_id(), operator.getName(), operator.getImgSrc(), filteredTvPackage));
             }
         }
         return resultTvPackages;
     }
 
     @Override
-    public ResultTvPackages getResult() {
+    public ResultTvPackages getFilteredResult() {
         List<ResultTvPackage> resultTvPackages = createResultWithoutFilters();
         CriteriaStrategy filterCriteria;
         // Filter order: operators -> term -> channels -> price

@@ -21,3 +21,5 @@ public class CorsConfig implements WebMvcConfigurer {
 
 
 }
+
+// Swagger: http://localhost:8095/v3/api-docs/, http://localhost:8095/swagger-ui.html

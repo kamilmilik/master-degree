@@ -1,29 +1,32 @@
 package com.example.masterdegree.controllers;
 
 import com.example.masterdegree.models.dto.ResultTvPackages;
-import com.example.masterdegree.services.result.ResultService;
+import com.example.masterdegree.services.filteredresult.FilteredResultService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@RepositoryRestController
+
+@RestController
 @RequestMapping("/api")
-public class ResultController {
+public class FilteredResultController {
 
-    private ResultService resultService;
+    private FilteredResultService filteredResultService;
 
     @Autowired
-    public ResultController(ResultService resultService) {
-        this.resultService = resultService;
+    public FilteredResultController(FilteredResultService filteredResultService) {
+        this.filteredResultService = filteredResultService;
     }
 
     @GetMapping("/result")
 //    @ResponseBody
     public ResponseEntity<ResultTvPackages> getResult() {
-        return new ResponseEntity<>(resultService.getResult(), HttpStatus.OK);
+        return new ResponseEntity<>(filteredResultService.getFilteredResult(), HttpStatus.OK);
     }
 
 }

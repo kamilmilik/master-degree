@@ -33,7 +33,7 @@ class MainFormFilter extends Component {
             .then(
                 response => {
                     console.log(response);
-                    this.setState({operators: response.data._embedded.operators})
+                    this.setState({operators: response.data})
                 }
             )
     }
@@ -43,7 +43,7 @@ class MainFormFilter extends Component {
             .then(
                 response => {
                     console.log(response);
-                    this.setState({channelsObject: response.data._embedded.channels})
+                    this.setState({channelsObject: response.data})
                 }
             )
     }

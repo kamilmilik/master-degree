@@ -18,7 +18,7 @@ public class TestOperatorModel {
         ObjectId objectId = ObjectId.get();
         List<MainTvPackage> tvPackageList = new ArrayList<>();
         List<Channel> channels = new ArrayList<>();
-        tvPackageList.add(new MainTvPackage("null", 4.0,"null", null, "null", "null", "null", channels, null));
+        tvPackageList.add(new MainTvPackage("null","", 4.0,"null", null, "null", "null", "null", channels, null));
         Operator operator1 = new Operator(objectId, "null", "null", tvPackageList);
         Operator operator2 = new Operator(objectId, "null23", "null", tvPackageList);
         Operator operator3 = new Operator(objectId, "null", null, tvPackageList);

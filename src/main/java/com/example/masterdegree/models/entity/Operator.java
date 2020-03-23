@@ -7,15 +7,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document
 @Data
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"_id"})
+@Document(collection = "operator")
 public class Operator {
 
     @Id
     @NonNull
-    private ObjectId id;
+    private ObjectId _id;
 
     @NonNull
     private String name;

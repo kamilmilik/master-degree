@@ -10,6 +10,7 @@ import java.util.List;
 public class TvPackage {
     @NonNull
     private String name;
+    private String description;
     @NonNull
     private Double price;
     @NonNull

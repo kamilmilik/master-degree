@@ -60,7 +60,7 @@ public class OperatorsServiceImpl implements OperatorsService {
                         .map(Operator::getId)
                         .anyMatch(objectId -> objectId.equals(resultTvPackage.getOperatorId()))).collect(Collectors.toList());*/
 //      Better option
-        Set<ObjectId> objectIdSet = getFetchedSelectedOperators().stream().map(Operator::getId).collect(Collectors.toSet());
+        Set<ObjectId> objectIdSet = getFetchedSelectedOperators().stream().map(Operator::get_id).collect(Collectors.toSet());
         resultTvPackages = resultTvPackages.stream().filter(resultTvPackage -> objectIdSet.contains(resultTvPackage.getOperatorId())).collect(Collectors.toList());
 
         return resultTvPackages;
