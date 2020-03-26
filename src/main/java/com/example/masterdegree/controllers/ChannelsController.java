@@ -2,10 +2,9 @@ package com.example.masterdegree.controllers;
 
 import com.example.masterdegree.models.entity.Channel;
 import com.example.masterdegree.models.entity.ChannelsGroupByCategory;
-import com.example.masterdegree.repositories.ChannelsRepository;
-import com.example.masterdegree.services.channel.ChannelsService;
+import com.example.masterdegree.core.channel.ChannelsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -14,14 +13,10 @@ import java.util.List;
 //@RepositoryRestController
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ChannelsController {
 
-    private ChannelsService channelsService;
-
-    @Autowired
-    public ChannelsController(ChannelsService channelsService) {
-        this.channelsService = channelsService;
-    }
+    private final ChannelsService channelsService;
 
     @GetMapping("/channels")
     public List<ChannelsGroupByCategory> getChannels() {

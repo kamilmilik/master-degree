@@ -1,20 +1,16 @@
 package com.example.masterdegree.controllers;
 
-import com.example.masterdegree.services.price.PriceService;
+import com.example.masterdegree.core.price.PriceService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PriceController {
 
-    private PriceService priceService;
-
-    @Autowired
-    public PriceController(PriceService priceService) {
-        this.priceService = priceService;
-    }
+    private final PriceService priceService;
 
     @PostMapping("/price")
     @ResponseBody

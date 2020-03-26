@@ -1,27 +1,23 @@
-package com.example.masterdegree.services.channel;
+package com.example.masterdegree.core.channel;
 
 import com.example.masterdegree.models.dto.ResultTvPackage;
 import com.example.masterdegree.models.entity.Channel;
 import com.example.masterdegree.models.entity.ChannelsGroupByCategory;
 import com.example.masterdegree.models.entity.TvPackage;
 import com.example.masterdegree.repositories.ChannelsRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ChannelsServiceImpl implements ChannelsService {
 
-    private Set<Channel> fetchedSelectedChannels;
+    private Set<Channel> fetchedSelectedChannels = new HashSet<>();
 
-    private ChannelsRepository channelsRepository;
-
-    @Autowired
-    public ChannelsServiceImpl(ChannelsRepository channelsRepository) {
-        this.fetchedSelectedChannels = new HashSet<>();
-        this.channelsRepository = channelsRepository;
-    }
+    private final ChannelsRepository channelsRepository;
 
     @Override
     public Set<Channel> getFetchedSelectedChannels() {

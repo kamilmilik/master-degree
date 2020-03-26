@@ -1,20 +1,17 @@
 import React, {Component} from 'react';
 import 'react-image-picker/dist/index.css'
 import './OperatorChooser.css';
-import {setResult, setSelectedOperators} from "../../../../reducers/actions/actions";
+import {setIsLoadingFilteredResult, setResult, setSelectedOperators} from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
 import OperatorDataService from "../../../../service/OperatorDataService";
 import ResultDataService from "../../../../service/ResultDataService";
+import {trackPromise} from "react-promise-tracker";
 
 
 class OperatorChooser extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            operators: [],
-            selectedOperators: [],
-        };
         this.onPick = this.onPick.bind(this);
         this.handleImageClick = this.handleImageClick.bind(this)
     }
@@ -47,6 +44,7 @@ class OperatorChooser extends Component {
     }
 
     sendSelectedOperator(operator) {
+        this.props.setIsLoadingFilteredResult(true);
         OperatorDataService.sendSelectedOperator(operator)
             .then(response => {
                 console.log(response);
@@ -55,6 +53,7 @@ class OperatorChooser extends Component {
     }
 
     sendNotSelectedOperator(operator) {
+        this.props.setIsLoadingFilteredResult(true);
         OperatorDataService.sendNotSelectedOperator(operator)
             .then(response => {
                 console.log(response);
@@ -65,7 +64,8 @@ class OperatorChooser extends Component {
     getResult() {
         ResultDataService.retrieveResult().then(response => {
             this.props.setResult(response.data);
-        });
+            this.props.setIsLoadingFilteredResult(false);
+        })
     }
 
     render() {
@@ -97,7 +97,8 @@ const mapStateToProps = (state) => {
     return {
         operators: state.formReducer.operators,
         selectedOperators: state.formReducer.selectedOperators,
-        result: state.formReducer.result
+        result: state.formReducer.result,
+        isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult
     }
 };
 
@@ -110,6 +111,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         setResult: (result) => {
             dispatch(setResult(result))
+        },
+        setIsLoadingFilteredResult: (isLoadingFilteredResult) => {
+            dispatch(setIsLoadingFilteredResult(isLoadingFilteredResult))
         },
     }
 };

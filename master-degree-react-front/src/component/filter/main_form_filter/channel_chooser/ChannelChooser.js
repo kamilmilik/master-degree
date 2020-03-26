@@ -4,6 +4,7 @@ import '../../../../App.css';
 import './ChannelChooser.css';
 import {Button} from "semantic-ui-react";
 import {
+    setIsLoadingFilteredResult,
     setResult,
     setSelectedCategories,
     setSelectedChannels,
@@ -104,6 +105,7 @@ class ChannelChooser extends Component {
     sendSelectedChannel(channel) {
         ChannelDataService.sendSelectedChannel(channel)
             .then(response => {
+                this.props.setIsLoadingFilteredResult(true);
                 this.getResult();
             });
     }
@@ -111,11 +113,13 @@ class ChannelChooser extends Component {
     sendNotSelectedChannel(channel) {
         ChannelDataService.sendNotSelectedChannel(channel)
             .then(response => {
+                this.props.setIsLoadingFilteredResult(true);
                 this.getResult();
             });
     }
 
     sendAllSelectedChannels(channels) {
+        this.props.setIsLoadingFilteredResult(true);
         ChannelDataService.sendAllSelectedChannels(channels)
             .then(response => {
                 this.getResult();
@@ -123,6 +127,7 @@ class ChannelChooser extends Component {
     }
 
     sendAllNotSelectedChannels(channels) {
+        this.props.setIsLoadingFilteredResult(true);
         ChannelDataService.sendAllNotSelectedChannels(channels)
             .then(response => {
                 this.getResult();
@@ -131,6 +136,7 @@ class ChannelChooser extends Component {
 
     getResult() {
         ResultDataService.retrieveResult().then(response => {
+            this.props.setIsLoadingFilteredResult(false);
             this.props.setResult(response.data);
         });
     }
@@ -213,7 +219,8 @@ const mapStateToProps = (state) => {
         channelsObject: state.formReducer.channelsObject,
         selectedCategories: state.formReducer.selectedCategories,
         selectedChannels: state.formReducer.selectedChannels,
-        result: state.formReducer.result
+        result: state.formReducer.result,
+        isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult
     }
 };
 
@@ -228,6 +235,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         setResult: (result) => {
             dispatch(setResult(result))
+        },
+        setIsLoadingFilteredResult: (isLoadingFilteredResult) => {
+            dispatch(setIsLoadingFilteredResult(isLoadingFilteredResult))
         },
     }
 };

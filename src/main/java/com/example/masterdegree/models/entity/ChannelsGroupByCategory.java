@@ -14,7 +14,7 @@ public class ChannelsGroupByCategory {
 
     @Id
     @NonNull
-    private ObjectId _id;
+    private String id;
     @NonNull
     private String categoryName;
     @NonNull

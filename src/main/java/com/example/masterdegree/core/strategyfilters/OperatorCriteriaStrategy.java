@@ -1,7 +1,7 @@
-package com.example.masterdegree.services.strategyfilters;
+package com.example.masterdegree.core.strategyfilters;
 
 import com.example.masterdegree.models.dto.ResultTvPackage;
-import com.example.masterdegree.services.operator.OperatorsService;
+import com.example.masterdegree.core.operator.OperatorsService;
 
 import java.util.List;
 

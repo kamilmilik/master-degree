@@ -10,7 +10,7 @@ import org.bson.types.ObjectId;
 public class ResultTvPackage {
 
     @NonNull
-    private ObjectId operatorId;
+    private String operatorId;
 
     @NonNull
     private String operatorName;

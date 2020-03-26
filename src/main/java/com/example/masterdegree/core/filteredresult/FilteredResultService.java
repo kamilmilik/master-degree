@@ -1,4 +1,4 @@
-package com.example.masterdegree.services.filteredresult;
+package com.example.masterdegree.core.filteredresult;
 
 import com.example.masterdegree.models.dto.ResultTvPackages;
 

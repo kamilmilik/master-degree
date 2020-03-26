@@ -1,7 +1,7 @@
-package com.example.masterdegree.services.strategyfilters;
+package com.example.masterdegree.core.strategyfilters;
 
 import com.example.masterdegree.models.dto.ResultTvPackage;
-import com.example.masterdegree.services.price.PriceService;
+import com.example.masterdegree.core.price.PriceService;
 
 import java.util.List;
 

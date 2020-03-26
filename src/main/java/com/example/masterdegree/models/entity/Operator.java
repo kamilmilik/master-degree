@@ -9,13 +9,13 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"_id"})
+@EqualsAndHashCode(of = {"id"})
 @Document(collection = "operator")
 public class Operator {
 
     @Id
     @NonNull
-    private ObjectId _id;
+    private String id;
 
     @NonNull
     private String name;

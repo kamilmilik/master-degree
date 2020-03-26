@@ -3,16 +3,20 @@ import {connect} from "react-redux";
 import './MainSearchResultComponent.css'
 import ResultComponent from './result_component/ResultComponent';
 import ResultDataService from "../../service/ResultDataService";
-import {setResult, setSelectedPrice} from "../../reducers/actions/actions";
+import {setIsLoadingFilteredResult, setResult, setSelectedPrice} from "../../reducers/actions/actions";
 import PricePickerDataService from "../../service/PricePickerDataService";
 import OperatorDataService from "../../service/OperatorDataService";
 import {MAX_PRICE_FILTER_VALUE, MIN_PRICE_FILTER_VALUE} from "../filter/main_form_filter/Const";
+import {trackPromise} from "react-promise-tracker";
+import {LoadingSpinner} from "../loading-spinner/LoadingSpinner";
 
 
 class MainSearchResultComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            isLoadingFilteredResult:true
+        };
     }
 
     componentDidMount() {
@@ -26,6 +30,7 @@ class MainSearchResultComponent extends Component {
             promises.push(this.sendSelectedOperator(operator));
         });
         Promise.all(promises).then(values => {
+            // this.props.setIsLoadingFilteredResult(true);
             this.getResult();
         });
         // TODO KM dopisac dodatkowe metody wysylajace kanaly i okres
@@ -45,40 +50,47 @@ class MainSearchResultComponent extends Component {
     }
 
     getResult() {
-        ResultDataService.retrieveResult().then(response => {
-            this.props.setResult(response.data);
-        });
+            ResultDataService.retrieveResult().then(response => {
+                this.props.setResult(response.data);
+                this.props.setIsLoadingFilteredResult(false);
+            })
     }
 
     render() {
 
         let selectedChannelsByCategory = this.props.selectedChannelsByCategory;
-        return (
-            <div className={"container-fluid"} id={"main-search-result-component-content"}>
-                <div className={"result-container"}>
-                    <div>Filters</div>
-                    <div>Okres: {this.props.selectedTerm}</div>
-                    <div>Cena: {this.props.selectedPrice[0]}zl - {this.props.selectedPrice[1]}zl</div>
-                    <div>Operator:
-                        {this.props.selectedOperators.map((operator) => {
-                            return operator.name + ", "
-                        })}
-                    </div>
-                    <div>Kanaly:
-                        {
-                            Object.keys(selectedChannelsByCategory).map(function (key) {
-                                let selectedChannels = selectedChannelsByCategory[key];
-                                return selectedChannels.map((channel) => {
-                                    return channel.name + ", ";
+        if(this.props.isLoadingFilteredResult){
+            return (
+                <LoadingSpinner/>
+            )
+        } else {
+            return (
+                <div className={"container-fluid"} id={"main-search-result-component-content"}>
+                    <div className={"result-container"}>
+                        <div>Filters</div>
+                        <div>Okres: {this.props.selectedTerm}</div>
+                        <div>Cena: {this.props.selectedPrice[0]}zl - {this.props.selectedPrice[1]}zl</div>
+                        <div>Operator:
+                            {this.props.selectedOperators.map((operator) => {
+                                return operator.name + ", "
+                            })}
+                        </div>
+                        <div>Kanaly:
+                            {
+                                Object.keys(selectedChannelsByCategory).map(function (key) {
+                                    let selectedChannels = selectedChannelsByCategory[key];
+                                    return selectedChannels.map((channel) => {
+                                        return channel.name + ", ";
+                                    })
                                 })
-                            })
-                        }
+                            }
+                        </div>
+                        <ResultComponent  />
                     </div>
-                    <ResultComponent {...this.props} />
                 </div>
-            </div>
 
-        );
+            );
+        }
     }
 }
 
@@ -89,7 +101,8 @@ const mapStateToProps = (state) => {
         selectedOperators: state.formReducer.selectedOperators,
         selectedChannels: state.formReducer.selectedChannels,
         selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory,
-        result: state.formReducer.result
+        result: state.formReducer.result,
+        isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult
     };
 };
 
@@ -101,7 +114,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         setResult: (result) => {
             dispatch(setResult(result))
-        }
+        },
+        setIsLoadingFilteredResult: (isLoadingFilteredResult) => {
+            dispatch(setIsLoadingFilteredResult(isLoadingFilteredResult))
+        },
     }
 };
 

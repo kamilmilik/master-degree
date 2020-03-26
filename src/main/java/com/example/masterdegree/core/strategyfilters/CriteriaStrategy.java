@@ -1,4 +1,4 @@
-package com.example.masterdegree.services.strategyfilters;
+package com.example.masterdegree.core.strategyfilters;
 
 import com.example.masterdegree.models.dto.ResultTvPackage;
 

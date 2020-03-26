@@ -1,4 +1,4 @@
-package com.example.masterdegree.services.channel;
+package com.example.masterdegree.core.channel;
 
 import com.example.masterdegree.models.dto.ResultTvPackage;
 import com.example.masterdegree.models.entity.Channel;

@@ -1,4 +1,4 @@
-package com.example.masterdegree;
+package com.example.masterdegree.model;
 
 import com.example.masterdegree.models.entity.Channel;
 import com.example.masterdegree.models.entity.Operator;
@@ -15,7 +15,7 @@ public class TestOperatorModel {
 
     @Test
     public void testEqualsOperators(){
-        ObjectId objectId = ObjectId.get();
+        String objectId = ObjectId.get().toHexString();
         List<MainTvPackage> tvPackageList = new ArrayList<>();
         List<Channel> channels = new ArrayList<>();
         tvPackageList.add(new MainTvPackage("null","", 4.0,"null", null, "null", "null", "null", channels, null));
@@ -24,7 +24,7 @@ public class TestOperatorModel {
         Operator operator3 = new Operator(objectId, "null", null, tvPackageList);
         Operator operator4 = new Operator(objectId, "null", "null2", tvPackageList);
         Operator operator5 = new Operator(objectId, "nulasdasdl", "nullasdad", tvPackageList);
-        Operator operator6 = new Operator(ObjectId.get(), "null", "null", tvPackageList);
+        Operator operator6 = new Operator(ObjectId.get().toHexString(), "null", "null", tvPackageList);
         assertThat(operator1.equals(operator2)).isEqualTo(true);
         assertThat(operator1.equals(operator3)).isEqualTo(true);
         assertThat(operator1.equals(operator4)).isEqualTo(true);

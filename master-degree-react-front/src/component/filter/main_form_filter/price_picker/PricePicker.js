@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './PricePicker.css';
-import {setResult, setSelectedPrice} from "../../../../reducers/actions/actions";
+import {setIsLoadingFilteredResult, setResult, setSelectedPrice} from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
 import {
     DEFAULT_MIN_PRICE_FILTER_VALUE,
@@ -28,13 +28,14 @@ class PricePicker extends Component {
         const selectedRangePrice = [MIN_PRICE_FILTER_VALUE, MAX_PRICE_FILTER_VALUE];
         this.props.setSelectedPrice(selectedRangePrice);
     }
-
+p
     onPick(range) {
         this.props.setSelectedPrice(range);
         this.sendSelectedRangePrice(range);
     }
 
     sendSelectedRangePrice(range) {
+        this.props.setIsLoadingFilteredResult(true);
         PricePickerDataService.sendSelectedPrice(range)
             .then(response => {
                 this.getResult();
@@ -44,6 +45,7 @@ class PricePicker extends Component {
     getResult() {
         ResultDataService.retrieveResult().then(response => {
             this.props.setResult(response.data);
+            this.props.setIsLoadingFilteredResult(false);
         });
     }
 
@@ -69,7 +71,8 @@ class PricePicker extends Component {
 const mapStateToProps = (state) => {
     return {
         rangePrice: state.formReducer.selectedPrice,
-        result: state.formReducer.result
+        result: state.formReducer.result,
+        isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult
     }
 };
 
@@ -81,6 +84,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         setResult: (result) => {
             dispatch(setResult(result))
+        },
+        setIsLoadingFilteredResult: (isLoadingFilteredResult) => {
+            dispatch(setIsLoadingFilteredResult(isLoadingFilteredResult))
         },
     }
 };

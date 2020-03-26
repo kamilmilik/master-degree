@@ -1,5 +1,6 @@
-package com.example.masterdegree.services.operator;
+package com.example.masterdegree.core.operator;
 
+import com.example.masterdegree.models.dto.OperatorDto;
 import com.example.masterdegree.models.entity.Operator;
 import com.example.masterdegree.models.dto.ResultTvPackage;
 
@@ -8,15 +9,19 @@ import java.util.Set;
 
 public interface OperatorsService {
 
-    void addFetchedOperatorResourceToFetchedList(Operator operator);
+    void addFetchedOperatorToFetchedList(Operator operator);
 
-    void removeFetchedOperatorResourceFromList(Operator operator);
+    void removeFetchedOperatorFromFetchedList(Operator operator);
 
     Set<Operator> getFetchedSelectedOperators();
 
     boolean isAnyOperatorSelected();
 
+    List<OperatorDto> getOperators();
+
     List<Operator> getAllOperatorsFromDb();
+
+    Operator getOperatorById(OperatorDto operatorDto);
 
     List<ResultTvPackage> getResultBySelectedOperators(List<ResultTvPackage> resultTvPackages);
 }

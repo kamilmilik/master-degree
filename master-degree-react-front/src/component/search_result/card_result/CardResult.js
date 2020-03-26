@@ -36,7 +36,7 @@ export default function CardResult({data}) {
                             <span></span>
                         )
                     }
-                    {data.filteredTvPackage.price} {data.filteredTvPackage.type}
+                    { data.filteredTvPackage.price} zl {data.filteredTvPackage.type}
                 </Card.Description>
 
             </CardContent>
