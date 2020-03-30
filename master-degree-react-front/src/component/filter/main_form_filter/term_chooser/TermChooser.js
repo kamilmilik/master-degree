@@ -10,16 +10,11 @@ class TermChooser extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            selectedTerm: ''
-        };
         this.handleTermClick = this.handleTermClick.bind(this);
     }
 
-
     handleTermClick(term) {
         this.props.setSelectedTerm(term)
-        // this.setState({selectedTerm: term})
     }
 
     render() {
@@ -56,12 +51,8 @@ class TermChooser extends Component {
     }
 }
 
-// export default TermChooser;
 const mapStateToProps = (state) => {
-    return {
-        selectedTerm: state.formReducer.selectedTerm,
-        maxPrice: state.formReducer.selectedPrice
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -73,7 +64,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(TermChooser)
+export default connect(mapStateToProps, mapDispatchToProps)(TermChooser)
 
 // zawizic do jednego filtru wynik na poczatku przy robieniu backendu
 // , bezterminowa opcja wybrania okresu trwania

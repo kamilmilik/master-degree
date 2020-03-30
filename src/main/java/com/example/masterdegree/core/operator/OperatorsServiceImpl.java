@@ -1,6 +1,9 @@
 package com.example.masterdegree.core.operator;
 
+import com.example.masterdegree.core.filteredresult.FilteredResultService;
 import com.example.masterdegree.models.dto.OperatorDto;
+import com.example.masterdegree.models.dto.ResultTvPackages;
+import com.example.masterdegree.models.entity.MainTvPackage;
 import com.example.masterdegree.models.entity.Operator;
 import com.example.masterdegree.models.dto.ResultTvPackage;
 import com.example.masterdegree.repositories.OperatorsRepository;
@@ -21,6 +24,7 @@ public class OperatorsServiceImpl implements OperatorsService {
     private Set<Operator> fetchedSelectedOperators = new HashSet<>();
     private final OperatorsRepository operatorsRepository;
     private final OperatorMapper operatorMapper;
+//    private final FilteredResultService filteredResultService;
 
     @Override
     public void addFetchedOperatorToFetchedList(Operator operator) {
@@ -37,6 +41,21 @@ public class OperatorsServiceImpl implements OperatorsService {
     public Operator getOperatorById(OperatorDto operatorDto) {
         return operatorsRepository.findById(operatorDto.getId())
                 .orElseThrow(() -> new RuntimeException("Operator with id: " + operatorDto.getId() + " doesn't exist"));
+    }
+
+    @Override
+    public List<MainTvPackage> getMainTvPackagesByIdOperator(String id) {
+        return operatorsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Operator with id: " + id + " doesn't exist"))
+                .getTvPackages();
+    }
+
+    @Override
+    public ResultTvPackages getFilteredTvPackagesByOperatorId(String id) {
+        Operator operator = operatorsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Operator with id: " + id + " doesn't exist"));
+//        return new ResultTvPackages(filteredResultService.createFilteredTvPackagesByOperator(operator));
+        return null;
     }
 
     @Override

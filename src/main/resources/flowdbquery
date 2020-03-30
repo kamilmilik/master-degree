@@ -1,0 +1,35 @@
+Eleven, Hbo, tvn
+
+Query: Przefiltruj po operatorze,term -> zwroc liste id operatorow
+iteruje po Id operatorow:{
+	query po price dla pakietow main -> zwroc liste id pakietow main
+	isFoundSelectedChannels = false
+	Iteruje po idPakietow:{
+		Set<TvPackage> extraTvPackages = new HashSet<>();
+		iteruj po (kryteria)kanalach dla pakietu o id: {
+			if (query czy kanal jest w mainie dla pakietu o id ){
+				isFoundSelectedChannels = true
+				idz do kolejnego kanalu
+			} else {
+				extraTvPackages.addAll(query: zwroc liste id pakietow dodatkowych dla pakietu main o id
+					w ktorych jest kanal)[i sum(pakiet dodatkowy cena + pakiet glowny cena) mniejsze od kryteria(price)];
+				isFoundSelectedChannels = czy lista dodatkowych pakietow jest pusta
+			}
+		}
+		if(isFoundSelectedChannels){
+			return lista pakietow dodatkowych i idPakietu glownego
+		}
+	}
+}
+// potem musi byc tez query po price dla ceny dodadtkowych plus cena glownego
+List<kombinacja dodatkowych do glownego>
+
+Mam po pierwszym query idPakietowGlownych: 12,13,14
+
+
+hbo jest w dodatkowym return hbo dodatkowy pakiet
+		eleven jest w dodatkowym return eleven dodatkowy pakiet
+
+
+wszystkie kanaly znalezione w MAinTvPackage i w extra zwroc
+

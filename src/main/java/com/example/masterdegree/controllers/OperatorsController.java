@@ -3,6 +3,7 @@ package com.example.masterdegree.controllers;
 import com.example.masterdegree.core.filteredresult.FilteredResultService;
 import com.example.masterdegree.models.dto.OperatorDto;
 import com.example.masterdegree.models.dto.ResultTvPackages;
+import com.example.masterdegree.models.entity.MainTvPackage;
 import com.example.masterdegree.models.entity.Operator;
 import com.example.masterdegree.core.operator.OperatorsService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class OperatorsController {
 
     private final OperatorsService operatorsService;
 
-    private final FilteredResultService filteredResultService;
+//    private final FilteredResultService filteredResultService;
 
     @GetMapping("/operators")
     public ResponseEntity<List<OperatorDto>> getOperators() {
@@ -31,15 +32,9 @@ public class OperatorsController {
         return new ResponseEntity<>(operatorsService.getOperators(), HttpStatus.OK);
     }
 
-    @PostMapping("/operators/selected") // http://localhost:8095/api/operators/selected
-    public ResponseEntity<Void> fetchSelectedOperator(@RequestBody OperatorDto operatorDto) {
-        System.out.println("Jestem tutaj");
-        System.out.println("Operator timestamp " + operatorDto.getId());
-        Operator operator = operatorsService.getOperatorById(operatorDto);
-        operatorsService.addFetchedOperatorToFetchedList(operator);
-        System.out.println("Operatory: ");
-        operatorsService.getFetchedSelectedOperators().forEach(System.out::println);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    @GetMapping("/operator") // http://localhost:8095/api/operator
+    public ResponseEntity<ResultTvPackages> getFilteredTvPackagesByIdOperator(@RequestParam String id) {
+        return new ResponseEntity<>(operatorsService.getFilteredTvPackagesByOperatorId(id),HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/operators/not-selected")

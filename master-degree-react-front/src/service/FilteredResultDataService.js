@@ -6,11 +6,15 @@ axios.defaults.withCredentials = true;
 const MAIN_URL = 'http://localhost:8095';
 const API = `${MAIN_URL}/api/result`;
 
-class ResultDataService {
+class FilteredResultDataService {
 
-    retrieveResult() {
-        return axios.get(`${API}`, {})
+    retrieveFilteredResultByCriteria(criteria) {
+        return axios.get(`${API}`, {
+            params: {
+                criteria: criteria
+            }
+        })
     }
 
 }
-export default new ResultDataService()
+export default new FilteredResultDataService()

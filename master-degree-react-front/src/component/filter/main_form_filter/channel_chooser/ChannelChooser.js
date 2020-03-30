@@ -12,13 +12,16 @@ import {
 } from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
 import ChannelDataService from "../../../../service/ChannelDataService";
-import ResultDataService from "../../../../service/ResultDataService";
+import FilteredResultDataService from "../../../../service/FilteredResultDataService";
 
 // TODO refactor, przeniesc czesc funkcjonalnosci moze do jakiejs klasy o nazwie service
 class ChannelChooser extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            selectedArray: []
+        };
         this.handleImageClick = this.handleImageClick.bind(this);
         this.handleCategoryClick = this.handleCategoryClick.bind(this)
     }
@@ -73,11 +76,10 @@ class ChannelChooser extends Component {
     }
 
     handleImageClick(channel, channelObject) {
-        console.log("Handle image click");
         const categoryKey = channelObject.categoryName;
         const selectedChannelsByCategory = this.props.selectedChannelsByCategory;
+        const selectedArray = [];
         if (typeof selectedChannelsByCategory[categoryKey] === 'undefined') {
-            const selectedArray = [];
             selectedArray.push(channel);
             this.sendSelectedChannel(channel);
             selectedChannelsByCategory[categoryKey] = selectedArray;
@@ -98,6 +100,7 @@ class ChannelChooser extends Component {
         } else {
             this.deleteSelectedCategory(categoryKey);
         }
+
         this.props.setSelectedChannelsByCategory(selectedChannelsByCategory);
     }
 
@@ -135,10 +138,10 @@ class ChannelChooser extends Component {
     }
 
     getResult() {
-        ResultDataService.retrieveResult().then(response => {
-            this.props.setIsLoadingFilteredResult(false);
-            this.props.setResult(response.data);
-        });
+        // FilteredResultDataService.retrieveFilteredResultByCriteria().then(response => {
+        //     this.props.setIsLoadingFilteredResult(false);
+        //     this.props.setResult(response.data);
+        // });
     }
 
     isAllChannelsSelectedInCategory(selectedChannelsByCategory, categoryKey, channelObject) {
@@ -218,7 +221,6 @@ const mapStateToProps = (state) => {
         selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory,
         channelsObject: state.formReducer.channelsObject,
         selectedCategories: state.formReducer.selectedCategories,
-        selectedChannels: state.formReducer.selectedChannels,
         result: state.formReducer.result,
         isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult
     }
@@ -239,6 +241,7 @@ const mapDispatchToProps = (dispatch) => {
         setIsLoadingFilteredResult: (isLoadingFilteredResult) => {
             dispatch(setIsLoadingFilteredResult(isLoadingFilteredResult))
         },
+
     }
 };
 

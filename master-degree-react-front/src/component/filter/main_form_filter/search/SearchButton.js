@@ -39,8 +39,6 @@ class SearchButton extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        section1Ref: state.formReducer.section1Ref,
-        section2Ref: state.formReducer.section2Ref,
     };
 };
 

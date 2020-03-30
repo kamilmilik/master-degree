@@ -21,6 +21,7 @@ export const setAllChannels=(channels)=>{
     }
 };
 
+
 export const setSelectedOperators=(selectedOperators)=>{
     return{
         type: SET_SELECTED_OPERATORS,

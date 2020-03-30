@@ -11,26 +11,28 @@ import {
     SET_SECTION1_REF, SET_SECTION2_REF, SET_SELECTED_CHANNELS_BY_CATEGORY,
     SET_RESULT
 } from './actions/actions-type'
-import {DEFAULT_MIN_PRICE_FILTER_VALUE} from "../component/filter/main_form_filter/Const";
+import {
+    DEFAULT_MIN_PRICE_FILTER_VALUE,
+    MAX_PRICE_FILTER_VALUE,
+    MIN_PRICE_FILTER_VALUE
+} from "../component/filter/main_form_filter/Const";
 import React from "react";
 
 
 const initState = {
     operators: [],
     channelsObject: [],
+
     selectedChannelsByCategory: {},
-    //     [{
-    //     category:'',
-    //     selectedChannels: ''
-    // }],
-    selectedChannels: [],
     selectedCategories: [],
-    selectedOperators: [],
-    selectedPrice: [],
-    selectedTerm: '',
-    section1Ref: React.createRef(),
-    section2ef: React.createRef(),
+
     result: {},
+    criteria: {
+        operators: [],
+        term: "24",
+        price: [MIN_PRICE_FILTER_VALUE, MAX_PRICE_FILTER_VALUE],
+        channels: []
+    },
     isLoadingFilteredResult: true,
 };
 
@@ -49,29 +51,34 @@ const formReducer = (state = initState, action) => {
             let channels = action.channelsObject;
             return {
                 ...state,
-                channelsObject: channels
+                channelsObject: channels,
             };
         }
         case SET_SELECTED_CHANNELS: {
             let selectedChannels = action.selectedChannels;
             return {
                 ...state,
-                selectedChannels: selectedChannels
+                criteria: {
+                    ...state.criteria,
+                    channels: selectedChannels
+                }
             };
         }
         case SET_SELECTED_CHANNELS_BY_CATEGORY: {
             let selectedChannelsByCategory = Object.assign({}, action.selectedChannelsByCategory)
-
-            // Object.keys(selectedChannelsByCategory).map(function (key) {
-            //     //     let channel = this.props.selectedChannelsByCategory[key];
-            //     //     return channel.name + ", ";
-            //     //     return[key]: selectedChannelsByCategory[key]
-            //
-            //     });
+            let selectedChannels = [];
+            Object.keys(selectedChannelsByCategory).map(function (key) {
+                let channel = selectedChannelsByCategory[key];
+                selectedChannels.push(channel);
+            });
 
             return {
                 ...state,
-                selectedChannelsByCategory: selectedChannelsByCategory
+                selectedChannelsByCategory: selectedChannelsByCategory,
+                criteria: {
+                    ...state.criteria,
+                    channels: selectedChannels
+                }
             };
         }
         case SET_SELECTED_CATEGORIES: {
@@ -85,30 +92,40 @@ const formReducer = (state = initState, action) => {
             let selectedPrice = action.selectedPrice;
             return {
                 ...state,
-                selectedPrice: selectedPrice
+                criteria: {
+                    ...state.criteria,
+                    price: selectedPrice
+                }
             };
         }
         case SET_SELECTED_TERM: {
             let selectedTerm = action.selectedTerm;
             return {
                 ...state,
-                selectedTerm: selectedTerm
+                criteria: {
+                    ...state.criteria,
+                    term: selectedTerm
+                }
             };
         }
         case SET_SELECTED_OPERATORS: {
             let operators = action.selectedOperators;
             return {
                 ...state,
-                selectedOperators: operators
+                criteria: {
+                    ...state.criteria,
+                    operators: operators
+                }
+
             };
         }
-            case SET_RESULT: {
-                let result = action.result;
-                return {
-                    ...state,
-                    result: result
-                };
-            }
+        case SET_RESULT: {
+            let result = action.result;
+            return {
+                ...state,
+                result: result
+            };
+        }
         case SET_IS_LOADING_FILTERED_RESULT: {
             let isLoadingFilteredResult = action.isLoadingFilteredResult;
             return {

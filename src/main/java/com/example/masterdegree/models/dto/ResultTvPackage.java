@@ -6,7 +6,7 @@ import org.bson.types.ObjectId;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode()
-@ToString(callSuper = true)
+@ToString()
 public class ResultTvPackage {
 
     @NonNull

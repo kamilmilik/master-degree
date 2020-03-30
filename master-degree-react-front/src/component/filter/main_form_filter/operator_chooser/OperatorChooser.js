@@ -4,8 +4,8 @@ import './OperatorChooser.css';
 import {setIsLoadingFilteredResult, setResult, setSelectedOperators} from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
 import OperatorDataService from "../../../../service/OperatorDataService";
-import ResultDataService from "../../../../service/ResultDataService";
 import {trackPromise} from "react-promise-tracker";
+import FilteredResultDataService from "../../../../service/FilteredResultDataService";
 
 
 class OperatorChooser extends Component {
@@ -17,6 +17,7 @@ class OperatorChooser extends Component {
     }
 
 
+
     onPick(images) {
         images.map((image) => {
             let selectedOperator = image.value;
@@ -26,50 +27,26 @@ class OperatorChooser extends Component {
     }
 
     handleImageClick(operator) {
-        const selectedArray = this.props.selectedOperators.slice();
+        const selectedArray = this.props.criteria.operators.slice();
         const indexOfSelected = selectedArray.indexOf(operator);
         if (!this.isOperatorSelected(indexOfSelected)) {
             selectedArray.splice(indexOfSelected, 1);
-            this.sendNotSelectedOperator(operator);
         } else {
             selectedArray.push(operator);
-            this.sendSelectedOperator(operator)
         }
         this.props.setSelectedOperators(selectedArray);
-
     }
 
     isOperatorSelected(indexOfSelected){
         return indexOfSelected === -1
     }
 
-    sendSelectedOperator(operator) {
-        this.props.setIsLoadingFilteredResult(true);
-        OperatorDataService.sendSelectedOperator(operator)
-            .then(response => {
-                console.log(response);
-                this.getResult();
-            })
-    }
-
-    sendNotSelectedOperator(operator) {
-        this.props.setIsLoadingFilteredResult(true);
-        OperatorDataService.sendNotSelectedOperator(operator)
-            .then(response => {
-                console.log(response);
-                this.getResult();
-            })
-    }
-
-    getResult() {
-        ResultDataService.retrieveResult().then(response => {
-            this.props.setResult(response.data);
-            this.props.setIsLoadingFilteredResult(false);
-        })
-    }
-
     render() {
         const {values} = this.props;
+        this.props.criteria.operators.map((operator) => {
+            console.log("Operator: sdf " + operator);
+        });
+        console.log("test");
         return (
             <div className={'container-fluid'} id={"main-operator-chooser-container"}>
                 <div className={"col-md-12"} id={"operators-list"}>
@@ -78,7 +55,7 @@ class OperatorChooser extends Component {
                             values.operators.map((operator) => {
                                 return (
                                     <img
-                                        className={this.props.selectedOperators.indexOf(operator) !== -1 ? 'operator-image-clicked' : 'operator-image'}
+                                        className={this.props.criteria.operators.indexOf(operator) !== -1 ? 'operator-image-clicked' : 'operator-image'}
                                         src={operator.imgSrc}
                                         onClick={() => this.handleImageClick(operator)}
                                     />
@@ -96,9 +73,9 @@ class OperatorChooser extends Component {
 const mapStateToProps = (state) => {
     return {
         operators: state.formReducer.operators,
-        selectedOperators: state.formReducer.selectedOperators,
         result: state.formReducer.result,
-        isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult
+        isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult,
+        criteria: state.formReducer.criteria
     }
 };
 

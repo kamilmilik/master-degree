@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {setResult, setSelectedOperators} from "../../../reducers/actions/actions";
 import {connect} from "react-redux";
 import CardResult from "../card_result/CardResult";
+import FilteredResultDataService from "../../../service/FilteredResultDataService";
 
 
 class ResultComponent extends Component {

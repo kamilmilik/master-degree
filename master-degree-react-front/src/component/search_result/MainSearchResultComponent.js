@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import './MainSearchResultComponent.css'
 import ResultComponent from './result_component/ResultComponent';
-import ResultDataService from "../../service/ResultDataService";
 import {setIsLoadingFilteredResult, setResult, setSelectedPrice} from "../../reducers/actions/actions";
 import PricePickerDataService from "../../service/PricePickerDataService";
 import OperatorDataService from "../../service/OperatorDataService";
 import {MAX_PRICE_FILTER_VALUE, MIN_PRICE_FILTER_VALUE} from "../filter/main_form_filter/Const";
 import {trackPromise} from "react-promise-tracker";
 import {LoadingSpinner} from "../loading-spinner/LoadingSpinner";
+import FilteredResultDataService from "../../service/FilteredResultDataService";
 
 
 class MainSearchResultComponent extends Component {
@@ -19,44 +19,17 @@ class MainSearchResultComponent extends Component {
         };
     }
 
-    componentDidMount() {
-        this.sendAllSelectedDataAndAfterGetResult();
-    }
-
-    sendAllSelectedDataAndAfterGetResult(){
-        const promises = [];
-        promises.push(this.sendSelectedRangePrice(this.props.selectedPrice));
-        this.props.selectedOperators.map((operator) => {
-            promises.push(this.sendSelectedOperator(operator));
-        });
-        Promise.all(promises).then(values => {
-            // this.props.setIsLoadingFilteredResult(true);
-            this.getResult();
-        });
-        // TODO KM dopisac dodatkowe metody wysylajace kanaly i okres
-    }
-
-    sendSelectedRangePrice(range) {
-        if(range.length === 0){
-            range = [MIN_PRICE_FILTER_VALUE, MAX_PRICE_FILTER_VALUE];
-            this.props.setSelectedPrice(range);
-        }
-        return PricePickerDataService.sendSelectedPrice(range)
-
-    }
-
-    sendSelectedOperator(operator) {
-        return OperatorDataService.sendSelectedOperator(operator)
-    }
-
-    getResult() {
-            ResultDataService.retrieveResult().then(response => {
-                this.props.setResult(response.data);
+    retrieveFilteredResultByCriteria(criteria){
+        this.props.setIsLoadingFilteredResult(true);
+        FilteredResultDataService.retrieveFilteredResultByCriteria(criteria)
+            .then(response =>{
                 this.props.setIsLoadingFilteredResult(false);
-            })
+                //         this.props.setResult(response.data);
+            } )
     }
 
     render() {
+        this.retrieveFilteredResultByCriteria(this.props.criteria);
 
         let selectedChannelsByCategory = this.props.selectedChannelsByCategory;
         if(this.props.isLoadingFilteredResult){
@@ -68,10 +41,10 @@ class MainSearchResultComponent extends Component {
                 <div className={"container-fluid"} id={"main-search-result-component-content"}>
                     <div className={"result-container"}>
                         <div>Filters</div>
-                        <div>Okres: {this.props.selectedTerm}</div>
-                        <div>Cena: {this.props.selectedPrice[0]}zl - {this.props.selectedPrice[1]}zl</div>
+                        <div>Okres: {this.props.criteria.term}</div>
+                        <div>Cena: {this.props.criteria.price[0]}zl - {this.props.criteria.price[1]}zl</div>
                         <div>Operator:
-                            {this.props.selectedOperators.map((operator) => {
+                            {this.props.criteria.operators.map((operator) => {
                                 return operator.name + ", "
                             })}
                         </div>
@@ -96,13 +69,14 @@ class MainSearchResultComponent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        selectedTerm: state.formReducer.selectedTerm,
-        selectedPrice: state.formReducer.selectedPrice,
-        selectedOperators: state.formReducer.selectedOperators,
-        selectedChannels: state.formReducer.selectedChannels,
+        // selectedTerm: state.formReducer.selectedTerm,
+        // selectedPrice: state.formReducer.selectedPrice,
+        // selectedOperators: state.formReducer.selectedOperators,
+        // selectedChannels: state.formReducer.selectedChannels,
         selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory,
         result: state.formReducer.result,
-        isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult
+        isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult,
+        criteria: state.formReducer.criteria
     };
 };
 
