@@ -20,15 +20,15 @@ import React from "react";
 
 
 const initState = {
-    operators: [],
-    channelsObject: [],
+    operatorsDto: [],
+    channelsGroupByCategoryDto: [],
 
     selectedChannelsByCategory: {},
     selectedCategories: [],
 
     result: {},
     criteria: {
-        operators: [],
+        operatorsId: [],
         term: "24",
         price: [MIN_PRICE_FILTER_VALUE, MAX_PRICE_FILTER_VALUE],
         channels: []
@@ -41,17 +41,17 @@ const formReducer = (state = initState, action) => {
 
     switch (action.type) {
         case SET_ALL_OPERATORS: {
-            let operators = action.operators;
+            let operators = action.operatorsDto;
             return {
                 ...state,
-                operators: operators
+                operatorsDto: operators
             };
         }
         case SET_ALL_CHANNELS: {
-            let channels = action.channelsObject;
+            let channels = action.channelsGroupByCategoryDto;
             return {
                 ...state,
-                channelsObject: channels,
+                channelsGroupByCategoryDto: channels,
             };
         }
         case SET_SELECTED_CHANNELS: {
@@ -65,20 +65,10 @@ const formReducer = (state = initState, action) => {
             };
         }
         case SET_SELECTED_CHANNELS_BY_CATEGORY: {
-            let selectedChannelsByCategory = Object.assign({}, action.selectedChannelsByCategory)
-            let selectedChannels = [];
-            Object.keys(selectedChannelsByCategory).map(function (key) {
-                let channel = selectedChannelsByCategory[key];
-                selectedChannels.push(channel);
-            });
-
+            let selectedChannelsByCategory = Object.assign({}, action.selectedChannelsByCategory);
             return {
                 ...state,
                 selectedChannelsByCategory: selectedChannelsByCategory,
-                criteria: {
-                    ...state.criteria,
-                    channels: selectedChannels
-                }
             };
         }
         case SET_SELECTED_CATEGORIES: {
@@ -114,7 +104,7 @@ const formReducer = (state = initState, action) => {
                 ...state,
                 criteria: {
                     ...state.criteria,
-                    operators: operators
+                    operatorsId: operators
                 }
 
             };

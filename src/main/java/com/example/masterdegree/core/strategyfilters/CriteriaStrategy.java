@@ -1,9 +1,9 @@
 package com.example.masterdegree.core.strategyfilters;
 
-import com.example.masterdegree.models.dto.ResultTvPackage;
+import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
 
 import java.util.List;
 
 public interface CriteriaStrategy {
-    List<ResultTvPackage> getFilteredResult(List<ResultTvPackage> resultTvPackages);
+    List<ResultTvPackageResponseDto> getFilteredResult(List<ResultTvPackageResponseDto> resultTvPackageResponseDtos);
 }

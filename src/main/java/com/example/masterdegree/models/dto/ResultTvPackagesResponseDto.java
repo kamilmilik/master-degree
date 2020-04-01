@@ -7,8 +7,8 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class ResultTvPackages {
+public class ResultTvPackagesResponseDto {
 
-    private List<ResultTvPackage> resultTvPackages;
+    private List<ResultTvPackageResponseDto> resultTvPackageResponseDtos;
 
 }

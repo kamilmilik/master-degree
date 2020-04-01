@@ -1,8 +1,8 @@
 //package com.example.masterdegree;
 //
-//import com.example.masterdegree.models.dto.FilteredTvPackage;
+//import com.example.masterdegree.models.dto.FilteredTvPackageResponseDto;
 //import com.example.masterdegree.models.entity.Operator;
-//import com.example.masterdegree.models.dto.ResultTvPackage;
+//import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
 //import com.example.masterdegree.services.operator.OperatorsServiceImpl;
 //import com.example.masterdegree.services.price.PriceServiceImpl;
 //import org.junit.Before;
@@ -59,41 +59,41 @@
 //    @Test
 //    public void testSelectTvPackagesByRangePrice() {
 //        testDataGenerator.generateOperatorWithManyTvPackage();
-//        List<ResultTvPackage> resultTvPackages = testDataGenerator.generateResultTvPackage();
+//        List<ResultTvPackageResponseDto> resultTvPackageResponseDtos = testDataGenerator.generateResultTvPackage();
 //
 //        priceService.setSelectedRangePrice(new double[]{20.00, 60.00});
 //
 //        Operator operatorCanalPlus = testDataGenerator.getOperatorCanalPlus();
 //        Operator operatorCyfrowyPolsat = testDataGenerator.getOperatorCyfrowyPolsat();
 //
-//        FilteredTvPackage filteredTvPackageComfortCanalPlus = new FilteredTvPackage(testDataGenerator.getTvPackageComfort(), null, null);
-//        FilteredTvPackage filteredTvPackageComfortCyfrowyPolsat = new FilteredTvPackage(testDataGenerator.getTvPackageComfort(), null, null);
-//        ResultTvPackage resultTvPackageCanalPlusComfort = new ResultTvPackage(operatorCanalPlus.get_id(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), filteredTvPackageComfortCanalPlus);
-//        ResultTvPackage resultTvPackageCyfrowyPolsatComfort = new ResultTvPackage(operatorCyfrowyPolsat.get_id(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), filteredTvPackageComfortCyfrowyPolsat);
-//        List<ResultTvPackage> expectedResultTvPackages = new ArrayList<>();
+//        FilteredTvPackageResponseDto filteredTvPackageComfortCanalPlus = new FilteredTvPackageResponseDto(testDataGenerator.getTvPackageComfort(), null, null);
+//        FilteredTvPackageResponseDto filteredTvPackageComfortCyfrowyPolsat = new FilteredTvPackageResponseDto(testDataGenerator.getTvPackageComfort(), null, null);
+//        ResultTvPackageResponseDto resultTvPackageCanalPlusComfort = new ResultTvPackageResponseDto(operatorCanalPlus.get_id(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(), filteredTvPackageComfortCanalPlus);
+//        ResultTvPackageResponseDto resultTvPackageCyfrowyPolsatComfort = new ResultTvPackageResponseDto(operatorCyfrowyPolsat.get_id(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), filteredTvPackageComfortCyfrowyPolsat);
+//        List<ResultTvPackageResponseDto> expectedResultTvPackages = new ArrayList<>();
 //        expectedResultTvPackages.add(resultTvPackageCanalPlusComfort);
 //        expectedResultTvPackages.add(resultTvPackageCyfrowyPolsatComfort);
-//        assertThat(this.priceService.getResultFilteredByRangePriceInMainTvPackages(resultTvPackages)).isEqualTo(expectedResultTvPackages);
+//        assertThat(this.priceService.getResultFilteredByRangePriceInMainTvPackages(resultTvPackageResponseDtos)).isEqualTo(expectedResultTvPackages);
 //
 //        expectedResultTvPackages.clear();
 //        priceService.setSelectedRangePrice(new double[]{80.00, 20.00});
-//        FilteredTvPackage filteredTvPackageSuperPremiumCanalPlus = new FilteredTvPackage(testDataGenerator.getTvPackageSuperpremium(), null, null);
-//        FilteredTvPackage filteredTvPackageSuperPremiumCyfrowyPolsat = new FilteredTvPackage(testDataGenerator.getTvPackageSuperpremium(), null, null);
+//        FilteredTvPackageResponseDto filteredTvPackageSuperPremiumCanalPlus = new FilteredTvPackageResponseDto(testDataGenerator.getTvPackageSuperpremium(), null, null);
+//        FilteredTvPackageResponseDto filteredTvPackageSuperPremiumCyfrowyPolsat = new FilteredTvPackageResponseDto(testDataGenerator.getTvPackageSuperpremium(), null, null);
 //
-//        ResultTvPackage resultTvPackageCanalPlusSuperPremium = new ResultTvPackage(operatorCanalPlus.get_id(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(),filteredTvPackageSuperPremiumCanalPlus);
-//        ResultTvPackage resultTvPackageCyfrowyPolsatSuperPremium = new ResultTvPackage(operatorCyfrowyPolsat.get_id(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), filteredTvPackageSuperPremiumCyfrowyPolsat);
+//        ResultTvPackageResponseDto resultTvPackageCanalPlusSuperPremium = new ResultTvPackageResponseDto(operatorCanalPlus.get_id(), operatorCanalPlus.getName(), operatorCanalPlus.getImgSrc(),filteredTvPackageSuperPremiumCanalPlus);
+//        ResultTvPackageResponseDto resultTvPackageCyfrowyPolsatSuperPremium = new ResultTvPackageResponseDto(operatorCyfrowyPolsat.get_id(), operatorCyfrowyPolsat.getName(), operatorCyfrowyPolsat.getImgSrc(), filteredTvPackageSuperPremiumCyfrowyPolsat);
 //        expectedResultTvPackages.add(resultTvPackageCanalPlusComfort);
 //        expectedResultTvPackages.add(resultTvPackageCanalPlusSuperPremium);
 //        expectedResultTvPackages.add(resultTvPackageCyfrowyPolsatComfort);
 //        expectedResultTvPackages.add(resultTvPackageCyfrowyPolsatSuperPremium);
-//        assertThat(this.priceService.getResultFilteredByRangePriceInMainTvPackages(resultTvPackages)).isEqualTo(expectedResultTvPackages);
+//        assertThat(this.priceService.getResultFilteredByRangePriceInMainTvPackages(resultTvPackageResponseDtos)).isEqualTo(expectedResultTvPackages);
 //
 //        expectedResultTvPackages.clear();
 //        priceService.setSelectedRangePrice(new double[]{20.00, 30.00});
-//        assertThat(this.priceService.getResultFilteredByRangePriceInMainTvPackages(resultTvPackages)).isEqualTo(expectedResultTvPackages);
+//        assertThat(this.priceService.getResultFilteredByRangePriceInMainTvPackages(resultTvPackageResponseDtos)).isEqualTo(expectedResultTvPackages);
 //
 //        expectedResultTvPackages.clear();
 //        priceService.setSelectedRangePrice(new double[]{210.00, 230.00});
-//        assertThat(this.priceService.getResultFilteredByRangePriceInMainTvPackages(resultTvPackages)).isEqualTo(expectedResultTvPackages);
+//        assertThat(this.priceService.getResultFilteredByRangePriceInMainTvPackages(resultTvPackageResponseDtos)).isEqualTo(expectedResultTvPackages);
 //    }
 //}

@@ -26,13 +26,13 @@ class OperatorChooser extends Component {
         });
     }
 
-    handleImageClick(operator) {
-        const selectedArray = this.props.criteria.operators.slice();
-        const indexOfSelected = selectedArray.indexOf(operator);
+    handleImageClick(operatorId) {
+        const selectedArray = this.props.criteria.operatorsId.slice();
+        const indexOfSelected = selectedArray.indexOf(operatorId);
         if (!this.isOperatorSelected(indexOfSelected)) {
             selectedArray.splice(indexOfSelected, 1);
         } else {
-            selectedArray.push(operator);
+            selectedArray.push(operatorId);
         }
         this.props.setSelectedOperators(selectedArray);
     }
@@ -43,21 +43,18 @@ class OperatorChooser extends Component {
 
     render() {
         const {values} = this.props;
-        this.props.criteria.operators.map((operator) => {
-            console.log("Operator: sdf " + operator);
-        });
         console.log("test");
         return (
             <div className={'container-fluid'} id={"main-operator-chooser-container"}>
                 <div className={"col-md-12"} id={"operators-list"}>
                     <div className="mdb-lightbox no-margin">
                         {
-                            values.operators.map((operator) => {
+                            values.operatorsDto.map((operator) => {
                                 return (
                                     <img
-                                        className={this.props.criteria.operators.indexOf(operator) !== -1 ? 'operator-image-clicked' : 'operator-image'}
+                                        className={this.props.criteria.operatorsId.indexOf(operator.id) !== -1 ? 'operator-image-clicked' : 'operator-image'}
                                         src={operator.imgSrc}
-                                        onClick={() => this.handleImageClick(operator)}
+                                        onClick={() => this.handleImageClick(operator.id)}
                                     />
                                 )
                             })
@@ -72,7 +69,7 @@ class OperatorChooser extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        operators: state.formReducer.operators,
+        operatorsDto: state.formReducer.operatorsDto,
         result: state.formReducer.result,
         isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult,
         criteria: state.formReducer.criteria

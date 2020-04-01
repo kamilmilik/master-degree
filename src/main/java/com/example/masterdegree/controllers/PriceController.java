@@ -12,9 +12,9 @@ public class PriceController {
 
     private final PriceService priceService;
 
-    @PostMapping("/price")
-    @ResponseBody
-    public void fetchSelectedRangePrice(@RequestBody double[] price) {
-        priceService.setSelectedRangePrice(price);
-    }
+//    @PostMapping("/price")
+//    @ResponseBody
+//    public void fetchSelectedRangePrice(@RequestBody double[] price) {
+//        priceService.setSelectedRangePrice(price);
+//    }
 }

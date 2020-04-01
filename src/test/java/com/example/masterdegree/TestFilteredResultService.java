@@ -34,10 +34,10 @@
 ////        operators.add(testDataGenerator.getOperatorCanalPlus());
 ////        when(this.operatorsService.getTvPackagesByOperator(testDataGenerator.getOperatorCanalPlus())).thenReturn(testDataGenerator.getOperatorCanalPlus().getTvPackages());
 ////        when(this.operatorsService.getFetchedOperators()).thenReturn(operators);
-////        ResultTvPackage resultTvPackageComfort = new ResultTvPackage(testDataGenerator.getOperatorCanalPlus().getName(), testDataGenerator.getOperatorCanalPlus().getImgSrc(), testDataGenerator.getTvPackageComfort());
-////        List<ResultTvPackage> resultTvPackages = new ArrayList<>();
-////        resultTvPackages.add(resultTvPackageComfort);
-////        assertThat(this.resultService.getResultByOperators(operatorsService.getFetchedOperators())).isEqualTo(resultTvPackages);
+////        ResultTvPackageResponseDto resultTvPackageComfort = new ResultTvPackageResponseDto(testDataGenerator.getOperatorCanalPlus().getName(), testDataGenerator.getOperatorCanalPlus().getImgSrc(), testDataGenerator.getTvPackageComfort());
+////        List<ResultTvPackageResponseDto> resultTvPackageResponseDtos = new ArrayList<>();
+////        resultTvPackageResponseDtos.add(resultTvPackageComfort);
+////        assertThat(this.resultService.getResultByOperators(operatorsService.getFetchedOperators())).isEqualTo(resultTvPackageResponseDtos);
 ////    }
 ////
 ////    @Test
@@ -53,17 +53,17 @@
 ////
 ////        when(this.operatorsService.getFetchedOperators()).thenReturn(operators);
 ////
-////        ResultTvPackage resultTvPackageComfortCanalPlus = new ResultTvPackage(testDataGenerator.getOperatorCanalPlus().getName(), testDataGenerator.getOperatorCanalPlus().getImgSrc(), testDataGenerator.getTvPackageComfort());
-////        ResultTvPackage resultTvPackageSuperpremiumCanalPlus = new ResultTvPackage(testDataGenerator.getOperatorCanalPlus().getName(), testDataGenerator.getOperatorCanalPlus().getImgSrc(), testDataGenerator.getTvPackageSuperpremium());
-////        ResultTvPackage resultTvPackageComfortCyfrowyPolsat = new ResultTvPackage(testDataGenerator.getOperatorCyfrowyPolsat().getName(), testDataGenerator.getOperatorCyfrowyPolsat().getImgSrc(), testDataGenerator.getTvPackageComfort());
-////        ResultTvPackage resultTvPackageSuperpremiumCyfrowyPolsat = new ResultTvPackage(testDataGenerator.getOperatorCyfrowyPolsat().getName(), testDataGenerator.getOperatorCyfrowyPolsat().getImgSrc(), testDataGenerator.getTvPackageSuperpremium());
+////        ResultTvPackageResponseDto resultTvPackageComfortCanalPlus = new ResultTvPackageResponseDto(testDataGenerator.getOperatorCanalPlus().getName(), testDataGenerator.getOperatorCanalPlus().getImgSrc(), testDataGenerator.getTvPackageComfort());
+////        ResultTvPackageResponseDto resultTvPackageSuperpremiumCanalPlus = new ResultTvPackageResponseDto(testDataGenerator.getOperatorCanalPlus().getName(), testDataGenerator.getOperatorCanalPlus().getImgSrc(), testDataGenerator.getTvPackageSuperpremium());
+////        ResultTvPackageResponseDto resultTvPackageComfortCyfrowyPolsat = new ResultTvPackageResponseDto(testDataGenerator.getOperatorCyfrowyPolsat().getName(), testDataGenerator.getOperatorCyfrowyPolsat().getImgSrc(), testDataGenerator.getTvPackageComfort());
+////        ResultTvPackageResponseDto resultTvPackageSuperpremiumCyfrowyPolsat = new ResultTvPackageResponseDto(testDataGenerator.getOperatorCyfrowyPolsat().getName(), testDataGenerator.getOperatorCyfrowyPolsat().getImgSrc(), testDataGenerator.getTvPackageSuperpremium());
 ////
-////        List<ResultTvPackage> resultTvPackages = new ArrayList<>();
-////        resultTvPackages.add(resultTvPackageComfortCanalPlus);
-////        resultTvPackages.add(resultTvPackageSuperpremiumCanalPlus);
-////        resultTvPackages.add(resultTvPackageComfortCyfrowyPolsat);
-////        resultTvPackages.add(resultTvPackageSuperpremiumCyfrowyPolsat);
-////        assertThat(this.resultService.getResultByOperators(operatorsService.getFetchedOperators())).isEqualTo(resultTvPackages);
+////        List<ResultTvPackageResponseDto> resultTvPackageResponseDtos = new ArrayList<>();
+////        resultTvPackageResponseDtos.add(resultTvPackageComfortCanalPlus);
+////        resultTvPackageResponseDtos.add(resultTvPackageSuperpremiumCanalPlus);
+////        resultTvPackageResponseDtos.add(resultTvPackageComfortCyfrowyPolsat);
+////        resultTvPackageResponseDtos.add(resultTvPackageSuperpremiumCyfrowyPolsat);
+////        assertThat(this.resultService.getResultByOperators(operatorsService.getFetchedOperators())).isEqualTo(resultTvPackageResponseDtos);
 ////    }
 //
 //

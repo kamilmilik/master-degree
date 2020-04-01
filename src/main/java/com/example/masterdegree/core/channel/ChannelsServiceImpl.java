@@ -1,9 +1,7 @@
 package com.example.masterdegree.core.channel;
 
-import com.example.masterdegree.models.dto.ResultTvPackage;
 import com.example.masterdegree.models.entity.Channel;
 import com.example.masterdegree.models.entity.ChannelsGroupByCategory;
-import com.example.masterdegree.models.entity.TvPackage;
 import com.example.masterdegree.repositories.ChannelsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,37 +52,6 @@ public class ChannelsServiceImpl implements ChannelsService {
         return getFetchedSelectedChannels().size() != 0;
     }
 
-    // TODO KM sprawdzic czy dziala w wiekszej ilosci danych
-    // TODO KM refactor
-    @Override
-    public List<ResultTvPackage> getResultBySelectedChannels(List<ResultTvPackage> resultTvPackages) {
-        for (Channel selectedChannel : getFetchedSelectedChannels()) {
-            for (Iterator<ResultTvPackage> it = resultTvPackages.iterator(); it.hasNext(); ) {
-                ResultTvPackage resultTvPackage = it.next();
-                boolean isFoundSelectedChannel = false;
-                for (Channel channel : resultTvPackage.getFilteredTvPackage().getChannels()) {
-                    if (channel.equals(selectedChannel)) {
-                        isFoundSelectedChannel = true; // znalazlem kanal w main tv package
-                        break;
-                    }
-                }
-                if (!isFoundSelectedChannel) { // nie znalazlem kanalu w main tv package, moze jest w dodatkowych
-                    for (TvPackage extraAvailableTvPackage : resultTvPackage.getFilteredTvPackage().getExtraAvailableTvPackages()) {
-                        for (Channel channel : extraAvailableTvPackage.getChannels())
-                            if (channel.equals(selectedChannel)) {
-                                isFoundSelectedChannel = true; // jest w dodatkowych, nie w main
-                                resultTvPackage.getFilteredTvPackage().getExtraTvPackagesWhichMeetCriteria().add(extraAvailableTvPackage);
-                                break;
-                            }
-                    }
-                    if (!isFoundSelectedChannel) { // nie ma w tym main, ani w dodatkowych, usun ten proponowany pakiet glowny z dodatkowymi
-                        it.remove();
-                    }
-                }
-            }
-        }
-        return resultTvPackages;
-    }
 
 
 }

@@ -4,10 +4,9 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
-public class OperatorDto {
+public class OperatorRequestDto {
     private String id;
-    private String name;
-    private String imgSrc;
 }

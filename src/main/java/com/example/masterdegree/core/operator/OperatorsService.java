@@ -1,11 +1,10 @@
 package com.example.masterdegree.core.operator;
 
-import com.example.masterdegree.models.dto.OperatorDto;
-import com.example.masterdegree.models.dto.ResultTvPackages;
+import com.example.masterdegree.models.dto.OperatorRequestDto;
+import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
+import com.example.masterdegree.models.dto.ResultTvPackagesResponseDto;
 import com.example.masterdegree.models.entity.MainTvPackage;
 import com.example.masterdegree.models.entity.Operator;
-import com.example.masterdegree.models.dto.ResultTvPackage;
-import com.example.masterdegree.models.entity.TvPackage;
 
 import java.util.List;
 import java.util.Set;
@@ -20,15 +19,15 @@ public interface OperatorsService {
 
     boolean isAnyOperatorSelected();
 
-    List<OperatorDto> getOperators();
+    List<OperatorRequestDto> getOperators();
 
     List<Operator> getAllOperatorsFromDb();
 
     List<MainTvPackage> getMainTvPackagesByIdOperator(String id);
 
-    ResultTvPackages getFilteredTvPackagesByOperatorId(String id);
+    ResultTvPackagesResponseDto getFilteredTvPackagesByOperatorId(String id);
 
-    Operator getOperatorById(OperatorDto operatorDto);
+    Operator getOperatorById(OperatorRequestDto operatorRequestDto);
 
-    List<ResultTvPackage> getResultBySelectedOperators(List<ResultTvPackage> resultTvPackages);
+    List<ResultTvPackageResponseDto> getResultBySelectedOperators(List<ResultTvPackageResponseDto> resultTvPackageResponseDtos);
 }

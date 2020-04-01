@@ -15,8 +15,8 @@ class MainFormFilter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            operators: [],
-            channelsObject: [],
+            operatorsDto: [],
+            channelsGroupByCategoryDto: [],
         };
         this.refreshOperators = this.refreshOperators.bind(this);
         this.refreshChannels = this.refreshChannels.bind(this);
@@ -33,7 +33,7 @@ class MainFormFilter extends Component {
             .then(
                 response => {
                     console.log(response);
-                    this.setState({operators: response.data})
+                    this.setState({operatorsDto: response.data})
                 }
             )
     }
@@ -43,14 +43,14 @@ class MainFormFilter extends Component {
             .then(
                 response => {
                     console.log(response);
-                    this.setState({channelsObject: response.data})
+                    this.setState({channelsGroupByCategoryDto: response.data})
                 }
             )
     }
 
     render() {
-        const {operators, channelsObject} = this.state;
-        const values = {operators, channelsObject};
+        const {operatorsDto, channelsGroupByCategoryDto} = this.state;
+        const values = {operatorsDto, channelsGroupByCategoryDto};
 
         return (
             <div className={"container-fluid"} id={"main-formm-filter"}>
@@ -81,9 +81,8 @@ class MainFormFilter extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        // To chyba bierze z tego reducera wpisane z palca dane i daje do items
-        operators: state.formReducer.operators,
-        channelsObject: state.formReducer.channelsObject
+        operatorsDto: state.formReducer.operatorsDto,
+        channelsGroupByCategoryDto: state.formReducer.channelsGroupByCategoryDto
     }
 };
 

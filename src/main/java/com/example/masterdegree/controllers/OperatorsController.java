@@ -1,9 +1,7 @@
 package com.example.masterdegree.controllers;
 
-import com.example.masterdegree.core.filteredresult.FilteredResultService;
-import com.example.masterdegree.models.dto.OperatorDto;
-import com.example.masterdegree.models.dto.ResultTvPackages;
-import com.example.masterdegree.models.entity.MainTvPackage;
+import com.example.masterdegree.models.dto.OperatorRequestDto;
+import com.example.masterdegree.models.dto.ResultTvPackagesResponseDto;
 import com.example.masterdegree.models.entity.Operator;
 import com.example.masterdegree.core.operator.OperatorsService;
 import lombok.RequiredArgsConstructor;
@@ -26,21 +24,21 @@ public class OperatorsController {
 //    private final FilteredResultService filteredResultService;
 
     @GetMapping("/operators")
-    public ResponseEntity<List<OperatorDto>> getOperators() {
+    public ResponseEntity<List<OperatorRequestDto>> getOperators() {
 //        List<Operator> operators = operatorsService.getAllOperatorsFromDb();
 //        operators.stream().map(Operator::getId).collect(Collectors.toList()).forEach(System.out::println);
         return new ResponseEntity<>(operatorsService.getOperators(), HttpStatus.OK);
     }
 
     @GetMapping("/operator") // http://localhost:8095/api/operator
-    public ResponseEntity<ResultTvPackages> getFilteredTvPackagesByIdOperator(@RequestParam String id) {
+    public ResponseEntity<ResultTvPackagesResponseDto> getFilteredTvPackagesByIdOperator(@RequestParam String id) {
         return new ResponseEntity<>(operatorsService.getFilteredTvPackagesByOperatorId(id),HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/operators/not-selected")
-    public ResponseEntity<Void> fetchNotSelectedOperator(@RequestBody OperatorDto operatorDto) {
+    public ResponseEntity<Void> fetchNotSelectedOperator(@RequestBody OperatorRequestDto operatorRequestDto) {
         System.out.println("Jestem tutaj not selected");
-        Operator operator = operatorsService.getOperatorById(operatorDto);
+        Operator operator = operatorsService.getOperatorById(operatorRequestDto);
         operatorsService.removeFetchedOperatorFromFetchedList(operator);
         System.out.println("Operatory: ");
         operatorsService.getFetchedSelectedOperators().forEach(System.out::println);

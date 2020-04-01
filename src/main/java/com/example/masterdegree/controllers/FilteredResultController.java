@@ -1,16 +1,15 @@
 package com.example.masterdegree.controllers;
 
-import com.example.masterdegree.models.dto.CriteriaDto;
-import com.example.masterdegree.models.dto.ResultTvPackages;
+import com.example.masterdegree.models.dto.CriteriaRequestDto;
+import com.example.masterdegree.models.dto.ResultTvPackagesResponseDto;
 import com.example.masterdegree.core.filteredresult.FilteredResultService;
+import com.example.masterdegree.models.entity.Criteria;
+import com.example.masterdegree.models.mappers.CriteriaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -19,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class FilteredResultController {
 
     private final FilteredResultService filteredResultService;
+    private final CriteriaMapper criteriaMapper;
 
-    @GetMapping("/result")
-//    @ResponseBody
-    public ResponseEntity<ResultTvPackages> getFilteredResultByCriteria(@RequestParam CriteriaDto criteria) {
-        return new ResponseEntity<>(filteredResultService.getFilteredResult(criteria), HttpStatus.OK);
+    @PostMapping("/result")
+    public ResponseEntity<ResultTvPackagesResponseDto> getFilteredResultByCriteria(@RequestBody CriteriaRequestDto criteriaRequestDto) {
+        return new ResponseEntity<>(filteredResultService.getFilteredResult(criteriaMapper.convertToEntity(criteriaRequestDto)), HttpStatus.OK);
     }
 
 }

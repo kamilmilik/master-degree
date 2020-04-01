@@ -20,16 +20,30 @@ class MainSearchResultComponent extends Component {
     }
 
     retrieveFilteredResultByCriteria(criteria){
-        this.props.setIsLoadingFilteredResult(true);
+        // this.props.setIsLoadingFilteredResult(true);
         FilteredResultDataService.retrieveFilteredResultByCriteria(criteria)
             .then(response =>{
-                this.props.setIsLoadingFilteredResult(false);
+                // this.props.setIsLoadingFilteredResult(false);
                 //         this.props.setResult(response.data);
             } )
     }
 
-    render() {
+    componentDidMount() {
         this.retrieveFilteredResultByCriteria(this.props.criteria);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.isStateCriteriaValueChanged(prevProps)) {
+            this.retrieveFilteredResultByCriteria(this.props.criteria);
+        }
+    }
+
+    isStateCriteriaValueChanged(prevProps) {
+        return prevProps.criteria !== this.props.criteria
+    }
+
+    render() {
+        // this.retrieveFilteredResultByCriteria(this.props.criteria);
 
         let selectedChannelsByCategory = this.props.selectedChannelsByCategory;
         if(this.props.isLoadingFilteredResult){
@@ -44,9 +58,12 @@ class MainSearchResultComponent extends Component {
                         <div>Okres: {this.props.criteria.term}</div>
                         <div>Cena: {this.props.criteria.price[0]}zl - {this.props.criteria.price[1]}zl</div>
                         <div>Operator:
-                            {this.props.criteria.operators.map((operator) => {
-                                return operator.name + ", "
+                            {this.props.criteria.operatorsId.map(operatorId => {
+                                return operatorId + ", "
                             })}
+                            {/*{this.props.criteria.operators.map((operator) => {*/}
+                            {/*    return operator.name + ", "*/}
+                            {/*})}*/}
                         </div>
                         <div>Kanaly:
                             {

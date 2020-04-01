@@ -1,7 +1,7 @@
 //package com.example.masterdegree;
 //
-//import com.example.masterdegree.models.dto.FilteredTvPackage;
-//import com.example.masterdegree.models.dto.ResultTvPackage;
+//import com.example.masterdegree.models.dto.FilteredTvPackageResponseDto;
+//import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
 //import com.example.masterdegree.models.entity.Channel;
 //import com.example.masterdegree.models.entity.MainTvPackage;
 //import com.example.masterdegree.models.entity.Operator;
@@ -33,7 +33,7 @@
 //
 //
 //    private Operator operatorCyfrowyPolsat = new Operator(ObjectId.get(), "Cyfrowy polsat", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Platforma_Canal%2B.svg/1200px-Platforma_Canal%2B.svg.png", mainTvPackagesList);
-//    private List<ResultTvPackage> resultTvPackages = new ArrayList<>();
+//    private List<ResultTvPackageResponseDto> resultTvPackageResponseDtos = new ArrayList<>();
 //
 //    public void generateOperatorWithOneTvPackage() {
 //        clearAll();
@@ -55,16 +55,16 @@
 //    }
 //
 //
-//    public List<ResultTvPackage> generateResultTvPackage() {
+//    public List<ResultTvPackageResponseDto> generateResultTvPackage() {
 //        generateResultTvPackageForGivenOperator(operatorCanalPlus);
 //        generateResultTvPackageForGivenOperator(operatorCyfrowyPolsat);
-//        return resultTvPackages;
+//        return resultTvPackageResponseDtos;
 //    }
 //
 //    private void generateResultTvPackageForGivenOperator(Operator operator) {
 //        for (MainTvPackage tvPackage : operator.getTvPackages()) {
-//            FilteredTvPackage filteredTvPackage = new FilteredTvPackage(tvPackage, null, null);
-//            resultTvPackages.add(new ResultTvPackage(operator.get_id(), operator.getName(), operator.getImgSrc(), filteredTvPackage));
+//            FilteredTvPackageResponseDto filteredTvPackageResponseDto = new FilteredTvPackageResponseDto(tvPackage, null, null);
+//            resultTvPackageResponseDtos.add(new ResultTvPackageResponseDto(operator.get_id(), operator.getName(), operator.getImgSrc(), filteredTvPackageResponseDto));
 //        }
 //    }
 //
@@ -93,7 +93,7 @@
 //        return operatorCyfrowyPolsat;
 //    }
 //
-//    public List<ResultTvPackage> getResultTvPackages() {
-//        return resultTvPackages;
+//    public List<ResultTvPackageResponseDto> getResultTvPackageResponseDtos() {
+//        return resultTvPackageResponseDtos;
 //    }
 //}

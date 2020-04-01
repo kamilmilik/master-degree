@@ -1,18 +1,10 @@
 package com.example.masterdegree.core.filteredresult;
 
-import com.example.masterdegree.models.dto.CriteriaDto;
-import com.example.masterdegree.models.dto.ResultTvPackage;
-import com.example.masterdegree.models.dto.ResultTvPackages;
-import com.example.masterdegree.models.entity.Operator;
-
-import java.util.List;
+import com.example.masterdegree.models.dto.ResultTvPackagesResponseDto;
+import com.example.masterdegree.models.entity.Criteria;
 
 public interface FilteredResultService {
 
-    ResultTvPackages getFilteredResult();
-
-    ResultTvPackages getFilteredResult(CriteriaDto criteria);
-
-    List<ResultTvPackage> createFilteredTvPackagesByOperator(Operator operator);
+    ResultTvPackagesResponseDto getFilteredResult(Criteria criteria);
 
 }

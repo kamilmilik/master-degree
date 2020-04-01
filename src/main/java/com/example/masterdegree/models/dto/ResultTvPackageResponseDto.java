@@ -1,23 +1,19 @@
 package com.example.masterdegree.models.dto;
 
 import lombok.*;
-import org.bson.types.ObjectId;
 
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode()
 @ToString()
-public class ResultTvPackage {
+public class ResultTvPackageResponseDto {
 
     @NonNull
     private String operatorId;
-
     @NonNull
     private String operatorName;
-
     private String operatorImg;
-
     @NonNull
-    private FilteredTvPackage filteredTvPackage;
+    private FilteredTvPackageResponseDto filteredTvPackageResponseDto;
 
 }

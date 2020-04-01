@@ -15,179 +15,150 @@ import ChannelDataService from "../../../../service/ChannelDataService";
 import FilteredResultDataService from "../../../../service/FilteredResultDataService";
 
 // TODO refactor, przeniesc czesc funkcjonalnosci moze do jakiejs klasy o nazwie service
+const CLICKED_CATEGORY_BUTTON = "category-button-clicked";
+const NOT_CLICKED_CATEGORY_BUTTON = "category-button";
 class ChannelChooser extends Component {
-
     constructor(props) {
         super(props);
-        this.state = {
-            selectedArray: []
-        };
-        this.handleImageClick = this.handleImageClick.bind(this);
-        this.handleCategoryClick = this.handleCategoryClick.bind(this)
+        this.onChannelClick = this.onChannelClick.bind(this);
+        this.onCategoryClick = this.onCategoryClick.bind(this)
     }
 
-
-    handleCategoryClick(channelObject) {
-        console.log("Handle category click");
-        const selectedCategoriesArray = this.props.selectedCategories.slice();
-        const indexOfSelected = selectedCategoriesArray.indexOf(channelObject.categoryName);
-        if (indexOfSelected !== -1) {
+    onCategoryClick(categoryWithChannels) {
+        const selectedCategoriesArray = this.copyElement(this.props.selectedCategories);
+        const indexOfSelected = selectedCategoriesArray.indexOf(categoryWithChannels.categoryName);
+        if (this.isElementExist(indexOfSelected)) {
             selectedCategoriesArray.splice(indexOfSelected, 1);
-            this.setAllChannelsFromCategorySelectedOrNotSelected(channelObject, false)
+            this.setAllChannelsFromCategorySelectedOrNotSelected(categoryWithChannels, false)
         } else {
-            selectedCategoriesArray.push(channelObject.categoryName);
-            this.setAllChannelsFromCategorySelectedOrNotSelected(channelObject, true)
+            selectedCategoriesArray.push(categoryWithChannels.categoryName);
+            this.setAllChannelsFromCategorySelectedOrNotSelected(categoryWithChannels, true)
         }
         this.props.setSelectedCategories(selectedCategoriesArray);
     }
 
-    setAllChannelsFromCategorySelectedOrNotSelected(channelObject, isSelectAll) {
-        const allSelectedOrAllNotSelectedChannels = [];
-
-        const categoryKey = channelObject.categoryName;
+    setAllChannelsFromCategorySelectedOrNotSelected(categoryWithChannels, isSelectAll) {
+        const categoryKey = categoryWithChannels.categoryName;
         const selectedChannelsByCategory = this.props.selectedChannelsByCategory;
-        channelObject.channels.map((channel, i) => {
-            if (typeof selectedChannelsByCategory[categoryKey] === 'undefined') {
+        categoryWithChannels.channels.map((channel, i) => {
+            if (!this.isAnyChannelInGivenCategorySelected(selectedChannelsByCategory, categoryKey)) {
                 const selectedArray = [];
                 selectedArray.push(channel);
-                allSelectedOrAllNotSelectedChannels.push(channel);
                 selectedChannelsByCategory[categoryKey] = selectedArray;
             } else {
                 const indexOfSelected = selectedChannelsByCategory[categoryKey].indexOf(channel);
                 if (isSelectAll) {
-                    if (indexOfSelected === -1) {
+                    if (!this.isElementExist(indexOfSelected)) {
                         selectedChannelsByCategory[categoryKey].push(channel);
-                        allSelectedOrAllNotSelectedChannels.push(channel);
                     }
                 } else {
-                    if (indexOfSelected !== -1) {
+                    if (this.isElementExist(indexOfSelected)) {
                         selectedChannelsByCategory[categoryKey].splice(indexOfSelected, 1);
-                        allSelectedOrAllNotSelectedChannels.push(channel);
                     }
                 }
             }
         });
-        if(isSelectAll){
-            this.sendAllSelectedChannels(allSelectedOrAllNotSelectedChannels);
-        } else {
-            this.sendAllNotSelectedChannels(allSelectedOrAllNotSelectedChannels);
-        }
         this.props.setSelectedChannelsByCategory(selectedChannelsByCategory);
+        let array = this.getArrayOfChannelsFromGivenMap(selectedChannelsByCategory);
+        this.props.setSelectedChannels(this.getArrayOfChannelsFromGivenMap(selectedChannelsByCategory));
     }
 
-    handleImageClick(channel, channelObject) {
-        const categoryKey = channelObject.categoryName;
-        const selectedChannelsByCategory = this.props.selectedChannelsByCategory;
-        const selectedArray = [];
-        if (typeof selectedChannelsByCategory[categoryKey] === 'undefined') {
-            selectedArray.push(channel);
-            this.sendSelectedChannel(channel);
-            selectedChannelsByCategory[categoryKey] = selectedArray;
+    isAnyChannelInGivenCategorySelected(selectedChannelsByCategory, category) {
+        return typeof selectedChannelsByCategory[category] !== 'undefined'
+    }
+
+    onChannelClick(channel, categoryWithChannels) {
+        const clickedChannelCategoryName = categoryWithChannels.categoryName;
+        const mapOfSelectedChannelsByCategory = this.props.selectedChannelsByCategory;
+        if (this.isAnyChannelFromGivenCategoryClickedBefore(mapOfSelectedChannelsByCategory, clickedChannelCategoryName)) {
+            this.initListAndPushToGivenCategoryFirstSelectedChannel(mapOfSelectedChannelsByCategory, clickedChannelCategoryName, channel);
         } else {
-            let selectedArray = selectedChannelsByCategory[categoryKey];
-            const indexOfSelected = selectedArray.indexOf(channel);
-            if (indexOfSelected !== -1) {
-                selectedArray.splice(indexOfSelected, 1);
-                this.sendNotSelectedChannel(channel);
+            let arrayOfSelectedChannelsAssociatedToCategory = mapOfSelectedChannelsByCategory[clickedChannelCategoryName];
+            const indexOfSelected = arrayOfSelectedChannelsAssociatedToCategory.indexOf(channel);
+            if (this.isElementExist(indexOfSelected)) {
+                arrayOfSelectedChannelsAssociatedToCategory.splice(indexOfSelected, 1);
             } else {
-                selectedArray.push(channel);
-                this.sendSelectedChannel(channel);
+                arrayOfSelectedChannelsAssociatedToCategory.push(channel);
             }
         }
-        console.log(selectedChannelsByCategory[categoryKey]);
-        if (this.isAllChannelsSelectedInCategory(selectedChannelsByCategory, categoryKey, channelObject)) {
-            this.handleCategoryClick(channelObject)
+        console.log(mapOfSelectedChannelsByCategory[clickedChannelCategoryName]);
+        if (this.isAllChannelsHasBeenSelectedByUserInCategory(mapOfSelectedChannelsByCategory, clickedChannelCategoryName, categoryWithChannels)) {
+            this.onCategoryClick(categoryWithChannels)
         } else {
-            this.deleteSelectedCategory(categoryKey);
+            this.deleteSelectedCategory(clickedChannelCategoryName);
         }
-
-        this.props.setSelectedChannelsByCategory(selectedChannelsByCategory);
+        this.props.setSelectedChannelsByCategory(mapOfSelectedChannelsByCategory);
+        let array = this.getArrayOfChannelsFromGivenMap(mapOfSelectedChannelsByCategory);
+        this.props.setSelectedChannels(this.getArrayOfChannelsFromGivenMap(mapOfSelectedChannelsByCategory));
     }
 
-
-    sendSelectedChannel(channel) {
-        ChannelDataService.sendSelectedChannel(channel)
-            .then(response => {
-                this.props.setIsLoadingFilteredResult(true);
-                this.getResult();
-            });
+    getArrayOfChannelsFromGivenMap(map){
+        let array = [];
+        for (let key in map) {
+            let channels = map[key];
+            array.push(...channels);
+        }
+        return array;
     }
 
-    sendNotSelectedChannel(channel) {
-        ChannelDataService.sendNotSelectedChannel(channel)
-            .then(response => {
-                this.props.setIsLoadingFilteredResult(true);
-                this.getResult();
-            });
+    initListAndPushToGivenCategoryFirstSelectedChannel(selectedChannelsByCategoryMap, clickedChannelCategoryName, channel){
+        const arrayOfSelectedChannelsAssociatedToCategory = [];
+        arrayOfSelectedChannelsAssociatedToCategory.push(channel);
+        selectedChannelsByCategoryMap[clickedChannelCategoryName] = arrayOfSelectedChannelsAssociatedToCategory;
     }
 
-    sendAllSelectedChannels(channels) {
-        this.props.setIsLoadingFilteredResult(true);
-        ChannelDataService.sendAllSelectedChannels(channels)
-            .then(response => {
-                this.getResult();
-            });
+    isElementExist(element) {
+        return element !== -1;
     }
 
-    sendAllNotSelectedChannels(channels) {
-        this.props.setIsLoadingFilteredResult(true);
-        ChannelDataService.sendAllNotSelectedChannels(channels)
-            .then(response => {
-                this.getResult();
-            });
+    isAnyChannelFromGivenCategoryClickedBefore(selectedChannelsByCategory, clickedChannelCategoryName){
+        return typeof selectedChannelsByCategory[clickedChannelCategoryName] === 'undefined'
     }
 
-    getResult() {
-        // FilteredResultDataService.retrieveFilteredResultByCriteria().then(response => {
-        //     this.props.setIsLoadingFilteredResult(false);
-        //     this.props.setResult(response.data);
-        // });
-    }
-
-    isAllChannelsSelectedInCategory(selectedChannelsByCategory, categoryKey, channelObject) {
-        return (selectedChannelsByCategory[categoryKey].length === channelObject.channels.length)
+    isAllChannelsHasBeenSelectedByUserInCategory(selectedChannelsByCategory, categoryKey, categoryWithChannels) {
+        return (selectedChannelsByCategory[categoryKey].length === categoryWithChannels.channels.length)
     }
 
     deleteSelectedCategory(categoryKey) {
-        const selectedCategoriesArray = this.props.selectedCategories.slice();
+        const selectedCategoriesArray = this.copyElement(this.props.selectedCategories);
         const indexOfSelected = selectedCategoriesArray.indexOf(categoryKey);
-        if (indexOfSelected !== -1) {
+        if (this.isElementExist(indexOfSelected)) {
             selectedCategoriesArray.splice(indexOfSelected, 1);
             this.props.setSelectedCategories(selectedCategoriesArray);
         }
     }
 
+    copyElement(elementToCopy){
+        return elementToCopy.slice()
+    }
+
     render() {
         const {values} = this.props;
         const selectedChannelsByCategory = this.props.selectedChannelsByCategory;
-
         return (
             <div className={"container-fluid"} id={"main-channel-chooser-container"}>
-
                 {
-                    values.channelsObject.map((channelObject) => (
-
+                    values.channelsGroupByCategoryDto.map((categoryWithChannelsDto) => (
                         <div className={"mdb-lightbox no-margin"} id={"category-image-channel-section"}>
                             <ul className={"list-group"}>
                                 <li className={"list-group-item"}>
                                     <div className={"category-type-title"}>
                                         <Button basic
-                                                id={this.props.selectedCategories.indexOf(channelObject.categoryName) !== -1 ? "category-button-clicked" : "category-button"}
-                                                onClick={() => this.handleCategoryClick(channelObject)}
+                                                id={this.props.selectedCategories.indexOf(categoryWithChannelsDto.categoryName) !== -1 ? CLICKED_CATEGORY_BUTTON : NOT_CLICKED_CATEGORY_BUTTON}
+                                                onClick={() => this.onCategoryClick(categoryWithChannelsDto)}
                                         >
-                                            {channelObject.categoryName}
+                                            {categoryWithChannelsDto.categoryName}
                                         </Button>
                                     </div>
                                     <div className={"col-md-12"} id={"category-channel-list"}>
                                         <div className="mdb-lightbox no-margin">
-
                                             {
-                                                channelObject.channels.map((channel, i) => {
+                                                categoryWithChannelsDto.channels.map((channel, i) => {
                                                     let classNameString = '';
-                                                    if (!(channelObject.categoryName in selectedChannelsByCategory)) {
+                                                    if (!(categoryWithChannelsDto.categoryName in selectedChannelsByCategory)) {
                                                         classNameString = 'channel-image';
                                                     } else {
-                                                        if (selectedChannelsByCategory[channelObject.categoryName].indexOf(channel) !== -1) {
+                                                        if (selectedChannelsByCategory[categoryWithChannelsDto.categoryName].indexOf(channel) !== -1) {
                                                             classNameString = 'channel-image-clicked';
                                                         } else {
                                                             classNameString = 'channel-image';
@@ -197,7 +168,7 @@ class ChannelChooser extends Component {
                                                         <img
                                                             className={classNameString}
                                                             src={channel.imgSrc}
-                                                            onClick={() => this.handleImageClick(channel, channelObject)}
+                                                            onClick={() => this.onChannelClick(channel, categoryWithChannelsDto)}
                                                         />
                                                     )
                                                 })
@@ -207,10 +178,8 @@ class ChannelChooser extends Component {
                                 </li>
                             </ul>
                         </div>
-
                     ))
                 }
-
             </div>
         );
     }
@@ -219,7 +188,7 @@ class ChannelChooser extends Component {
 const mapStateToProps = (state) => {
     return {
         selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory,
-        channelsObject: state.formReducer.channelsObject,
+        channelsGroupByCategoryDto: state.formReducer.channelsGroupByCategoryDto,
         selectedCategories: state.formReducer.selectedCategories,
         result: state.formReducer.result,
         isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult
@@ -227,7 +196,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-
     return {
         setSelectedCategories: (selectedCategories) => {
             dispatch(setSelectedCategories(selectedCategories))
@@ -238,10 +206,12 @@ const mapDispatchToProps = (dispatch) => {
         setResult: (result) => {
             dispatch(setResult(result))
         },
+        setSelectedChannels: (selectedChannels) =>{
+            dispatch(setSelectedChannels(selectedChannels))
+        },
         setIsLoadingFilteredResult: (isLoadingFilteredResult) => {
             dispatch(setIsLoadingFilteredResult(isLoadingFilteredResult))
         },
-
     }
 };
 

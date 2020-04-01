@@ -1,13 +1,12 @@
 package com.example.masterdegree.core.operator;
 
-import com.example.masterdegree.core.filteredresult.FilteredResultService;
-import com.example.masterdegree.models.dto.OperatorDto;
-import com.example.masterdegree.models.dto.ResultTvPackages;
+import com.example.masterdegree.models.dto.OperatorRequestDto;
+import com.example.masterdegree.models.dto.ResultTvPackagesResponseDto;
 import com.example.masterdegree.models.entity.MainTvPackage;
 import com.example.masterdegree.models.entity.Operator;
-import com.example.masterdegree.models.dto.ResultTvPackage;
+import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
+import com.example.masterdegree.models.mappers.OperatorMapper;
 import com.example.masterdegree.repositories.OperatorsRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,9 +37,9 @@ public class OperatorsServiceImpl implements OperatorsService {
     }
 
     @Override
-    public Operator getOperatorById(OperatorDto operatorDto) {
-        return operatorsRepository.findById(operatorDto.getId())
-                .orElseThrow(() -> new RuntimeException("Operator with id: " + operatorDto.getId() + " doesn't exist"));
+    public Operator getOperatorById(OperatorRequestDto operatorRequestDto) {
+        return operatorsRepository.findById(operatorRequestDto.getId())
+                .orElseThrow(() -> new RuntimeException("Operator with id: " + operatorRequestDto.getId() + " doesn't exist"));
     }
 
     @Override
@@ -51,10 +50,10 @@ public class OperatorsServiceImpl implements OperatorsService {
     }
 
     @Override
-    public ResultTvPackages getFilteredTvPackagesByOperatorId(String id) {
+    public ResultTvPackagesResponseDto getFilteredTvPackagesByOperatorId(String id) {
         Operator operator = operatorsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Operator with id: " + id + " doesn't exist"));
-//        return new ResultTvPackages(filteredResultService.createFilteredTvPackagesByOperator(operator));
+//        return new ResultTvPackagesResponseDto(filteredResultService.createFilteredTvPackagesByOperator(operator));
         return null;
     }
 
@@ -69,7 +68,7 @@ public class OperatorsServiceImpl implements OperatorsService {
     }
 
     @Override
-    public List<OperatorDto> getOperators() {
+    public List<OperatorRequestDto> getOperators() {
         return operatorsRepository.findAll().stream().map(operatorMapper::convertToDto).collect(Collectors.toList());
     }
 
@@ -80,16 +79,16 @@ public class OperatorsServiceImpl implements OperatorsService {
 
 
     @Override
-    public List<ResultTvPackage> getResultBySelectedOperators(List<ResultTvPackage> resultTvPackages) {
-//         Now this is very expensive because you create a stream for each instance in the data ResultTvPackage stream pipeline.
-/*        resultTvPackages = resultTvPackages.stream().
+    public List<ResultTvPackageResponseDto> getResultBySelectedOperators(List<ResultTvPackageResponseDto> resultTvPackageResponseDtos) {
+//         Now this is very expensive because you create a stream for each instance in the data ResultTvPackageResponseDto stream pipeline.
+/*        resultTvPackageResponseDtos = resultTvPackageResponseDtos.stream().
                 filter(resultTvPackage -> getFetchedOperators().stream()
                         .map(Operator::getId)
                         .anyMatch(objectId -> objectId.equals(resultTvPackage.getOperatorId()))).collect(Collectors.toList());*/
 //      Better option
         Set<String> objectIdSet = getFetchedSelectedOperators().stream().map(Operator::getId).collect(Collectors.toSet());
-        resultTvPackages = resultTvPackages.stream().filter(resultTvPackage -> objectIdSet.contains(resultTvPackage.getOperatorId())).collect(Collectors.toList());
+        resultTvPackageResponseDtos = resultTvPackageResponseDtos.stream().filter(resultTvPackage -> objectIdSet.contains(resultTvPackage.getOperatorId())).collect(Collectors.toList());
 
-        return resultTvPackages;
+        return resultTvPackageResponseDtos;
     }
 }

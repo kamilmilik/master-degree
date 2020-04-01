@@ -7,17 +7,17 @@ import {
 } from "./actions-type";
 
 // actions: these are objects that should have two properties, one describing the type of action, and one describing what should be changed in the app state.
-export const setAllOperators=(operators)=>{
+export const setAllOperators=(operatorsDto)=>{
     return{
         type: SET_ALL_OPERATORS,
-        operators
+        operatorsDto
     }
 };
 
-export const setAllChannels=(channels)=>{
+export const setAllChannels=(channelsGroupByCategoryDto)=>{
     return{
         type: SET_ALL_CHANNELS,
-        channels
+        channelsGroupByCategoryDto
     }
 };
 

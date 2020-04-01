@@ -1,7 +1,5 @@
 package com.example.masterdegree.models.dto;
 
-import com.example.masterdegree.core.price.RangePrice;
-import com.example.masterdegree.models.entity.Channel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,9 +11,9 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode()
 @ToString()
-public class CriteriaDto {
+public class CriteriaRequestDto {
     private List<String> operatorsId;
-    private RangePrice price;
-    private List<Channel> channels;
+    private double[] price;
+    private List<ChannelRequestDto> channels;
     private String term;
 }
