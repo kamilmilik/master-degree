@@ -9,6 +9,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ResultTvPackagesResponseDto {
 
-    private List<ResultTvPackageResponseDto> resultTvPackageResponseDtos;
+    private List<ResultTvPackageResponseDto> resultTvPackages;
 
 }

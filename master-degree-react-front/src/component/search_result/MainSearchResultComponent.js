@@ -3,10 +3,6 @@ import {connect} from "react-redux";
 import './MainSearchResultComponent.css'
 import ResultComponent from './result_component/ResultComponent';
 import {setIsLoadingFilteredResult, setResult, setSelectedPrice} from "../../reducers/actions/actions";
-import PricePickerDataService from "../../service/PricePickerDataService";
-import OperatorDataService from "../../service/OperatorDataService";
-import {MAX_PRICE_FILTER_VALUE, MIN_PRICE_FILTER_VALUE} from "../filter/main_form_filter/Const";
-import {trackPromise} from "react-promise-tracker";
 import {LoadingSpinner} from "../loading-spinner/LoadingSpinner";
 import FilteredResultDataService from "../../service/FilteredResultDataService";
 
@@ -20,11 +16,11 @@ class MainSearchResultComponent extends Component {
     }
 
     retrieveFilteredResultByCriteria(criteria){
-        // this.props.setIsLoadingFilteredResult(true);
+        this.props.setIsLoadingFilteredResult(true);
         FilteredResultDataService.retrieveFilteredResultByCriteria(criteria)
             .then(response =>{
-                // this.props.setIsLoadingFilteredResult(false);
-                //         this.props.setResult(response.data);
+                this.props.setIsLoadingFilteredResult(false);
+                this.props.setResult(response);
             } )
     }
 
@@ -86,10 +82,6 @@ class MainSearchResultComponent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        // selectedTerm: state.formReducer.selectedTerm,
-        // selectedPrice: state.formReducer.selectedPrice,
-        // selectedOperators: state.formReducer.selectedOperators,
-        // selectedChannels: state.formReducer.selectedChannels,
         selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory,
         result: state.formReducer.result,
         isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult,

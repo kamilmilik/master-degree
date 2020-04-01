@@ -3,6 +3,7 @@ package com.example.masterdegree.core.strategyfilters;
 import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
 import com.example.masterdegree.models.entity.Criteria;
 import com.example.masterdegree.models.entity.Operator;
+import com.example.masterdegree.models.model.ResultTvPackage;
 
 import java.util.HashSet;
 import java.util.List;
@@ -18,13 +19,13 @@ public class OperatorCriteriaStrategy implements CriteriaStrategy {
     }
 
     @Override
-    public List<ResultTvPackageResponseDto> getFilteredResult(List<ResultTvPackageResponseDto> resultTvPackageResponseDtos) {
-        return getResultBySelectedOperators(resultTvPackageResponseDtos);
+    public List<ResultTvPackage> getFilteredResult(List<ResultTvPackage> resultTvPackages) {
+        return getResultBySelectedOperators(resultTvPackages);
     }
-    public List<ResultTvPackageResponseDto> getResultBySelectedOperators(List<ResultTvPackageResponseDto> resultTvPackageResponseDtos) {
+    public List<ResultTvPackage> getResultBySelectedOperators(List<ResultTvPackage> resultTvPackages) {
         Set<String> objectIdSet = new HashSet<>(criteria.getOperatorsId());
-        resultTvPackageResponseDtos = resultTvPackageResponseDtos.stream().filter(resultTvPackage -> objectIdSet.contains(resultTvPackage.getOperatorId())).collect(Collectors.toList());
+        resultTvPackages = resultTvPackages.stream().filter(resultTvPackage -> objectIdSet.contains(resultTvPackage.getOperatorId())).collect(Collectors.toList());
 
-        return resultTvPackageResponseDtos;
+        return resultTvPackages;
     }
 }

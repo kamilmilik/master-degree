@@ -5,6 +5,7 @@ import com.example.masterdegree.models.dto.ResultTvPackagesResponseDto;
 import com.example.masterdegree.core.filteredresult.FilteredResultService;
 import com.example.masterdegree.models.entity.Criteria;
 import com.example.masterdegree.models.mappers.CriteriaMapper;
+import com.example.masterdegree.models.model.ResultTvPackages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class FilteredResultController {
     private final CriteriaMapper criteriaMapper;
 
     @PostMapping("/result")
-    public ResponseEntity<ResultTvPackagesResponseDto> getFilteredResultByCriteria(@RequestBody CriteriaRequestDto criteriaRequestDto) {
+    public ResponseEntity<ResultTvPackages> getFilteredResultByCriteria(@RequestBody CriteriaRequestDto criteriaRequestDto) {
         return new ResponseEntity<>(filteredResultService.getFilteredResult(criteriaMapper.convertToEntity(criteriaRequestDto)), HttpStatus.OK);
     }
 

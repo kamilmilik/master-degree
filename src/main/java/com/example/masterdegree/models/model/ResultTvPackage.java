@@ -1,4 +1,4 @@
-package com.example.masterdegree.models.dto;
+package com.example.masterdegree.models.model;
 
 import lombok.*;
 
@@ -6,14 +6,17 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode()
 @ToString()
-public class ResultTvPackageResponseDto {
+public class ResultTvPackage {
 
     @NonNull
     private String operatorId;
+
     @NonNull
     private String operatorName;
+
     private String operatorImg;
+
     @NonNull
-    private FilteredTvPackageResponseDto filteredTvPackage;
+    private FilteredTvPackage filteredTvPackage;
 
 }

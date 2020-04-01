@@ -10,9 +10,6 @@ import {
 } from "../Const";
 import 'antd/dist/antd.css';
 import {Slider, Switch} from 'antd';
-import PricePickerDataService from "../../../../service/PricePickerDataService";
-import FilteredResultDataService from "../../../../service/FilteredResultDataService";
-
 
 class PricePicker extends Component {
 
@@ -23,18 +20,6 @@ class PricePicker extends Component {
 
     onPick(range) {
         this.props.setSelectedPrice(range);
-        this.sendSelectedRangePrice(range);
-    }
-
-    sendSelectedRangePrice(range) {
-        this.props.setIsLoadingFilteredResult(true);
-        PricePickerDataService.sendSelectedPrice(range)
-            .then(response => {
-                this.getResult();
-            })
-    }
-
-    getResult() {
     }
 
     render() {

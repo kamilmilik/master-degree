@@ -10,6 +10,9 @@ import com.example.masterdegree.core.channel.ChannelsService;
 import com.example.masterdegree.core.operator.OperatorsService;
 import com.example.masterdegree.core.price.PriceService;
 import com.example.masterdegree.core.strategyfilters.*;
+import com.example.masterdegree.models.model.FilteredTvPackage;
+import com.example.masterdegree.models.model.ResultTvPackage;
+import com.example.masterdegree.models.model.ResultTvPackages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,29 +29,27 @@ public class FilteredResultServiceImpl implements FilteredResultService {
     private final ChannelsService channelsService;
 
     @Override
-    public ResultTvPackagesResponseDto getFilteredResult(Criteria criteria) {
-        List<ResultTvPackageResponseDto> resultTvPackageResponseDtos = createResultWithoutFilters();
+    public ResultTvPackages getFilteredResult(Criteria criteria) {
+        List<ResultTvPackage> resultTvPackages = createResultWithoutFilters();
         // Filter order: operators -> term -> channels -> price
         CriteriaStrategy andCriteria = AndCriteria.builder()
                 .criteria(new OperatorCriteriaStrategy(criteria))
                 .criteria(new PriceRangeCriteriaStrategy(criteria))
                 .criteria(new ChannelCriteriaStrategy(criteria))
                 .build();
-        resultTvPackageResponseDtos = andCriteria.getFilteredResult(resultTvPackageResponseDtos);
-        return new ResultTvPackagesResponseDto(resultTvPackageResponseDtos);
+        resultTvPackages = andCriteria.getFilteredResult(resultTvPackages);
+        return new ResultTvPackages(resultTvPackages);
     }
 
-    public List<ResultTvPackageResponseDto> createResultWithoutFilters() {
-        System.out.println("createResultWithoutFilters size " + operatorsService.getOperators().size());
-        List<ResultTvPackageResponseDto> resultTvPackageResponseDtos = new ArrayList<>();
+    public List<ResultTvPackage> createResultWithoutFilters() {
+        List<ResultTvPackage> resultTvPackages = new ArrayList<>();
         for (Operator operator : operatorsService.getAllOperatorsFromDb()) {
             for (MainTvPackage tvPackage : operator.getTvPackages()) {
-                FilteredTvPackageResponseDto filteredTvPackageResponseDto = new FilteredTvPackageResponseDto(tvPackage, new ArrayList<>(), tvPackage.getExtraTvPackages());
-                resultTvPackageResponseDtos.add(new ResultTvPackageResponseDto(operator.getId(), operator.getName(), operator.getImgSrc(), filteredTvPackageResponseDto));
+                FilteredTvPackage filteredTvPackage = new FilteredTvPackage(tvPackage, new ArrayList<>(), tvPackage.getExtraTvPackages());
+                resultTvPackages.add(new ResultTvPackage(operator.getId(), operator.getName(), operator.getImgSrc(), filteredTvPackage));
             }
         }
-        return resultTvPackageResponseDtos;
+        return resultTvPackages;
     }
-
 
 }

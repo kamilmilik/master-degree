@@ -1,6 +1,6 @@
 package com.example.masterdegree.core.strategyfilters;
 
-import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
+import com.example.masterdegree.models.model.ResultTvPackage;
 import lombok.Builder;
 import lombok.Singular;
 
@@ -13,11 +13,11 @@ public class AndCriteria implements CriteriaStrategy {
     private List<CriteriaStrategy> criterias;
 
     @Override
-    public List<ResultTvPackageResponseDto> getFilteredResult(List<ResultTvPackageResponseDto> resultTvPackageResponseDtos) {
-        List<ResultTvPackageResponseDto> filteredResultTvPackageResponseDtos = resultTvPackageResponseDtos;
+    public List<ResultTvPackage> getFilteredResult(List<ResultTvPackage> resultTvPackages) {
+        List<ResultTvPackage> filteredResultTvPackages = resultTvPackages;
         for (CriteriaStrategy criteria : criterias) {
-            filteredResultTvPackageResponseDtos = criteria.getFilteredResult(filteredResultTvPackageResponseDtos);
+            filteredResultTvPackages = criteria.getFilteredResult(filteredResultTvPackages);
         }
-        return filteredResultTvPackageResponseDtos;
+        return filteredResultTvPackages;
     }
 }

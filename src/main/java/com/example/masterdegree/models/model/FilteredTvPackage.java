@@ -1,4 +1,4 @@
-package com.example.masterdegree.models.dto;
+package com.example.masterdegree.models.model;
 
 import com.example.masterdegree.models.entity.TvPackage;
 import lombok.*;
@@ -9,13 +9,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class FilteredTvPackageResponseDto extends TvPackageResponseDto {
+public class FilteredTvPackage extends TvPackage {
 
-    private List<TvPackageResponseDto> extraTvPackagesWhichMeetCriteria;
+    private List<TvPackage> extraTvPackagesWhichMeetCriteria;
 
-    private List<TvPackageResponseDto> extraAvailableTvPackages;
+    private List<TvPackage> extraAvailableTvPackages;
 
-    public FilteredTvPackageResponseDto(TvPackageResponseDto tvPackage, List<TvPackageResponseDto> extraTvPackagesWhichMeetCriteria, List<TvPackageResponseDto> extraAvailableTvPackages) {
+    public FilteredTvPackage(TvPackage tvPackage, List<TvPackage> extraTvPackagesWhichMeetCriteria, List<TvPackage> extraAvailableTvPackages) {
         super(tvPackage.getName(), tvPackage.getDescription(), tvPackage.getPrice(), tvPackage.getType(), tvPackage.getImgSrc(), tvPackage.getLink(), tvPackage.getTerm(), tvPackage.getStatus(), tvPackage.getChannels());
         this.extraTvPackagesWhichMeetCriteria = extraTvPackagesWhichMeetCriteria;
         this.extraAvailableTvPackages = extraAvailableTvPackages;

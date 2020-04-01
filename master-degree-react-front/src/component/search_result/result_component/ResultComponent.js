@@ -13,13 +13,13 @@ class ResultComponent extends Component {
 
     render() {
         console.log("Props " +  + " " + this.props.result);
-        if (!(typeof this.props.result.resultTvPackages === 'undefined')) {
+        if (this.props.result.length >= 0) {
             return (
                 <div className={'container-fluid'} id={"main-result-list-container"}>
                     <div className={"col-md-12"} id={"result-list"}>
                         <div className="mdb-lightbox no-margin">
                             {
-                                this.props.result.resultTvPackages.map((resultTvPackage) => {
+                                this.props.result.map((resultTvPackage) => {
                                     return (
                                         <div> Zwracam: {resultTvPackage.operatorName}
                                             <CardResult

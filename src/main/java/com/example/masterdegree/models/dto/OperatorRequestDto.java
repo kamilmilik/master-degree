@@ -9,4 +9,6 @@ import org.springframework.data.annotation.Id;
 @EqualsAndHashCode(of = {"id"})
 public class OperatorRequestDto {
     private String id;
+    private String name;
+    private String imgSrc;
 }

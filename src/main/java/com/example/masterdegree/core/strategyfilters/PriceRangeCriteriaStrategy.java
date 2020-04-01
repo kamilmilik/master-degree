@@ -1,9 +1,10 @@
 package com.example.masterdegree.core.strategyfilters;
 
-import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
 import com.example.masterdegree.models.entity.Criteria;
+import com.example.masterdegree.models.model.ResultTvPackage;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PriceRangeCriteriaStrategy implements CriteriaStrategy {
 
@@ -14,16 +15,15 @@ public class PriceRangeCriteriaStrategy implements CriteriaStrategy {
     }
 
     @Override
-    public List<ResultTvPackageResponseDto> getFilteredResult(List<ResultTvPackageResponseDto> resultTvPackageResponseDtos) {
-        return this.getResultFilteredByRangePriceInMainTvPackages(resultTvPackageResponseDtos);
+    public List<ResultTvPackage> getFilteredResult(List<ResultTvPackage> resultTvPackages) {
+        return this.getResultFilteredByRangePriceInMainTvPackages(resultTvPackages);
     }
 
-    public List<ResultTvPackageResponseDto> getResultFilteredByRangePriceInMainTvPackages(List<ResultTvPackageResponseDto> resultTvPackageResponseDtos) {
-//        resultTvPackageResponseDtos = resultTvPackageResponseDtos.stream().
-//                filter(resultTvPackage -> criteria.getPrice().isBetween(resultTvPackage.getFilteredTvPackageResponseDto().getPrice()))
-//                .collect(Collectors.toList());
-
-        return resultTvPackageResponseDtos;
+    public List<ResultTvPackage> getResultFilteredByRangePriceInMainTvPackages(List<ResultTvPackage> resultTvPackages) {
+        return resultTvPackages.stream().
+                filter(resultTvPackage -> criteria.getPrice().isBetween(resultTvPackage.getFilteredTvPackage().getPrice()))
+                .collect(Collectors.toList());
     }
+
 
 }
