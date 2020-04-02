@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Data
+@Data // It must have getters, and setters for mapping to Dto.
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode()

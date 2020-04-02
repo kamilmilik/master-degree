@@ -4,18 +4,22 @@ import lombok.*;
 
 import java.util.Objects;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"name"})
 public class Channel {
 
     @NonNull
+    @Getter
     private String name;
+    @Getter
     private String desc;
+    @Getter
     private String imgSrc;
 
 
+    // TODO KM dodac na bazie id do channel, i rozrozniac jako osobno kanaly hd i nie hd
     public boolean isTheSame(Channel channel) {
         if (isTheSameLength(channel)) {
             String channelToCompareName = chooseProperChannelNameToCompareForSymmetryComparision(channel);
