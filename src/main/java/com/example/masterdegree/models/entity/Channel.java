@@ -4,9 +4,8 @@ import lombok.*;
 
 import java.util.Objects;
 
-
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
+@Value
 @EqualsAndHashCode(of = {"name"})
 public class Channel {
 

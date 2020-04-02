@@ -1,6 +1,5 @@
 package com.example.masterdegree.models.dto;
 
-import com.example.masterdegree.models.entity.Channel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

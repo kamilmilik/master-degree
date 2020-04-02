@@ -16,9 +16,4 @@ public class OperatorMapper {
     public OperatorRequestDto convertToDto(Operator operator) {
         return modelMapper.map(operator, OperatorRequestDto.class);
     }
-
-    public Operator convertToEntity(OperatorRequestDto operatorRequestDto) {
-        return modelMapper.map(operatorRequestDto, Operator.class);
-    }
-
 }

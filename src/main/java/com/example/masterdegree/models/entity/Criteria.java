@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Data // It must have getters, and setters for mapping to Dto.
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
+@Value
 @EqualsAndHashCode()
 @ToString()
 public class Criteria {

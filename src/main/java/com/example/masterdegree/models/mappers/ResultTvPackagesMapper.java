@@ -16,8 +16,4 @@ public class ResultTvPackagesMapper {
         return modelMapper.map(resultTvPackages, ResultTvPackagesResponseDto.class);
     }
 
-    public ResultTvPackages convertToModel(ResultTvPackagesResponseDto resultTvPackagesResponseDto) {
-        return modelMapper.map(resultTvPackagesResponseDto, ResultTvPackages.class);
-    }
-
 }
