@@ -1,8 +1,7 @@
 package com.example.masterdegree.repositories;
 
-import com.example.masterdegree.models.entity.Operator;
+import com.example.masterdegree.models.model.Operator;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 

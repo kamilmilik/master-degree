@@ -1,4 +1,4 @@
-package com.example.masterdegree.models.model;
+package com.example.masterdegree.models.model.filter;
 
 import lombok.*;
 

@@ -1,7 +1,7 @@
 //package com.example.masterdegree;
 //
 //import com.example.masterdegree.models.dto.FilteredTvPackageResponseDto;
-//import com.example.masterdegree.models.entity.Operator;
+//import com.example.masterdegree.models.model.Operator;
 //import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
 //import com.example.masterdegree.services.operator.OperatorsServiceImpl;
 //import org.junit.Before;

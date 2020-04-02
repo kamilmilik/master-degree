@@ -1,8 +1,6 @@
-package com.example.masterdegree.models.entity;
+package com.example.masterdegree.models.model;
 
 import lombok.*;
-
-import java.util.Objects;
 
 @Value
 @Getter

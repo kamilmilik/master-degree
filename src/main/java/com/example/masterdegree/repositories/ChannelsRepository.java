@@ -1,8 +1,7 @@
 package com.example.masterdegree.repositories;
 
-import com.example.masterdegree.models.entity.ChannelsGroupByCategory;
+import com.example.masterdegree.models.model.ChannelsGroupByCategory;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 

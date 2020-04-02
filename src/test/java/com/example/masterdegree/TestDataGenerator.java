@@ -2,10 +2,10 @@
 //
 //import com.example.masterdegree.models.dto.FilteredTvPackageResponseDto;
 //import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
-//import com.example.masterdegree.models.entity.Channel;
-//import com.example.masterdegree.models.entity.MainTvPackage;
-//import com.example.masterdegree.models.entity.Operator;
-//import com.example.masterdegree.models.entity.TvPackage;
+//import com.example.masterdegree.models.model.Channel;
+//import com.example.masterdegree.models.model.MainTvPackage;
+//import com.example.masterdegree.models.model.Operator;
+//import com.example.masterdegree.models.model.TvPackage;
 //import org.bson.types.ObjectId;
 //
 //import java.util.ArrayList;

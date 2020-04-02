@@ -1,7 +1,6 @@
 package com.example.masterdegree.core.strategyfilters;
 
-import com.example.masterdegree.models.model.ResultTvPackage;
-import lombok.AllArgsConstructor;
+import com.example.masterdegree.models.model.filter.ResultTvPackage;
 import lombok.Builder;
 import lombok.Singular;
 

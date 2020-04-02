@@ -1,6 +1,5 @@
 package com.example.masterdegree.model;
 
-import com.example.masterdegree.models.entity.Channel;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

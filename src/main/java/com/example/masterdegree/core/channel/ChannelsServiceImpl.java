@@ -1,12 +1,10 @@
 package com.example.masterdegree.core.channel;
 
 import com.example.masterdegree.models.dto.ChannelsGroupByCategoryResponseDto;
-import com.example.masterdegree.models.entity.Channel;
-import com.example.masterdegree.models.entity.ChannelsGroupByCategory;
+import com.example.masterdegree.models.model.ChannelsGroupByCategory;
 import com.example.masterdegree.models.mappers.ChannelsGroupByCategoryMapper;
 import com.example.masterdegree.repositories.ChannelsRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

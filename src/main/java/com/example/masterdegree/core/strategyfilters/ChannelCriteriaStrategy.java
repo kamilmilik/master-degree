@@ -1,9 +1,9 @@
 package com.example.masterdegree.core.strategyfilters;
 
-import com.example.masterdegree.models.entity.Channel;
-import com.example.masterdegree.models.entity.Criteria;
-import com.example.masterdegree.models.entity.TvPackage;
-import com.example.masterdegree.models.model.ResultTvPackage;
+import com.example.masterdegree.models.model.Channel;
+import com.example.masterdegree.models.model.Criteria;
+import com.example.masterdegree.models.model.TvPackage;
+import com.example.masterdegree.models.model.filter.ResultTvPackage;
 
 import java.util.Iterator;
 import java.util.List;

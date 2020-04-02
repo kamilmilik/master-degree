@@ -1,7 +1,7 @@
 package com.example.masterdegree.core.strategyfilters;
 
-import com.example.masterdegree.models.entity.Criteria;
-import com.example.masterdegree.models.model.ResultTvPackage;
+import com.example.masterdegree.models.model.Criteria;
+import com.example.masterdegree.models.model.filter.ResultTvPackage;
 
 import java.util.List;
 import java.util.stream.Collectors;

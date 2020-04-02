@@ -2,7 +2,7 @@ package com.example.masterdegree.models.mappers;
 
 import com.example.masterdegree.models.dto.ChannelDto;
 import com.example.masterdegree.models.dto.ChannelsGroupByCategoryResponseDto;
-import com.example.masterdegree.models.entity.ChannelsGroupByCategory;
+import com.example.masterdegree.models.model.ChannelsGroupByCategory;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Component;

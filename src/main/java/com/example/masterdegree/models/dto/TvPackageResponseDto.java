@@ -25,7 +25,5 @@ public class TvPackageResponseDto {
     @NonNull
     private String term;
     @NonNull
-    private String status;
-    @NonNull
     private List<ChannelDto> channels;
 }

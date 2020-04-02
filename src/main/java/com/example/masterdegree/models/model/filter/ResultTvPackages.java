@@ -1,7 +1,6 @@
-package com.example.masterdegree.models.model;
+package com.example.masterdegree.models.model.filter;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

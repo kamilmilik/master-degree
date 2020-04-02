@@ -1,13 +1,6 @@
 package com.example.masterdegree.model;
 
-import com.example.masterdegree.models.entity.Channel;
-import com.example.masterdegree.models.entity.Operator;
-import com.example.masterdegree.models.entity.MainTvPackage;
-import org.bson.types.ObjectId;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

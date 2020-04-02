@@ -1,6 +1,6 @@
-package com.example.masterdegree.models.model;
+package com.example.masterdegree.models.model.filter;
 
-import com.example.masterdegree.models.entity.TvPackage;
+import com.example.masterdegree.models.model.TvPackage;
 import lombok.*;
 
 import java.util.List;

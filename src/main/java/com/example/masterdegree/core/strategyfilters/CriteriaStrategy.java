@@ -1,8 +1,6 @@
 package com.example.masterdegree.core.strategyfilters;
 
-import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
-import com.example.masterdegree.models.model.ResultTvPackage;
-import com.example.masterdegree.models.model.ResultTvPackages;
+import com.example.masterdegree.models.model.filter.ResultTvPackage;
 
 import java.util.List;
 

@@ -1,9 +1,7 @@
 package com.example.masterdegree.models.dto;
 
-import com.example.masterdegree.models.entity.Channel;
 import lombok.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Collections;
 import java.util.List;

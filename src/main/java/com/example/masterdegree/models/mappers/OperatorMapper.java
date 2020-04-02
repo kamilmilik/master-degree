@@ -2,7 +2,7 @@ package com.example.masterdegree.models.mappers;
 
 
 import com.example.masterdegree.models.dto.OperatorRequestDto;
-import com.example.masterdegree.models.entity.Operator;
+import com.example.masterdegree.models.model.Operator;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

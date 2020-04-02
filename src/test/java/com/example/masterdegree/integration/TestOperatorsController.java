@@ -1,8 +1,8 @@
 //package com.example.masterdegree.integration;
 //
-//import com.example.masterdegree.models.entity.Channel;
-//import com.example.masterdegree.models.entity.Operator;
-//import com.example.masterdegree.models.entity.MainTvPackage;
+//import com.example.masterdegree.models.model.Channel;
+//import com.example.masterdegree.models.model.Operator;
+//import com.example.masterdegree.models.model.MainTvPackage;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import org.bson.types.ObjectId;
 //import org.junit.Before;

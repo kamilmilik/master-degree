@@ -1,9 +1,9 @@
 package com.example.masterdegree.models.mappers;
 
-import com.example.masterdegree.models.entity.RangePrice;
+import com.example.masterdegree.models.model.RangePrice;
 import com.example.masterdegree.models.dto.CriteriaRequestDto;
-import com.example.masterdegree.models.entity.Channel;
-import com.example.masterdegree.models.entity.Criteria;
+import com.example.masterdegree.models.model.Channel;
+import com.example.masterdegree.models.model.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
