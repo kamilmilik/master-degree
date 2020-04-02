@@ -16,7 +16,7 @@ public class ChannelsGroupByCategoryMapper {
 
     public ChannelsGroupByCategoryResponseDto convertToDto(ChannelsGroupByCategory channelsGroupByCategory) {
         List<ChannelDto> channelDtos = channelsGroupByCategory.getChannels().stream().map(channel ->
-                    new ChannelDto(channel.getName(), channel.getImgSrc())
+                     new ChannelDto(channel.getName(), channel.getImgSrc())
                 ).collect(Collectors.toList());
         return ChannelsGroupByCategoryResponseDto.newChannelsGroupByCategoryDto(channelsGroupByCategory.getId(), channelsGroupByCategory.getCategoryName(), channelDtos);
     }

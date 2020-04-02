@@ -3,17 +3,17 @@ package com.example.masterdegree.models.model.filter;
 import com.example.masterdegree.models.model.TvPackage;
 import lombok.*;
 
+import java.util.Collections;
 import java.util.List;
 
-
+@Getter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class FilteredTvPackage extends TvPackage {
 
-    @Getter
     private List<TvPackage> extraTvPackagesWhichMeetCriteria;
-    @Getter
+    @Getter(AccessLevel.NONE)
     private List<TvPackage> extraAvailableTvPackages;
 
     public FilteredTvPackage(TvPackage tvPackage, List<TvPackage> extraTvPackagesWhichMeetCriteria, List<TvPackage> extraAvailableTvPackages) {
@@ -21,4 +21,9 @@ public class FilteredTvPackage extends TvPackage {
         this.extraTvPackagesWhichMeetCriteria = extraTvPackagesWhichMeetCriteria;
         this.extraAvailableTvPackages = extraAvailableTvPackages;
     }
+
+    public List<TvPackage> getExtraAvailableTvPackages() {
+        return Collections.unmodifiableList(extraAvailableTvPackages);
+    }
+
 }

@@ -35,6 +35,7 @@ public class ChannelCriteriaStrategy implements CriteriaStrategy {
                     }
                 }
                 if (!isFoundSelectedChannel) { // nie znalazlem kanalu w main tv package, moze jest w dodatkowych
+                                // TODO KM moze tutaj stream i filter, z getExtraTvPackagesWhichMeetCriteria ktore by byly tym samym co dostepne i ten filter by usuwal z tej listy, wtedy moze byc ona immutable
                     for (TvPackage extraAvailableTvPackage : resultTvPackage.getFilteredTvPackage().getExtraAvailableTvPackages()) {
                         for (Channel channel : extraAvailableTvPackage.getChannels())
                             if (channel.isTheSame(selectedChannel)) {

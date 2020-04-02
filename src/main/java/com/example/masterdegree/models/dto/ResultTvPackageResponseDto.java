@@ -2,7 +2,6 @@ package com.example.masterdegree.models.dto;
 
 import lombok.*;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,7 +10,6 @@ import lombok.*;
 public class ResultTvPackageResponseDto {
 
     @NonNull
-    @Getter
     private String operatorId;
     @NonNull
     private String operatorName;
