@@ -6,15 +6,13 @@ import java.util.Objects;
 
 @Builder
 @Value
+@Getter
 @EqualsAndHashCode(of = {"name"})
 public class Channel {
 
     @NonNull
-    @Getter
     private String name;
-    @Getter
     private String desc;
-    @Getter
     private String imgSrc;
 
 

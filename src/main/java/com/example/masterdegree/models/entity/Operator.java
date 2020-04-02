@@ -5,9 +5,11 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
@@ -15,16 +17,17 @@ import java.util.List;
 public class Operator {
 
     @Id
-    @Getter
     @NonNull
     private String id;
     @NonNull
-    @Getter
     private String name;
-    @Getter
     private String imgSrc;
     @NonNull
-    @Getter
+    @Getter(AccessLevel.NONE)
     private List<MainTvPackage> tvPackages;
+
+    public List<MainTvPackage> getTvPackages() {
+        return Collections.unmodifiableList(tvPackages);
+    }
 
 }
