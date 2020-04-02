@@ -4,9 +4,9 @@ import lombok.*;
 
 import java.util.Objects;
 
-@Builder
 @Value
 @Getter
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode(of = {"name"})
 public class Channel {
 
@@ -15,6 +15,14 @@ public class Channel {
     private String desc;
     private String imgSrc;
 
+
+    public static Channel newChannel(String name, String desc, String imgSrc){ // To make object immutable. Factory method.
+        return new Channel(name, desc, imgSrc);
+    }
+
+    public static Channel newChannel(String name, String imgSrc){ // To make object immutable. Factory method.
+        return new Channel(name, null, imgSrc);
+    }
 
     // TODO KM dodac na bazie id do channel, i rozrozniac jako osobno kanaly hd i nie hd
     public boolean isTheSame(Channel channel) {

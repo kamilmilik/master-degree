@@ -8,11 +8,10 @@ import lombok.NonNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChannelRequestDto {
+public class ChannelDto {
 
     @NonNull
     private String name;
-    private String desc;
     private String imgSrc;
 
 }

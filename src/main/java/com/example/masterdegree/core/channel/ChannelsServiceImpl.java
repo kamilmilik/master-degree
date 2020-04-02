@@ -1,57 +1,35 @@
 package com.example.masterdegree.core.channel;
 
+import com.example.masterdegree.models.dto.ChannelsGroupByCategoryResponseDto;
 import com.example.masterdegree.models.entity.Channel;
 import com.example.masterdegree.models.entity.ChannelsGroupByCategory;
+import com.example.masterdegree.models.mappers.ChannelsGroupByCategoryMapper;
 import com.example.masterdegree.repositories.ChannelsRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ChannelsServiceImpl implements ChannelsService {
 
-    private Set<Channel> fetchedSelectedChannels = new HashSet<>();
-
     private final ChannelsRepository channelsRepository;
+    private final ChannelsGroupByCategoryMapper channelsGroupByCategoryMapper;
 
     @Override
-    public Set<Channel> getFetchedSelectedChannels() {
-        return fetchedSelectedChannels;
+    public List<ChannelsGroupByCategoryResponseDto> getAllChannelsGroupByCategoryFromDbDto() {
+        List<ChannelsGroupByCategoryResponseDto> channelsGroupByCategoryResponseDtos = getAllChannelsGroupByCategoryFromDb().stream().map(channelsGroupByCategoryMapper::convertToDto).collect(Collectors.toList());
+        return getAllChannelsGroupByCategoryFromDb().stream().map(channelsGroupByCategoryMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
     public List<ChannelsGroupByCategory> getAllChannelsGroupByCategoryFromDb() {
         return channelsRepository.findAll();
     }
-
-    @Override
-    public void addFetchedChannelResourceToFetchedList(Channel channel) {
-        getFetchedSelectedChannels().add(channel);
-    }
-
-    @Override
-    public void removeFetchedChannelResourceFromList(Channel channel) {
-        fetchedSelectedChannels.remove(channel);
-    }
-
-    @Override
-    public void addAllFetchedChannelsResourceToFetchedList(Collection<Channel> channels) {
-        fetchedSelectedChannels.addAll(channels);
-    }
-
-    @Override
-    public void removeAllFetchedChannelsResourceToFetchedList(Collection<Channel> channels) {
-        fetchedSelectedChannels.removeAll(channels);
-    }
-
-    @Override
-    public boolean isAnyChannelSelected() {
-        return getFetchedSelectedChannels().size() != 0;
-    }
-
 
 
 }

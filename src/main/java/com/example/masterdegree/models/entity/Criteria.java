@@ -1,6 +1,5 @@
 package com.example.masterdegree.models.entity;
 
-import com.example.masterdegree.core.price.RangePrice;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -8,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 
-@Builder
 @Value
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode()
 @ToString()
 public class Criteria {
@@ -32,5 +31,9 @@ public class Criteria {
             return new ArrayList<>();
         }
         return Collections.unmodifiableList(channels);
+    }
+
+    public static Criteria newCriteria(List<String> operatorsId, RangePrice rangePrice, List<Channel> channels, String term){
+        return new Criteria(operatorsId, rangePrice, channels, term);
     }
 }

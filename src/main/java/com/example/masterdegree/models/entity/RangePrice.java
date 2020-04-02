@@ -1,11 +1,12 @@
-package com.example.masterdegree.core.price;
+package com.example.masterdegree.models.entity;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Value;
 
 
-@Getter
+@Value
 public class RangePrice {
     private double minPrice;
     private double maxPrice;
