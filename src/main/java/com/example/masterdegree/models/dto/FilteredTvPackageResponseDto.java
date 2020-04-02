@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class FilteredTvPackageResponseDto extends TvPackageResponseDto {

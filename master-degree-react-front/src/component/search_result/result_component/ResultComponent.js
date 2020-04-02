@@ -17,16 +17,13 @@ class ResultComponent extends Component {
             return (
                 <div className={'container-fluid'} id={"main-result-list-container"}>
                     <div className={"col-md-12"} id={"result-list"}>
-                        <div className="mdb-lightbox no-margin">
+                        <div id="mainContent" className="container" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridGap: '10px', gridAutoRows: 'minMax(100px, auto)'}}>
                             {
                                 this.props.result.map((resultTvPackage) => {
                                     return (
-                                        <div> Zwracam: {resultTvPackage.operatorName}
                                             <CardResult
                                                 data = {resultTvPackage}
                                             />
-                                        </div>
-
                                     )
                                 })
                             }

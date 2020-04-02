@@ -24,4 +24,5 @@ public class TvPackage {
     private String status;
     @NonNull
     private List<Channel> channels;
+
 }

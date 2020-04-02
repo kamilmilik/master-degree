@@ -1,15 +1,14 @@
 package com.example.masterdegree.core.filteredresult;
 
-import com.example.masterdegree.models.dto.FilteredTvPackageResponseDto;
-import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
+import com.example.masterdegree.models.dto.CriteriaRequestDto;
 import com.example.masterdegree.models.dto.ResultTvPackagesResponseDto;
 import com.example.masterdegree.models.entity.Criteria;
 import com.example.masterdegree.models.entity.MainTvPackage;
 import com.example.masterdegree.models.entity.Operator;
-import com.example.masterdegree.core.channel.ChannelsService;
 import com.example.masterdegree.core.operator.OperatorsService;
-import com.example.masterdegree.core.price.PriceService;
 import com.example.masterdegree.core.strategyfilters.*;
+import com.example.masterdegree.models.mappers.CriteriaMapper;
+import com.example.masterdegree.models.mappers.ResultTvPackagesMapper;
 import com.example.masterdegree.models.model.FilteredTvPackage;
 import com.example.masterdegree.models.model.ResultTvPackage;
 import com.example.masterdegree.models.model.ResultTvPackages;
@@ -25,11 +24,13 @@ import java.util.List;
 public class FilteredResultServiceImpl implements FilteredResultService {
 
     private final OperatorsService operatorsService;
-    private final PriceService priceService;
-    private final ChannelsService channelsService;
+    private final CriteriaMapper criteriaMapper;
+    private final ResultTvPackagesMapper resultTvPackagesMapper;
+
 
     @Override
-    public ResultTvPackages getFilteredResult(Criteria criteria) {
+    public ResultTvPackagesResponseDto getFilteredResult(CriteriaRequestDto criteriaRequestDto) {
+        Criteria criteria = criteriaMapper.convertToEntity(criteriaRequestDto);
         List<ResultTvPackage> resultTvPackages = createResultWithoutFilters();
         // Filter order: operators -> term -> channels -> price
         CriteriaStrategy andCriteria = AndCriteria.builder()
@@ -38,7 +39,7 @@ public class FilteredResultServiceImpl implements FilteredResultService {
                 .criteria(new ChannelCriteriaStrategy(criteria))
                 .build();
         resultTvPackages = andCriteria.getFilteredResult(resultTvPackages);
-        return new ResultTvPackages(resultTvPackages);
+        return resultTvPackagesMapper.convertToDto(new ResultTvPackages(resultTvPackages));
     }
 
     public List<ResultTvPackage> createResultWithoutFilters() {

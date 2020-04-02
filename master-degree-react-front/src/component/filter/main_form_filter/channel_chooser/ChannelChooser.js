@@ -13,10 +13,23 @@ import {
 import {connect} from "react-redux";
 import ChannelDataService from "../../../../service/ChannelDataService";
 import FilteredResultDataService from "../../../../service/FilteredResultDataService";
+import Tooltip from "@material-ui/core/Tooltip";
+import withStyles from "@material-ui/core/styles/withStyles";
+import Typography from "@material-ui/core/Typography";
 
 // TODO refactor, przeniesc czesc funkcjonalnosci moze do jakiejs klasy o nazwie service
 const CLICKED_CATEGORY_BUTTON = "category-button-clicked";
 const NOT_CLICKED_CATEGORY_BUTTON = "category-button";
+const TooltipMedium = withStyles((theme) => ({
+    tooltip: {
+        backgroundColor: '#f5f5f9',
+        color: 'rgba(0, 0, 0, 0.87)',
+        maxWidth: 220,
+        fontSize: theme.typography.pxToRem(16),
+        border: '1px solid #dadde9',
+    },
+}))(Tooltip);
+
 class ChannelChooser extends Component {
     constructor(props) {
         super(props);
@@ -59,7 +72,6 @@ class ChannelChooser extends Component {
             }
         });
         this.props.setSelectedChannelsByCategory(selectedChannelsByCategory);
-        let array = this.getArrayOfChannelsFromGivenMap(selectedChannelsByCategory);
         this.props.setSelectedChannels(this.getArrayOfChannelsFromGivenMap(selectedChannelsByCategory));
     }
 
@@ -88,11 +100,10 @@ class ChannelChooser extends Component {
             this.deleteSelectedCategory(clickedChannelCategoryName);
         }
         this.props.setSelectedChannelsByCategory(mapOfSelectedChannelsByCategory);
-        let array = this.getArrayOfChannelsFromGivenMap(mapOfSelectedChannelsByCategory);
         this.props.setSelectedChannels(this.getArrayOfChannelsFromGivenMap(mapOfSelectedChannelsByCategory));
     }
 
-    getArrayOfChannelsFromGivenMap(map){
+    getArrayOfChannelsFromGivenMap(map) {
         let array = [];
         for (let key in map) {
             let channels = map[key];
@@ -101,7 +112,7 @@ class ChannelChooser extends Component {
         return array;
     }
 
-    initListAndPushToGivenCategoryFirstSelectedChannel(selectedChannelsByCategoryMap, clickedChannelCategoryName, channel){
+    initListAndPushToGivenCategoryFirstSelectedChannel(selectedChannelsByCategoryMap, clickedChannelCategoryName, channel) {
         const arrayOfSelectedChannelsAssociatedToCategory = [];
         arrayOfSelectedChannelsAssociatedToCategory.push(channel);
         selectedChannelsByCategoryMap[clickedChannelCategoryName] = arrayOfSelectedChannelsAssociatedToCategory;
@@ -111,7 +122,7 @@ class ChannelChooser extends Component {
         return element !== -1;
     }
 
-    isAnyChannelFromGivenCategoryClickedBefore(selectedChannelsByCategory, clickedChannelCategoryName){
+    isAnyChannelFromGivenCategoryClickedBefore(selectedChannelsByCategory, clickedChannelCategoryName) {
         return typeof selectedChannelsByCategory[clickedChannelCategoryName] === 'undefined'
     }
 
@@ -128,7 +139,7 @@ class ChannelChooser extends Component {
         }
     }
 
-    copyElement(elementToCopy){
+    copyElement(elementToCopy) {
         return elementToCopy.slice()
     }
 
@@ -165,11 +176,19 @@ class ChannelChooser extends Component {
                                                         }
                                                     }
                                                     return (
-                                                        <img
-                                                            className={classNameString}
-                                                            src={channel.imgSrc}
-                                                            onClick={() => this.onChannelClick(channel, categoryWithChannelsDto)}
-                                                        />
+                                                        <TooltipMedium
+                                                            title={
+                                                                <React.Fragment>
+                                                                    <Typography
+                                                                        color="inherit">{channel.name} </Typography>
+                                                                </React.Fragment>}
+                                                        >
+                                                            <img
+                                                                className={classNameString}
+                                                                src={channel.imgSrc}
+                                                                onClick={() => this.onChannelClick(channel, categoryWithChannelsDto)}
+                                                            />
+                                                        </TooltipMedium>
                                                     )
                                                 })
                                             }
@@ -206,7 +225,7 @@ const mapDispatchToProps = (dispatch) => {
         setResult: (result) => {
             dispatch(setResult(result))
         },
-        setSelectedChannels: (selectedChannels) =>{
+        setSelectedChannels: (selectedChannels) => {
             dispatch(setSelectedChannels(selectedChannels))
         },
         setIsLoadingFilteredResult: (isLoadingFilteredResult) => {

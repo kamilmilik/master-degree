@@ -19,11 +19,10 @@ import org.springframework.web.bind.annotation.*;
 public class FilteredResultController {
 
     private final FilteredResultService filteredResultService;
-    private final CriteriaMapper criteriaMapper;
 
     @PostMapping("/result")
-    public ResponseEntity<ResultTvPackages> getFilteredResultByCriteria(@RequestBody CriteriaRequestDto criteriaRequestDto) {
-        return new ResponseEntity<>(filteredResultService.getFilteredResult(criteriaMapper.convertToEntity(criteriaRequestDto)), HttpStatus.OK);
+    public ResponseEntity<ResultTvPackagesResponseDto> getFilteredResultByCriteria(@RequestBody CriteriaRequestDto criteriaRequestDto) {
+        return new ResponseEntity<>(filteredResultService.getFilteredResult(criteriaRequestDto), HttpStatus.OK);
     }
 
 }

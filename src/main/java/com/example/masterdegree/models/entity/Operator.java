@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
@@ -15,15 +15,16 @@ import java.util.List;
 public class Operator {
 
     @Id
+    @Getter
     @NonNull
     private String id;
-
     @NonNull
+    @Getter
     private String name;
-
+    @Getter
     private String imgSrc;
-
     @NonNull
+    @Getter
     private List<MainTvPackage> tvPackages;
 
 }

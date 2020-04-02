@@ -28,7 +28,7 @@ export default class Navbar extends Component {
                                 offset={-70}
                                 duration={500}
                             >
-                                Section 1
+                                Select Criteria
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -40,7 +40,7 @@ export default class Navbar extends Component {
                                 offset={-70}
                                 duration={500}
                             >
-                                Section 2
+                                Your Dreamed Tv Packages
                             </Link>
                         </li>
                     </ul>
