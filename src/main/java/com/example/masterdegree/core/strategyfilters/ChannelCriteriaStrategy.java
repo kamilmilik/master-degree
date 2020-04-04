@@ -6,7 +6,10 @@ import com.example.masterdegree.models.model.TvPackage;
 import com.example.masterdegree.models.model.filter.ResultTvPackage;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class ChannelCriteriaStrategy implements CriteriaStrategy {
 
@@ -22,34 +25,30 @@ public class ChannelCriteriaStrategy implements CriteriaStrategy {
     }
 
     // TODO KM sprawdzic czy dziala w wiekszej ilosci danych
-    // TODO KM refactor
     public List<ResultTvPackage> getResultBySelectedChannels(List<ResultTvPackage> resultTvPackages) {
         for (Channel selectedChannel : criteria.getChannels()) {
-            for (Iterator<ResultTvPackage> it = resultTvPackages.iterator(); it.hasNext(); ) {
-                ResultTvPackage resultTvPackage = it.next();
-                boolean isFoundSelectedChannel = false;
-                for (Channel channel : resultTvPackage.getFilteredTvPackage().getChannels()) {
-                    if (channel.isTheSame(selectedChannel)) {
-                        isFoundSelectedChannel = true; // znalazlem kanal w main tv package
-                        break;
-                    }
+            resultTvPackages.removeIf(resultTvPackage -> {
+                boolean isFoundSelectedChannel = searchChannelInMainTvPackage(resultTvPackage, selectedChannel);
+                if (!isFoundSelectedChannel) {
+                    isFoundSelectedChannel = searchChannelInExtraAvailablePackages(resultTvPackage, selectedChannel);
                 }
-                if (!isFoundSelectedChannel) { // nie znalazlem kanalu w main tv package, moze jest w dodatkowych
-                                // TODO KM moze tutaj stream i filter, z getExtraTvPackagesWhichMeetCriteria ktore by byly tym samym co dostepne i ten filter by usuwal z tej listy, wtedy moze byc ona immutable
-                    for (TvPackage extraAvailableTvPackage : resultTvPackage.getFilteredTvPackage().getExtraAvailableTvPackages()) {
-                        for (Channel channel : extraAvailableTvPackage.getChannels())
-                            if (channel.isTheSame(selectedChannel)) {
-                                isFoundSelectedChannel = true; // jest w dodatkowych, nie w main
-                                resultTvPackage.getFilteredTvPackage().getExtraTvPackagesWhichMeetCriteria().add(extraAvailableTvPackage);
-                                break;
-                            }
-                    }
-                    if (!isFoundSelectedChannel) { // nie ma w tym main, ani w dodatkowych, usun ten proponowany pakiet glowny z dodatkowymi
-                        it.remove();
-                    }
-                }
-            }
+                return !isFoundSelectedChannel;
+            });
         }
         return resultTvPackages;
     }
+
+    private boolean searchChannelInMainTvPackage(ResultTvPackage resultTvPackage, Channel searchedChannel){
+        return resultTvPackage.getFilteredTvPackage().getChannels().stream().anyMatch(channel -> channel.isTheSame(searchedChannel));
+    }
+
+    private boolean searchChannelInExtraAvailablePackages(ResultTvPackage resultTvPackage, Channel searchedChannel){
+        return resultTvPackage.getFilteredTvPackage().getExtraTvPackagesWhichMeetCriteria().addAll(
+                resultTvPackage.getFilteredTvPackage().getExtraAvailableTvPackages().stream()
+                        .filter(tvPackage -> tvPackage.getChannels().stream()
+                                .anyMatch(channel -> channel.isTheSame(searchedChannel))).collect(Collectors.toList())
+        );
+    }
+
+
 }

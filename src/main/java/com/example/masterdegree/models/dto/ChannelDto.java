@@ -1,13 +1,12 @@
 package com.example.masterdegree.models.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import com.example.masterdegree.models.model.Channel;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = {"name"})
 public class ChannelDto {
 
     @NonNull

@@ -22,7 +22,7 @@ public class FilteredTvPackage extends TvPackage {
         this.extraAvailableTvPackages = extraAvailableTvPackages;
     }
 
-    public List<TvPackage> getExtraAvailableTvPackages() {
+    public List<TvPackage> getExtraAvailableTvPackages() { // Getter for mapper.
         return Collections.unmodifiableList(extraAvailableTvPackages);
     }
 

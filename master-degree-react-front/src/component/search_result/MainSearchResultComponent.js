@@ -19,8 +19,9 @@ class MainSearchResultComponent extends Component {
         this.props.setIsLoadingFilteredResult(true);
         FilteredResultDataService.retrieveFilteredResultByCriteria(criteria)
             .then(response =>{
-                this.props.setIsLoadingFilteredResult(false);
+                // TODO KM blad gdy: szybkie przelaczanie miedzy operatorami ui czasami sie nie odswieza, raczej response ok
                 this.props.setResult(response);
+                this.props.setIsLoadingFilteredResult(false);
             } )
     }
 
@@ -39,8 +40,6 @@ class MainSearchResultComponent extends Component {
     }
 
     render() {
-        // this.retrieveFilteredResultByCriteria(this.props.criteria);
-
         let selectedChannelsByCategory = this.props.selectedChannelsByCategory;
         if(this.props.isLoadingFilteredResult){
             return (

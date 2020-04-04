@@ -20,7 +20,6 @@ public class ChannelsServiceImpl implements ChannelsService {
 
     @Override
     public List<ChannelsGroupByCategoryResponseDto> getAllChannelsGroupByCategoryFromDbDto() {
-        List<ChannelsGroupByCategoryResponseDto> channelsGroupByCategoryResponseDtos = getAllChannelsGroupByCategoryFromDb().stream().map(channelsGroupByCategoryMapper::convertToDto).collect(Collectors.toList());
         return getAllChannelsGroupByCategoryFromDb().stream().map(channelsGroupByCategoryMapper::convertToDto).collect(Collectors.toList());
     }
 

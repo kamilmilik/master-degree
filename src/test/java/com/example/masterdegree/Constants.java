@@ -1,0 +1,50 @@
+package com.example.masterdegree;
+
+public class Constants {
+    protected static final String CANAL_PLUS = "Canal+";
+    protected static final String CYFROWY_POLSAT = "Cyfrowy polsat";
+    protected static final String CANAL_PLUS_ID = "5e77b71972e086126cc4e6b3";
+    protected static final String CYFROWY_POLSAT_ID = "5e77b70072e086126cc4e6b2";
+    protected static final String CANAL_PLUS_START = "START+";
+    protected static final String ELEVEN_SPORTS = "Eleven Sports";
+    protected static final String FUN = "Fun";
+    protected static final String CANAL_PLUS_SUPERPREMIUM = "Superpemium+ 4K";
+    protected static final String FAMILY_SMALL_CYFROWY_POLSAT = "Familijny small";
+    protected static final String SMALL_FAMILY_CYFROWY_POLSAT = "Familijny small";
+    protected static final String FAMILY_CYFROWY_POLSAT = "Familijny Max HD + Cinemax HD + Film HD + Sport HD";
+    protected static final String FOX_PLAY = "FOX_PLAY";
+    protected static final String ELEVEN_SPORTS1 = ELEVEN_SPORTS + "1";
+    protected static final String ELEVEN_SPORTS2 = ELEVEN_SPORTS + "2";
+    protected static final String MULTI_MAN_PACK =  "Multi man pack";
+    protected static final String FUN_TV =  "4fun TV";
+    protected static final String FUN_DANCE =  "4fun Dance";
+    protected static final String FUN_GOLD_HTS =  "4fun Gold Hits";
+    protected static final String ACTIVE_FAMILY =  "Active Family";
+    protected static final String AMC =  "AMC HD";
+    protected static final String ANIMAL_PLANET_HD =  "Animal Planet HD";
+    protected static final String ALE_KINO_HD =  "Ale Kino+ HD";
+    protected static final String AIRGANG_TV =  "Arirang TV";
+    protected static final String ATM =  "ATM Rozrywka";
+    protected static final String BBC =  "BBC World News";
+    protected static final String HBO =  "HBO";
+    protected static final String HBO2 =  HBO + "2";
+    protected static final String HBO3 =  HBO + "3";
+    protected static final String HBO_GO =  HBO + " GO";
+    protected static final String DORCEL =  "Dorcel TV";
+    protected static final String BLUR_HUSTLER =  "blur Hustler";
+    protected static final String HUSTLER_HD =  "Hustler HD";
+    protected static final String FIGHTBOX =  "Fightbox";
+    protected static final String HISTORY =  "History";
+    protected static final String HISTORY2 =  HISTORY + "2";
+    protected static final String ADVENTURE =  "Adventure";
+    protected static final String ATM_ROZRYWKA =  "ATM Rozrywka HD";
+    protected static final String POLSAT =  "Polsat";
+    protected static final String TVN =  "Tvn";
+    protected static final String BRAZZERS =  "Brazzers";
+    protected static final String PRIVATE_HD =  "Private hd";
+    protected static final String VIVD_HD =  "Vivd hd";
+    protected static final String SPORT_PREMIUM1 =  "Sport premium 1";
+    protected static final String SPORT_PREMIUM2 =  "Sport premium 2";
+    protected static final String POLSAT_SPORT_PREMIUM =  "Polsat sport premium";
+
+}
