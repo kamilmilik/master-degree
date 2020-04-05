@@ -23,9 +23,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
@@ -33,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ChannelsFilterTest extends Constants{
+public class ChannelsFilterTest extends Constants {
     @Mock
     private OperatorsRepository repositoryOperations;
 
@@ -56,17 +54,27 @@ public class ChannelsFilterTest extends Constants{
         CriteriaRequestDto criteriaChannelElevenSports1 = criteriaChannels(Collections.singletonList(newChannel(ELEVEN_SPORTS1)));
         CriteriaRequestDto criteriaChannelElevenSports1AndFoxPlay = criteriaChannels(asList(newChannel(ELEVEN_SPORTS1), newChannel(FOX_PLAY)));
 
-        assertThat(filteredResultService.getFilteredResult(criteriaChannelElevenSports1)).isEqualTo(OperatorsDataTestFactory.ExpectedResultDataTestFactory.expectedResultChannelEleven());
+//        assertThat(filteredResultService.getFilteredResult(criteriaChannelElevenSports1)).isEqualTo(OperatorsDataTestFactory.ExpectedResultDataTestFactory.expectedResultChannelEleven());
+
+        assertThat(filteredResultService.getFilteredResult(criteriaChannelElevenSports1)).isEqualTo(OperatorsDataTestFactory.ExpectedResultDataTestFactory.getExpectedResult(asList(
+                OperatorsDataTestFactory.ExpectedResultDataTestFactory.createExpected(CANAL_PLUS_ID, new LinkedHashMap<String, String[]>() {{
+                            put(CANAL_PLUS_START, new String[]{ELEVEN_SPORTS});
+                            put(CANAL_PLUS_SUPERPREMIUM, new String[]{ELEVEN_SPORTS});
+                        }}
+                ), OperatorsDataTestFactory.ExpectedResultDataTestFactory.createExpected(
+                        CYFROWY_POLSAT_ID, new LinkedHashMap<String, String[]>() {{
+                            put(SMALL_FAMILY_CYFROWY_POLSAT, new String[]{ELEVEN_SPORTS});
+                            put(FAMILY_CYFROWY_POLSAT, new String[]{ELEVEN_SPORTS});
+                        }}
+                )
+        )));
     }
 
-
-
-    private CriteriaRequestDto criteriaChannels(List<ChannelDto> channels){
-        return new CriteriaRequestDto(null,new double[]{0, 400}, channels,"24");
+    private CriteriaRequestDto criteriaChannels(List<ChannelDto> channels) {
+        return new CriteriaRequestDto(null, new double[]{0, 400}, channels, "24");
     }
 
-
-    public ChannelDto newChannel(String name){
+    public ChannelDto newChannel(String name) {
         return new ChannelDto(name, null);
     }
 

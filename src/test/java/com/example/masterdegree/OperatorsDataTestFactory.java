@@ -11,121 +11,75 @@ import com.example.masterdegree.models.model.filter.ResultTvPackage;
 import com.example.masterdegree.models.model.filter.ResultTvPackages;
 import org.modelmapper.ModelMapper;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
 
 public class OperatorsDataTestFactory extends Constants {
 
 
     private static List<Operator> operators;
 
+    public static List<Channel> channels(String[] channelsName) {
+        List<Channel> channels = new ArrayList<>();
+        for (String channel : channelsName) {
+            channels.add(Channel.newChannel(channel));
+        }
+        return channels;
+    }
+
+    public static List<Channel> channels(List<Channel> channelsBasic, String[] channelsName) {
+        List<Channel> channels = new ArrayList<>(channelsBasic);
+        for (String channel : channelsName) {
+            channels.add(Channel.newChannel(channel));
+        }
+        return channels;
+    }
+
     public static List<Operator> create() {
-        List<Channel> startTvPackageChannels = asList(
-                Channel.newChannel(FUN_TV),
-                Channel.newChannel(ALE_KINO_HD),
-                Channel.newChannel(AIRGANG_TV),
-                Channel.newChannel(ATM_ROZRYWKA),
-                Channel.newChannel(BBC)
-        );
-        List<Channel> hboExtraTvPackageChannels = asList(
-                Channel.newChannel(HBO),
-                Channel.newChannel(HBO2),
-                Channel.newChannel(HBO3)
-        );
-        List<Channel> hboGoExtraTvPackageChannels = Stream.of(hboExtraTvPackageChannels, Collections.singletonList(
-                Channel.newChannel(HBO_GO)
-        )).flatMap(Collection::stream).collect(toList());
-        List<Channel> elevenSportsExtraTvPackageChannels = asList(
-                Channel.newChannel(ELEVEN_SPORTS),
-                Channel.newChannel(ELEVEN_SPORTS1),
-                Channel.newChannel(ELEVEN_SPORTS2)
-        );
+        List<Channel> startTvPackageChannels = channels(new String[]{FUN_TV, ALE_KINO_HD, AIRGANG_TV, ATM_ROZRYWKA, BBC});
+        List<Channel> hboExtraTvPackageChannels = channels(new String[]{HBO, HBO2, HBO3});
+        List<Channel> hboGoExtraTvPackageChannels = channels(hboExtraTvPackageChannels, new String[]{HBO_GO});
+        List<Channel> elevenSportsExtraTvPackageChannels = channels(new String[]{ELEVEN_SPORTS, ELEVEN_SPORTS1, ELEVEN_SPORTS2});
+        List<Channel> foxPlayExtraTvPackageChannels = channels(new String[]{FOX_PLAY});
+        List<Channel> smallFamilyChannels = channels(new String[]{ATM_ROZRYWKA, POLSAT, TVN, HISTORY});
+        List<Channel> familyChannels = channels(new String[]{FUN_TV, ALE_KINO_HD});
+        List<Channel> funChannels = channels(new String[]{BRAZZERS, HUSTLER_HD, PRIVATE_HD, VIVD_HD});
+        List<Channel> polsatSportPremiumChannels = channels(new String[]{SPORT_PREMIUM1, SPORT_PREMIUM2});
+        List<Channel> multiManPackChannels = channels(new String[]{DORCEL, BLUR_HUSTLER, HUSTLER_HD, FIGHTBOX, HISTORY2, HISTORY, ADVENTURE});
+        List<Channel> dorcelTvChannels = channels(new String[]{DORCEL});
+        List<Channel> superPremiumTvPackageChannels = channels(startTvPackageChannels, new String[]{FUN_DANCE, FUN_GOLD_HTS, ACTIVE_FAMILY, AMC, ANIMAL_PLANET_HD});
+
         TvPackage hboExtraTvPackage = TvPackageTestFactory.create(HBO, 25d, hboExtraTvPackageChannels);
         TvPackage hboGoExtraTvPackage = TvPackageTestFactory.create(HBO_GO, 35d, hboGoExtraTvPackageChannels);
         TvPackage elevenExtraTvPackage = TvPackageTestFactory.create(ELEVEN_SPORTS, 15d, elevenSportsExtraTvPackageChannels);
-        TvPackage foxPlayExtraTvPackage = TvPackageTestFactory.create(FOX_PLAY, 5d, Collections.singletonList(Channel.newChannel(FOX_PLAY)));
-        MainTvPackage startTvPackage = MainTvPackageTestFactory.create(
-                CANAL_PLUS_START,
-                18.11d,
-                startTvPackageChannels,
-                asList(hboExtraTvPackage, hboGoExtraTvPackage, elevenExtraTvPackage, foxPlayExtraTvPackage)
-        );
-        List<Channel> multiManPackChannels = asList(
-                Channel.newChannel(DORCEL),
-                Channel.newChannel(BLUR_HUSTLER),
-                Channel.newChannel(HUSTLER_HD),
-                Channel.newChannel(FIGHTBOX),
-                Channel.newChannel(HISTORY2),
-                Channel.newChannel(HISTORY),
-                Channel.newChannel(ADVENTURE)
-        );
-        List<Channel> dorcelTvChannels = Collections.singletonList(Channel.newChannel(DORCEL));
+        TvPackage foxPlayExtraTvPackage = TvPackageTestFactory.create(FOX_PLAY, 5d, foxPlayExtraTvPackageChannels);
         TvPackage multiManPackExtraTvPackage = TvPackageTestFactory.create(MULTI_MAN_PACK, 20d, multiManPackChannels);
         TvPackage dorcelExtraTvPackage = TvPackageTestFactory.create(DORCEL, 10d, dorcelTvChannels);
-        List<Channel> superPremiumTvPackageChannels = Stream.of(startTvPackageChannels, asList(
-                Channel.newChannel(FUN_DANCE),
-                Channel.newChannel(FUN_GOLD_HTS),
-                Channel.newChannel(ACTIVE_FAMILY),
-                Channel.newChannel(AMC),
-                Channel.newChannel(ANIMAL_PLANET_HD)
-        )).flatMap(Collection::stream).collect(toList());
-
-        MainTvPackage superPremiumTvPackage = MainTvPackageTestFactory.create(
-                CANAL_PLUS_SUPERPREMIUM,
-                126.86d,
-                superPremiumTvPackageChannels,
-                asList(dorcelExtraTvPackage, foxPlayExtraTvPackage, multiManPackExtraTvPackage, elevenExtraTvPackage)
-        );
-        Operator operatorCanalPlus = new Operator(
-                CANAL_PLUS_ID,
-                CANAL_PLUS, "img",
-                asList(startTvPackage, superPremiumTvPackage)
-        );
-        List<Channel> smallFamilyChannels = asList(
-                Channel.newChannel(ATM_ROZRYWKA),
-                Channel.newChannel(POLSAT),
-                Channel.newChannel(TVN),
-                Channel.newChannel(HISTORY)
-        );
-        List<Channel> familyChannels = Stream.of(smallFamilyChannels, asList(
-                Channel.newChannel(FUN_TV),
-                Channel.newChannel(ALE_KINO_HD)
-        )).flatMap(Collection::stream).collect(toList());
-        List<Channel> funChannels = asList(
-                Channel.newChannel(BRAZZERS),
-                Channel.newChannel(HUSTLER_HD),
-                Channel.newChannel(PRIVATE_HD),
-                Channel.newChannel(VIVD_HD)
-        );
         TvPackage funExtraTvPackage = TvPackageTestFactory.create(FUN, 10d, funChannels);
-        List<Channel> polsatSportPremiumChannels = asList(
-                Channel.newChannel(SPORT_PREMIUM1),
-                Channel.newChannel(SPORT_PREMIUM2)
-        );
         TvPackage polsatSportPremiumExtraTvPackage = TvPackageTestFactory.create(POLSAT_SPORT_PREMIUM, 20d, polsatSportPremiumChannels);
-        MainTvPackage smallFamilyTvPackage = MainTvPackageTestFactory.create(
-                SMALL_FAMILY_CYFROWY_POLSAT,
-                12d,
-                smallFamilyChannels,
-                asList(hboExtraTvPackage, elevenExtraTvPackage)
-        );
-        MainTvPackage familyTvPackage = MainTvPackageTestFactory.create(
-                FAMILY_CYFROWY_POLSAT,
-                52d,
-                familyChannels,
-                asList(hboExtraTvPackage, elevenExtraTvPackage, funExtraTvPackage, polsatSportPremiumExtraTvPackage)
-        );
-        Operator operatorCyfrowyPolsat = new Operator(
-                CYFROWY_POLSAT_ID,
-                CYFROWY_POLSAT, "img",
-                asList(smallFamilyTvPackage, familyTvPackage)
-        );
+
+        Operator operatorCanalPlus = new Operator(CANAL_PLUS_ID, CANAL_PLUS, "img", asList(
+                MainTvPackageTestFactory.create(CANAL_PLUS_START, 18.11d, startTvPackageChannels, asList(
+                        hboExtraTvPackage, hboGoExtraTvPackage, elevenExtraTvPackage, foxPlayExtraTvPackage
+                )),
+                MainTvPackageTestFactory.create(CANAL_PLUS_SUPERPREMIUM, 126.86d, superPremiumTvPackageChannels, asList(
+                        dorcelExtraTvPackage, foxPlayExtraTvPackage, multiManPackExtraTvPackage, elevenExtraTvPackage
+                ))
+        ));
+
+        Operator operatorCyfrowyPolsat = new Operator(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, "img", asList(
+                MainTvPackageTestFactory.create(SMALL_FAMILY_CYFROWY_POLSAT, 12d, smallFamilyChannels, asList(
+                        hboExtraTvPackage, elevenExtraTvPackage
+                )),
+                MainTvPackageTestFactory.create(FAMILY_CYFROWY_POLSAT, 52d, familyChannels, asList(
+                        hboExtraTvPackage, elevenExtraTvPackage, funExtraTvPackage, polsatSportPremiumExtraTvPackage
+                ))
+        ));
+
         operators = asList(operatorCanalPlus, operatorCyfrowyPolsat);
         return operators;
     }
@@ -154,7 +108,54 @@ public class OperatorsDataTestFactory extends Constants {
         }
     }
 
+
     public static class ExpectedResultDataTestFactory {
+        public static class Expected {
+            String expectedOperatorId;
+            List<ExpectedMainTvPackage> expectedMainTvPackages;
+
+            public Expected(String expectedOperatorId, List<ExpectedMainTvPackage> expectedMainTvPackages) {
+                this.expectedOperatorId = expectedOperatorId;
+                this.expectedMainTvPackages = expectedMainTvPackages;
+            }
+        }
+
+        public static class ExpectedMainTvPackage {
+            String expectedMainTvPackage;
+            String[] expectedExtraTvPackages;
+
+            public ExpectedMainTvPackage(String expectedMainTvPackage, String[] expectedExtraTvPackages) {
+                this.expectedMainTvPackage = expectedMainTvPackage;
+                this.expectedExtraTvPackages = expectedExtraTvPackages;
+            }
+        }
+
+        public static Expected createExpected(String expectedOperatorId, Map<String, String[]> expectedMainTvPackageWithExtra) {
+            List<ExpectedMainTvPackage> expectedMainTvPackages = new ArrayList<>();
+            expectedMainTvPackageWithExtra.forEach((expectedMainTvPackage, expectedExtraTvPackages) -> {
+                expectedMainTvPackages.add(new ExpectedMainTvPackage(expectedMainTvPackage, expectedExtraTvPackages));
+            });
+            return new Expected(expectedOperatorId, expectedMainTvPackages);
+        }
+
+        public static ResultTvPackagesResponseDto getExpectedResult(List<Expected> expectedOperators) {
+            List<ResultTvPackage> resultTvPackages = new ArrayList<>();
+            for (Expected operator : expectedOperators) {
+                Operator expectedOperator = OperatorsDataTestFactory.findOperatorById(operator.expectedOperatorId);
+                for (ExpectedMainTvPackage expectedMainTvPackage : operator.expectedMainTvPackages) {
+                    MainTvPackage mainTvPackage = OperatorsDataTestFactory.findFromOperatorMainTvPackageByName(expectedOperator, expectedMainTvPackage.expectedMainTvPackage);
+                    List<TvPackage> expectedExtra = new ArrayList<>();
+                    for (String expectedExtraTvPackage : expectedMainTvPackage.expectedExtraTvPackages) {
+                        expectedExtra.add(OperatorsDataTestFactory.findExtraTvPackageFromMainTvPackageByName(mainTvPackage, expectedExtraTvPackage));
+                    }
+                    resultTvPackages.add(resultTvPackage(expectedOperator, mainTvPackage, expectedExtra));
+                }
+            }
+            ResultTvPackages expectedResultTvPackages = new ResultTvPackages(resultTvPackages);
+            ResultTvPackagesMapper resultTvPackagesMapper = new ResultTvPackagesMapper(new ModelMapper());
+            return resultTvPackagesMapper.convertToDto(expectedResultTvPackages);
+        }
+
         public static ResultTvPackagesResponseDto expectedResultChannelEleven() {
             Operator cyfrowyPolsat = OperatorsDataTestFactory.findOperatorById(CYFROWY_POLSAT_ID);
             Operator canalPlus = OperatorsDataTestFactory.findOperatorById(CANAL_PLUS_ID);
