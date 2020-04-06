@@ -16,7 +16,7 @@ public class CriteriaMapper {
 
     public Criteria convertToEntity(CriteriaRequestDto criteriaDto) {
         List<Channel> channels = criteriaDto.getChannels().stream().map(channelDto ->
-                Channel.newChannel(channelDto.getName(), channelDto.getImgSrc())
+                Channel.create(channelDto.getName(), channelDto.getImgSrc())
         ).collect(Collectors.toList());
 
         return Criteria.newCriteria(criteriaDto.getOperatorsId(), new RangePrice(criteriaDto.getPrice()), channels, criteriaDto.getTerm());

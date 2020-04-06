@@ -19,5 +19,4 @@ public class MainTvPackage extends TvPackage {
         super(name, description, price, type, imgSrc, link, term, status, channels);
         this.extraTvPackages = extraTvPackages;
     }
-
 }

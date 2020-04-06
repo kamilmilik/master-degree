@@ -14,15 +14,15 @@ public class Channel {
     private String imgSrc;
 
 
-    public static Channel newChannel(String name, String desc, String imgSrc){ // To make object immutable. Factory method.
-        return new Channel(name, desc, imgSrc);
-    }
+//    public static Channel newChannel(String name, String desc, String imgSrc){ // To make object immutable. Factory method.
+//        return new Channel(name, desc, imgSrc);
+//    }
 
-    public static Channel newChannel(String name){
+    public static Channel create(String name){
         return new Channel(name, null, null);
     }
 
-    public static Channel newChannel(String name, String imgSrc){ // To make object immutable. Factory method.
+    public static Channel create(String name, String imgSrc){ // To make object immutable. Factory method.
         return new Channel(name, null, imgSrc);
     }
 

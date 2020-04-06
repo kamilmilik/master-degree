@@ -12,9 +12,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ResultTvPackagesMapper {
 
-    private final ModelMapper modelMapper;
-
     public ResultTvPackagesResponseDto convertToDto(ResultTvPackages resultTvPackages) {
+        ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(resultTvPackages, ResultTvPackagesResponseDto.class);
     }
 

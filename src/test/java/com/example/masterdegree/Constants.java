@@ -13,8 +13,8 @@ public class Constants {
     protected static final String SMALL_FAMILY_CYFROWY_POLSAT = "Familijny small";
     protected static final String FAMILY_CYFROWY_POLSAT = "Familijny Max HD + Cinemax HD + Film HD + Sport HD";
     protected static final String FOX_PLAY = "FOX_PLAY";
-    protected static final String ELEVEN_SPORTS1 = ELEVEN_SPORTS + "1";
-    protected static final String ELEVEN_SPORTS2 = ELEVEN_SPORTS + "2";
+    protected static final String ELEVEN_SPORTS_1 = ELEVEN_SPORTS + "1";
+    protected static final String ELEVEN_SPORTS_2 = ELEVEN_SPORTS + "2";
     protected static final String MULTI_MAN_PACK =  "Multi man pack";
     protected static final String FUN_TV =  "4fun TV";
     protected static final String FUN_DANCE =  "4fun Dance";
@@ -27,7 +27,7 @@ public class Constants {
     protected static final String ATM =  "ATM Rozrywka";
     protected static final String BBC =  "BBC World News";
     protected static final String HBO =  "HBO";
-    protected static final String HBO2 =  HBO + "2";
+    protected static final String HBO_2 =  HBO + "2";
     protected static final String HBO3 =  HBO + "3";
     protected static final String HBO_GO =  HBO + " GO";
     protected static final String DORCEL =  "Dorcel TV";

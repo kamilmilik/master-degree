@@ -13,6 +13,7 @@ import com.example.masterdegree.models.model.filter.ResultTvPackage;
 import com.example.masterdegree.models.model.filter.ResultTvPackages;
 import com.example.masterdegree.repositories.OperatorsRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,11 @@ import java.util.List;
 public class FilteredResultServiceImpl implements FilteredResultService {
 
     private final OperatorsRepository operatorsRepository;
-    private final CriteriaMapper criteriaMapper;
-    private final ResultTvPackagesMapper resultTvPackagesMapper;
-
 
     @Override
     public ResultTvPackagesResponseDto getFilteredResult(CriteriaRequestDto criteriaRequestDto) {
+        CriteriaMapper criteriaMapper = new CriteriaMapper();
+        ResultTvPackagesMapper resultTvPackagesMapper = new ResultTvPackagesMapper();
         Criteria criteria = criteriaMapper.convertToEntity(criteriaRequestDto);
         List<ResultTvPackage> resultTvPackages = getFilteredResults(criteria);
         return resultTvPackagesMapper.convertToDto(new ResultTvPackages(resultTvPackages));
