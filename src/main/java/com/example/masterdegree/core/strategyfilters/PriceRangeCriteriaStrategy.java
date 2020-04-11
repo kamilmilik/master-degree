@@ -20,8 +20,8 @@ public class PriceRangeCriteriaStrategy implements CriteriaStrategy {
     }
 
     public List<ResultTvPackage> getResultFilteredByRangePriceInMainTvPackages(List<ResultTvPackage> resultTvPackages) {
-        return resultTvPackages.stream().
-                filter(resultTvPackage -> criteria.getPrice().isBetween(resultTvPackage.getFilteredTvPackage().getPrice()))
+        return resultTvPackages.stream()
+                .filter(resultTvPackage -> criteria.getPrice().isBetween(resultTvPackage.getFilteredTvPackage().getPrice()))
                 .collect(Collectors.toList());
     }
 

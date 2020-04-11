@@ -1,15 +1,13 @@
 package com.example.masterdegree.models.model.filter;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Collections;
 import java.util.List;
 
 
 @AllArgsConstructor
+@EqualsAndHashCode
 public class ResultTvPackages {
 
     @Getter(AccessLevel.NONE)

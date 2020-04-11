@@ -9,7 +9,7 @@ import java.util.List;
 @ToString(callSuper = true)
 public class MainTvPackage extends TvPackage {
 
-    private List<TvPackage> extraTvPackages;
+    private final List<TvPackage> extraTvPackages;
 
     public List<TvPackage> getExtraTvPackages() {
         return Collections.unmodifiableList(extraTvPackages);

@@ -33,6 +33,10 @@ public class Criteria {
         return Collections.unmodifiableList(channels);
     }
 
+    public boolean hasAnyChannelsCriteria(){
+        return channels.size() > 0;
+    }
+
     public static Criteria newCriteria(List<String> operatorsId, RangePrice rangePrice, List<Channel> channels, String term){
         return new Criteria(operatorsId, rangePrice, channels, term);
     }

@@ -1,10 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Card, CardContent, Feed, Icon, Image} from "semantic-ui-react";
 import './CardResult.css';
 
 
 export default function CardResult({data}) {
-
+    let priceSumOfTvPackagesWhichMeetCriteria = 0;
+    data.filteredTvPackage.extraTvPackagesWhichMeetCriteria.map((tvPackage) => {
+        priceSumOfTvPackagesWhichMeetCriteria += tvPackage.price;
+    })
     return (
         <Card>
             <CardContent id={"card-result-header"}>
@@ -25,10 +28,10 @@ export default function CardResult({data}) {
                 <Card.Description>
                     {data.filteredTvPackage.name}
                     {
-                       + data.filteredTvPackage.extraTvPackagesWhichMeetCriteria.length !== 0 ? (
+                        +data.filteredTvPackage.extraTvPackagesWhichMeetCriteria.length !== 0 ? (
                             data.filteredTvPackage.extraTvPackagesWhichMeetCriteria.map((extraTvPackageWhichMeetCriteria, index) => {
                                 return (
-                                    <span>{(index ? ', ' : '') + extraTvPackageWhichMeetCriteria.name}</span>
+                                    <span>{(index ? ', ' : '') + extraTvPackageWhichMeetCriteria.name + " "}</span>
                                 )
                             })
 
@@ -36,7 +39,8 @@ export default function CardResult({data}) {
                             <span></span>
                         )
                     }
-                    { data.filteredTvPackage.price} zl {data.filteredTvPackage.type}
+
+                    {data.filteredTvPackage.price + priceSumOfTvPackagesWhichMeetCriteria} zl {data.filteredTvPackage.type}
                 </Card.Description>
 
             </CardContent>
@@ -87,4 +91,6 @@ export default function CardResult({data}) {
             </Card.Content>
         </Card>
     );
+
+
 }

@@ -35,21 +35,25 @@ public class FilteredResultService {
 
     private List<ResultTvPackage> getFilteredResults(Criteria criteria) {
         List<ResultTvPackage> resultTvPackages = createResultWithoutFilters();
+        return filterByCriteria(criteria, resultTvPackages);
+    }
+
+    private List<ResultTvPackage> filterByCriteria(Criteria criteria, List<ResultTvPackage> resultTvPackages){
         // Filter order: operators -> term -> channels -> price
         CriteriaStrategy andCriteria = AndCriteria.builder()
                 .criteria(new OperatorCriteriaStrategy(criteria))
                 .criteria(new PriceRangeCriteriaStrategy(criteria))
                 .criteria(new ChannelCriteriaStrategy(criteria))
+                .criteria(new ChannelAndPriceCombinationCriteriaStrategy(criteria))
                 .build();
         return andCriteria.getFilteredResult(resultTvPackages);
-
     }
 
     public List<ResultTvPackage> createResultWithoutFilters() {
         List<ResultTvPackage> resultTvPackages = new LinkedList<>(); // LinkedList since it is faster using it. Removing element O(1), in ArrayList O(n).
         for (Operator operator : operatorsRepository.findAll()) {
             for (MainTvPackage tvPackage : operator.getTvPackages()) {
-                FilteredTvPackage filteredTvPackage = new FilteredTvPackage(tvPackage, new LinkedList<>(), tvPackage.getExtraTvPackages());
+                FilteredTvPackage filteredTvPackage = new FilteredTvPackage(tvPackage, new LinkedList<>(), new LinkedList<>(tvPackage.getExtraTvPackages()));
                 resultTvPackages.add(new ResultTvPackage(operator.getId(), operator.getName(), operator.getImgSrc(), filteredTvPackage));
             }
         }

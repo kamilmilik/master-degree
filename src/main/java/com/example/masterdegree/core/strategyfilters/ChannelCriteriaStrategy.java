@@ -24,8 +24,11 @@ public class ChannelCriteriaStrategy implements CriteriaStrategy {
         return this.getResultBySelectedChannels(resultTvPackages);
     }
 
-    // TODO KM sprawdzic czy dziala w wiekszej ilosci danych
-    public List<ResultTvPackage> getResultBySelectedChannels(List<ResultTvPackage> resultTvPackages) {
+    private List<ResultTvPackage> getResultBySelectedChannels(List<ResultTvPackage> resultTvPackages) {
+        return searchInMainAndExtraTvPackages(resultTvPackages);
+    }
+
+    private List<ResultTvPackage> searchInMainAndExtraTvPackages(List<ResultTvPackage> resultTvPackages) {
         for (Channel selectedChannel : criteria.getChannels()) {
             resultTvPackages.removeIf(resultTvPackage -> {
                 boolean isFoundSelectedChannel = searchChannelInMainTvPackage(resultTvPackage, selectedChannel);
@@ -38,11 +41,11 @@ public class ChannelCriteriaStrategy implements CriteriaStrategy {
         return resultTvPackages;
     }
 
-    private boolean searchChannelInMainTvPackage(ResultTvPackage resultTvPackage, Channel searchedChannel){
+    private boolean searchChannelInMainTvPackage(ResultTvPackage resultTvPackage, Channel searchedChannel) {
         return resultTvPackage.getFilteredTvPackage().getChannels().stream().anyMatch(channel -> channel.isTheSame(searchedChannel));
     }
 
-    private boolean searchChannelInExtraAvailablePackages(ResultTvPackage resultTvPackage, Channel searchedChannel){
+    private boolean searchChannelInExtraAvailablePackages(ResultTvPackage resultTvPackage, Channel searchedChannel) {
         return resultTvPackage.getFilteredTvPackage().getExtraTvPackagesWhichMeetCriteria().addAll(
                 resultTvPackage.getFilteredTvPackage().getExtraAvailableTvPackages().stream()
                         .filter(tvPackage -> tvPackage.getChannels().stream()

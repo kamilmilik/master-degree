@@ -4,6 +4,7 @@ import com.example.masterdegree.models.model.TvPackage;
 import lombok.*;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 @Getter
@@ -26,4 +27,16 @@ public class FilteredTvPackage extends TvPackage {
         return Collections.unmodifiableList(extraAvailableTvPackages);
     }
 
+    public boolean hasExtraTvPackagesWhichMeetCriteria() {
+        return extraTvPackagesWhichMeetCriteria.size() > 0;
+    }
+
+    public void replaceExtraTvPackagesWithGivenList(List<TvPackage> listToReplace) {
+        extraTvPackagesWhichMeetCriteria = new LinkedList<>();
+        extraTvPackagesWhichMeetCriteria.addAll(listToReplace);
+    }
+
+    public void removeGivenTvPackagesFromExtraTvPackages(List<TvPackage> tvPackages) {
+        extraAvailableTvPackages.removeAll(tvPackages);
+    }
 }

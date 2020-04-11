@@ -8,6 +8,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class TvPackage {
     @NonNull
     private String name;
