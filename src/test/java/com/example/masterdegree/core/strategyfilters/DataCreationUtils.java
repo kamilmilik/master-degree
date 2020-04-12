@@ -2,7 +2,7 @@ package com.example.masterdegree.core.strategyfilters;
 
 import com.example.masterdegree.models.model.Channel;
 import com.example.masterdegree.models.model.Criteria;
-import com.example.masterdegree.models.model.RangePrice;
+import com.example.masterdegree.models.model.Price;
 import com.example.masterdegree.models.model.TvPackage;
 import com.example.masterdegree.models.model.filter.FilteredTvPackage;
 import com.example.masterdegree.models.model.filter.ResultTvPackage;
@@ -36,15 +36,15 @@ public class DataCreationUtils {
         return new TvPackage("", "", 0d, "", "", "", "", "", channels);
     }
 
-    public static Criteria createCriteria(double[] price) {
-        return Criteria.newCriteria(null, new RangePrice(price), null, null);
+    public static Criteria createCriteria(double price) {
+        return Criteria.newCriteria(null, new Price(price), null, null);
     }
 
     public static Criteria createCriteria(List<Channel> channels) {
-        return Criteria.newCriteria(null, new RangePrice(new double[]{0d, 0d}), channels, null);
+        return Criteria.newCriteria(null, new Price(0d), channels, null);
     }
 
-    public static Criteria createCriteria(double[] price, List<Channel> channels) {
-        return Criteria.newCriteria(null, new RangePrice(price), channels, null);
+    public static Criteria createCriteria(double price, List<Channel> channels) {
+        return Criteria.newCriteria(null, new Price(price), channels, null);
     }
 }

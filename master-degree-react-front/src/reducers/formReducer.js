@@ -30,7 +30,7 @@ const initState = {
     criteria: {
         operatorsId: [],
         term: "24",
-        price: [MIN_PRICE_FILTER_VALUE, MAX_PRICE_FILTER_VALUE],
+        price:  MAX_PRICE_FILTER_VALUE,
         channels: []
     },
     isLoadingFilteredResult: true,

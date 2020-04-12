@@ -13,7 +13,7 @@ import java.util.List;
 @ToString()
 public class CriteriaRequestDto {
     private List<String> operatorsId;
-    private double[] price;
+    private double price;
     private List<ChannelDto> channels;
     private String term;
 }

@@ -39,4 +39,13 @@ public class FilteredTvPackage extends TvPackage {
     public void removeGivenTvPackagesFromExtraTvPackages(List<TvPackage> tvPackages) {
         extraAvailableTvPackages.removeAll(tvPackages);
     }
+
+    public void removeGivenTvPackageFromExtraTvPackagesIfContainsAllChannels(List<TvPackage> tvPackages){
+        tvPackages.forEach(meetCriteriaTvPackage -> {
+            extraAvailableTvPackages.removeIf(tvPackage ->
+                    meetCriteriaTvPackage.getChannels().containsAll(tvPackage.getChannels())
+            );
+        });
+    }
+
 }

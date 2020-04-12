@@ -18,18 +18,16 @@ class PricePicker extends Component {
         this.onPick = this.onPick.bind(this)
     }
 
-    onPick(range) {
-        this.props.setSelectedPrice(range);
+    onPick(price) {
+        this.props.setSelectedPrice(price);
     }
 
     render() {
         return (
             <div className={"container-fluid"} id={"main-price-picker-container"}>
                 <Slider
-                    range
-                    min={MIN_PRICE_FILTER_VALUE}
                     max={MAX_PRICE_FILTER_VALUE}
-                    defaultValue={[MIN_PRICE_FILTER_VALUE, MAX_PRICE_FILTER_VALUE]}
+                    defaultValue={MAX_PRICE_FILTER_VALUE}
                     tipFormatter={value => `${value}zl`}
                     onAfterChange={(e) => this.onPick(e)}
                     tooltipVisible

@@ -28,15 +28,15 @@ export default function CardResult({data}) {
                 <Card.Description>
                     {data.filteredTvPackage.name}
                     {
-                        +data.filteredTvPackage.extraTvPackagesWhichMeetCriteria.length !== 0 ? (
+                        + data.filteredTvPackage.extraTvPackagesWhichMeetCriteria.length !== 0 ? (
                             data.filteredTvPackage.extraTvPackagesWhichMeetCriteria.map((extraTvPackageWhichMeetCriteria, index) => {
                                 return (
-                                    <span>{(index ? ', ' : '') + extraTvPackageWhichMeetCriteria.name + " "}</span>
+                                    <span>{(index ? ', ' : ' ') + extraTvPackageWhichMeetCriteria.name + " "}</span>
                                 )
                             })
 
                         ) : (
-                            <span></span>
+                            <span> </span>
                         )
                     }
 

@@ -1,6 +1,6 @@
 package com.example.masterdegree.models.mappers;
 
-import com.example.masterdegree.models.model.RangePrice;
+import com.example.masterdegree.models.model.Price;
 import com.example.masterdegree.models.dto.CriteriaRequestDto;
 import com.example.masterdegree.models.model.Channel;
 import com.example.masterdegree.models.model.Criteria;
@@ -19,7 +19,7 @@ public class CriteriaMapper {
                 Channel.create(channelDto.getName(), channelDto.getImgSrc())
         ).collect(Collectors.toList());
 
-        return Criteria.newCriteria(criteriaDto.getOperatorsId(), new RangePrice(criteriaDto.getPrice()), channels, criteriaDto.getTerm());
+        return Criteria.newCriteria(criteriaDto.getOperatorsId(), new Price(criteriaDto.getPrice()), channels, criteriaDto.getTerm());
     }
 }
 

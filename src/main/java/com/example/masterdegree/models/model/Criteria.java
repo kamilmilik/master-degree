@@ -14,7 +14,7 @@ import java.util.List;
 public class Criteria {
     @Getter(AccessLevel.NONE)
     private List<String> operatorsId;
-    private RangePrice price;
+    private Price price;
     @Getter(AccessLevel.NONE)
     private List<Channel> channels;
     private String term;
@@ -37,7 +37,7 @@ public class Criteria {
         return channels.size() > 0;
     }
 
-    public static Criteria newCriteria(List<String> operatorsId, RangePrice rangePrice, List<Channel> channels, String term){
-        return new Criteria(operatorsId, rangePrice, channels, term);
+    public static Criteria newCriteria(List<String> operatorsId, Price price, List<Channel> channels, String term){
+        return new Criteria(operatorsId, price, channels, term);
     }
 }

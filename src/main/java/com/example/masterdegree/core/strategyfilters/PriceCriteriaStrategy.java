@@ -6,11 +6,11 @@ import com.example.masterdegree.models.model.filter.ResultTvPackage;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PriceRangeCriteriaStrategy implements CriteriaStrategy {
+public class PriceCriteriaStrategy implements CriteriaStrategy {
 
     private Criteria criteria;
 
-    public PriceRangeCriteriaStrategy(Criteria criteria) {
+    public PriceCriteriaStrategy(Criteria criteria) {
         this.criteria = criteria;
     }
 
@@ -21,7 +21,7 @@ public class PriceRangeCriteriaStrategy implements CriteriaStrategy {
 
     public List<ResultTvPackage> getResultFilteredByRangePriceInMainTvPackages(List<ResultTvPackage> resultTvPackages) {
         return resultTvPackages.stream()
-                .filter(resultTvPackage -> criteria.getPrice().isBetween(resultTvPackage.getFilteredTvPackage().getPrice()))
+                .filter(resultTvPackage -> criteria.getPrice().isGreaterThan(resultTvPackage.getFilteredTvPackage().getPrice()))
                 .collect(Collectors.toList());
     }
 
