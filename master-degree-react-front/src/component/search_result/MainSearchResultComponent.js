@@ -20,6 +20,7 @@ class MainSearchResultComponent extends Component {
         FilteredResultDataService.retrieveFilteredResultByCriteria(criteria)
             .then(response =>{
                 // TODO KM blad gdy: szybkie przelaczanie miedzy operatorami ui czasami sie nie odswieza, raczej response ok
+                // Czasami jak sa dwa szybkie requesty to jeden serwer zwrocil i drugi przetwarza a ui zamiast znaczka przetwarzania pokazuje stary widok, tymczasem serwer nie zwrocil jeszcze drguiego response
                 this.props.setResult(response);
                 this.props.setIsLoadingFilteredResult(false);
             } )

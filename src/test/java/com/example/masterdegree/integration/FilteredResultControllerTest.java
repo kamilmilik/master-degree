@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,8 +29,6 @@ import static com.example.masterdegree.Constants.*;
 import static com.example.masterdegree.core.strategyfilters.DataCreationUtils.*;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-
-//import static org.hamcrest.MatcherAssert.assertThat;
 
 
 @ExtendWith(SpringExtension.class)
@@ -44,102 +43,9 @@ public class FilteredResultControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @ParameterizedTest
-    @MethodSource("dataProvider")
-    public void shouldReturnFilteredResult(CriteriaRequestDto criteria, ResultTvPackagesResponseDto expected) throws JsonProcessingException {
-        HttpEntity<CriteriaRequestDto> entity = new HttpEntity<>(criteria, headers);
-
-        ResponseEntity<String> response = this.restTemplate
-                .postForEntity(createURLWithPort(URI), entity, String.class);
-
-        ResultTvPackagesResponseDto actual = objectMapper.readValue(response.getBody(), ResultTvPackagesResponseDto.class);
-
-        List<String> expectedOperatorsId = expected.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorId).collect(Collectors.toList());
-        List<String> expectedOperatorsName = expected.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorName).collect(Collectors.toList());
-        Object[] expectedExtraAvailableTvPackageNames = expected.getResultTvPackages().stream().
-                flatMap(resultTvPackageResponseDto -> resultTvPackageResponseDto.getFilteredTvPackage().getExtraAvailableTvPackages().stream())
-                .map(TvPackageResponseDto::getName)
-                .toArray();
-        Object[] expectedMeetCriteriaTvPackageNames = expected.getResultTvPackages().stream().
-                flatMap(resultTvPackageResponseDto -> resultTvPackageResponseDto.getFilteredTvPackage().getExtraTvPackagesWhichMeetCriteria().stream())
-                .map(TvPackageResponseDto::getName)
-                .toArray();
-        Object[] expectedMainTvPackageNames = expected.getResultTvPackages().stream().
-                map(resultTvPackageResponseDto -> resultTvPackageResponseDto.getFilteredTvPackage().getName())
-                .toArray();
-
-        List<String> actualOperatorsId = actual.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorId).collect(Collectors.toList());
-        List<String> actualOperatorsName = actual.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorName).collect(Collectors.toList());
-
-        Object[] actualExtraAvailableTvPackageNames = actual.getResultTvPackages().stream().
-                flatMap(resultTvPackageResponseDto -> resultTvPackageResponseDto.getFilteredTvPackage().getExtraAvailableTvPackages().stream())
-                .map(TvPackageResponseDto::getName).toArray();
-
-        Object[] actualMeetCriteriaTvPackageNames = actual.getResultTvPackages().stream()
-                .flatMap(resultTvPackageResponseDto -> resultTvPackageResponseDto.getFilteredTvPackage().getExtraTvPackagesWhichMeetCriteria().stream())
-                .map(TvPackageResponseDto::getName).toArray();
-
-        Object[] actualMainTvPackageNames = actual.getResultTvPackages().stream()
-                .map(resultTvPackageResponseDto -> resultTvPackageResponseDto.getFilteredTvPackage().getName()).toArray();
-
-        assertThat(actualOperatorsId)
-                .usingRecursiveComparison()
-                .ignoringCollectionOrder()
-                .isEqualTo(expectedOperatorsId);
-        assertThat(actualOperatorsName)
-                .usingRecursiveComparison()
-                .ignoringCollectionOrder()
-                .isEqualTo(expectedOperatorsName);
-        assertThat(actualMainTvPackageNames)
-                .usingRecursiveComparison()
-                .ignoringCollectionOrder()
-                .isEqualTo(expectedMainTvPackageNames);
-        assertThat(actualMeetCriteriaTvPackageNames)
-                .containsExactlyInAnyOrder(expectedMeetCriteriaTvPackageNames);
-        assertThat(actualExtraAvailableTvPackageNames)
-                .containsExactlyInAnyOrder(expectedExtraAvailableTvPackageNames);
-
-        // It is also option. But in this situation, error not display property place where was. For example if expected name of Tv Package will be different it not show difference in error stack.
-//        assertThat(actual.getResultTvPackages())
-//                .usingRecursiveComparison()
-//                .ignoringAllOverriddenEquals()
-//                .ignoringCollectionOrder()
-//                .ignoringFields(
-//                        "operatorImg",
-//                        "operatorId",
-//                        "operatorName",
-//                        "filteredTvPackage.description",
-//                        "filteredTvPackage.price",
-//                        "filteredTvPackage.type",
-//                        "filteredTvPackage.imgSrc",
-//                        "filteredTvPackage.link",
-//                        "filteredTvPackage.term",
-//                        "filteredTvPackage.channels",
-//                        "filteredTvPackage.extraTvPackagesWhichMeetCriteria.description",
-//                        "filteredTvPackage.extraTvPackagesWhichMeetCriteria.price",
-//                        "filteredTvPackage.extraTvPackagesWhichMeetCriteria.type",
-//                        "filteredTvPackage.extraTvPackagesWhichMeetCriteria.imgSrc",
-//                        "filteredTvPackage.extraTvPackagesWhichMeetCriteria.link",
-//                        "filteredTvPackage.extraTvPackagesWhichMeetCriteria.term",
-//                        "filteredTvPackage.extraTvPackagesWhichMeetCriteria.channels",
-//                        "filteredTvPackage.extraTvPackagesWhichMeetCriteria.channels.name",
-//                        "filteredTvPackage.extraTvPackagesWhichMeetCriteria.channels.imgScr",
-//                        "filteredTvPackage.extraAvailableTvPackages.description",
-//                        "filteredTvPackage.extraAvailableTvPackages.price",
-//                        "filteredTvPackage.extraAvailableTvPackages.type",
-//                        "filteredTvPackage.extraAvailableTvPackages.imgSrc",
-//                        "filteredTvPackage.extraAvailableTvPackages.link",
-//                        "filteredTvPackage.extraAvailableTvPackages.term",
-//                        "filteredTvPackage.extraAvailableTvPackages.channels",
-//                        "filteredTvPackage.extraAvailableTvPackages.channels.name",
-//                        "filteredTvPackage.extraAvailableTvPackages.channels.imgSrc"
-//                )
-//                .isEqualTo(expected.getResultTvPackages());
-    }
-
     private static Stream<Arguments> dataProvider() {
-        CriteriaRequestDto criteria = new CriteriaRequestDto(new ArrayList<>(), 400d, asList(createChannelDto(NETFLIX_4K), createChannelDto(HBO_GO), createChannelDto(FOX_PLAY)), "24");
-        ResultTvPackagesResponseDto expected = new ResultTvPackagesResponseDto(asList(
+        CriteriaRequestDto criteriaChannelsDefaultPriceAndTerm = new CriteriaRequestDto(new ArrayList<>(), 400d, asList(createChannelDto(NETFLIX_4K), createChannelDto(HBO_GO), createChannelDto(FOX_PLAY)), "24");
+        ResultTvPackagesResponseDto expectedComfortAndExtra = new ResultTvPackagesResponseDto(asList(
                 createResultTvPackageDto(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackageResponseDto(
                         createTvPackageDto(COMFORT_CANAL_PLUS_NETFLIX),
                         asList(
@@ -175,12 +81,147 @@ public class FilteredResultControllerTest {
                         )
                 ))
         ));
+        CriteriaRequestDto criteriaOperatorPriceChannelsDefaultTerm = new CriteriaRequestDto(
+                new ArrayList<>(Collections.singletonList("5e77b71972e086126cc4e6b3")),
+                143d,
+                asList(createChannelDto(DTX_HD), createChannelDto(SPORT_PREMIUM_1), createChannelDto(DORCEL_TV_HD)),
+                "24");
+        ResultTvPackagesResponseDto expectedExtraAndSuperPremium = new ResultTvPackagesResponseDto(asList(
+                createResultTvPackageDto(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackageResponseDto(
+                        createTvPackageDto(EXTRA_CANAL_PLUS),
+                        asList(
+                                createTvPackageDto(POLSAT_SPORT_PREMIUM),
+                                createTvPackageDto(MULTI_MAN_PACK)
+                        ),
+                        asList(
+                                createTvPackageDto(HBO),
+                                createTvPackageDto(HBO_PLUS_HBO_GO),
+                                createTvPackageDto(ELEVEN_SPORTS),
+                                createTvPackageDto(FOX_PLAY),
+                                createTvPackageDto(NATIONAL_GEOGRAPHIC_PLAY),
+                                createTvPackageDto(PARAMOUNT_PLAY),
+                                createTvPackageDto(CANAL_PLUS_4K_ULTRA_HD)
+                        )
+                )),
+                createResultTvPackageDto(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackageResponseDto(
+                        createTvPackageDto(CANAL_PLUS_SUPERPREMIUM),
+                        asList(
+                                createTvPackageDto(POLSAT_SPORT_PREMIUM),
+                                createTvPackageDto(DORCEL_TV)
+                        ),
+                        asList(
+                                createTvPackageDto(MULTI_MAN_PACK),
+                                createTvPackageDto(FOX_PLAY),
+                                createTvPackageDto(NATIONAL_GEOGRAPHIC_PLAY),
+                                createTvPackageDto(ADVENTURE),
+                                createTvPackageDto(HISTORY_PACKAGE)
+                        )
+                ))
+        ));
+        CriteriaRequestDto criteriaChannelInMainTvPackage = new CriteriaRequestDto(
+                new ArrayList<>(Collections.singletonList("5e77b71972e086126cc4e6b3")), 75d, Collections.singletonList(createChannelDto(BOOMERANG_HD)), "24"
+        );
+        ResultTvPackagesResponseDto expectedCriteriaChannelInMainTvPackage = new ResultTvPackagesResponseDto(asList(
+                createResultTvPackageDto(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackageResponseDto(
+                        createTvPackageDto(EXTRA),
+                        new LinkedList<>(),
+                        asList(
+                                createTvPackageDto(HBO),
+                                createTvPackageDto(HBO_PLUS_HBO_GO),
+                                createTvPackageDto(ELEVEN_SPORTS),
+                                createTvPackageDto(MULTI_MAN_PACK),
+                                createTvPackageDto(FOX_PLAY),
+                                createTvPackageDto(NATIONAL_GEOGRAPHIC_PLAY),
+                                createTvPackageDto(HISTORY_PACKAGE)
+                        )
+                ))
+        ));
 
+        CriteriaRequestDto criteriaChannelInExtraTvPackage = new CriteriaRequestDto(
+                new ArrayList<>(Collections.singletonList("5e77b71972e086126cc4e6b3")), 131d, Collections.singletonList(createChannelDto(NETFLIX_4K)), "24"
+        );
+        ResultTvPackagesResponseDto expectedCriteriaChannelInExtraTvPackage = new ResultTvPackagesResponseDto(asList(
+                createResultTvPackageDto(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackageResponseDto(
+                        createTvPackageDto(COMFORT_CANAL_PLUS_NETFLIX),
+                        asList(createTvPackageDto(NETFLIX_4K_PACKAGE)),
+                        asList(
+                                createTvPackageDto(HBO),
+                                createTvPackageDto(HBO_PLUS_HBO_GO),
+                                createTvPackageDto(ELEVEN_SPORTS),
+                                createTvPackageDto(CANAL_PLUS_4K_ULTRA_HD),
+                                createTvPackageDto(MULTI_MAN_PACK),
+                                createTvPackageDto(PARAMOUNT_PLAY),
+                                createTvPackageDto(HISTORY_PACKAGE),
+                                createTvPackageDto(POLSAT_SPORT_PREMIUM),
+                                createTvPackageDto(FOX_PLAY),
+                                createTvPackageDto(NATIONAL_GEOGRAPHIC_PLAY)
+                        )
+                ))
+        ));
         return Stream.of(
-                Arguments.of(criteria, expected)
+                Arguments.of(criteriaChannelsDefaultPriceAndTerm, expectedComfortAndExtra),
+                Arguments.of(criteriaOperatorPriceChannelsDefaultTerm, expectedExtraAndSuperPremium),
+                Arguments.of(criteriaChannelInMainTvPackage, expectedCriteriaChannelInMainTvPackage),
+                Arguments.of(criteriaChannelInExtraTvPackage, expectedCriteriaChannelInExtraTvPackage)
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("dataProvider")
+    public void shouldReturnFilteredResult(CriteriaRequestDto criteria, ResultTvPackagesResponseDto expected) throws JsonProcessingException {
+        HttpEntity<CriteriaRequestDto> entity = new HttpEntity<>(criteria, headers);
+
+        ResponseEntity<String> response = this.restTemplate
+                .postForEntity(createURLWithPort(URI), entity, String.class);
+
+        ResultTvPackagesResponseDto actual = objectMapper.readValue(response.getBody(), ResultTvPackagesResponseDto.class);
+
+        List<String> expectedOperatorsId = expected.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorId).collect(Collectors.toList());
+        List<String> expectedOperatorsName = expected.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorName).collect(Collectors.toList());
+        Object[] expectedExtraAvailableTvPackageNames = prepareDataToCompareForAvailableTvPackagesName(expected);
+        Object[] expectedMeetCriteriaTvPackageNames = prepareDataToCompareForMeetCriteriaTvPackagesName(expected);
+        Object[] expectedMainTvPackageNames = prepareDataToCompareForMainTvPackagesName(expected);
+
+        List<String> actualOperatorsId = actual.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorId).collect(Collectors.toList());
+        List<String> actualOperatorsName = actual.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorName).collect(Collectors.toList());
+        Object[] actualExtraAvailableTvPackageNames = prepareDataToCompareForAvailableTvPackagesName(actual);
+        Object[] actualMeetCriteriaTvPackageNames = prepareDataToCompareForMeetCriteriaTvPackagesName(actual);
+        Object[] actualMainTvPackageNames = prepareDataToCompareForMainTvPackagesName(actual);
+
+        assertThat(actualOperatorsId).as("Operator id")
+                .usingRecursiveComparison()
+                .ignoringCollectionOrder()
+                .isEqualTo(expectedOperatorsId);
+        assertThat(actualOperatorsName).as("Operator name")
+                .usingRecursiveComparison()
+                .ignoringCollectionOrder()
+                .isEqualTo(expectedOperatorsName);
+        assertThat(actualMainTvPackageNames).as("Main")
+                .usingRecursiveComparison()
+                .ignoringCollectionOrder()
+                .isEqualTo(expectedMainTvPackageNames);
+        assertThat(actualMeetCriteriaTvPackageNames).as("Meet criteria")
+                .containsExactlyInAnyOrder(expectedMeetCriteriaTvPackageNames);
+        assertThat(actualExtraAvailableTvPackageNames).as("Extra available")
+                .containsExactlyInAnyOrder(expectedExtraAvailableTvPackageNames);
+    }
+
+    private Object[] prepareDataToCompareForAvailableTvPackagesName(ResultTvPackagesResponseDto input) {
+        return input.getResultTvPackages().stream()
+                .flatMap(resultTvPackageResponseDto -> resultTvPackageResponseDto.getFilteredTvPackage().getExtraAvailableTvPackages().stream())
+                .map(TvPackageResponseDto::getName).toArray();
+    }
+
+    private Object[] prepareDataToCompareForMeetCriteriaTvPackagesName(ResultTvPackagesResponseDto input) {
+        return input.getResultTvPackages().stream()
+                .flatMap(resultTvPackageResponseDto -> resultTvPackageResponseDto.getFilteredTvPackage().getExtraTvPackagesWhichMeetCriteria().stream())
+                .map(TvPackageResponseDto::getName).toArray();
+    }
+
+    private Object[] prepareDataToCompareForMainTvPackagesName(ResultTvPackagesResponseDto input) {
+        return input.getResultTvPackages().stream()
+                .map(resultTvPackageResponseDto -> resultTvPackageResponseDto.getFilteredTvPackage().getName()).toArray();
+    }
 
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;

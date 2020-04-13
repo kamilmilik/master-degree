@@ -35,14 +35,14 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         @MethodSource("provideDataForNotMeetCriteriaTvPackages")
         @DisplayName("Test not returning filtered result when tv packages not meet criteria")
         void shouldNotReturnFilteredResult_whenTvPackagesNotMeetCriteria(List<ResultTvPackage> input, List<ResultTvPackage> expected) {
-            Criteria criteria = createCriteria(60d, asList(Channel.create(DORCEL), Channel.create(BRAZZERS), Channel.create(FOX_PLAY)));
+            Criteria criteria = createCriteria(60d, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS), Channel.create(FOX_PLAY)));
             ChannelAndPriceCombinationCriteriaStrategy criteriaStrategy = new ChannelAndPriceCombinationCriteriaStrategy(criteria);
             List<ResultTvPackage> actual = criteriaStrategy.getFilteredResult(input);
             assertThat(actual).isEqualTo(expected);
         }
 
         Stream<Arguments> provideDataForNotMeetCriteriaTvPackages() {
-            TvPackage activeTvPackage = createTvPackage(ACTIVE_FAMILY, 30d, asList(Channel.create(DORCEL), Channel.create(BRAZZERS), Channel.create(FOX_PLAY), Channel.create(ACTIVE_FAMILY)));
+            TvPackage activeTvPackage = createTvPackage(ACTIVE_FAMILY, 30d, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS), Channel.create(FOX_PLAY), Channel.create(ACTIVE_FAMILY)));
             List<ResultTvPackage> inputNotMeetAllCriteriaOneExtraTvPackage = new ArrayList<>(asList(
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
@@ -55,7 +55,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
 
             TvPackage hboTvPackage = createTvPackage(HBO, 15d, Collections.singletonList(Channel.create(HBO)));
             TvPackage foxTvPackage = createTvPackage(FOX_PLAY, 5d, Collections.singletonList(Channel.create(FOX_PLAY)));
-            TvPackage dorcelTvPackage = createTvPackage(DORCEL, 2d, Collections.singletonList(Channel.create(DORCEL)));
+            TvPackage dorcelTvPackage = createTvPackage(DORCEL_TV_HD, 2d, Collections.singletonList(Channel.create(DORCEL_TV_HD)));
             List<ResultTvPackage> inputNotMeetAllCriteriaManyExtraTvPackages = new ArrayList<>(asList(
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
@@ -82,10 +82,10 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         }
 
         Stream<Arguments> provideDataForMeetCriteriaTvPackages() {
-            Criteria criteriaChannels = createCriteria(400d, asList(Channel.create(DORCEL), Channel.create(BRAZZERS), Channel.create(FOX_PLAY)));
-            TvPackage multiTvPackage = createTvPackage(MULTI_MAN_PACK, 10d, asList(Channel.create(DORCEL), Channel.create(BRAZZERS), Channel.create(FOX_PLAY), Channel.create(FIGHTBOX)));
+            Criteria criteriaChannels = createCriteria(400d, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS), Channel.create(FOX_PLAY)));
+            TvPackage multiTvPackage = createTvPackage(MULTI_MAN_PACK, 10d, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS), Channel.create(FOX_PLAY), Channel.create(FIGHTBOX)));
             TvPackage foxTvPackage = createTvPackage(FOX_PLAY, 5d, Collections.singletonList(Channel.create(FOX_PLAY)));
-            TvPackage dorcelTvPackage = createTvPackage(DORCEL, 2d, Collections.singletonList(Channel.create(DORCEL)));
+            TvPackage dorcelTvPackage = createTvPackage(DORCEL_TV_HD, 2d, Collections.singletonList(Channel.create(DORCEL_TV_HD)));
             TvPackage brazzersTvPackage = createTvPackage(BRAZZERS, 1d, asList(Channel.create(BRAZZERS), Channel.create(BBC)));
             TvPackage hboTvPackage = createTvPackage(HBO, 15d, Collections.singletonList(Channel.create(HBO)));
             List<ResultTvPackage> inputManyExtraMeetCriteriaCheapest = new ArrayList<>(asList(
@@ -106,8 +106,8 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
                     )
             ));
 
-            TvPackage activeTvPackage = createTvPackage(ACTIVE_FAMILY, 14d, asList(Channel.create(DORCEL), Channel.create(BRAZZERS), Channel.create(FOX_PLAY), Channel.create(ACTIVE_FAMILY)));
-            TvPackage adventureTvPackage = createTvPackage(ADVENTURE, 10d, asList(Channel.create(DORCEL), Channel.create(BRAZZERS), Channel.create(ADVENTURE)));
+            TvPackage activeTvPackage = createTvPackage(ACTIVE_FAMILY, 14d, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS), Channel.create(FOX_PLAY), Channel.create(ACTIVE_FAMILY)));
+            TvPackage adventureTvPackage = createTvPackage(ADVENTURE, 10d, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS), Channel.create(ADVENTURE)));
             foxTvPackage = createTvPackage(FOX_PLAY, 5d, Collections.singletonList(Channel.create(FOX_PLAY)));
             hboTvPackage = createTvPackage(HBO, 15d, Collections.singletonList(Channel.create(HBO)));
             List<ResultTvPackage> inputOneExtraMeetAllCriteriaCheapest = new ArrayList<>(asList(
