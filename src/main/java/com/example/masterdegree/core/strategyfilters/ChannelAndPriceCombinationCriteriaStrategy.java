@@ -11,10 +11,12 @@ import java.util.stream.Collectors;
 
 public class ChannelAndPriceCombinationCriteriaStrategy implements CriteriaStrategy {
 
+    private ChannelCriteriaStrategy channelCriteriaStrategy;
     private final Criteria criteria;
 
     public ChannelAndPriceCombinationCriteriaStrategy(Criteria criteria) {
         this.criteria = criteria;
+        channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
     }
 
     @Override
@@ -30,7 +32,7 @@ public class ChannelAndPriceCombinationCriteriaStrategy implements CriteriaStrat
                 if (resultTvPackage.getFilteredTvPackage().hasExtraTvPackagesWhichMeetCriteria()) {
                     List<List<TvPackage>> combinedTvPackages = createAllCombinationsFromGivenList(meetCriteriaTvPackages);
                     combinedTvPackages = getFilteredCombinationsWhichSumOfPricePlusGivenPriceIsBetweenPriceCriteria(resultTvPackage.getFilteredTvPackage().getPrice(), combinedTvPackages);
-                    combinedTvPackages = checkIfCombinedTvPackagesContainsAllCriteriaChannels(combinedTvPackages);
+                    combinedTvPackages = checkIfCombinedTvPackagesContainsAllCriteriaChannelsExceptChannelsFromMainTvPackage(resultTvPackage, combinedTvPackages);
                     List<TvPackage> meetAllCriteriaTvPackages = sortAndGetCombinedTvPackagesBySumOfPrice(combinedTvPackages);
                     if (!hasMeetAllCriteriaTvPackages(meetAllCriteriaTvPackages)){
                         resultsToDelete.add(resultTvPackage);
@@ -49,7 +51,7 @@ public class ChannelAndPriceCombinationCriteriaStrategy implements CriteriaStrat
     }
 
     List<List<TvPackage>> createAllCombinationsFromGivenList(List<TvPackage> list) {
-        List<List<TvPackage>> combinedTvPackages = new ArrayList<>();
+        List<List<TvPackage>> combinedTvPackages = new LinkedList<>();
         for (int length = 1; length <= list.size(); length++) {
             combinedTvPackages.addAll(createCombinationsOfGivenTvPackagesWithGivenLength(list, length));
         }
@@ -70,15 +72,18 @@ public class ChannelAndPriceCombinationCriteriaStrategy implements CriteriaStrat
         return resultTvPackages;
     }
 
-    List<List<TvPackage>> checkIfCombinedTvPackagesContainsAllCriteriaChannels(List<List<TvPackage>> combinedTvPackages) {
+    List<List<TvPackage>> checkIfCombinedTvPackagesContainsAllCriteriaChannelsExceptChannelsFromMainTvPackage(ResultTvPackage resultTvPackage, List<List<TvPackage>> combinedTvPackages) {
         criteria.getChannels().forEach(channel -> {
-            combinedTvPackages.removeIf(tvPackages ->
-                    tvPackages.stream().noneMatch(tvPackage ->
-                            tvPackage.getChannels().stream().anyMatch(tvPackageChannel ->
-                                    tvPackageChannel.isTheSame(channel)
-                            )
-                    )
-            );
+            boolean isSelectedChannelInMainTvPackage = channelCriteriaStrategy.searchChannelInMainTvPackage(resultTvPackage, channel);
+            if(!isSelectedChannelInMainTvPackage) {
+                combinedTvPackages.removeIf(tvPackages ->
+                        tvPackages.stream().noneMatch(tvPackage ->
+                                tvPackage.getChannels().stream().anyMatch(tvPackageChannel ->
+                                        tvPackageChannel.isTheSame(channel)
+                                )
+                        )
+                );
+            }
         });
         return combinedTvPackages;
     }

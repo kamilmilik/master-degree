@@ -6,16 +6,17 @@ public class Constants {
     public static final String CANAL_PLUS_ID = "5e77b71972e086126cc4e6b3";
     public static final String CYFROWY_POLSAT_ID = "5e77b70072e086126cc4e6b2";
     public static final String CANAL_PLUS_START = "START+";
-    public static final String ELEVEN_SPORTS = "Eleven Sports";
+    public static final String ELEVEN_SPORTS = "ELEVEN SPORTS";
     public static final String FUN = "Fun";
     public static final String CANAL_PLUS_SUPERPREMIUM = "Superpemium+ 4K";
     public static final String FAMILY_SMALL_CYFROWY_POLSAT = "Familijny small";
     public static final String SMALL_FAMILY_CYFROWY_POLSAT = "Familijny small";
     public static final String FAMILY_CYFROWY_POLSAT = "Familijny Max HD + Cinemax HD + Film HD + Sport HD";
-    public static final String FOX_PLAY = "FOX_PLAY";
-    public static final String ELEVEN_SPORTS_1 = ELEVEN_SPORTS + "1";
-    public static final String ELEVEN_SPORTS_2 = ELEVEN_SPORTS + "2";
-    public static final String MULTI_MAN_PACK =  "Multi man pack";
+    public static final String FOX_PLAY = "FOX PLAY";
+    public static final String ELEVEN_SPORTS_1 = ELEVEN_SPORTS + " 1";
+    public static final String ELEVEN_SPORTS_2 = ELEVEN_SPORTS + " 2";
+    public static final String ELEVEN_SPORTS_3 = ELEVEN_SPORTS + " 3";
+    public static final String MULTI_MAN_PACK =  "MULTI MAN PACK";
     public static final String FUN_TV =  "4fun TV";
     public static final String FUN_DANCE =  "4fun Dance";
     public static final String FUN_GOLD_HTS =  "4fun Gold Hits";
@@ -35,6 +36,7 @@ public class Constants {
     public static final String HUSTLER_HD =  "Hustler HD";
     public static final String FIGHTBOX =  "Fightbox";
     public static final String HISTORY =  "History";
+    public static final String HISTORY_PACKAGE =  "HISTORY HD / HISTORY 2";
     public static final String HISTORY2 =  HISTORY + "2";
     public static final String ADVENTURE =  "Adventure";
     public static final String ATM_ROZRYWKA =  "ATM Rozrywka HD";
@@ -45,6 +47,16 @@ public class Constants {
     public static final String VIVD_HD =  "Vivd hd";
     public static final String SPORT_PREMIUM1 =  "Sport premium 1";
     public static final String SPORT_PREMIUM2 =  "Sport premium 2";
-    public static final String POLSAT_SPORT_PREMIUM =  "Polsat sport premium";
+    public static final String POLSAT_SPORT_PREMIUM =  "POLSAT SPORT PREMIUM - MISTRZOWSKA PI£KA";
+    public static final String NETFLIX_4K =  "Netflix 4k";
+    public static final String NETFLIX_4K_PACKAGE =  "OPCJA DODATKOWA NETFLIX – ROZSZERZENIE 4K";
+    public static final String COMFORT =  "COMFORT+";
+    public static final String COMFORT_CANAL_PLUS_NETFLIX =  "COMFORT+ Z CANAL+ Netflix";
+    public static final String EXTRA_CANAL_PLUS_NETFLIX =  "EXTRA+ Z CANAL+ NETFLIX";
+    public static final String CANAL_PLUS_4K_ULTRA_HD =  "CANAL+ 4K ULTRA HD";
+    public static final String PARAMOUNT_PLAY =  "PARAMOUNT PLAY";
+    public static final String NATIONAL_GEOGRAPHIC_PLAY =  "NATIONAL GEOGRAPHIC PLAY";
+    public static final String HBO_PLUS_HBO_GO =  "HBO + HBO GO";
+
 
 }

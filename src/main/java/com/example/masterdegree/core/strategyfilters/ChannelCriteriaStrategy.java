@@ -41,7 +41,7 @@ public class ChannelCriteriaStrategy implements CriteriaStrategy {
         return resultTvPackages;
     }
 
-    private boolean searchChannelInMainTvPackage(ResultTvPackage resultTvPackage, Channel searchedChannel) {
+    boolean searchChannelInMainTvPackage(ResultTvPackage resultTvPackage, Channel searchedChannel) {
         return resultTvPackage.getFilteredTvPackage().getChannels().stream().anyMatch(channel -> channel.isTheSame(searchedChannel));
     }
 

@@ -158,24 +158,28 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         @ParameterizedTest
         @MethodSource("provideDataForCombinedTvPackagesNotContainsAllCriteriaChannels")
         @DisplayName("Test returning nothing when combinations not contains all criteria channels")
-        void shouldReturnNothing_whenCombinedTvPackagesNotContainsAllCriteriaChannels(List<List<TvPackage>> input, List<List<TvPackage>> expected) {
-            Criteria criteria = createCriteria(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE), Channel.create(POLSAT)));
+        void shouldReturnNothing_whenCombinedTvPackagesNotContainsAllCriteriaChannels(Criteria criteria, ResultTvPackage inputResult,List<List<TvPackage>> input, List<List<TvPackage>> expected) {
             ChannelAndPriceCombinationCriteriaStrategy criteriaStrategy = new ChannelAndPriceCombinationCriteriaStrategy(criteria);
-            List<List<TvPackage>> actual = criteriaStrategy.checkIfCombinedTvPackagesContainsAllCriteriaChannels(input);
+            List<List<TvPackage>> actual = criteriaStrategy.checkIfCombinedTvPackagesContainsAllCriteriaChannelsExceptChannelsFromMainTvPackage(inputResult, input);
             assertThat(actual).isEqualTo(expected);
         }
 
         @ParameterizedTest
         @MethodSource("provideDataForCombinedTvPackagesWhereSomeCombinationsContainsAllChannels")
         @DisplayName("Test returning combined tv packages when some combinations contains all criteria channels")
-        void shouldReturnCombinedTvPackages_whenCombinedTvPackagesWhereTwoCombinationsContainsAllCriteriaChannels(List<List<TvPackage>> input, List<List<TvPackage>> expected) {
-            Criteria criteria = createCriteria(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE)));
+        void shouldReturnCombinedTvPackages_whenCombinedTvPackagesWhereTwoCombinationsContainsAllCriteriaChannels(Criteria criteria, ResultTvPackage inputResult, List<List<TvPackage>> input, List<List<TvPackage>> expected) {
             ChannelAndPriceCombinationCriteriaStrategy criteriaStrategy = new ChannelAndPriceCombinationCriteriaStrategy(criteria);
-            List<List<TvPackage>> actual = criteriaStrategy.checkIfCombinedTvPackagesContainsAllCriteriaChannels(input);
+            List<List<TvPackage>> actual = criteriaStrategy.checkIfCombinedTvPackagesContainsAllCriteriaChannelsExceptChannelsFromMainTvPackage(inputResult, input);
             assertThat(actual).isEqualTo(expected);
         }
 
         Stream<Arguments> provideDataForCombinedTvPackagesWhereSomeCombinationsContainsAllChannels() {
+            Criteria criteria = createCriteria(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE), Channel.create(POLSAT)));
+            ResultTvPackage inputResultNotImportantExtraAndMeetTvPackages = createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
+                    createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
+                    new ArrayList<>(),
+                    new ArrayList<>()
+            ));
             List<TvPackage> combinedTvPackagesContainsAllCriteriaChannelsSingleTvPackage = asList(
                     createTvPackage(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE), Channel.create(BBC)))
             );
@@ -189,13 +193,24 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
             );
 
             return Stream.of(Arguments.of(
+                    criteria,
+                    inputResultNotImportantExtraAndMeetTvPackages,
                     new ArrayList<>(asList(combinedTvPackagesContainsAllCriteriaChannelsSingleTvPackage, combinedTvPackagesContainsAllCriteriaChannelsMultipleTvPackages, combinedTvPackagesNotContainsAllCriteriaChannels)),
                     new ArrayList<>(asList(combinedTvPackagesContainsAllCriteriaChannelsSingleTvPackage, combinedTvPackagesContainsAllCriteriaChannelsMultipleTvPackages))
             ));
         }
 
         Stream<Arguments> provideDataForCombinedTvPackagesNotContainsAllCriteriaChannels() {
+            Criteria criteria = createCriteria(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE), Channel.create(POLSAT_SPORT_PREMIUM)));
+            ResultTvPackage inputResultNotImportantExtraAndMeetTvPackages = createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
+                    createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
+                    new ArrayList<>(),
+                    new ArrayList<>()
+            ));
+
             return Stream.of(Arguments.of(
+                    criteria,
+                    inputResultNotImportantExtraAndMeetTvPackages,
                     new ArrayList<>(asList(
                             asList(createTvPackage(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE)))),
                             asList(createTvPackage(asList(Channel.create(HBO))), createTvPackage(asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(POLSAT))))

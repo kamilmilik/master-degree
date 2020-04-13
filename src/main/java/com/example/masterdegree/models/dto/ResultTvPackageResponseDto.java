@@ -7,8 +7,8 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode()
 @ToString()
+//TODO KM zamienic na ResultTvPackage z TvPackageDto
 public class ResultTvPackageResponseDto {
-
     @NonNull
     private String operatorId;
     @NonNull
