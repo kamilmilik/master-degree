@@ -47,9 +47,9 @@ public class Constants {
     public static final String VIVD_HD =  "Vivd hd";
     public static final String SPORT_PREMIUM1 =  "Sport premium 1";
     public static final String SPORT_PREMIUM2 =  "Sport premium 2";
-    public static final String POLSAT_SPORT_PREMIUM =  "POLSAT SPORT PREMIUM - MISTRZOWSKA PI£KA";
+    public static final String POLSAT_SPORT_PREMIUM =  "POLSAT SPORT PREMIUM - MISTRZOWSKA PILKA";
     public static final String NETFLIX_4K =  "Netflix 4k";
-    public static final String NETFLIX_4K_PACKAGE =  "OPCJA DODATKOWA NETFLIX – ROZSZERZENIE 4K";
+    public static final String NETFLIX_4K_PACKAGE =  "OPCJA DODATKOWA NETFLIX - ROZSZERZENIE 4K";
     public static final String COMFORT =  "COMFORT+";
     public static final String COMFORT_CANAL_PLUS_NETFLIX =  "COMFORT+ Z CANAL+ Netflix";
     public static final String EXTRA_CANAL_PLUS_NETFLIX =  "EXTRA+ Z CANAL+ NETFLIX";
