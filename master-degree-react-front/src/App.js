@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
-import MainFormFilter from "./component/filter/main_form_filter/MainFormFilter";
+import MainFormFilter from "./component/filter_section/main_form_filter/MainFormFilter";
 import Navbar from "./component/navigation/Navbar";
 import Section from "./component/section/Section";
-import MainSearchResultComponent from "./component/search_result/MainSearchResultComponent";
-import { usePromiseTracker } from 'react-promise-tracker';
-import Loader from 'react-promise-loader';
+import ResultSection from "./component/result_section/ResultSection";
 
 class App extends Component {
 
@@ -13,10 +11,10 @@ class App extends Component {
         super(props);
     }
 
+
     render() {
         return (
             <div className="App">
-                <Loader promiseTracker={usePromiseTracker} />
                 <Navbar/>
                 <div className={"container-fluid"} id={"main-container"}>
                     <Section
@@ -24,7 +22,7 @@ class App extends Component {
                         id={"section1"}
                     />
                     <Section
-                        Component={MainSearchResultComponent}
+                        Component={ResultSection}
                         id={"section2"}/>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './PricePicker.css';
-import {setIsLoadingFilteredResult, setResult, setSelectedPrice} from "../../../../reducers/actions/actions";
+import { setResult, setSelectedPrice} from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
 import {
     DEFAULT_MIN_PRICE_FILTER_VALUE,
@@ -42,7 +42,6 @@ class PricePicker extends Component {
 const mapStateToProps = (state) => {
     return {
         result: state.formReducer.result,
-        isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult
     }
 };
 
@@ -54,9 +53,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         setResult: (result) => {
             dispatch(setResult(result))
-        },
-        setIsLoadingFilteredResult: (isLoadingFilteredResult) => {
-            dispatch(setIsLoadingFilteredResult(isLoadingFilteredResult))
         },
     }
 };

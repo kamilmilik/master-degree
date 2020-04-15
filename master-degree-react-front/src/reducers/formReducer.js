@@ -7,15 +7,14 @@ import {
     SET_SELECTED_CATEGORIES,
     SET_SELECTED_PRICE,
     SET_SELECTED_TERM,
-    SET_IS_LOADING_FILTERED_RESULT,
-    SET_SECTION1_REF, SET_SECTION2_REF, SET_SELECTED_CHANNELS_BY_CATEGORY,
+    SET_SELECTED_CHANNELS_BY_CATEGORY,
     SET_RESULT
 } from './actions/actions-type'
 import {
     DEFAULT_MIN_PRICE_FILTER_VALUE,
     MAX_PRICE_FILTER_VALUE,
     MIN_PRICE_FILTER_VALUE
-} from "../component/filter/main_form_filter/Const";
+} from "../component/filter_section/main_form_filter/Const";
 import React from "react";
 
 
@@ -33,7 +32,6 @@ const initState = {
         price:  MAX_PRICE_FILTER_VALUE,
         channels: []
     },
-    isLoadingFilteredResult: true,
 };
 
 // reducers: these are functions that implement the behavior of the actions. They change the state of the app, based on the action description and the state change description.
@@ -116,15 +114,6 @@ const formReducer = (state = initState, action) => {
                 result: result
             };
         }
-        case SET_IS_LOADING_FILTERED_RESULT: {
-            let isLoadingFilteredResult = action.isLoadingFilteredResult;
-            return {
-                ...state,
-                isLoadingFilteredResult: isLoadingFilteredResult
-            };
-        }
-
-
         default:
             return state
     }

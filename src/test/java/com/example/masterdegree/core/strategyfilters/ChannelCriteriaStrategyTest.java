@@ -1,16 +1,15 @@
 package com.example.masterdegree.core.strategyfilters;
 
-import com.example.masterdegree.models.model.*;
+import com.example.masterdegree.models.model.Channel;
+import com.example.masterdegree.models.model.Criteria;
 import com.example.masterdegree.models.model.filter.FilteredTvPackage;
 import com.example.masterdegree.models.model.filter.ResultTvPackage;
-
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
 
 import static com.example.masterdegree.Constants.*;
 import static com.example.masterdegree.core.strategyfilters.DataCreationUtils.*;
@@ -37,10 +36,11 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         ));
-
         Criteria criteria = createCriteria(Collections.singletonList(Channel.create(FUN_TV)));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
+
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
+
         List<ResultTvPackage> expected = new LinkedList<>();
         assertThat(actual).isEqualTo(expected);
 
@@ -76,9 +76,10 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         ));
-
         Criteria criteria = createCriteria(Collections.singletonList(Channel.create(ELEVEN_SPORTS_1)));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
+
+        List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
 
         List<ResultTvPackage> expected = asList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT,
@@ -102,8 +103,6 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         );
-
-        List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -125,10 +124,10 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         ));
-
-
         Criteria criteria = createCriteria(Collections.singletonList(Channel.create(ELEVEN_SPORTS_1)));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
+
+        List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
 
         List<ResultTvPackage> expected = Collections.singletonList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT,
@@ -142,7 +141,6 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         );
-        List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -164,9 +162,10 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         ));
-
         Criteria criteria = createCriteria(asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(FOX_PLAY)));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
+
+        List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
 
         List<ResultTvPackage> expected = Collections.singletonList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT,
@@ -180,8 +179,6 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         );
-        List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
-
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -203,10 +200,10 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         ));
-
-
         Criteria criteria = createCriteria(asList(Channel.create(ELEVEN_SPORTS_1)));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
+
+        List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
 
         List<ResultTvPackage> expected = Collections.singletonList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT,
@@ -221,8 +218,6 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         );
-        List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
-
         assertThat(actual).isEqualTo(expected);
     }
 }

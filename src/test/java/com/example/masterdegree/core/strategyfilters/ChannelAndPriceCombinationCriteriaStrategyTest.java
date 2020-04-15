@@ -158,9 +158,11 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         @ParameterizedTest
         @MethodSource("provideDataForCombinedTvPackagesNotContainsAllCriteriaChannels")
         @DisplayName("Test returning nothing when combinations not contains all criteria channels")
-        void shouldReturnNothing_whenCombinedTvPackagesNotContainsAllCriteriaChannels(Criteria criteria, ResultTvPackage inputResult,List<List<TvPackage>> input, List<List<TvPackage>> expected) {
+        void shouldReturnNothing_whenCombinedTvPackagesNotContainsAllCriteriaChannels(Criteria criteria, ResultTvPackage inputResult, List<List<TvPackage>> input, List<List<TvPackage>> expected) {
             ChannelAndPriceCombinationCriteriaStrategy criteriaStrategy = new ChannelAndPriceCombinationCriteriaStrategy(criteria);
+
             List<List<TvPackage>> actual = criteriaStrategy.checkIfCombinedTvPackagesContainsAllCriteriaChannelsExceptChannelsFromMainTvPackage(inputResult, input);
+
             assertThat(actual).isEqualTo(expected);
         }
 
@@ -169,7 +171,9 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         @DisplayName("Test returning combined tv packages when some combinations contains all criteria channels")
         void shouldReturnCombinedTvPackages_whenCombinedTvPackagesWhereTwoCombinationsContainsAllCriteriaChannels(Criteria criteria, ResultTvPackage inputResult, List<List<TvPackage>> input, List<List<TvPackage>> expected) {
             ChannelAndPriceCombinationCriteriaStrategy criteriaStrategy = new ChannelAndPriceCombinationCriteriaStrategy(criteria);
+
             List<List<TvPackage>> actual = criteriaStrategy.checkIfCombinedTvPackagesContainsAllCriteriaChannelsExceptChannelsFromMainTvPackage(inputResult, input);
+
             assertThat(actual).isEqualTo(expected);
         }
 
@@ -229,7 +233,9 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         @MethodSource("providerForCombinedTvPackagesWithoutOrderBySumOfPrice")
         public void shouldReturnSorted_whenCombinedTvPackagesAreNotSortedBySumOfPrice(List<List<TvPackage>> input, List<TvPackage> expected) {
             ChannelAndPriceCombinationCriteriaStrategy criteriaStrategy = new ChannelAndPriceCombinationCriteriaStrategy(null);
+
             List<TvPackage> actual = criteriaStrategy.sortAndGetCombinedTvPackagesBySumOfPrice(input);
+
             Assertions.assertThat(actual).isEqualTo(expected);
         }
 
@@ -260,7 +266,9 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
             );
             Criteria criteria = createCriteria(50);
             ChannelAndPriceCombinationCriteriaStrategy criteriaStrategy = new ChannelAndPriceCombinationCriteriaStrategy(criteria);
+
             List<List<TvPackage>> actual = criteriaStrategy.getFilteredCombinationsWhichSumOfPricePlusGivenPriceIsBetweenPriceCriteria(45d, combinedTvPackages);
+
             List<List<TvPackage>> expected = new ArrayList<>();
             assertThat(actual).isEqualTo(expected);
         }
@@ -277,13 +285,14 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
             );
             Criteria criteria = createCriteria(50d);
             ChannelAndPriceCombinationCriteriaStrategy criteriaStrategy = new ChannelAndPriceCombinationCriteriaStrategy(criteria);
+
+            List<List<TvPackage>> actual = (criteriaStrategy.getFilteredCombinationsWhichSumOfPricePlusGivenPriceIsBetweenPriceCriteria(5d, combinedTvPackages));
+
             List<List<TvPackage>> expected = asList(
                     asList(createTvPackage(2), createTvPackage(10)),
                     asList(createTvPackage(5), createTvPackage(15)),
                     asList(createTvPackage(25), createTvPackage(20))
             );
-
-            List<List<TvPackage>> actual = (criteriaStrategy.getFilteredCombinationsWhichSumOfPricePlusGivenPriceIsBetweenPriceCriteria(5d, combinedTvPackages));
             Assertions.assertThat(actual).isEqualTo(expected);
         }
     }
@@ -296,7 +305,9 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         @MethodSource("provideDataForRemoveAllTvPackagesFromAvailableExtraTvPackages")
         void shouldRemoveAllTvPackagesFromAvailableExtraTvPackages_whenTvPackagesAreInTvPackagesWhichMeetCriteria(List<ResultTvPackage> input, List<ResultTvPackage> expected) {
             ChannelAndPriceCombinationCriteriaStrategy criteriaStrategy = new ChannelAndPriceCombinationCriteriaStrategy(null);
+
             List<ResultTvPackage> actual = criteriaStrategy.removeExtraAvailableTvPackagesWhichAreInMeetCriteriaPackages(input);
+
             Assertions.assertThat(actual).isEqualTo(expected);
         }
 

@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import {setResult, setSelectedOperators} from "../../../reducers/actions/actions";
+import {setResult} from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
-import CardResult from "../card_result/CardResult";
-import FilteredResultDataService from "../../../service/FilteredResultDataService";
+import CardResult from "./card_result/CardResult";
 
 
-class ResultComponent extends Component {
+class ResultsComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -56,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResultComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(ResultsComponent)

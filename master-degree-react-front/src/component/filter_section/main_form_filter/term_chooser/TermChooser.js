@@ -66,5 +66,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(TermChooser)
 
-// zawizic do jednego filtru wynik na poczatku przy robieniu backendu
 // , bezterminowa opcja wybrania okresu trwania

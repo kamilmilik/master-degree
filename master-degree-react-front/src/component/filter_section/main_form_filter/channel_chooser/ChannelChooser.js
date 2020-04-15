@@ -4,20 +4,16 @@ import '../../../../App.css';
 import './ChannelChooser.css';
 import {Button} from "semantic-ui-react";
 import {
-    setIsLoadingFilteredResult,
     setResult,
     setSelectedCategories,
     setSelectedChannels,
     setSelectedChannelsByCategory
 } from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
-import ChannelDataService from "../../../../service/ChannelDataService";
-import FilteredResultDataService from "../../../../service/FilteredResultDataService";
 import Tooltip from "@material-ui/core/Tooltip";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 
-// TODO refactor, przeniesc czesc funkcjonalnosci moze do jakiejs klasy o nazwie service
 const CLICKED_CATEGORY_BUTTON = "category-button-clicked";
 const NOT_CLICKED_CATEGORY_BUTTON = "category-button";
 const TooltipMedium = withStyles((theme) => ({
@@ -210,7 +206,6 @@ const mapStateToProps = (state) => {
         channelsGroupByCategoryDto: state.formReducer.channelsGroupByCategoryDto,
         selectedCategories: state.formReducer.selectedCategories,
         result: state.formReducer.result,
-        isLoadingFilteredResult: state.formReducer.isLoadingFilteredResult
     }
 };
 
@@ -227,9 +222,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         setSelectedChannels: (selectedChannels) => {
             dispatch(setSelectedChannels(selectedChannels))
-        },
-        setIsLoadingFilteredResult: (isLoadingFilteredResult) => {
-            dispatch(setIsLoadingFilteredResult(isLoadingFilteredResult))
         },
     }
 };

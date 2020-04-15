@@ -43,6 +43,44 @@ public class FilteredResultControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @ParameterizedTest
+    @MethodSource("dataProvider")
+    public void shouldReturnFilteredResult(CriteriaRequestDto criteria, ResultTvPackagesResponseDto expected) throws JsonProcessingException {
+        HttpEntity<CriteriaRequestDto> entity = new HttpEntity<>(criteria, headers);
+        ResponseEntity<String> response = this.restTemplate
+                .postForEntity(createURLWithPort(URI), entity, String.class);
+
+        ResultTvPackagesResponseDto actual = objectMapper.readValue(response.getBody(), ResultTvPackagesResponseDto.class);
+
+        List<String> actualOperatorsId = actual.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorId).collect(Collectors.toList());
+        List<String> actualOperatorsName = actual.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorName).collect(Collectors.toList());
+        Object[] actualExtraAvailableTvPackageNames = prepareDataToCompareForAvailableTvPackagesName(actual);
+        Object[] actualMeetCriteriaTvPackageNames = prepareDataToCompareForMeetCriteriaTvPackagesName(actual);
+        Object[] actualMainTvPackageNames = prepareDataToCompareForMainTvPackagesName(actual);
+
+        List<String> expectedOperatorsId = expected.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorId).collect(Collectors.toList());
+        List<String> expectedOperatorsName = expected.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorName).collect(Collectors.toList());
+        Object[] expectedExtraAvailableTvPackageNames = prepareDataToCompareForAvailableTvPackagesName(expected);
+        Object[] expectedMeetCriteriaTvPackageNames = prepareDataToCompareForMeetCriteriaTvPackagesName(expected);
+        Object[] expectedMainTvPackageNames = prepareDataToCompareForMainTvPackagesName(expected);
+        assertThat(actualOperatorsId).as("Operator id")
+                .usingRecursiveComparison()
+                .ignoringCollectionOrder()
+                .isEqualTo(expectedOperatorsId);
+        assertThat(actualOperatorsName).as("Operator name")
+                .usingRecursiveComparison()
+                .ignoringCollectionOrder()
+                .isEqualTo(expectedOperatorsName);
+        assertThat(actualMainTvPackageNames).as("Main")
+                .usingRecursiveComparison()
+                .ignoringCollectionOrder()
+                .isEqualTo(expectedMainTvPackageNames);
+        assertThat(actualMeetCriteriaTvPackageNames).as("Meet criteria")
+                .containsExactlyInAnyOrder(expectedMeetCriteriaTvPackageNames);
+        assertThat(actualExtraAvailableTvPackageNames).as("Extra available")
+                .containsExactlyInAnyOrder(expectedExtraAvailableTvPackageNames);
+    }
+
     private static Stream<Arguments> dataProvider() {
         CriteriaRequestDto criteriaChannelsDefaultPriceAndTerm = new CriteriaRequestDto(new ArrayList<>(), 400d, asList(createChannelDto(NETFLIX_4K), createChannelDto(HBO_GO), createChannelDto(FOX_PLAY)), "24");
         ResultTvPackagesResponseDto expectedComfortAndExtra = new ResultTvPackagesResponseDto(asList(
@@ -164,46 +202,6 @@ public class FilteredResultControllerTest {
                 Arguments.of(criteriaChannelInMainTvPackage, expectedCriteriaChannelInMainTvPackage),
                 Arguments.of(criteriaChannelInExtraTvPackage, expectedCriteriaChannelInExtraTvPackage)
         );
-    }
-
-    @ParameterizedTest
-    @MethodSource("dataProvider")
-    public void shouldReturnFilteredResult(CriteriaRequestDto criteria, ResultTvPackagesResponseDto expected) throws JsonProcessingException {
-        HttpEntity<CriteriaRequestDto> entity = new HttpEntity<>(criteria, headers);
-
-        ResponseEntity<String> response = this.restTemplate
-                .postForEntity(createURLWithPort(URI), entity, String.class);
-
-        ResultTvPackagesResponseDto actual = objectMapper.readValue(response.getBody(), ResultTvPackagesResponseDto.class);
-
-        List<String> expectedOperatorsId = expected.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorId).collect(Collectors.toList());
-        List<String> expectedOperatorsName = expected.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorName).collect(Collectors.toList());
-        Object[] expectedExtraAvailableTvPackageNames = prepareDataToCompareForAvailableTvPackagesName(expected);
-        Object[] expectedMeetCriteriaTvPackageNames = prepareDataToCompareForMeetCriteriaTvPackagesName(expected);
-        Object[] expectedMainTvPackageNames = prepareDataToCompareForMainTvPackagesName(expected);
-
-        List<String> actualOperatorsId = actual.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorId).collect(Collectors.toList());
-        List<String> actualOperatorsName = actual.getResultTvPackages().stream().map(ResultTvPackageResponseDto::getOperatorName).collect(Collectors.toList());
-        Object[] actualExtraAvailableTvPackageNames = prepareDataToCompareForAvailableTvPackagesName(actual);
-        Object[] actualMeetCriteriaTvPackageNames = prepareDataToCompareForMeetCriteriaTvPackagesName(actual);
-        Object[] actualMainTvPackageNames = prepareDataToCompareForMainTvPackagesName(actual);
-
-        assertThat(actualOperatorsId).as("Operator id")
-                .usingRecursiveComparison()
-                .ignoringCollectionOrder()
-                .isEqualTo(expectedOperatorsId);
-        assertThat(actualOperatorsName).as("Operator name")
-                .usingRecursiveComparison()
-                .ignoringCollectionOrder()
-                .isEqualTo(expectedOperatorsName);
-        assertThat(actualMainTvPackageNames).as("Main")
-                .usingRecursiveComparison()
-                .ignoringCollectionOrder()
-                .isEqualTo(expectedMainTvPackageNames);
-        assertThat(actualMeetCriteriaTvPackageNames).as("Meet criteria")
-                .containsExactlyInAnyOrder(expectedMeetCriteriaTvPackageNames);
-        assertThat(actualExtraAvailableTvPackageNames).as("Extra available")
-                .containsExactlyInAnyOrder(expectedExtraAvailableTvPackageNames);
     }
 
     private Object[] prepareDataToCompareForAvailableTvPackagesName(ResultTvPackagesResponseDto input) {

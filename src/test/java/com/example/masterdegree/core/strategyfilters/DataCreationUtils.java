@@ -24,7 +24,7 @@ public class DataCreationUtils {
         return new TvPackage(name, "", 0d, "", "", "", "", "", new LinkedList<>());
     }
 
-    public static TvPackage createTvPackage(String name,double price, List<Channel> channels) {
+    public static TvPackage createTvPackage(String name, double price, List<Channel> channels) {
         return new TvPackage(name, "", price, "", "", "", "", "", channels);
     }
 
