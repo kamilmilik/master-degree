@@ -182,16 +182,24 @@ class ChannelChooser extends Component {
                                                                     <div className={classNameString}
                                                                          onClick={() => this.onChannelClick(channel, categoryWithChannelsDto)}
                                                                     >
-                                                                        <div className="ui segment"
-                                                                        >
-                                                                            <Image
-                                                                                style={{width: 40, height: 40}}
-                                                                                source={{
-                                                                                    uri: channel.imgSrc
-                                                                                }}
-                                                                                resizeMode="contain"
-                                                                            />
-                                                                        </div>
+                                                                        <TooltipMedium
+                                                                            title={
+                                                                                <React.Fragment>
+                                                                                    <Typography
+                                                                                        color="inherit">{channel.name} </Typography>
+                                                                                </React.Fragment>}>
+                                                                            <div className="ui segment"
+                                                                            >
+                                                                                <Image
+                                                                                    style={{width: 40, height: 40}}
+                                                                                    source={{
+                                                                                        uri: channel.imgSrc
+                                                                                    }}
+                                                                                    resizeMode="contain"
+                                                                                />
+
+                                                                            </div>
+                                                                        </TooltipMedium>
                                                                     </div>
                                                                 </div>
                                                             )
