@@ -11,7 +11,6 @@ class ResultsComponent extends Component {
     }
 
     render() {
-        console.log("Props " +  + " " + this.props.result);
         if (this.props.result.length >= 0) {
             return (
                 <div className={'container-fluid'} id={"main-result-list-container"}>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import 'react-image-picker/dist/index.css'
 import '../../../../App.css';
 import './ChannelChooser.css';
-import {Button} from "semantic-ui-react";
+import {Button, Card, CardContent} from "semantic-ui-react";
 import {
     setResult,
     setSelectedCategories,
@@ -12,7 +12,12 @@ import {
 import {connect} from "react-redux";
 import Tooltip from "@material-ui/core/Tooltip";
 import withStyles from "@material-ui/core/styles/withStyles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
+import {CheckBox, Image, View} from "react-native-web";
 
 const CLICKED_CATEGORY_BUTTON = "category-button-clicked";
 const NOT_CLICKED_CATEGORY_BUTTON = "category-button";
@@ -89,7 +94,6 @@ class ChannelChooser extends Component {
                 arrayOfSelectedChannelsAssociatedToCategory.push(channel);
             }
         }
-        console.log(mapOfSelectedChannelsByCategory[clickedChannelCategoryName]);
         if (this.isAllChannelsHasBeenSelectedByUserInCategory(mapOfSelectedChannelsByCategory, clickedChannelCategoryName, categoryWithChannels)) {
             this.onCategoryClick(categoryWithChannels)
         } else {
@@ -143,7 +147,7 @@ class ChannelChooser extends Component {
         const {values} = this.props;
         const selectedChannelsByCategory = this.props.selectedChannelsByCategory;
         return (
-            <div className={"container-fluid"} id={"main-channel-chooser-container"}>
+            <div className="Gird">
                 {
                     values.channelsGroupByCategoryDto.map((categoryWithChannelsDto) => (
                         <div className={"mdb-lightbox no-margin"} id={"category-image-channel-section"}>
@@ -160,33 +164,40 @@ class ChannelChooser extends Component {
                                     <div className={"col-md-12"} id={"category-channel-list"}>
                                         <div className="mdb-lightbox no-margin">
                                             {
-                                                categoryWithChannelsDto.channels.map((channel, i) => {
-                                                    let classNameString = '';
-                                                    if (!(categoryWithChannelsDto.categoryName in selectedChannelsByCategory)) {
-                                                        classNameString = 'channel-image';
-                                                    } else {
-                                                        if (selectedChannelsByCategory[categoryWithChannelsDto.categoryName].indexOf(channel) !== -1) {
-                                                            classNameString = 'channel-image-clicked';
-                                                        } else {
-                                                            classNameString = 'channel-image';
-                                                        }
+                                                <div className={"root-grid"}>
+                                                    {
+                                                        categoryWithChannelsDto.channels.map((channel, i) => {
+                                                            let classNameString = '';
+                                                            if (!(categoryWithChannelsDto.categoryName in selectedChannelsByCategory)) {
+                                                                classNameString = 'channel-image';
+                                                            } else {
+                                                                if (selectedChannelsByCategory[categoryWithChannelsDto.categoryName].indexOf(channel) !== -1) {
+                                                                    classNameString = 'channel-image-clicked';
+                                                                } else {
+                                                                    classNameString = 'channel-image';
+                                                                }
+                                                            }
+                                                            return (
+                                                                <div className="column">
+                                                                    <div className={classNameString}
+                                                                         onClick={() => this.onChannelClick(channel, categoryWithChannelsDto)}
+                                                                    >
+                                                                        <div className="ui segment"
+                                                                        >
+                                                                            <Image
+                                                                                style={{width: 40, height: 40}}
+                                                                                source={{
+                                                                                    uri: channel.imgSrc
+                                                                                }}
+                                                                                resizeMode="contain"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })
                                                     }
-                                                    return (
-                                                        <TooltipMedium
-                                                            title={
-                                                                <React.Fragment>
-                                                                    <Typography
-                                                                        color="inherit">{channel.name} </Typography>
-                                                                </React.Fragment>}
-                                                        >
-                                                            <img
-                                                                className={classNameString}
-                                                                src={channel.imgSrc}
-                                                                onClick={() => this.onChannelClick(channel, categoryWithChannelsDto)}
-                                                            />
-                                                        </TooltipMedium>
-                                                    )
-                                                })
+                                                </div>
                                             }
                                         </div>
                                     </div>
@@ -196,7 +207,7 @@ class ChannelChooser extends Component {
                     ))
                 }
             </div>
-        );
+        )
     }
 }
 

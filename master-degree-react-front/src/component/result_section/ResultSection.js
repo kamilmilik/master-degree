@@ -13,6 +13,7 @@ class ResultSection extends Component {
         trackPromise( // Loading spinner is associated with it.
             FilteredResultDataService.retrieveFilteredResultByCriteria(criteria)
                 .then(response => {
+                    console.log(response)
                     this.props.setResult(response);
                 })
         )

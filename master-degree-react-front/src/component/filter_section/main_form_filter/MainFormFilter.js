@@ -32,7 +32,6 @@ class MainFormFilter extends Component {
         OperatorDataService.retrieveAllOperators()
             .then(
                 response => {
-                    console.log(response);
                     this.setState({operatorsDto: response.data})
                 }
             )
@@ -42,7 +41,6 @@ class MainFormFilter extends Component {
         ChannelDataService.retrieveAllChannels()
             .then(
                 response => {
-                    console.log(response);
                     this.setState({channelsGroupByCategoryDto: response.data})
                 }
             )

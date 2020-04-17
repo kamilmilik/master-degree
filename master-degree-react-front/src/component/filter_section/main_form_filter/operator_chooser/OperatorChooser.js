@@ -21,8 +21,6 @@ class OperatorChooser extends Component {
     onPick(images) {
         images.map((image) => {
             let selectedOperator = image.value;
-            console.log("Selected ");
-            console.log(selectedOperator);
         });
     }
 
@@ -43,7 +41,6 @@ class OperatorChooser extends Component {
 
     render() {
         const {values} = this.props;
-        console.log("test");
         return (
             <div className={'container-fluid'} id={"main-operator-chooser-container"}>
                 <div className={"col-md-12"} id={"operators-list"}>
