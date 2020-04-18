@@ -18,9 +18,12 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import {CheckBox, Image, View} from "react-native-web";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const CLICKED_CATEGORY_BUTTON = "category-button-clicked";
 const NOT_CLICKED_CATEGORY_BUTTON = "category-button";
+const CHANNEL_IMAGE_CLICKED = "channel-image-clicked";
+const CHANNEL_IMAGE_NOT_CLICKED = "channel-image";
 const TooltipMedium = withStyles((theme) => ({
     tooltip: {
         backgroundColor: '#f5f5f9',
@@ -31,11 +34,16 @@ const TooltipMedium = withStyles((theme) => ({
     },
 }))(Tooltip);
 
+
 class ChannelChooser extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isImageHoverArray: [{}]
+        }
         this.onChannelClick = this.onChannelClick.bind(this);
         this.onCategoryClick = this.onCategoryClick.bind(this)
+        this.onImageHoverAction = this.onImageHoverAction.bind(this)
     }
 
     onCategoryClick(categoryWithChannels) {
@@ -147,12 +155,18 @@ class ChannelChooser extends Component {
         const {values} = this.props;
         const selectedChannelsByCategory = this.props.selectedChannelsByCategory;
         return (
-            <div className="Gird">
+            <div>
                 {
                     values.channelsGroupByCategoryDto.map((categoryWithChannelsDto) => (
                         <div className={"mdb-lightbox no-margin"} id={"category-image-channel-section"}>
-                            <ul className={"list-group"}>
+                            <ul>
                                 <li className={"list-group-item"}>
+                                    <div className={"item-background"}
+                                         // style={{backgroundImage: 'url(' +
+                                         //         "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+                                         //         + ')',
+                                         // }}
+                                    />
                                     <div className={"category-type-title"}>
                                         <Button basic
                                                 id={this.props.selectedCategories.indexOf(categoryWithChannelsDto.categoryName) !== -1 ? CLICKED_CATEGORY_BUTTON : NOT_CLICKED_CATEGORY_BUTTON}
@@ -163,50 +177,34 @@ class ChannelChooser extends Component {
                                     </div>
                                     <div className={"col-md-12"} id={"category-channel-list"}>
                                         <div className="mdb-lightbox no-margin">
+                                        <div className={"channel-grid"}>
                                             {
-                                                <div className={"root-grid"}>
-                                                    {
-                                                        categoryWithChannelsDto.channels.map((channel, i) => {
-                                                            let classNameString = '';
-                                                            if (!(categoryWithChannelsDto.categoryName in selectedChannelsByCategory)) {
-                                                                classNameString = 'channel-image';
-                                                            } else {
-                                                                if (selectedChannelsByCategory[categoryWithChannelsDto.categoryName].indexOf(channel) !== -1) {
-                                                                    classNameString = 'channel-image-clicked';
-                                                                } else {
-                                                                    classNameString = 'channel-image';
-                                                                }
-                                                            }
-                                                            return (
-                                                                <div className="column">
-                                                                    <div className={classNameString}
-                                                                         onClick={() => this.onChannelClick(channel, categoryWithChannelsDto)}
-                                                                    >
-                                                                        <TooltipMedium
-                                                                            title={
-                                                                                <React.Fragment>
-                                                                                    <Typography
-                                                                                        color="inherit">{channel.name} </Typography>
-                                                                                </React.Fragment>}>
-                                                                            <div className="ui segment"
-                                                                            >
-                                                                                <Image
-                                                                                    style={{width: 40, height: 40}}
-                                                                                    source={{
-                                                                                        uri: channel.imgSrc
-                                                                                    }}
-                                                                                    resizeMode="contain"
-                                                                                />
-
-                                                                            </div>
-                                                                        </TooltipMedium>
+                                                categoryWithChannelsDto.channels.map((channel, i) => {
+                                                    let classNameString = this.setClassNameImage(categoryWithChannelsDto, selectedChannelsByCategory, channel);
+                                                    return (
+                                                        <div className="column">
+                                                            <div className={classNameString}
+                                                                 onClick={() => this.onChannelClick(channel, categoryWithChannelsDto)}
+                                                                 onMouseOver={() => this.onImageHoverAction(channel, true)}
+                                                                 onMouseOut={() => this.onImageHoverAction(channel, false)}
+                                                            >
+                                                                <TooltipMedium title={<React.Fragment><Typography
+                                                                    color="inherit">{channel.name} </Typography></React.Fragment>}>
+                                                                    <div className="ui segment">
+                                                                        <Image
+                                                                            style={{width: 40, height: 40}}
+                                                                            source={{uri: channel.imgSrc}}
+                                                                            resizeMode="contain"
+                                                                        />
+                                                                        {this.checkBoxHover(classNameString, channel)}
                                                                     </div>
-                                                                </div>
-                                                            )
-                                                        })
-                                                    }
-                                                </div>
+                                                                </TooltipMedium>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })
                                             }
+                                        </div>
                                         </div>
                                     </div>
                                 </li>
@@ -216,6 +214,48 @@ class ChannelChooser extends Component {
                 }
             </div>
         )
+    }
+
+    setClassNameImage(categoryWithChannelsDto, selectedChannelsByCategory, channel) {
+        let classNameString = '';
+        if (!(categoryWithChannelsDto.categoryName in selectedChannelsByCategory)) {
+            classNameString = CHANNEL_IMAGE_NOT_CLICKED;
+        } else {
+            if (selectedChannelsByCategory[categoryWithChannelsDto.categoryName].indexOf(channel) !== -1) {
+                classNameString = CHANNEL_IMAGE_CLICKED;
+            } else {
+                classNameString = CHANNEL_IMAGE_NOT_CLICKED;
+            }
+        }
+        return classNameString;
+    }
+
+    checkBoxHover(classNameString, channel) {
+        return (
+            (classNameString === CHANNEL_IMAGE_CLICKED ||
+                (classNameString === CHANNEL_IMAGE_NOT_CLICKED && this.state.isImageHoverArray.indexOf(channel) !== -1)) ?
+                <div
+                    className={"overlay-image-content"}>
+                    <Checkbox
+                        size="small"
+                        disabled={true}
+                        defaultChecked
+                        color="primary"
+                    />
+                </div> : null
+        )
+    }
+
+    onImageHoverAction(channel, isHover) {
+        if (isHover) {
+            this.setState({
+                isImageHoverArray: [...this.state.isImageHoverArray, channel],
+            })
+        } else {
+            this.setState({
+                isImageHoverArray: this.state.isImageHoverArray.filter(item => item !== channel)
+            })
+        }
     }
 }
 
