@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import logo from "../../logo.svg";
-import {Link, animateScroll as scroll} from "react-scroll";
+import {animateScroll as scroll, Link} from "react-scroll";
 import './Navigation.css';
 
-export default class Navbar extends Component {
+export default class NavbarComponent extends Component {
     scrollToTop = () => {
         scroll.scrollToTop();
     };
@@ -12,12 +12,12 @@ export default class Navbar extends Component {
         return (
             <nav className="nav" id="navbar">
                 <div className="nav-content">
-                    <img
-                        src={logo}
-                        className="nav-logo"
-                        alt="Logo"
-                        onClick={this.scrollToTop}
-                    />
+                    {/*<img*/}
+                    {/*    src={logo}*/}
+                    {/*    className="nav-logo"*/}
+                    {/*    alt="Logo"*/}
+                    {/*    onClick={this.scrollToTop}*/}
+                    {/*/>*/}
                     <ul className="nav-items">
                         <li className="nav-item">
                             <Link
@@ -28,7 +28,7 @@ export default class Navbar extends Component {
                                 offset={-70}
                                 duration={500}
                             >
-                                Select Criteria
+                                Filtry
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -40,7 +40,7 @@ export default class Navbar extends Component {
                                 offset={-70}
                                 duration={500}
                             >
-                                Your Dreamed Tv Packages
+                                Wyszukane Pakiety
                             </Link>
                         </li>
                     </ul>

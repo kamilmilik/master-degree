@@ -5,7 +5,6 @@ import PricePicker from "./price_picker/PricePicker";
 import ChannelDataService from "../../../service/ChannelDataService";
 import ChannelChooser from "./channel_chooser/ChannelChooser";
 import TermChooser from "./term_chooser/TermChooser";
-import './MainFormFilter.css';
 import SearchButton from "./search_button/SearchButton";
 import {setAllChannels, setAllOperators} from "../../../reducers/actions/actions";
 import {connect} from "react-redux";

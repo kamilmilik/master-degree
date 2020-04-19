@@ -1,8 +1,17 @@
+html, body{
+  width: 100%;
+  min-height: 100%;
+  /*overflow: auto;*/
+}
 body {
   margin: 0;
   padding: 100px 0 0;
   font-family: sans-serif;
   /*background-color: #1b1e21;*/
+  /*background-image: linear-gradient(to top right, #111111, #380000, #490000, #dd1818)*/
+  /*background-image: linear-gradient(to top right, #111111, #380000, #490000, #600000, #7a0404)*/
+  /*background-image: linear-gradient(to top right, #111111, #380000, #490000, #8e0e00) */
+
 }
 #root{
   height: 100%;

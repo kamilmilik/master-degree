@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import MainFormFilter from "./component/filter_section/main_form_filter/MainFormFilter";
-import Navbar from "./component/navigation/Navbar";
+import NavbarComponent from "./component/navigation/NavbarComponent";
 import Section from "./component/section/Section";
 import ResultSection from "./component/result_section/ResultSection";
 
@@ -15,7 +15,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Navbar/>
+                <NavbarComponent/>
                 <div className={"container-fluid"} id={"main-container"}>
                     <Section
                         Component={MainFormFilter}

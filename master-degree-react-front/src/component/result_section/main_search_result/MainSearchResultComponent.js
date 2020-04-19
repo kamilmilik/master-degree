@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import './MainSearchResultComponent.css'
 import ResultComponent from './result_component/ResultsComponent';
 
 

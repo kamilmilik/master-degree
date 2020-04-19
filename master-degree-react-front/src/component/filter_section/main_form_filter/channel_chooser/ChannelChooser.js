@@ -159,13 +159,14 @@ class ChannelChooser extends Component {
                 {
                     values.channelsGroupByCategoryDto.map((categoryWithChannelsDto) => (
                         <div className={"mdb-lightbox no-margin"} id={"category-image-channel-section"}>
-                            <ul>
+                            <ul className={"ul-channel-content"}>
                                 <li className={"list-group-item"}>
                                     <div className={"item-background"}
-                                         // style={{backgroundImage: 'url(' +
-                                         //         "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
-                                         //         + ')',
-                                         // }}
+                                         style={{backgroundImage:
+                                                 'url(' +
+                                                 "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+                                                 + ')',
+                                         }}
                                     />
                                     <div className={"category-type-title"}>
                                         <Button basic
