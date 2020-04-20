@@ -21,28 +21,50 @@ class TermChooser extends Component {
         const {values} = this.props;
         return (
             <div className={"container-fluid"} id={"main-term-chooser-container"}>
-                <div className="container">
-                    <div className="row">
-                        <div id={"term-text"} className="col-sm"
-                             onClick={() => this.handleTermClick(12)}>
-                            <a>
-                                {NUMBER_OF_MONTHS_VALUE_1}
-                                <span>miesiecy</span>
-                            </a>
-                        </div>
-                        <div id={"term-text"} className="col-sm"
-                             onClick={() => this.handleTermClick(15)}>
-                            <a>
-                                {NUMBER_OF_MONTHS_VALUE_2}
-                                <span>miesiecy</span>
-                            </a>
-                        </div>
-                        <div id={"term-text"} className="col-sm"
-                             onClick={() => this.handleTermClick(24)}>
-                            <a>
-                                {NUMBER_OF_MONTHS_VALUE_3}
-                                <span>miesiace</span>
-                            </a>
+                <div className={"ui segment"} id={"term-main-segment"}>
+                    <div className={"col-md-12"}>
+                        <div className="mdb-lightbox no-margin">
+                            <div id={"term-header"}>
+                                <h4>Wybierz okres</h4>
+                                Wybierz przez jaki okres ma trwac umowa
+                            </div>
+                            <div className={"ui segment"} id={"term-segment"}>
+                                <div className="container">
+                                    <div className="row">
+                                        {/*wysrodkowac*/}
+                                        <div className={"center-row"}>
+                                        <div id={"term-text"} className="col-sm"
+                                             onClick={() => this.handleTermClick(12)}>
+                                            <a>
+                                                brak
+                                                <span>wymagan</span>
+                                            </a>
+                                        </div>
+                                        <div id={"term-text"} className="col-sm"
+                                             onClick={() => this.handleTermClick(12)}>
+                                            <a>
+                                                {NUMBER_OF_MONTHS_VALUE_1}
+                                                <span>miesiecy</span>
+                                            </a>
+                                        </div>
+                                        <div id={"term-text"} className="col-sm"
+                                             onClick={() => this.handleTermClick(15)}>
+                                            <a>
+                                                {NUMBER_OF_MONTHS_VALUE_2}
+                                                <span>miesiecy</span>
+                                            </a>
+                                        </div>
+                                        <div id={"term-text"} className="col-sm"
+                                             onClick={() => this.handleTermClick(24)}>
+                                            <a>
+                                                {NUMBER_OF_MONTHS_VALUE_3}
+                                                <span>miesiace</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,15 @@
+#channel-main-segment {
+    padding: unset;
+    /*background-color: #f5f5f5;*/
+    background-color: #fcfcfc;
+}
+
+#channel-header {
+    margin-top: 14px;
+    margin-bottom: unset;
+    text-align: left;
+}
+
 .category-type-title {
     padding: 10px;
     width: 12%;
@@ -17,7 +29,7 @@
     text-align: left;
 }
 
-.column{
+.column {
     /*margin: .4875rem;*/
     margin: 5px 5px 5px 0px;
 }
@@ -30,15 +42,11 @@
     overflow: hidden;
 }
 
-#category-image-channel-section img {
-    vertical-align: middle;
-    max-width: 100%;
-    max-height: 100%;
-    padding: 2px;
-    background-size: cover;
+#category-image-channel-section {
+    margin-top: 14px;
 }
 
-.image-size{
+.image-size {
     width: 50px;
     height: 50px;
 }
@@ -48,10 +56,10 @@
     /*background: #1b1e21;*/
     background: #f8f8f8;
     width: 100%;
-    padding: 0px;
+    padding: 0;
 }
 
-.item-background{
+.item-background {
     background-size: cover;
     background-position: center;
     opacity: 0.0;
@@ -60,7 +68,7 @@
     width: 100%;
 }
 
-.ul-channel-content{
+.ul-channel-content {
     padding: 0;
 }
 
@@ -68,15 +76,28 @@
     width: 500px;
 }
 
-
-.channel-image:hover, .channel-image-clicked, .channel-image-clicked:target  {
-    border: solid 1px slategrey ;
+.channel-image:hover, .channel-image-clicked, .channel-image-clicked:target {
+    /*border: solid 1px slategrey ;*/
     box-shadow: 0 6px 6px 0 #333;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    border-radius:5px;
-    background-color: rgba(0,0,0,0.7);
-    opacity:0.5;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0.5;
+}
+
+.no-overlay-background-channel-image:hover .check-hover, .no-overlay-background-channel-image-clicked .check-hover {
+    position: absolute;
+    margin: -68px 2px 0;
+    display: block;
+    pointer-events: none;
+}
+
+.no-overlay-background-channel-image .check-hover {
+    display: none;
+    position: absolute;
+    margin: -68px 2px 0;
+    pointer-events: none;
 }
 
 /*#category-button #category-button:target {*/
@@ -101,8 +122,4 @@
 /*    background: #E0E1E3 !important;*/
 /*}*/
 
-.overlay-image-content{
-    position: absolute;
-    margin: -61px -22px -23px;
-}
 

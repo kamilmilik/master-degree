@@ -1,12 +1,38 @@
-#main-term-chooser-container{
-    margin-top: 45px;
-    text-align: center;
+#main-term-chooser-container {
+    padding: unset;
+    margin-bottom: 25px;
+}
+
+#term-main-segment {
+    padding: unset;
+    background-color: #fcfcfc;
+}
+
+#term-header{
+    margin-top: 14px;
+    margin-bottom: unset;
+    text-align: left;
+}
+
+#term-segment {
+    width: 100%;
+    padding: 10px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    background-color: #f8f8f8;
+}
+.row{
+    display: inline-block;
+}
+
+.center-row{
+    display: flex;
 }
 
 #term-text {
-    float: left;
+    text-align: center;
     position: relative;
-    padding: 0 18px 0 55px;
+    padding: 0 80px 0 80px;
     /*text-align: left;*/
     list-style: none;
     cursor: pointer;
@@ -15,4 +41,7 @@
 #term-text a > span {
     display: block;
     font-size: 18px;
+}
+#term-text a {
+    display: table-caption;
 }

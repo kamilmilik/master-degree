@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './PricePicker.css';
-import { setResult, setSelectedPrice} from "../../../../reducers/actions/actions";
+import {setResult, setSelectedPrice} from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
 import {
     DEFAULT_MIN_PRICE_FILTER_VALUE,
@@ -25,14 +25,26 @@ class PricePicker extends Component {
     render() {
         return (
             <div className={"container-fluid"} id={"main-price-picker-container"}>
-                <Slider
-                    max={MAX_PRICE_FILTER_VALUE}
-                    defaultValue={MAX_PRICE_FILTER_VALUE}
-                    tipFormatter={value => `${value}zl`}
-                    onAfterChange={(e) => this.onPick(e)}
-                    tooltipVisible
-                />
+                <div className={"ui segment"} id={"price-main-segment"}>
+                    <div className={"col-md-12"}>
+                        <div className="mdb-lightbox no-margin">
+                            <div id={"price-header"}>
+                                <h4>Wybierz cene</h4>
+                                Wybierz maksymalna cene pakietu telewizyjnego
+                            </div>
+                            <div className={"ui segment"} id={"price-segment"}>
 
+                                <Slider
+                                    max={MAX_PRICE_FILTER_VALUE}
+                                    defaultValue={MAX_PRICE_FILTER_VALUE}
+                                    tipFormatter={value => `${value}zl`}
+                                    onAfterChange={(e) => this.onPick(e)}
+                                    tooltipVisible
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         )

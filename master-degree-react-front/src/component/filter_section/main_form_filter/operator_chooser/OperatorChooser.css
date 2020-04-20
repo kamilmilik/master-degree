@@ -1,14 +1,22 @@
-/*.operator-image-clicked, .operator-image-clicked:target{*/
-/*    background: rgba(0, 0, 0, .6);*/
-/*    border: 3px solid green;*/
-/*}*/
 #main-operator-chooser-container {
     padding: unset;
+    margin-bottom: 25px;
 }
 
 #operator-main-segment {
     padding: unset;
-    background-color: #f5f5f5;
+    /*background-color: #f5f5f5;*/
+    background-color: #fcfcfc;
+}
+
+#operator-header {
+    margin-top: 14px;
+    margin-bottom: unset;
+    text-align: left;
+}
+
+#operator-grid {
+    display: flex;
 }
 
 #operator-segment {
@@ -20,48 +28,50 @@
     background-color: #f8f8f8;
 }
 
-#operator-header{
-    margin-top: 14px;
-    margin-bottom: unset;
-    text-align: left;
-}
-
-#operator-grid {
-    display: flex;
+.operator-container {
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 .operator-image {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .operator-image:hover, .operator-image-clicked, .operator-image-clicked:target {
-    border: solid 1px slategrey;
-    box-shadow: 0 6px 6px 0 #333;
+    /*border: solid 1px slategrey;*/
+    /*!*box-shadow: 0 6px 6px 0 #333;*!*/
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0.3;
+    opacity: 0.25;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-/*#operators-list {*/
-/*    display: flex;*/
-/*    text-align: left;*/
-/*}*/
+.image-test {
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
-/*#operators-list  img{*/
-/*    width: 6em;*/
-/*    height: 3em;*/
-/*    margin-right: 10px;*/
-/*}*/
-.overlay-operator-content {
+.no-overlay-background-operator-image:hover .check-hover, .no-overlay-background-operator-image-clicked .check-hover {
     position: absolute;
-    margin: -84px -13px 0;
+    margin: -80px 2px 0;
+    display: block;
+    pointer-events: none;
 }
 
-.operator-container {
+.no-overlay-background-operator-image .check-hover {
+    display: none;
+    position: absolute;
+    margin: -80px 2px 0;
+    pointer-events: none;
+}
+
+.main-operator-image-container {
     margin: 4px 20px 4px 0;
 }
 

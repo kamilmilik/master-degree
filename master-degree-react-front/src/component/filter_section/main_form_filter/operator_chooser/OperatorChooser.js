@@ -26,11 +26,7 @@ class OperatorChooser extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            isImageHoverArray: [{}]
-        }
         this.handleImageClick = this.handleImageClick.bind(this)
-        this.onImageHoverAction = this.onImageHoverAction.bind(this)
     }
 
     handleImageClick(operatorId) {
@@ -61,69 +57,48 @@ class OperatorChooser extends Component {
                             </div>
                             <div id={"operator-grid"}>
                                 <div className={"ui segment"} id={"operator-segment"}>
-                                {
-                                    values.operatorsDto.map((operator) => {
-                                        let classNameString = this.props.criteria.operatorsId.indexOf(operator.id) !== -1 ? OPERATOR_IMAGE_CLICKED : OPERATOR_IMAGE_NOT_CLICKED;
-                                        return (
-                                            <div className={"operator-container"}>
-                                                <div className={classNameString}
-                                                     onClick={() => this.handleImageClick(operator.id)}
-                                                     onMouseOver={() => this.onImageHoverAction(operator, true)}
-                                                     onMouseOut={() => this.onImageHoverAction(operator, false)}
-                                                >
-                                                    <TooltipMedium title={<React.Fragment><Typography
-                                                        color="inherit">{operator.name} </Typography></React.Fragment>}>
-                                                        <div className={"operator-image-container"}>
+                                    {
+                                        values.operatorsDto.map((operator) => {
+                                            let classNameString = this.props.criteria.operatorsId.indexOf(operator.id) !== -1 ? OPERATOR_IMAGE_CLICKED : OPERATOR_IMAGE_NOT_CLICKED;
+                                            return (
+                                                <div className={"operator-container"}>
+                                                    <div className={"no-overlay-background" + "-" + classNameString}>
+
+
+                                                        <div className={classNameString}
+                                                             onClick={() => this.handleImageClick(operator.id)}
+                                                        >
+                                                            <TooltipMedium title={<React.Fragment><Typography
+                                                                color="inherit">{operator.name} </Typography></React.Fragment>}>
+                                                                <div className={"operator-image-container"}>
+                                                                    <Image
+                                                                        size={"medium"}
+                                                                        style={{width: 70, height: 70}}
+                                                                        source={{uri: operator.imgSrc}}
+                                                                        resizeMode="contain"
+                                                                    />
+                                                                </div>
+                                                            </TooltipMedium>
+                                                        </div>
+                                                        <div className={"check-hover"}>
                                                             <Image
-                                                                size={"medium"}
-                                                                style={{width: 70, height: 70}}
-                                                                source={{uri: operator.imgSrc}}
+                                                                style={{width: 20, height: 20}}
+                                                                source={{uri: "https://img.icons8.com/color/48/000000/checked-2.png"}}
                                                                 resizeMode="contain"
                                                             />
-                                                            {this.checkBoxHover(classNameString, operator)}
                                                         </div>
-                                                    </TooltipMedium>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    })
-                                }
+                                            )
+                                        })
+                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         )
-    }
-
-    checkBoxHover(classNameString, channel) {
-        return (
-            (classNameString === OPERATOR_IMAGE_CLICKED ||
-                (classNameString === OPERATOR_IMAGE_NOT_CLICKED && this.state.isImageHoverArray.indexOf(channel) !== -1)) ?
-                <div
-                    className={"overlay-operator-content"}>
-                    <Checkbox
-                        size="small"
-                        disabled={true}
-                        defaultChecked
-                        color="primary"
-                    />
-                </div> : null
-        )
-    }
-
-    onImageHoverAction(channel, isHover) {
-        if (isHover) {
-            this.setState({
-                isImageHoverArray: [...this.state.isImageHoverArray, channel],
-            })
-        } else {
-            this.setState({
-                isImageHoverArray: this.state.isImageHoverArray.filter(item => item !== channel)
-            })
-        }
     }
 
 }

@@ -58,12 +58,12 @@ class MainFormFilter extends Component {
 
                 />
 
-                <ChannelChooser
-                    values={values}
-                />
-
                 <TermChooser
                     values={{values}}
+                />
+
+                <ChannelChooser
+                    values={values}
                 />
 
                 <SearchButton
