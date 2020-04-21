@@ -18,7 +18,6 @@ class TermChooser extends Component {
     }
 
     render() {
-        const {values} = this.props;
         return (
             <div className={"container-fluid"} id={"main-term-chooser-container"}>
                 <div className={"ui segment"} id={"term-main-segment"}>

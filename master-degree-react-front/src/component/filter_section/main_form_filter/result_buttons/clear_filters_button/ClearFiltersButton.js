@@ -1,38 +1,36 @@
 import React, {Component} from 'react';
-import './SearchButton.css';
+import './ClearFiltersButton.css';
 import {Button, Icon} from "semantic-ui-react";
 import {Link} from "react-scroll";
 import {connect} from "react-redux";
 
-class SearchButton extends Component {
+class ClearFiltersButton extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
     }
 
     render() {
-        const {values} = this.props;
         return (
-            <div className={"container-fluid"} id={"main-search-container"}>
-                <div id={"button-container"}>
+                <div id={"clear-filter-button-container"}>
                     <Link
                         activeClass="active"
-                        to="result-container"
+                        to="section1"
                         spy={true}
                         smooth={true}
                         offset={-70}
                         duration={500}
                     >
-                        <Button
-                            icon labelPosition='right'
+                        <Button id={"clear-button"}
+                            icon labelPosition='left'
                         >
-                            Wyszukaj oferty
-                            <Icon name='search'/>
+                            Wyczysc filtry
+                            <Icon id={"clear-icon"}
+                                name='eraser'
+                            />
                         </Button>
                     </Link>
                 </div>
-            </div>
         );
     }
 }
@@ -47,4 +45,4 @@ const mapDispatchToProps = (dispatch) => {
     return {}
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchButton)
+export default connect(mapStateToProps, mapDispatchToProps)(ClearFiltersButton)

@@ -163,15 +163,7 @@ class ChannelChooser extends Component {
                                 <div className={"mdb-lightbox no-margin"} id={"category-image-channel-section"}>
                                     <ul className={"ul-channel-content"}>
                                         <li className={"list-group-item"}>
-                                            <div className={"item-background"}
-                                                 style={{
-                                                     backgroundImage:
-                                                         'url(' +
-                                                         "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
-                                                         + ')',
-                                                 }}
-                                            />
-                                            <div className={"category-type-title"}>
+                                            <div  id={"category-type-title"}>
                                                 <Button basic
                                                         id={this.props.selectedCategories.indexOf(categoryWithChannelsDto.categoryName) !== -1 ? CLICKED_CATEGORY_BUTTON : NOT_CLICKED_CATEGORY_BUTTON}
                                                         onClick={() => this.onCategoryClick(categoryWithChannelsDto)}

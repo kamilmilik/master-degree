@@ -59,7 +59,7 @@
 
 .no-overlay-background-operator-image:hover .check-hover, .no-overlay-background-operator-image-clicked .check-hover {
     position: absolute;
-    margin: -80px 2px 0;
+    margin: -84px 2px 0;
     display: block;
     pointer-events: none;
 }
@@ -67,7 +67,7 @@
 .no-overlay-background-operator-image .check-hover {
     display: none;
     position: absolute;
-    margin: -80px 2px 0;
+    margin: -84px 2px 0;
     pointer-events: none;
 }
 

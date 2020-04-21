@@ -5,9 +5,9 @@ import PricePicker from "./price_picker/PricePicker";
 import ChannelDataService from "../../../service/ChannelDataService";
 import ChannelChooser from "./channel_chooser/ChannelChooser";
 import TermChooser from "./term_chooser/TermChooser";
-import SearchButton from "./search_button/SearchButton";
 import {setAllChannels, setAllOperators} from "../../../reducers/actions/actions";
 import {connect} from "react-redux";
+import ButtonsContainer from "./result_buttons/ButtonsContainer";
 
 
 class MainFormFilter extends Component {
@@ -47,28 +47,22 @@ class MainFormFilter extends Component {
 
     render() {
         const {operatorsDto, channelsGroupByCategoryDto} = this.state;
-        const values = {operatorsDto, channelsGroupByCategoryDto};
+        const resDataDto = {operatorsDto, channelsGroupByCategoryDto};
 
         return (
             <div className={"container-fluid"} id={"main-formm-filter"}>
                 <OperatorChooser
-                    values={values}
+                    values={resDataDto}
                 />
-                <PricePicker
+                <PricePicker/>
 
-                />
-
-                <TermChooser
-                    values={{values}}
-                />
+                <TermChooser/>
 
                 <ChannelChooser
-                    values={values}
+                    values={resDataDto}
                 />
 
-                <SearchButton
-                    values={values}
-                />
+                <ButtonsContainer/>
 
             </div>
 
@@ -95,4 +89,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(MainFormFilter)
+export default connect(mapStateToProps, mapDispatchToProps)(MainFormFilter)

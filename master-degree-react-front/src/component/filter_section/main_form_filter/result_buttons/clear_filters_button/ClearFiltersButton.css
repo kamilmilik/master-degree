@@ -1,0 +1,10 @@
+#clear-filter-button-container{
+    margin: unset;
+    /*width: 50%;*/
+}
+
+#clear-button{
+    margin: unset;
+    /*width: 100%;*/
+    background-color: #E8E9EB !important;
+}
