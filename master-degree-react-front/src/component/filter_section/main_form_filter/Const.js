@@ -5,3 +5,4 @@ export const MIN_PRICE_FILTER_VALUE = 0.00;
 export const NUMBER_OF_MONTHS_VALUE_1 = 12;
 export const NUMBER_OF_MONTHS_VALUE_2 = 15;
 export const NUMBER_OF_MONTHS_VALUE_3 = 24;
+export const NUMBER_OF_MONTHS_VALUE_NONE = 0;

@@ -27,7 +27,7 @@ class PricePicker extends Component {
             <div className={"container-fluid"} id={"main-price-picker-container"}>
                 <div className={"ui segment"} id={"price-main-segment"}>
                     <div className={"col-md-12"}>
-                        <div className="mdb-lightbox no-margin">
+                        <div className={"mdb-lightbox no-margin"}>
                             <div id={"price-header"}>
                                 <h4>Wybierz cene</h4>
                                 Wybierz maksymalna cene pakietu telewizyjnego
@@ -37,8 +37,10 @@ class PricePicker extends Component {
                                 <Slider
                                     max={MAX_PRICE_FILTER_VALUE}
                                     defaultValue={MAX_PRICE_FILTER_VALUE}
+                                    value={this.props.criteria.price}
                                     tipFormatter={value => `${value}zl`}
                                     onAfterChange={(e) => this.onPick(e)}
+                                    onChange={(e) => this.onPick(e)}
                                     tooltipVisible
                                 />
                             </div>
@@ -54,6 +56,7 @@ class PricePicker extends Component {
 const mapStateToProps = (state) => {
     return {
         result: state.formReducer.result,
+        criteria: state.formReducer.criteria,
     }
 };
 

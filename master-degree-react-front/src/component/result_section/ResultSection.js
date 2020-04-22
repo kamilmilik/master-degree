@@ -8,8 +8,6 @@ import MainSearchResultComponent from "./main_search_result/MainSearchResultComp
 
 class ResultSection extends Component {
     retrieveFilteredResultByCriteria(criteria) {
-        // TODO KM blad gdy: szybkie przelaczanie miedzy operatorami ui czasami sie nie odswieza, raczej response ok
-        // Czasami jak sa dwa szybkie requesty to jeden serwer zwrocil i drugi przetwarza a ui zamiast znaczka przetwarzania pokazuje stary widok, tymczasem serwer nie zwrocil jeszcze drguiego response
         trackPromise( // Loading spinner is associated with it.
             FilteredResultDataService.retrieveFilteredResultByCriteria(criteria)
                 .then(response => {
@@ -21,20 +19,6 @@ class ResultSection extends Component {
 
     componentDidMount() {
         this.retrieveFilteredResultByCriteria(this.props.criteria);
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        this.onCriteriaChange(prevProps);
-    }
-
-    onCriteriaChange(prevProps) {
-        if (this.isCriteriaStateChanged(prevProps)) {
-            this.retrieveFilteredResultByCriteria(this.props.criteria);
-        }
-    }
-
-    isCriteriaStateChanged(prevProps) {
-        return prevProps.criteria !== this.props.criteria
     }
 
     render() {

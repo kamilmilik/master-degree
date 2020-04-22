@@ -8,12 +8,12 @@ import {
     SET_SELECTED_PRICE,
     SET_SELECTED_TERM,
     SET_SELECTED_CHANNELS_BY_CATEGORY,
-    SET_RESULT
+    SET_RESULT, CLEAR_FILTER_ELEMENTS
 } from './actions/actions-type'
 import {
     DEFAULT_MIN_PRICE_FILTER_VALUE,
     MAX_PRICE_FILTER_VALUE,
-    MIN_PRICE_FILTER_VALUE
+    MIN_PRICE_FILTER_VALUE, NUMBER_OF_MONTHS_VALUE_3
 } from "../component/filter_section/main_form_filter/Const";
 import React from "react";
 
@@ -28,8 +28,8 @@ const initState = {
     result: {},
     criteria: {
         operatorsId: [],
-        term: "24",
-        price:  MAX_PRICE_FILTER_VALUE,
+        term: NUMBER_OF_MONTHS_VALUE_3.toString(),
+        price: MAX_PRICE_FILTER_VALUE,
         channels: []
     },
 };
@@ -112,6 +112,22 @@ const formReducer = (state = initState, action) => {
             return {
                 ...state,
                 result: result
+            };
+        }
+        case CLEAR_FILTER_ELEMENTS: {
+            let criteria = {
+                operatorsId: [],
+                term: NUMBER_OF_MONTHS_VALUE_3.toString(),
+                price: MAX_PRICE_FILTER_VALUE,
+                channels: []
+            }
+            let selectedCategories = [];
+            let selectedChannelsByCategory = {}
+            return {
+                ...state,
+                criteria: Object.assign({}, criteria),
+                selectedCategories: Object.assign([], selectedCategories),
+                selectedChannelsByCategory: Object.assign({}, selectedChannelsByCategory)
             };
         }
         default:

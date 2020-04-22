@@ -153,7 +153,7 @@ class ChannelChooser extends Component {
         return (
             <div className={"ui segment"} id={"channel-main-segment"}>
                 <div className={"col-md-12"}>
-                    <div className="mdb-lightbox no-margin">
+                    <div className={"mdb-lightbox no-margin"}>
                         <div id={"channel-header"}>
                             <h4>Wybierz kanaly</h4>
                             Wybierz kanaly majace znalezc sie w pakietach
@@ -163,7 +163,7 @@ class ChannelChooser extends Component {
                                 <div className={"mdb-lightbox no-margin"} id={"category-image-channel-section"}>
                                     <ul className={"ul-channel-content"}>
                                         <li className={"list-group-item"}>
-                                            <div  id={"category-type-title"}>
+                                            <div id={"category-type-title"}>
                                                 <Button basic
                                                         id={this.props.selectedCategories.indexOf(categoryWithChannelsDto.categoryName) !== -1 ? CLICKED_CATEGORY_BUTTON : NOT_CLICKED_CATEGORY_BUTTON}
                                                         onClick={() => this.onCategoryClick(categoryWithChannelsDto)}
@@ -172,7 +172,7 @@ class ChannelChooser extends Component {
                                                 </Button>
                                             </div>
                                             <div className={"col-md-12"} id={"category-channel-list"}>
-                                                <div className="mdb-lightbox no-margin">
+                                                <div className={"mdb-lightbox no-margin"}>
                                                     <div className={"channel-grid"}>
                                                         {
                                                             categoryWithChannelsDto.channels.map((channel, i) => {

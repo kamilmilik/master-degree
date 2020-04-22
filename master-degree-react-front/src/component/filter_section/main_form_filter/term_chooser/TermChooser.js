@@ -2,9 +2,17 @@ import React, {Component} from 'react';
 import 'react-image-picker/dist/index.css'
 import '../../../../App.css';
 import './TermChooser.css';
-import {setSelectedPrice, setSelectedTerm} from "../../../../reducers/actions/actions";
+import {setSelectedTerm} from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
-import {NUMBER_OF_MONTHS_VALUE_1, NUMBER_OF_MONTHS_VALUE_2, NUMBER_OF_MONTHS_VALUE_3} from "../Const";
+import {
+    NUMBER_OF_MONTHS_VALUE_1,
+    NUMBER_OF_MONTHS_VALUE_2,
+    NUMBER_OF_MONTHS_VALUE_3,
+    NUMBER_OF_MONTHS_VALUE_NONE
+} from "../Const";
+
+export const TERM_CLICKED = "term-text-clicked";
+export const TERM_NOT_CLICKED = "term-text";
 
 class TermChooser extends Component {
 
@@ -18,6 +26,7 @@ class TermChooser extends Component {
     }
 
     render() {
+        let terms = [NUMBER_OF_MONTHS_VALUE_NONE, NUMBER_OF_MONTHS_VALUE_1, NUMBER_OF_MONTHS_VALUE_2, NUMBER_OF_MONTHS_VALUE_3]
         return (
             <div className={"container-fluid"} id={"main-term-chooser-container"}>
                 <div className={"ui segment"} id={"term-main-segment"}>
@@ -28,39 +37,29 @@ class TermChooser extends Component {
                                 Wybierz przez jaki okres ma trwac umowa
                             </div>
                             <div className={"ui segment"} id={"term-segment"}>
-                                <div className="container">
-                                    <div className="row">
-                                        {/*wysrodkowac*/}
+                                <div className={"container"}>
+                                    <div className={"row"}>
                                         <div className={"center-row"}>
-                                        <div id={"term-text"} className="col-sm"
-                                             onClick={() => this.handleTermClick(12)}>
-                                            <a>
-                                                brak
-                                                <span>wymagan</span>
-                                            </a>
+                                            {
+                                                terms.map((termValue) => {
+                                                    let classNameString = parseInt(this.props.criteria.term, 10) === termValue ? TERM_CLICKED : TERM_NOT_CLICKED;
+                                                    let termTextValue = this.isNoTermRequirements(termValue) ? "brak" : termValue.toString()
+                                                    let termText = this.isNoTermRequirements(termValue) ? "wymagan" : "miesiecy"
+                                                    let style = this.isTheLastElementOfTerm(terms, termValue) ? {borderRight: "unset"} : {borderRight: "1px solid rgba(34, 36, 38, .15);"}
+                                                    return (
+                                                        <div id={classNameString} className={"col-sm"}
+                                                             onClick={() => this.handleTermClick(termValue)}
+                                                             style={style}
+                                                        >
+                                                            <a>
+                                                                {termTextValue}
+                                                                <span>{termText}</span>
+                                                            </a>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
                                         </div>
-                                        <div id={"term-text"} className="col-sm"
-                                             onClick={() => this.handleTermClick(12)}>
-                                            <a>
-                                                {NUMBER_OF_MONTHS_VALUE_1}
-                                                <span>miesiecy</span>
-                                            </a>
-                                        </div>
-                                        <div id={"term-text"} className="col-sm"
-                                             onClick={() => this.handleTermClick(15)}>
-                                            <a>
-                                                {NUMBER_OF_MONTHS_VALUE_2}
-                                                <span>miesiecy</span>
-                                            </a>
-                                        </div>
-                                        <div id={"term-text"} className="col-sm"
-                                             onClick={() => this.handleTermClick(24)}>
-                                            <a>
-                                                {NUMBER_OF_MONTHS_VALUE_3}
-                                                <span>miesiace</span>
-                                            </a>
-                                        </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -70,10 +69,20 @@ class TermChooser extends Component {
             </div>
         );
     }
+
+    isNoTermRequirements(termValue) {
+        return termValue === NUMBER_OF_MONTHS_VALUE_NONE;
+    }
+
+    isTheLastElementOfTerm(terms, termValue) {
+        return terms[terms.length - 1] === termValue;
+    }
 }
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        criteria: state.formReducer.criteria
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -86,5 +95,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TermChooser)
-
-// , bezterminowa opcja wybrania okresu trwania

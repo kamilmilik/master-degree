@@ -50,7 +50,7 @@ class OperatorChooser extends Component {
             <div className={'container-fluid'} id={"main-operator-chooser-container"}>
                 <div className={"ui segment"} id={"operator-main-segment"}>
                     <div className={"col-md-12"} id={"operators-list"}>
-                        <div className="mdb-lightbox no-margin">
+                        <div className={"mdb-lightbox no-margin"}>
                             <div id={"operator-header"}>
                                 <h4>Wybierz operatora</h4>
                                 Wybierajac operatora wybierasz dostawce pakietu telewizyjnego
@@ -63,8 +63,6 @@ class OperatorChooser extends Component {
                                             return (
                                                 <div className={"operator-container"}>
                                                     <div className={"no-overlay-background" + "-" + classNameString}>
-
-
                                                         <div className={classNameString}
                                                              onClick={() => this.handleImageClick(operator.id)}
                                                         >
