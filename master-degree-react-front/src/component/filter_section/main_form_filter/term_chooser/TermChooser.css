@@ -24,7 +24,6 @@
 
 .container {
     width: inherit;
-    margin-bottom: -8px;
 }
 
 .row {
@@ -40,6 +39,10 @@
 @media only screen and (max-width: 620px) {
     .center-row {
         display: inline-block;
+    }
+
+    #term-text, #term-text-clicked {
+        border-right: unset !important;
     }
 }
 

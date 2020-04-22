@@ -45,7 +45,7 @@ class TermChooser extends Component {
                                                     let classNameString = parseInt(this.props.criteria.term, 10) === termValue ? TERM_CLICKED : TERM_NOT_CLICKED;
                                                     let termTextValue = this.isNoTermRequirements(termValue) ? "brak" : termValue.toString()
                                                     let termText = this.isNoTermRequirements(termValue) ? "wymagan" : "miesiecy"
-                                                    let style = this.isTheLastElementOfTerm(terms, termValue) ? {borderRight: "unset"} : {borderRight: "1px solid rgba(34, 36, 38, .15);"}
+                                                    let style = this.isTheLastElementOfTerm(terms, termValue) ? {borderRight: "unset"} : {borderRight: "1px solid rgba(34, 36, 38, .15)"}
                                                     return (
                                                         <div id={classNameString} className={"col-sm"}
                                                              onClick={() => this.handleTermClick(termValue)}
