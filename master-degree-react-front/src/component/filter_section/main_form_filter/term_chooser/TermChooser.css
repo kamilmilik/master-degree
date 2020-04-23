@@ -36,35 +36,40 @@
     display: inline-flex;
 }
 
+
+#term-text, #term-text-clicked {
+text-align: center;
+position: relative;
+/*padding: 0 10% 0 10%;*/
+/*text-align: left;*/
+display: inline-grid;
+list-style: none;
+cursor: pointer;
+}
+
+#term-text-clicked {
+color: #61a4cf;
+}
+
+#term-text a > span, #term-text-clicked a > span {
+display: block;
+font-size: 18px;
+}
+
+#term-text a, #term-text-clicked a {
+display: table-caption;
+}
+
 @media only screen and (max-width: 620px) {
     .center-row {
         display: inline-block;
     }
 
     #term-text, #term-text-clicked {
-        border-right: unset !important;
+        border-right: unset !important; /*important override style set in js file */
     }
-}
 
-#term-text, #term-text-clicked {
-    text-align: center;
-    position: relative;
-    /*padding: 0 10% 0 10%;*/
-    /*text-align: left;*/
-    display: inline-grid;
-    list-style: none;
-    cursor: pointer;
-}
-
-#term-text-clicked {
-    color: #61a4cf;
-}
-
-#term-text a > span, #term-text-clicked a > span {
-    display: block;
-    font-size: 18px;
-}
-
-#term-text a, #term-text-clicked a {
-    display: table-caption;
+    #term-header{
+        text-align: center;
+    }
 }

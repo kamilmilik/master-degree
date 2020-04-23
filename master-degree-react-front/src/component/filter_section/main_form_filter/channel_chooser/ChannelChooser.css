@@ -24,6 +24,7 @@
     width: 100%;
     height: 100%;
     padding-left: unset;
+    padding-right: unset;
     right: 0;
     margin: 0;
     display: table-cell;
@@ -59,7 +60,6 @@
     padding: 0;
 }
 
-
 .ul-channel-content {
     padding: 0;
 }
@@ -92,10 +92,6 @@
     pointer-events: none;
 }
 
-/*#category-button #category-button:target {*/
-/*    background: transparent none !important;*/
-/*}*/
-
 .ui.basic.button, .ui.basic.buttons .button {
     border-radius: 12px !important;
 }
@@ -108,19 +104,22 @@
     background-color: white !important;
 }
 
+@media only screen and (max-width: 620px) {
+    .list-group-item{
+        display: grid !important;
+    }
+    #category-type-title{
+        width: unset;
+    }
+    #category-button, #category-button-clicked{
+        width: 100%;
+    }
+    .channel-grid{
+        justify-content: center;
+    }
 
-/*#category-button{*/
-/*    background: gainsboro !important;*/
-/*    color: black;*/
-/*}*/
-
-/*#category-button:hover {*/
-/*    !*background: white !important;*!*/
-/*    border-radius: 12px*/
-/*}*/
-
-/*#category-button-clicked {*/
-/*    border-radius: 12px*/
-/*}*/
-
+    #channel-header{
+        text-align: center;
+    }
+}
 

@@ -1,0 +1,9 @@
+#go-up-button{
+    padding-left: 40px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.1) inset
+}
+#go-up-button>.icon {
+    background-color: unset;
+
+}

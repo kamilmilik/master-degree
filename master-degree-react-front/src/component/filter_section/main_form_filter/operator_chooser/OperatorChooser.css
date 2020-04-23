@@ -78,3 +78,12 @@
 .operator-image-container {
     padding: 5px;
 }
+
+@media only screen and (max-width: 620px) {
+    #operator-header{
+        text-align: center;
+    }
+    #operator-segment{
+        justify-content: center;
+    }
+}

@@ -25,3 +25,9 @@
 .rc-slider {
     padding: 50px 0;
 }
+
+@media only screen and (max-width: 620px) {
+    #price-header{
+        text-align: center;
+    }
+}
