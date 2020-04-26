@@ -116,29 +116,28 @@ export default function HorizontalCardResult({data}) {
                             {hasExtraTvPackages ?
                                 <div id={"extra-package-main-container"}>
                                     <h5 id={"extra-packages-info-text"}>Dostepne pakiety dodatkowe:</h5>
-                                    <div id={"extra-packages-main-container"}>
-                                        {
-                                            data.filteredTvPackage.extraAvailableTvPackages.map((availableTvPackage) => {
-                                                return (
-                                                    <div id={"extra-package-container"}>
-                                                        <div id={"result-extra-package-image-container"}>
-                                                            <Image
-                                                                size={"small"}
-                                                                style={{width: 30}}
-                                                                source={{uri: availableTvPackage.imgSrc}}
-                                                                resizeMode="contain"
-                                                            />
-                                                        </div>
-                                                        <div>
-                                                            <div>{availableTvPackage.name} | <b>{availableTvPackage.price} zl</b>
-                                                            </div>
+                                    {
+                                        data.filteredTvPackage.extraAvailableTvPackages.map((availableTvPackage) => {
+                                            return (
+                                                <div id={"extra-package-container"}>
+                                                    <div id={"result-extra-package-image-container"}>
+                                                        <Image
+                                                            size={"small"}
+                                                            style={{width: 30}}
+                                                            source={{uri: availableTvPackage.imgSrc}}
+                                                            resizeMode="contain"
+                                                        />
+                                                    </div>
+                                                    <div id={"result-extra-package-text-container"}>
+                                                        <div>{availableTvPackage.name} | <b>{availableTvPackage.price} zl</b>
                                                         </div>
                                                     </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                </div> :
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                :
                                 <h5 id={"extra-packages-info-text"}>Brak dostepnych pakietow dodatkowych</h5>
                             }
                         </div>
