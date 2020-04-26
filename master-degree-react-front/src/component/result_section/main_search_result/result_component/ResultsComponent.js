@@ -16,17 +16,15 @@ class ResultsComponent extends Component {
             return (
                 <div className={'container-fluid'} id={"main-result-list-container"}>
                     <div className={"col-md-12"} id={"result-list"}>
-                        <div id="mainContent">
-                            {
-                                this.props.result.map((resultTvPackage) => {
-                                    return (
-                                            <HorizontalCardResult
-                                                data = {resultTvPackage}
-                                            />
-                                    )
-                                })
-                            }
-                        </div>
+                        {
+                            this.props.result.map((resultTvPackage) => {
+                                return (
+                                    <HorizontalCardResult
+                                        data={resultTvPackage}
+                                    />
+                                )
+                            })
+                        }
                     </div>
                 </div>
             )
