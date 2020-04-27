@@ -3,7 +3,7 @@ import './ClearFiltersButton.css';
 import {Button, Icon} from "semantic-ui-react";
 import {Link} from "react-scroll";
 import {connect} from "react-redux";
-import {clearFilterElements, setResult} from "../../../../../reducers/actions/actions";
+import {clearFilterElements, setIsClearedFilters, setResult} from "../../../../../reducers/actions/actions";
 
 class ClearFiltersButton extends Component {
 
@@ -14,6 +14,7 @@ class ClearFiltersButton extends Component {
 
     clearCriteria() {
         this.props.clearFilterElements();
+        this.props.setIsClearedFilters(true);
     }
 
     render() {
@@ -53,6 +54,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         clearFilterElements: () => {
             dispatch(clearFilterElements())
+        },
+        setIsClearedFilters: (isClearedFilters) => {
+            dispatch(setIsClearedFilters(isClearedFilters))
         },
     }
 };

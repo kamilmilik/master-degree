@@ -5,13 +5,18 @@ import {Link} from "react-scroll";
 import {connect} from "react-redux";
 import {trackPromise} from "react-promise-tracker";
 import FilteredResultDataService from "../../../../../service/FilteredResultDataService";
-import {setResult} from "../../../../../reducers/actions/actions";
+import {setIsClearedFilters, setResult} from "../../../../../reducers/actions/actions";
 
 class SearchButton extends Component {
 
     constructor(props) {
         super(props);
-        this.retrieveFilteredResultByCriteria = this.retrieveFilteredResultByCriteria.bind(this)
+        this.searchButtonAction = this.searchButtonAction.bind(this)
+    }
+
+    searchButtonAction() {
+        this.props.setIsClearedFilters(false);
+        this.retrieveFilteredResultByCriteria();
     }
 
     retrieveFilteredResultByCriteria() {
@@ -38,7 +43,7 @@ class SearchButton extends Component {
                     <Button positive
                             id={"search-button"}
                             icon labelPosition='right'
-                            onClick={this.retrieveFilteredResultByCriteria}
+                            onClick={this.searchButtonAction}
                     >
                         Wyszukaj oferty
                         <Icon name='search'/>
@@ -61,6 +66,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setResult: (result) => {
             dispatch(setResult(result))
+        },
+        setIsClearedFilters: (isClearedFilters) => {
+            dispatch(setIsClearedFilters(isClearedFilters))
         },
     }
 };

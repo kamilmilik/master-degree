@@ -8,7 +8,7 @@ import {
     SET_SELECTED_PRICE,
     SET_SELECTED_TERM,
     SET_SELECTED_CHANNELS_BY_CATEGORY,
-    SET_RESULT, CLEAR_FILTER_ELEMENTS
+    SET_RESULT, CLEAR_FILTER_ELEMENTS, SET_IS_CLEARED_FILTERS
 } from './actions/actions-type'
 import {
     DEFAULT_MIN_PRICE_FILTER_VALUE,
@@ -32,6 +32,7 @@ const initState = {
         price: MAX_PRICE_FILTER_VALUE,
         channels: []
     },
+    isClearedFilters: false
 };
 
 // reducers: these are functions that implement the behavior of the actions. They change the state of the app, based on the action description and the state change description.
@@ -127,7 +128,14 @@ const formReducer = (state = initState, action) => {
                 ...state,
                 criteria: Object.assign({}, criteria),
                 selectedCategories: Object.assign([], selectedCategories),
-                selectedChannelsByCategory: Object.assign({}, selectedChannelsByCategory)
+                selectedChannelsByCategory: Object.assign({}, selectedChannelsByCategory),
+            };
+        }
+        case SET_IS_CLEARED_FILTERS:{
+            let isClearedFilters = action.isClearedFilters;
+            return {
+                ...state,
+                isClearedFilters: isClearedFilters
             };
         }
         default:

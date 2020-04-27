@@ -2,8 +2,14 @@ import {
     SET_ALL_CHANNELS,
     SET_ALL_OPERATORS,
     SET_SELECTED_CATEGORIES,
-    SET_SELECTED_CHANNELS, SET_SELECTED_CHANNELS_BY_CATEGORY,
-    SET_SELECTED_OPERATORS, SET_SELECTED_PRICE, SET_SELECTED_TERM, SET_RESULT, CLEAR_FILTER_ELEMENTS,
+    SET_SELECTED_CHANNELS,
+    SET_SELECTED_CHANNELS_BY_CATEGORY,
+    SET_SELECTED_OPERATORS,
+    SET_SELECTED_PRICE,
+    SET_SELECTED_TERM,
+    SET_RESULT,
+    CLEAR_FILTER_ELEMENTS,
+    SET_IS_CLEARED_FILTERS,
 } from "./actions-type";
 
 // actions: these are objects that should have two properties, one describing the type of action, and one describing what should be changed in the app state.
@@ -74,6 +80,13 @@ export const setResult = (result) => {
 export const clearFilterElements = () => {
     return {
         type: CLEAR_FILTER_ELEMENTS,
+    }
+};
+
+export const setIsClearedFilters = (isClearedFilters) => {
+    return {
+        type: SET_IS_CLEARED_FILTERS,
+        isClearedFilters: isClearedFilters
     }
 };
 

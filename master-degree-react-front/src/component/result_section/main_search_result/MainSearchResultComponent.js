@@ -35,7 +35,9 @@ class MainSearchResultComponent extends Component {
                     {/*        })*/}
                     {/*    }*/}
                     {/*</div>*/}
-                    <ResultComponent/>
+                    {
+                        this.props.isClearedFilters ? null : <ResultComponent/>
+                    }
                 </div>
             </div>
         );
@@ -45,7 +47,8 @@ class MainSearchResultComponent extends Component {
 const mapStateToProps = (state) => {
     return {
         selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory,
-        criteria: state.formReducer.criteria
+        criteria: state.formReducer.criteria,
+        isClearedFilters: state.formReducer.isClearedFilters
     };
 };
 

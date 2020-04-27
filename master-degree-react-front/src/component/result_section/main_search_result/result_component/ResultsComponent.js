@@ -16,15 +16,24 @@ class ResultsComponent extends Component {
             return (
                 <div className={'container-fluid'} id={"main-result-list-container"}>
                     <div className={"col-md-12"} id={"result-list"}>
-                        {
-                            this.props.result.map((resultTvPackage) => {
-                                return (
-                                    <HorizontalCardResult
-                                        data={resultTvPackage}
-                                    />
-                                )
-                            })
-                        }
+                        <div className={"ui segment"} id={"result-main-segment"}>
+                            {
+                                this.isEmptyResult() ?
+                                    <div id={"no-result-text"}>
+                                        <h3>Brak wynikow</h3>
+                                        <h5>Zaden pakiet nie spelnia Twoich filtrow<br/>
+                                            Popraw filtry</h5>
+                                    </div>
+                                    :
+                                    this.props.result.map((resultTvPackage) => {
+                                        return (
+                                            <HorizontalCardResult
+                                                data={resultTvPackage}
+                                            />
+                                        )
+                                    })
+                            }
+                        </div>
                     </div>
                 </div>
             )
@@ -35,6 +44,9 @@ class ResultsComponent extends Component {
         }
     }
 
+    isEmptyResult() {
+        return this.props.result.length === 0;
+    }
 }
 
 
