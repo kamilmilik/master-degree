@@ -42,6 +42,7 @@ public class FilteredResultService {
         // Filter order: operators -> term -> channels -> price
         CriteriaStrategy andCriteria = AndCriteria.builder()
                 .criteria(new OperatorCriteriaStrategy(criteria))
+                .criteria(new TermCriteriaStrategy(criteria))
                 .criteria(new PriceCriteriaStrategy(criteria))
                 .criteria(new ChannelCriteriaStrategy(criteria))
                 .criteria(new ChannelAndPriceCombinationCriteriaStrategy(criteria))

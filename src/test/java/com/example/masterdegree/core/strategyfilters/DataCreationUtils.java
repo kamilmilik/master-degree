@@ -28,6 +28,10 @@ public class DataCreationUtils {
         return new TvPackage(name, "", price, "", "", "", "", "", channels);
     }
 
+    public static TvPackage createTvPackage(String name, String term) {
+        return new TvPackage(name, "", 0.0d, "", "", "", term, "", new ArrayList<>());
+    }
+
     public static TvPackage createTvPackage(String name, List<Channel> channels) {
         return new TvPackage(name, "", 0d, "", "", "", "", "", channels);
     }

@@ -17,27 +17,27 @@ public class Criteria {
     private Price price;
     @Getter(AccessLevel.NONE)
     private List<Channel> channels;
-    private String term;
+    private Term term;
 
     public List<String> getOperatorsId() {
-        if(this.operatorsId == null){
+        if (this.operatorsId == null) {
             return new ArrayList<>();
         }
         return Collections.unmodifiableList(operatorsId);
     }
 
     public List<Channel> getChannels() {
-        if(this.channels == null){
+        if (this.channels == null) {
             return new ArrayList<>();
         }
         return Collections.unmodifiableList(channels);
     }
 
-    public boolean hasAnyChannelsCriteria(){
+    public boolean hasAnyChannelsCriteria() {
         return channels.size() > 0;
     }
 
-    public static Criteria newCriteria(List<String> operatorsId, Price price, List<Channel> channels, String term){
+    public static Criteria newCriteria(List<String> operatorsId, Price price, List<Channel> channels, Term term) {
         return new Criteria(operatorsId, price, channels, term);
     }
 }
