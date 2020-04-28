@@ -8,7 +8,9 @@ class FilteredResultDataService {
 
     retrieveFilteredResultByCriteria(criteria) {
         return axios.post(`${API}`, criteria)
-            .then(response => response.data.resultTvPackages);
+            .then(response => {
+                return response.data.resultTvPackages.sort((a, b) => (a.filteredTvPackage.price - b.filteredTvPackage.price))
+            });
     }
 
 }

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {setResult} from "../../../../reducers/actions/actions";
 import {connect} from "react-redux";
-import CardResult from "./card_result/CardResult";
 import HorizontalCardResult from "./card_result/HorizontalCardResult";
 import "./ResultsComponent.css";
 
