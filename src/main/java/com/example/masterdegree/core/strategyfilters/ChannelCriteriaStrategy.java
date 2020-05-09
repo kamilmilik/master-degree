@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class ChannelCriteriaStrategy implements CriteriaStrategy {
 
-    private Criteria criteria;
+    private final Criteria criteria;
 
     public ChannelCriteriaStrategy(Criteria criteria) {
         this.criteria = criteria;

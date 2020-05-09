@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class PriceCriteriaStrategy implements CriteriaStrategy {
 
-    private Criteria criteria;
+    private final Criteria criteria;
 
     public PriceCriteriaStrategy(Criteria criteria) {
         this.criteria = criteria;

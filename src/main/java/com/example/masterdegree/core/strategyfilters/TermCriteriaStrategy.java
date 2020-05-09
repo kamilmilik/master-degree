@@ -25,6 +25,4 @@ public class TermCriteriaStrategy implements CriteriaStrategy {
                 .filter(resultTvPackage -> criteria.getTerm().compareTerm(resultTvPackage.getFilteredTvPackage().getTerm()))
                 .collect(Collectors.toList());
     }
-
-
 }

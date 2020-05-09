@@ -22,7 +22,7 @@ public class ChannelsService {
         return getAllChannelsGroupByCategoryFromDb().stream().map(channelsGroupByCategoryMapper::convertToDto).collect(Collectors.toList());
     }
 
-    public List<ChannelsGroupByCategory> getAllChannelsGroupByCategoryFromDb() {
+    private List<ChannelsGroupByCategory> getAllChannelsGroupByCategoryFromDb() {
         return channelsRepository.findAll();
     }
 

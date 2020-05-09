@@ -10,7 +10,7 @@ import java.util.List;
 public class AndCriteria implements CriteriaStrategy {
 
     @Singular
-    private List<CriteriaStrategy> criterias;
+    private final List<CriteriaStrategy> criterias;
 
     @Override
     public List<ResultTvPackage> getFilteredResult(List<ResultTvPackage> resultTvPackages) {

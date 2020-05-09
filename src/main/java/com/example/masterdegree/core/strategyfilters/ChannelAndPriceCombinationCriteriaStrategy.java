@@ -6,12 +6,15 @@ import com.example.masterdegree.models.model.filter.FilteredTvPackage;
 import com.example.masterdegree.models.model.filter.ResultTvPackage;
 import org.paukov.combinatorics3.Generator;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ChannelAndPriceCombinationCriteriaStrategy implements CriteriaStrategy {
 
-    private ChannelCriteriaStrategy channelCriteriaStrategy;
+    private final ChannelCriteriaStrategy channelCriteriaStrategy;
     private final Criteria criteria;
 
     public ChannelAndPriceCombinationCriteriaStrategy(Criteria criteria) {
@@ -28,13 +31,13 @@ public class ChannelAndPriceCombinationCriteriaStrategy implements CriteriaStrat
         if (criteria.hasAnyChannelsCriteria()) {
             List<ResultTvPackage> resultsToDelete = new LinkedList<>();
             resultTvPackages.forEach(resultTvPackage -> {
-                List<TvPackage> meetCriteriaTvPackages = resultTvPackage.getFilteredTvPackage().getExtraTvPackagesWhichMeetCriteria();
                 if (resultTvPackage.getFilteredTvPackage().hasExtraTvPackagesWhichMeetCriteria()) {
+                    List<TvPackage> meetCriteriaTvPackages = resultTvPackage.getFilteredTvPackage().getExtraTvPackagesWhichMeetCriteria();
                     List<List<TvPackage>> combinedTvPackages = createAllCombinationsFromGivenList(meetCriteriaTvPackages);
                     combinedTvPackages = getFilteredCombinationsWhichSumOfPricePlusGivenPriceIsBetweenPriceCriteria(resultTvPackage.getFilteredTvPackage().getPrice(), combinedTvPackages);
                     combinedTvPackages = checkIfCombinedTvPackagesContainsAllCriteriaChannelsExceptChannelsFromMainTvPackage(resultTvPackage, combinedTvPackages);
                     List<TvPackage> meetAllCriteriaTvPackages = sortAndGetCombinedTvPackagesBySumOfPrice(combinedTvPackages);
-                    if (!hasMeetAllCriteriaTvPackages(meetAllCriteriaTvPackages)){
+                    if (!hasMeetAllCriteriaTvPackages(meetAllCriteriaTvPackages)) {
                         resultsToDelete.add(resultTvPackage);
                     }
                     resultTvPackage.getFilteredTvPackage().replaceExtraTvPackagesWithGivenList(meetAllCriteriaTvPackages);
@@ -46,7 +49,7 @@ public class ChannelAndPriceCombinationCriteriaStrategy implements CriteriaStrat
         return resultTvPackages;
     }
 
-    boolean hasMeetAllCriteriaTvPackages(List<TvPackage> meetAllCriteriaTvPackages){
+    boolean hasMeetAllCriteriaTvPackages(List<TvPackage> meetAllCriteriaTvPackages) {
         return meetAllCriteriaTvPackages.size() > 0;
     }
 
@@ -75,7 +78,7 @@ public class ChannelAndPriceCombinationCriteriaStrategy implements CriteriaStrat
     List<List<TvPackage>> checkIfCombinedTvPackagesContainsAllCriteriaChannelsExceptChannelsFromMainTvPackage(ResultTvPackage resultTvPackage, List<List<TvPackage>> combinedTvPackages) {
         criteria.getChannels().forEach(channel -> {
             boolean isSelectedChannelInMainTvPackage = channelCriteriaStrategy.searchChannelInMainTvPackage(resultTvPackage, channel);
-            if(!isSelectedChannelInMainTvPackage) {
+            if (!isSelectedChannelInMainTvPackage) {
                 combinedTvPackages.removeIf(tvPackages ->
                         tvPackages.stream().noneMatch(tvPackage ->
                                 tvPackage.getChannels().stream().anyMatch(tvPackageChannel ->

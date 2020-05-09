@@ -32,7 +32,7 @@ class ChannelCriteriaStrategyTest {
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                 createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO, asList(Channel.create(HBO), Channel.create(HBO_2))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))))
                         )
                 )
         ));
@@ -60,19 +60,19 @@ class ChannelCriteriaStrategyTest {
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                 createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO, asList(Channel.create(HBO), Channel.create(HBO_2))), createTvPackage(ELEVEN_SPORTS, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(ELEVEN_SPORTS_2))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))), createTvPackage(ELEVEN_SPORTS, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(ELEVEN_SPORTS_2))))
                         )
                 ),
                 createResultTvPackage(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackage(
                                 createTvPackage(CANAL_PLUS_START, asList(Channel.create(FUN_TV), Channel.create(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO, asList(Channel.create(HBO), Channel.create(HBO_2))), createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))), createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))))
                         )
                 ),
                 createResultTvPackage(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackage(
                                 createTvPackage(CANAL_PLUS_SUPERPREMIUM, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO, asList(Channel.create(HBO), Channel.create(HBO_2))), createTvPackage(POLSAT_SPORT_PREMIUM, asList(Channel.create(VIVD_HD), Channel.create(BRAZZERS))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))), createTvPackage(POLSAT_SPORT_PREMIUM, asList(Channel.create(VIVD_HD), Channel.create(BRAZZERS))))
                         )
                 )
         ));
@@ -97,7 +97,7 @@ class ChannelCriteriaStrategyTest {
                                 createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                 asList(createTvPackage(ELEVEN_SPORTS, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(ELEVEN_SPORTS_2)))),
                                 asList(
-                                        createTvPackage(HBO, asList(Channel.create(HBO), Channel.create(HBO_2))),
+                                        createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))),
                                         createTvPackage(ELEVEN_SPORTS, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(ELEVEN_SPORTS_2)))
                                 )
                         )
@@ -114,13 +114,13 @@ class ChannelCriteriaStrategyTest {
                                         asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(TVN))
                                 ),
                                 new LinkedList<>(),
-                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))), createTvPackage(HBO, asList(Channel.create(HBO), Channel.create(HBO_2))))
+                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))), createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))))
                         )
                 ),
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                 createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO, asList(Channel.create(HBO), Channel.create(HBO_2))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))))
                         )
                 )
         ));
@@ -136,7 +136,7 @@ class ChannelCriteriaStrategyTest {
                                 new LinkedList<>(),
                                 asList(
                                         createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))),
-                                        createTvPackage(HBO, asList(Channel.create(HBO), Channel.create(HBO_2)))
+                                        createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL)))
                                 )
                         )
                 )
@@ -158,7 +158,7 @@ class ChannelCriteriaStrategyTest {
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                 createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                 new ArrayList<>(),
-                                asList(createTvPackage(HBO, asList(Channel.create(HBO), Channel.create(HBO_2))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))))
                         )
                 )
         ));
@@ -196,7 +196,7 @@ class ChannelCriteriaStrategyTest {
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                 createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO, asList(Channel.create(HBO), Channel.create(HBO_2))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))))
                         )
                 )
         ));

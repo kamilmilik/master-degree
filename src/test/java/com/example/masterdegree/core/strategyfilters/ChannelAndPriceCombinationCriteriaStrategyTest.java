@@ -53,7 +53,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
             ));
             List<ResultTvPackage> expectedNotMeetAllCriteriaOneExtraTvPackage = new ArrayList<>();
 
-            TvPackage hboTvPackage = createTvPackage(HBO, 15d, Collections.singletonList(Channel.create(HBO)));
+            TvPackage hboTvPackage = createTvPackage(HBO_HD_CHANNEL, 15d, Collections.singletonList(Channel.create(HBO_HD_CHANNEL)));
             TvPackage foxTvPackage = createTvPackage(FOX_PLAY, 5d, Collections.singletonList(Channel.create(FOX_PLAY)));
             TvPackage dorcelTvPackage = createTvPackage(DORCEL_TV_HD, 2d, Collections.singletonList(Channel.create(DORCEL_TV_HD)));
             List<ResultTvPackage> inputNotMeetAllCriteriaManyExtraTvPackages = new ArrayList<>(asList(
@@ -87,7 +87,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
             TvPackage foxTvPackage = createTvPackage(FOX_PLAY, 5d, Collections.singletonList(Channel.create(FOX_PLAY)));
             TvPackage dorcelTvPackage = createTvPackage(DORCEL_TV_HD, 2d, Collections.singletonList(Channel.create(DORCEL_TV_HD)));
             TvPackage brazzersTvPackage = createTvPackage(BRAZZERS, 1d, asList(Channel.create(BRAZZERS), Channel.create(BBC)));
-            TvPackage hboTvPackage = createTvPackage(HBO, 15d, Collections.singletonList(Channel.create(HBO)));
+            TvPackage hboTvPackage = createTvPackage(HBO_HD_CHANNEL, 15d, Collections.singletonList(Channel.create(HBO_HD_CHANNEL)));
             List<ResultTvPackage> inputManyExtraMeetCriteriaCheapest = new ArrayList<>(asList(
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT, 40d, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(TVN))),
@@ -109,7 +109,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
             TvPackage activeTvPackage = createTvPackage(ACTIVE_FAMILY, 14d, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS), Channel.create(FOX_PLAY), Channel.create(ACTIVE_FAMILY)));
             TvPackage adventureTvPackage = createTvPackage(ADVENTURE, 10d, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS), Channel.create(ADVENTURE)));
             foxTvPackage = createTvPackage(FOX_PLAY, 5d, Collections.singletonList(Channel.create(FOX_PLAY)));
-            hboTvPackage = createTvPackage(HBO, 15d, Collections.singletonList(Channel.create(HBO)));
+            hboTvPackage = createTvPackage(HBO_HD_CHANNEL, 15d, Collections.singletonList(Channel.create(HBO_HD_CHANNEL)));
             List<ResultTvPackage> inputOneExtraMeetAllCriteriaCheapest = new ArrayList<>(asList(
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
@@ -150,8 +150,8 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
 
         Stream<Arguments> provideDataCreateCombinedTvPackage() {
             return Stream.of(
-                    Arguments.of(asList(createTvPackage(HBO), createTvPackage(ELEVEN_SPORTS), createTvPackage(ADVENTURE)), 7),
-                    Arguments.of(asList(createTvPackage(HBO), createTvPackage(ELEVEN_SPORTS), createTvPackage(ADVENTURE), createTvPackage(HUSTLER_HD)), 15)
+                    Arguments.of(asList(createTvPackage(HBO_HD_CHANNEL), createTvPackage(ELEVEN_SPORTS), createTvPackage(ADVENTURE)), 7),
+                    Arguments.of(asList(createTvPackage(HBO_HD_CHANNEL), createTvPackage(ELEVEN_SPORTS), createTvPackage(ADVENTURE), createTvPackage(HUSTLER_HD)), 15)
             );
         }
 
@@ -178,21 +178,21 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         }
 
         Stream<Arguments> provideDataForCombinedTvPackagesWhereSomeCombinationsContainsAllChannels() {
-            Criteria criteria = createCriteria(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE), Channel.create(POLSAT)));
+            Criteria criteria = createCriteria(asList(Channel.create(HBO_HD_CHANNEL), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE), Channel.create(POLSAT)));
             ResultTvPackage inputResultNotImportantExtraAndMeetTvPackages = createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
                     new ArrayList<>(),
                     new ArrayList<>()
             ));
             List<TvPackage> combinedTvPackagesContainsAllCriteriaChannelsSingleTvPackage = asList(
-                    createTvPackage(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE), Channel.create(BBC)))
+                    createTvPackage(asList(Channel.create(HBO_HD_CHANNEL), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE), Channel.create(BBC)))
             );
             List<TvPackage> combinedTvPackagesContainsAllCriteriaChannelsMultipleTvPackages = asList(
-                    createTvPackage(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(BBC))),
+                    createTvPackage(asList(Channel.create(HBO_HD_CHANNEL), Channel.create(ELEVEN_SPORTS_1), Channel.create(BBC))),
                     createTvPackage(asList(Channel.create(ADVENTURE)))
             );
             List<TvPackage> combinedTvPackagesNotContainsAllCriteriaChannels = asList(
-                    createTvPackage(asList(Channel.create(HBO))),
+                    createTvPackage(asList(Channel.create(HBO_HD_CHANNEL))),
                     createTvPackage(asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(POLSAT)))
             );
 
@@ -205,7 +205,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         }
 
         Stream<Arguments> provideDataForCombinedTvPackagesNotContainsAllCriteriaChannels() {
-            Criteria criteria = createCriteria(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE), Channel.create(POLSAT_SPORT_PREMIUM)));
+            Criteria criteria = createCriteria(asList(Channel.create(HBO_HD_CHANNEL), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE), Channel.create(POLSAT_SPORT_PREMIUM)));
             ResultTvPackage inputResultNotImportantExtraAndMeetTvPackages = createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
                     new ArrayList<>(),
@@ -216,8 +216,8 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
                     criteria,
                     inputResultNotImportantExtraAndMeetTvPackages,
                     new ArrayList<>(asList(
-                            asList(createTvPackage(asList(Channel.create(HBO), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE)))),
-                            asList(createTvPackage(asList(Channel.create(HBO))), createTvPackage(asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(POLSAT))))
+                            asList(createTvPackage(asList(Channel.create(HBO_HD_CHANNEL), Channel.create(ELEVEN_SPORTS_1), Channel.create(ADVENTURE)))),
+                            asList(createTvPackage(asList(Channel.create(HBO_HD_CHANNEL))), createTvPackage(asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(POLSAT))))
                     )),
                     new ArrayList<>()
             ));
@@ -315,9 +315,9 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
             List<ResultTvPackage> input = new ArrayList<>(asList(
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                             createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
-                            asList(createTvPackage(HBO, asList(Channel.create(HBO)))),
+                            asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL)))),
                             new ArrayList<>(asList(
-                                    createTvPackage(HBO, asList(Channel.create(HBO))),
+                                    createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL))),
                                     createTvPackage(FIGHTBOX, asList(Channel.create(FIGHTBOX)))
                             )
                             ))
@@ -326,7 +326,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
             List<ResultTvPackage> expected = new ArrayList<>(asList(
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
-                                    asList(createTvPackage(HBO, asList(Channel.create(HBO)))),
+                                    asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL)))),
                                     new ArrayList<>(asList(createTvPackage(FIGHTBOX, asList(Channel.create(FIGHTBOX)))))
                             )
                     )
@@ -335,7 +335,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                     new LinkedList<>(),
-                                    new ArrayList<>(asList(createTvPackage(HBO, asList(Channel.create(HBO)))))
+                                    new ArrayList<>(asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL)))))
                             )
                     )
             ));
@@ -343,7 +343,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                     new LinkedList<>(),
-                                    new ArrayList<>(asList(createTvPackage(HBO, asList(Channel.create(HBO)))))
+                                    new ArrayList<>(asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL)))))
                             )
                     )
             ));
@@ -352,11 +352,11 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                     asList(
-                                            createTvPackage(HBO, asList(Channel.create(HBO)))
+                                            createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL)))
                                     ),
                                     new LinkedList<>(asList(
-                                            createTvPackage(HBO, asList(Channel.create(HBO))),
-                                            createTvPackage(HBO_GO, asList(Channel.create(HBO), Channel.create(HBO_GO))),
+                                            createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL))),
+                                            createTvPackage(HBO_GO, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_GO))),
                                             createTvPackage(FIGHTBOX, asList(Channel.create(FIGHTBOX)))
 
                                     ))
@@ -367,10 +367,10 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                     asList(
-                                            createTvPackage(HBO, asList(Channel.create(HBO)))
+                                            createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL)))
                                     ),
                                     new LinkedList<>(asList(
-                                            createTvPackage(HBO_GO, asList(Channel.create(HBO), Channel.create(HBO_GO))),
+                                            createTvPackage(HBO_GO, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_GO))),
                                             createTvPackage(FIGHTBOX, asList(Channel.create(FIGHTBOX)))
                                     ))
                             )
@@ -381,11 +381,11 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                     asList(
-                                            createTvPackage(HBO_GO, asList(Channel.create(HBO), Channel.create(HBO_GO)))
+                                            createTvPackage(HBO_GO, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_GO)))
                                     ),
                                     new LinkedList<>(asList(
-                                            createTvPackage(HBO, asList(Channel.create(HBO))),
-                                            createTvPackage(HBO_GO, asList(Channel.create(HBO), Channel.create(HBO_GO))),
+                                            createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL))),
+                                            createTvPackage(HBO_GO, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_GO))),
                                             createTvPackage(FIGHTBOX, asList(Channel.create(FIGHTBOX)))
 
                                     ))
@@ -396,7 +396,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
                     createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.create(POLSAT), Channel.create(TVN))),
                                     asList(
-                                            createTvPackage(HBO_GO, asList(Channel.create(HBO), Channel.create(HBO_GO)))
+                                            createTvPackage(HBO_GO, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_GO)))
                                     ),
                                     new LinkedList<>(asList(createTvPackage(FIGHTBOX, asList(Channel.create(FIGHTBOX)))))
                             )

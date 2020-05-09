@@ -26,12 +26,12 @@ public class Channel {
         return new Channel(name, null, imgSrc);
     }
 
-    // TODO KM dodac na bazie id do channel, i rozrozniac jako osobno kanaly hd i nie hd
     public boolean isTheSame(Channel channel) {
-        if (isTheSameLength(channel)) {
-            String channelToCompareName = chooseProperChannelNameToCompareForSymmetryComparision(channel);
-            return (isChannelsNameStartWithTheSame(channelToCompareName) && isHdChannelName(channelToCompareName));
-        } else return getName().equalsIgnoreCase(channel.getName());
+//        if (isTheSameLength(channel)) {
+//            String channelToCompareName = chooseProperChannelNameToCompareForSymmetryComparision(channel);
+//            return (isChannelsNameStartWithTheSame(channelToCompareName) && isHdChannelName(channelToCompareName));
+//        } else return getName().equalsIgnoreCase(channel.getName());
+        return getName().equalsIgnoreCase(channel.getName());
     }
 
     private boolean isTheSameLength(Channel channel) {
