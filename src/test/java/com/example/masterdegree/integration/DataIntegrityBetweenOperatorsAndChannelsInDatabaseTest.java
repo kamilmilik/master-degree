@@ -39,7 +39,7 @@ class DataIntegrityBetweenOperatorsAndChannelsInDatabaseTest {
         for (ChannelsGroupByCategory categoryWithChannels : channelsGroupByCategory) {
             for (Channel channel : categoryWithChannels.getChannels()) {
                 List<ResultTvPackage> newInput = new ArrayList<>(input);
-                ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(create(channel));
+                ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteriaChannel(channel.getName()));
                 List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(newInput);
                 actualSizes.add(actual.size());
                 LOGGER.info("For channel: " + channel.getName() + " result size is:" + actual.size());
@@ -49,8 +49,8 @@ class DataIntegrityBetweenOperatorsAndChannelsInDatabaseTest {
         assertThat(actualSizes, everyItem(greaterThanOrEqualTo(1)));
     }
 
-    private static Criteria create(Channel channel) {
-        return Criteria.newCriteria(new ArrayList<>(), new Price(400d), Collections.singletonList(channel), new Term("0"));
+    private static Criteria criteriaChannel(String channelName) {
+        return Criteria.newCriteria(new ArrayList<>(), new Price(400d), Collections.singletonList(channelName), new Term("0"));
     }
 
 }

@@ -12,12 +12,12 @@ public class ChannelsGroupByCategoryResponseDto {
 
     @Id
     @NonNull
-    private String id;
+    private final String id;
     @NonNull
-    private String categoryName;
+    private final String categoryName;
     @NonNull
     @Getter(AccessLevel.NONE)
-    private List<ChannelDto> channels;
+    private final List<ChannelDto> channels;
 
     public List<ChannelDto> getChannels() {
         return Collections.unmodifiableList(channels);

@@ -13,25 +13,16 @@ public class Channel {
     private String desc;
     private String imgSrc;
 
-
-//    public static Channel newChannel(String name, String desc, String imgSrc){ // To make object immutable. Factory method.
-//        return new Channel(name, desc, imgSrc);
-//    }
-
-    public static Channel create(String name){
+    public static Channel channel(String name){ // To make object immutable. Factory method.
         return new Channel(name, null, null);
     }
 
-    public static Channel create(String name, String imgSrc){ // To make object immutable. Factory method.
-        return new Channel(name, null, imgSrc);
-    }
-
-    public boolean isTheSame(Channel channel) {
+    public boolean isTheSame(String channelName) {
 //        if (isTheSameLength(channel)) {
 //            String channelToCompareName = chooseProperChannelNameToCompareForSymmetryComparision(channel);
 //            return (isChannelsNameStartWithTheSame(channelToCompareName) && isHdChannelName(channelToCompareName));
 //        } else return getName().equalsIgnoreCase(channel.getName());
-        return getName().equalsIgnoreCase(channel.getName());
+        return getName().equalsIgnoreCase(channelName);
     }
 
     private boolean isTheSameLength(Channel channel) {

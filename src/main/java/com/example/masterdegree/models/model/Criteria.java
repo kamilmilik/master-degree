@@ -13,11 +13,11 @@ import java.util.List;
 @ToString()
 public class Criteria {
     @Getter(AccessLevel.NONE)
-    private List<String> operatorsId;
-    private Price price;
+    List<String> operatorsId;
+    Price price;
     @Getter(AccessLevel.NONE)
-    private List<Channel> channels;
-    private Term term;
+    List<String> channelsName;
+    Term term;
 
     public List<String> getOperatorsId() {
         if (this.operatorsId == null) {
@@ -26,18 +26,18 @@ public class Criteria {
         return Collections.unmodifiableList(operatorsId);
     }
 
-    public List<Channel> getChannels() {
-        if (this.channels == null) {
+    public List<String> getChannelsName() {
+        if (this.channelsName == null) {
             return new ArrayList<>();
         }
-        return Collections.unmodifiableList(channels);
+        return Collections.unmodifiableList(channelsName);
     }
 
     public boolean hasAnyChannelsCriteria() {
-        return channels.size() > 0;
+        return channelsName.size() > 0;
     }
 
-    public static Criteria newCriteria(List<String> operatorsId, Price price, List<Channel> channels, Term term) {
-        return new Criteria(operatorsId, price, channels, term);
+    public static Criteria newCriteria(List<String> operatorsId, Price price, List<String> channelsName, Term term) {
+        return new Criteria(operatorsId, price, channelsName, term);
     }
 }

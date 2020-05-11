@@ -23,20 +23,20 @@ class ChannelCriteriaStrategyTest {
         List<ResultTvPackage> resultTvPackage = new ArrayList<>(asList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                 createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT,
-                                        asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(TVN))
+                                        asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(TVN))
                                 ),
                                 new LinkedList<>(),
-                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))), createTvPackage(FOX_PLAY, Collections.singletonList(Channel.create(FOX_PLAY))))
+                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(DORCEL_TV_HD), Channel.channel(BRAZZERS))), createTvPackage(FOX_PLAY, Collections.singletonList(Channel.channel(FOX_PLAY))))
                         )
                 ),
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
-                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
+                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.channel(POLSAT), Channel.channel(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.channel(HBO_HD_CHANNEL), Channel.channel(HBO_2_HD_CHANNEL))))
                         )
                 )
         ));
-        Criteria criteria = createCriteria(Collections.singletonList(Channel.create(FUN_TV)));
+        Criteria criteria = createCriteria(Collections.singletonList(FUN_TV));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
 
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
@@ -51,32 +51,32 @@ class ChannelCriteriaStrategyTest {
         List<ResultTvPackage> resultTvPackage = new ArrayList<>(asList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                 createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT,
-                                        asList(Channel.create(FUN_TV), Channel.create(TVN))
+                                        asList(Channel.channel(FUN_TV), Channel.channel(TVN))
                                 ),
                                 new LinkedList<>(),
-                                asList(createTvPackage(ELEVEN_SPORTS, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(ELEVEN_SPORTS_2))), createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))))
+                                asList(createTvPackage(ELEVEN_SPORTS, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(ELEVEN_SPORTS_2))), createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(DORCEL_TV_HD), Channel.channel(BRAZZERS))))
                         )
                 ),
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
-                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
+                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.channel(POLSAT), Channel.channel(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))), createTvPackage(ELEVEN_SPORTS, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(ELEVEN_SPORTS_2))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.channel(HBO_HD_CHANNEL), Channel.channel(HBO_2_HD_CHANNEL))), createTvPackage(ELEVEN_SPORTS, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(ELEVEN_SPORTS_2))))
                         )
                 ),
                 createResultTvPackage(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackage(
-                                createTvPackage(CANAL_PLUS_START, asList(Channel.create(FUN_TV), Channel.create(TVN))),
+                                createTvPackage(CANAL_PLUS_START, asList(Channel.channel(FUN_TV), Channel.channel(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))), createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.channel(HBO_HD_CHANNEL), Channel.channel(HBO_2_HD_CHANNEL))), createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(DORCEL_TV_HD), Channel.channel(BRAZZERS))))
                         )
                 ),
                 createResultTvPackage(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackage(
-                                createTvPackage(CANAL_PLUS_SUPERPREMIUM, asList(Channel.create(POLSAT), Channel.create(TVN))),
+                                createTvPackage(CANAL_PLUS_SUPERPREMIUM, asList(Channel.channel(POLSAT), Channel.channel(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))), createTvPackage(POLSAT_SPORT_PREMIUM, asList(Channel.create(VIVD_HD), Channel.create(BRAZZERS))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.channel(HBO_HD_CHANNEL), Channel.channel(HBO_2_HD_CHANNEL))), createTvPackage(POLSAT_SPORT_PREMIUM, asList(Channel.channel(VIVD_HD), Channel.channel(BRAZZERS))))
                         )
                 )
         ));
-        Criteria criteria = createCriteria(Collections.singletonList(Channel.create(ELEVEN_SPORTS_1)));
+        Criteria criteria = createCriteria(Collections.singletonList(ELEVEN_SPORTS_1));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
 
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
@@ -84,21 +84,21 @@ class ChannelCriteriaStrategyTest {
         List<ResultTvPackage> expected = asList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT,
                         new FilteredTvPackage(
-                                createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT, asList(Channel.create(FUN_TV), Channel.create(TVN))),
-                                asList(createTvPackage(ELEVEN_SPORTS, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(ELEVEN_SPORTS_2)))),
+                                createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT, asList(Channel.channel(FUN_TV), Channel.channel(TVN))),
+                                asList(createTvPackage(ELEVEN_SPORTS, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(ELEVEN_SPORTS_2)))),
                                 asList(
-                                        createTvPackage(ELEVEN_SPORTS, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(ELEVEN_SPORTS_2))),
-                                        createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS)))
+                                        createTvPackage(ELEVEN_SPORTS, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(ELEVEN_SPORTS_2))),
+                                        createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(DORCEL_TV_HD), Channel.channel(BRAZZERS)))
                                 )
                         )
                 ),
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT,
                         new FilteredTvPackage(
-                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
-                                asList(createTvPackage(ELEVEN_SPORTS, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(ELEVEN_SPORTS_2)))),
+                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.channel(POLSAT), Channel.channel(TVN))),
+                                asList(createTvPackage(ELEVEN_SPORTS, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(ELEVEN_SPORTS_2)))),
                                 asList(
-                                        createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))),
-                                        createTvPackage(ELEVEN_SPORTS, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(ELEVEN_SPORTS_2)))
+                                        createTvPackage(HBO_HD_CHANNEL, asList(Channel.channel(HBO_HD_CHANNEL), Channel.channel(HBO_2_HD_CHANNEL))),
+                                        createTvPackage(ELEVEN_SPORTS, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(ELEVEN_SPORTS_2)))
                                 )
                         )
                 )
@@ -111,20 +111,20 @@ class ChannelCriteriaStrategyTest {
         List<ResultTvPackage> resultTvPackage = new ArrayList<>(asList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                 createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT,
-                                        asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(TVN))
+                                        asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(TVN))
                                 ),
                                 new LinkedList<>(),
-                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))), createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))))
+                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(DORCEL_TV_HD), Channel.channel(BRAZZERS))), createTvPackage(HBO_HD_CHANNEL, asList(Channel.channel(HBO_HD_CHANNEL), Channel.channel(HBO_2_HD_CHANNEL))))
                         )
                 ),
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
-                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
+                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.channel(POLSAT), Channel.channel(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))))
+                                Collections.singletonList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.channel(HBO_HD_CHANNEL), Channel.channel(HBO_2_HD_CHANNEL))))
                         )
                 )
         ));
-        Criteria criteria = createCriteria(Collections.singletonList(Channel.create(ELEVEN_SPORTS_1)));
+        Criteria criteria = createCriteria(Collections.singletonList(ELEVEN_SPORTS_1));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
 
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
@@ -132,11 +132,11 @@ class ChannelCriteriaStrategyTest {
         List<ResultTvPackage> expected = Collections.singletonList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT,
                         new FilteredTvPackage(
-                                createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(TVN))),
+                                createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(TVN))),
                                 new LinkedList<>(),
                                 asList(
-                                        createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))),
-                                        createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL)))
+                                        createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(DORCEL_TV_HD), Channel.channel(BRAZZERS))),
+                                        createTvPackage(HBO_HD_CHANNEL, asList(Channel.channel(HBO_HD_CHANNEL), Channel.channel(HBO_2_HD_CHANNEL)))
                                 )
                         )
                 )
@@ -149,20 +149,20 @@ class ChannelCriteriaStrategyTest {
         List<ResultTvPackage> resultTvPackage = new ArrayList<>(asList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                 createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT,
-                                        asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(TVN))
+                                        asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(TVN))
                                 ),
                                 new ArrayList<>(),
-                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))), createTvPackage(FOX_PLAY, Collections.singletonList(Channel.create(FOX_PLAY))))
+                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(DORCEL_TV_HD), Channel.channel(BRAZZERS))), createTvPackage(FOX_PLAY, Collections.singletonList(Channel.channel(FOX_PLAY))))
                         )
                 ),
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
-                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
+                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.channel(POLSAT), Channel.channel(TVN))),
                                 new ArrayList<>(),
-                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))))
+                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.channel(HBO_HD_CHANNEL), Channel.channel(HBO_2_HD_CHANNEL))))
                         )
                 )
         ));
-        Criteria criteria = createCriteria(asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(FOX_PLAY)));
+        Criteria criteria = createCriteria(asList(ELEVEN_SPORTS_1, FOX_PLAY));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
 
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
@@ -170,11 +170,11 @@ class ChannelCriteriaStrategyTest {
         List<ResultTvPackage> expected = Collections.singletonList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT,
                         new FilteredTvPackage(
-                                createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(TVN))),
-                                Collections.singletonList(createTvPackage(FOX_PLAY, Collections.singletonList(Channel.create(FOX_PLAY)))),
+                                createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(TVN))),
+                                Collections.singletonList(createTvPackage(FOX_PLAY, Collections.singletonList(Channel.channel(FOX_PLAY)))),
                                 asList(
-                                        createTvPackage(MULTI_MAN_PACK, asList(Channel.create(DORCEL_TV_HD), Channel.create(BRAZZERS))),
-                                        createTvPackage(FOX_PLAY, Collections.singletonList(Channel.create(FOX_PLAY)))
+                                        createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(DORCEL_TV_HD), Channel.channel(BRAZZERS))),
+                                        createTvPackage(FOX_PLAY, Collections.singletonList(Channel.channel(FOX_PLAY)))
                                 )
                         )
                 )
@@ -187,20 +187,20 @@ class ChannelCriteriaStrategyTest {
         List<ResultTvPackage> resultTvPackage = new ArrayList<>(asList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                                 createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT,
-                                        asList(Channel.create(POLSAT), Channel.create(TVN))
+                                        asList(Channel.channel(POLSAT), Channel.channel(TVN))
                                 ),
                                 new LinkedList<>(),
-                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(BRAZZERS))), createTvPackage(ELEVEN_SPORTS, Collections.singletonList(Channel.create(ELEVEN_SPORTS_1))))
+                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(BRAZZERS))), createTvPackage(ELEVEN_SPORTS, Collections.singletonList(Channel.channel(ELEVEN_SPORTS_1))))
                         )
                 ),
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
-                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
+                                createTvPackage(FAMILY_CYFROWY_POLSAT, asList(Channel.channel(POLSAT), Channel.channel(TVN))),
                                 new LinkedList<>(),
-                                asList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.create(HBO_HD_CHANNEL), Channel.create(HBO_2_HD_CHANNEL))))
+                                Collections.singletonList(createTvPackage(HBO_HD_CHANNEL, asList(Channel.channel(HBO_HD_CHANNEL), Channel.channel(HBO_2_HD_CHANNEL))))
                         )
                 )
         ));
-        Criteria criteria = createCriteria(asList(Channel.create(ELEVEN_SPORTS_1)));
+        Criteria criteria = createCriteria(Collections.singletonList(ELEVEN_SPORTS_1));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
 
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
@@ -208,11 +208,11 @@ class ChannelCriteriaStrategyTest {
         List<ResultTvPackage> expected = Collections.singletonList(
                 createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT,
                         new FilteredTvPackage(
-                                createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT, asList(Channel.create(POLSAT), Channel.create(TVN))),
-                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(BRAZZERS))), createTvPackage(ELEVEN_SPORTS, Collections.singletonList(Channel.create(ELEVEN_SPORTS_1)))),
+                                createTvPackage(SMALL_FAMILY_CYFROWY_POLSAT, asList(Channel.channel(POLSAT), Channel.channel(TVN))),
+                                asList(createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(BRAZZERS))), createTvPackage(ELEVEN_SPORTS, Collections.singletonList(Channel.channel(ELEVEN_SPORTS_1)))),
                                 asList(
-                                        createTvPackage(MULTI_MAN_PACK, asList(Channel.create(ELEVEN_SPORTS_1), Channel.create(BRAZZERS))),
-                                        createTvPackage(ELEVEN_SPORTS, Collections.singletonList(Channel.create(ELEVEN_SPORTS_1)))
+                                        createTvPackage(MULTI_MAN_PACK, asList(Channel.channel(ELEVEN_SPORTS_1), Channel.channel(BRAZZERS))),
+                                        createTvPackage(ELEVEN_SPORTS, Collections.singletonList(Channel.channel(ELEVEN_SPORTS_1)))
                                 )
 
                         )

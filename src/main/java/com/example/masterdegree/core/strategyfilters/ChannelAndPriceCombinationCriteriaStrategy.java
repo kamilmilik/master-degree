@@ -76,13 +76,13 @@ public class ChannelAndPriceCombinationCriteriaStrategy implements CriteriaStrat
     }
 
     List<List<TvPackage>> checkIfCombinedTvPackagesContainsAllCriteriaChannelsExceptChannelsFromMainTvPackage(ResultTvPackage resultTvPackage, List<List<TvPackage>> combinedTvPackages) {
-        criteria.getChannels().forEach(channel -> {
-            boolean isSelectedChannelInMainTvPackage = channelCriteriaStrategy.searchChannelInMainTvPackage(resultTvPackage, channel);
+        criteria.getChannelsName().forEach(channelName -> {
+            boolean isSelectedChannelInMainTvPackage = channelCriteriaStrategy.searchChannelInMainTvPackage(resultTvPackage, channelName);
             if (!isSelectedChannelInMainTvPackage) {
                 combinedTvPackages.removeIf(tvPackages ->
                         tvPackages.stream().noneMatch(tvPackage ->
                                 tvPackage.getChannels().stream().anyMatch(tvPackageChannel ->
-                                        tvPackageChannel.isTheSame(channel)
+                                        tvPackageChannel.isTheSame(channelName)
                                 )
                         )
                 );

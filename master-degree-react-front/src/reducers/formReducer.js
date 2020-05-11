@@ -30,7 +30,7 @@ const initState = {
         operatorsId: [],
         term: NUMBER_OF_MONTHS_VALUE_3.toString(),
         price: MAX_PRICE_FILTER_VALUE,
-        channels: []
+        channelsName: []
     },
     isClearedFilters: false
 };
@@ -59,7 +59,7 @@ const formReducer = (state = initState, action) => {
                 ...state,
                 criteria: {
                     ...state.criteria,
-                    channels: selectedChannels
+                    channelsName: selectedChannels
                 }
             };
         }
@@ -120,7 +120,7 @@ const formReducer = (state = initState, action) => {
                 operatorsId: [],
                 term: NUMBER_OF_MONTHS_VALUE_3.toString(),
                 price: MAX_PRICE_FILTER_VALUE,
-                channels: []
+                channelsName: []
             }
             let selectedCategories = [];
             let selectedChannelsByCategory = {}

@@ -14,6 +14,6 @@ import java.util.List;
 public class CriteriaRequestDto {
     private List<String> operatorsId;
     private double price;
-    private List<ChannelDto> channels;
+    private List<String> channelsName;
     private String term;
 }

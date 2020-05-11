@@ -61,13 +61,13 @@ class ChannelChooser extends Component {
         categoryWithChannels.channels.map((channel, i) => {
             if (!this.isAnyChannelInGivenCategorySelected(selectedChannelsByCategory, categoryKey)) {
                 const selectedArray = [];
-                selectedArray.push(channel);
+                selectedArray.push(channel.name);
                 selectedChannelsByCategory[categoryKey] = selectedArray;
             } else {
-                const indexOfSelected = selectedChannelsByCategory[categoryKey].indexOf(channel);
+                const indexOfSelected = selectedChannelsByCategory[categoryKey].indexOf(channel.name);
                 if (isSelectAll) {
                     if (!this.isElementExist(indexOfSelected)) {
-                        selectedChannelsByCategory[categoryKey].push(channel);
+                        selectedChannelsByCategory[categoryKey].push(channel.name);
                     }
                 } else {
                     if (this.isElementExist(indexOfSelected)) {
@@ -84,18 +84,18 @@ class ChannelChooser extends Component {
         return typeof selectedChannelsByCategory[category] !== 'undefined'
     }
 
-    onChannelClick(channel, categoryWithChannels) {
+    onChannelClick(channelName, categoryWithChannels) {
         const clickedChannelCategoryName = categoryWithChannels.categoryName;
         const mapOfSelectedChannelsByCategory = this.props.selectedChannelsByCategory;
         if (this.isAnyChannelFromGivenCategoryClickedBefore(mapOfSelectedChannelsByCategory, clickedChannelCategoryName)) {
-            this.initListAndPushToGivenCategoryFirstSelectedChannel(mapOfSelectedChannelsByCategory, clickedChannelCategoryName, channel);
+            this.initListAndPushToGivenCategoryFirstSelectedChannel(mapOfSelectedChannelsByCategory, clickedChannelCategoryName, channelName);
         } else {
             let arrayOfSelectedChannelsAssociatedToCategory = mapOfSelectedChannelsByCategory[clickedChannelCategoryName];
-            const indexOfSelected = arrayOfSelectedChannelsAssociatedToCategory.indexOf(channel);
+            const indexOfSelected = arrayOfSelectedChannelsAssociatedToCategory.indexOf(channelName);
             if (this.isElementExist(indexOfSelected)) {
                 arrayOfSelectedChannelsAssociatedToCategory.splice(indexOfSelected, 1);
             } else {
-                arrayOfSelectedChannelsAssociatedToCategory.push(channel);
+                arrayOfSelectedChannelsAssociatedToCategory.push(channelName);
             }
         }
         if (this.isAllChannelsHasBeenSelectedByUserInCategory(mapOfSelectedChannelsByCategory, clickedChannelCategoryName, categoryWithChannels)) {
@@ -176,13 +176,13 @@ class ChannelChooser extends Component {
                                                     <div className={"channel-grid"}>
                                                         {
                                                             categoryWithChannelsDto.channels.map((channel, i) => {
-                                                                let classNameString = this.setClassNameImage(categoryWithChannelsDto, selectedChannelsByCategory, channel);
+                                                                let classNameString = this.setClassNameImage(categoryWithChannelsDto, selectedChannelsByCategory, channel.name);
                                                                 return (
                                                                     <div className="column">
                                                                         <div
                                                                             className={"no-overlay-background" + "-" + classNameString}>
                                                                             <div className={classNameString}
-                                                                                 onClick={() => this.onChannelClick(channel, categoryWithChannelsDto)}
+                                                                                 onClick={() => this.onChannelClick(channel.name, categoryWithChannelsDto)}
                                                                             >
                                                                                 <TooltipMedium
                                                                                     title={<React.Fragment><Typography
@@ -225,12 +225,12 @@ class ChannelChooser extends Component {
         )
     }
 
-    setClassNameImage(categoryWithChannelsDto, selectedChannelsByCategory, channel) {
+    setClassNameImage(categoryWithChannelsDto, selectedChannelsByCategory, channelName) {
         let classNameString = '';
         if (!(categoryWithChannelsDto.categoryName in selectedChannelsByCategory)) {
             classNameString = CHANNEL_IMAGE_NOT_CLICKED;
         } else {
-            if (selectedChannelsByCategory[categoryWithChannelsDto.categoryName].indexOf(channel) !== -1) {
+            if (selectedChannelsByCategory[categoryWithChannelsDto.categoryName].indexOf(channelName) !== -1) {
                 classNameString = CHANNEL_IMAGE_CLICKED;
             } else {
                 classNameString = CHANNEL_IMAGE_NOT_CLICKED;

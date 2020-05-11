@@ -1,9 +1,6 @@
 package com.example.masterdegree.core.strategyfilters;
 
-import com.example.masterdegree.models.dto.ChannelDto;
-import com.example.masterdegree.models.dto.FilteredTvPackageResponseDto;
-import com.example.masterdegree.models.dto.ResultTvPackageResponseDto;
-import com.example.masterdegree.models.dto.TvPackageResponseDto;
+import com.example.masterdegree.models.dto.*;
 import com.example.masterdegree.models.model.Channel;
 import com.example.masterdegree.models.model.Criteria;
 import com.example.masterdegree.models.model.Price;
@@ -48,12 +45,12 @@ public class DataCreationUtils {
         return Criteria.newCriteria(null, new Price(price), null, null);
     }
 
-    public static Criteria createCriteria(List<Channel> channels) {
-        return Criteria.newCriteria(null, new Price(0d), channels, null);
+    public static Criteria createCriteria(List<String> channelsName) {
+        return Criteria.newCriteria(null, new Price(0d), channelsName, null);
     }
 
-    public static Criteria createCriteria(double price, List<Channel> channels) {
-        return Criteria.newCriteria(null, new Price(price), channels, null);
+    public static Criteria createCriteria(double price, List<String> channelsName) {
+        return Criteria.newCriteria(null, new Price(price), channelsName, null);
     }
 
     public static ResultTvPackageResponseDto createResultTvPackageDto(String operatorId, String operatorName, FilteredTvPackageResponseDto filteredTvPackage) {
@@ -68,7 +65,4 @@ public class DataCreationUtils {
         return new TvPackageResponseDto(name, "", 0d, "", "", "", "", channels);
     }
 
-    public static ChannelDto createChannelDto(String name) {
-        return new ChannelDto(name, "");
-    }
 }
