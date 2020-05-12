@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import 'react-image-picker/dist/index.css'
 import '../../../../App.css';
 import './ChannelChooser.css';
-import {Button, Card, CardContent} from "semantic-ui-react";
+import {Button} from "semantic-ui-react";
 import {
     setResult,
     setSelectedCategories,
@@ -12,13 +12,8 @@ import {
 import {connect} from "react-redux";
 import Tooltip from "@material-ui/core/Tooltip";
 import withStyles from "@material-ui/core/styles/withStyles";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import {CheckBox, Image, View} from "react-native-web";
-import Checkbox from "@material-ui/core/Checkbox";
+import {Image} from "react-native-web";
 
 const CLICKED_CATEGORY_BUTTON = "category-button-clicked";
 const NOT_CLICKED_CATEGORY_BUTTON = "category-button";
@@ -147,6 +142,10 @@ class ChannelChooser extends Component {
         return elementToCopy.slice()
     }
 
+    isChannelHD(channelName) {
+        return channelName.toLowerCase().includes("hd");
+    }
+
     render() {
         const {values} = this.props;
         const selectedChannelsByCategory = this.props.selectedChannelsByCategory;
@@ -180,7 +179,7 @@ class ChannelChooser extends Component {
                                                                 return (
                                                                     <div className="column">
                                                                         <div
-                                                                            className={"no-overlay-background" + "-" + classNameString}>
+                                                                            className={"overlay" + "-" + classNameString}>
                                                                             <div className={classNameString}
                                                                                  onClick={() => this.onChannelClick(channel.name, categoryWithChannelsDto)}
                                                                             >
@@ -206,6 +205,12 @@ class ChannelChooser extends Component {
                                                                                     resizeMode="contain"
                                                                                 />
                                                                             </div>
+                                                                            {
+                                                                                this.isChannelHD(channel.name) ?
+                                                                                    <div className={"hd-overlay"}>
+                                                                                        <b>HD</b>
+                                                                                    </div> : null
+                                                                            }
                                                                         </div>
                                                                     </div>
                                                                 );

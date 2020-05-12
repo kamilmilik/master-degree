@@ -78,18 +78,24 @@
     opacity: 0.5;
 }
 
-.no-overlay-background-channel-image:hover .check-hover, .no-overlay-background-channel-image-clicked .check-hover {
+.overlay-channel-image:hover .check-hover, .overlay-channel-image-clicked .check-hover {
     position: absolute;
     margin: -68px 2px 0;
     display: block;
     pointer-events: none;
 }
 
-.no-overlay-background-channel-image .check-hover {
+.overlay-channel-image .check-hover {
     display: none;
     position: absolute;
     margin: -68px 2px 0;
     pointer-events: none;
+}
+
+.hd-overlay {
+    font-size: smaller;
+    position: absolute;
+    margin: -68px 48px 0;
 }
 
 .ui.basic.button, .ui.basic.buttons .button {
@@ -105,20 +111,23 @@
 }
 
 @media only screen and (max-width: 620px) {
-    .list-group-item{
+    .list-group-item {
         display: grid !important;
     }
-    #category-type-title{
+
+    #category-type-title {
         width: unset;
     }
-    #category-button, #category-button-clicked{
+
+    #category-button, #category-button-clicked {
         width: 100%;
     }
-    .channel-grid{
+
+    .channel-grid {
         justify-content: center;
     }
 
-    #channel-header{
+    #channel-header {
         text-align: center;
     }
 }
