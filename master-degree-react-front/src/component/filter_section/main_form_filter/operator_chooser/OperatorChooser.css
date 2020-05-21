@@ -41,7 +41,11 @@
     margin-bottom: 5px;
 }
 
-.operator-image:hover, .operator-image-clicked, .operator-image-clicked:target {
+.operator-image:hover {
+    box-shadow: 0 6px 6px 0 #333;
+}
+
+.operator-image-clicked, .operator-image-clicked:target {
     /*border: solid 1px slategrey;*/
     /*!*box-shadow: 0 6px 6px 0 #333;*!*/
     -moz-border-radius: 5px;
@@ -57,7 +61,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.no-overlay-background-operator-image:hover .check-hover, .no-overlay-background-operator-image-clicked .check-hover {
+.no-overlay-background-operator-image-clicked .check-hover {
     position: absolute;
     margin: -84px 2px 0;
     display: block;
@@ -80,10 +84,11 @@
 }
 
 @media only screen and (max-width: 620px) {
-    #operator-header{
+    #operator-header {
         text-align: center;
     }
-    #operator-segment{
+
+    #operator-segment {
         justify-content: center;
     }
 }

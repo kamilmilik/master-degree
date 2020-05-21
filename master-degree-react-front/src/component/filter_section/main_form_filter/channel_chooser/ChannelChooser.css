@@ -68,7 +68,11 @@
     width: 500px;
 }
 
-.channel-image:hover, .channel-image-clicked, .channel-image-clicked:target {
+.channel-image:hover {
+    box-shadow: 0 6px 6px 0 #333;
+}
+
+.channel-image-clicked, .channel-image-clicked:target {
     /*border: solid 1px slategrey ;*/
     box-shadow: 0 6px 6px 0 #333;
     -moz-border-radius: 5px;
@@ -78,7 +82,7 @@
     opacity: 0.5;
 }
 
-.overlay-channel-image:hover .check-hover, .overlay-channel-image-clicked .check-hover {
+.overlay-channel-image-clicked .check-hover {
     position: absolute;
     margin: -68px 2px 0;
     display: block;
