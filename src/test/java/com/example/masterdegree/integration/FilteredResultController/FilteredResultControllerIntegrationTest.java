@@ -1,11 +1,9 @@
-package com.example.masterdegree.integration;
+package com.example.masterdegree.integration.FilteredResultController;
 
 import com.example.masterdegree.MasterDegreeApplication;
 import com.example.masterdegree.controllers.FilteredResultController;
 import com.example.masterdegree.models.dto.CriteriaRequestDto;
-import com.example.masterdegree.models.model.TvPackage;
 import com.example.masterdegree.models.model.filter.FilteredTvPackage;
-import com.example.masterdegree.models.model.filter.ResultTvPackage;
 import com.example.masterdegree.models.model.filter.ResultTvPackages;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,15 +23,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.example.masterdegree.Constants.*;
 import static com.example.masterdegree.core.strategyfilters.DataCreationUtils.createResultTv;
 import static com.example.masterdegree.core.strategyfilters.DataCreationUtils.createTvPackage;
 import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 @ExtendWith(SpringExtension.class)
@@ -41,8 +36,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FilteredResultControllerIntegrationTest {
 
     private static final String URI = "/api/result";
-    TestRestTemplate restTemplate = new TestRestTemplate();
-    HttpHeaders headers = new HttpHeaders();
+    private final TestRestTemplate restTemplate = new TestRestTemplate();
+    private final HttpHeaders headers = new HttpHeaders();
     @LocalServerPort
     private int port;
     @Autowired
@@ -57,33 +52,12 @@ public class FilteredResultControllerIntegrationTest {
 
         ResultTvPackages actual = objectMapper.readValue(response.getBody(), ResultTvPackages.class);
 
-        List<String> actualOperatorsId = actual.getResultTvPackages().stream().map(ResultTvPackage::getOperatorId).collect(Collectors.toList());
-        List<String> actualOperatorsName = actual.getResultTvPackages().stream().map(ResultTvPackage::getOperatorName).collect(Collectors.toList());
-        Object[] actualExtraAvailableTvPackageNames = prepareDataToCompareForAvailableTvPackagesName(actual);
-        Object[] actualMeetCriteriaTvPackageNames = prepareDataToCompareForMeetCriteriaTvPackagesName(actual);
-        Object[] actualMainTvPackageNames = prepareDataToCompareForMainTvPackagesName(actual);
-
-        List<String> expectedOperatorsId = expected.getResultTvPackages().stream().map(ResultTvPackage::getOperatorId).collect(Collectors.toList());
-        List<String> expectedOperatorsName = expected.getResultTvPackages().stream().map(ResultTvPackage::getOperatorName).collect(Collectors.toList());
-        Object[] expectedExtraAvailableTvPackageNames = prepareDataToCompareForAvailableTvPackagesName(expected);
-        Object[] expectedMeetCriteriaTvPackageNames = prepareDataToCompareForMeetCriteriaTvPackagesName(expected);
-        Object[] expectedMainTvPackageNames = prepareDataToCompareForMainTvPackagesName(expected);
-        assertThat(actualOperatorsId).as("Operator id")
-                .usingRecursiveComparison()
-                .ignoringCollectionOrder()
-                .isEqualTo(expectedOperatorsId);
-        assertThat(actualOperatorsName).as("Operator name")
-                .usingRecursiveComparison()
-                .ignoringCollectionOrder()
-                .isEqualTo(expectedOperatorsName);
-        assertThat(actualMainTvPackageNames).as("Main")
-                .usingRecursiveComparison()
-                .ignoringCollectionOrder()
-                .isEqualTo(expectedMainTvPackageNames);
-        assertThat(actualMeetCriteriaTvPackageNames).as("Meet criteria")
-                .containsExactlyInAnyOrder(expectedMeetCriteriaTvPackageNames);
-        assertThat(actualExtraAvailableTvPackageNames).as("Extra available")
-                .containsExactlyInAnyOrder(expectedExtraAvailableTvPackageNames);
+        FilteredResultControllerAssertion.assertThat(actual)
+                .hasOperatorsId(expected)
+                .hasOperatorsName(expected)
+                .hasMainTvPackageNames(expected)
+                .hasExtraAvailableTvPackageNames(expected)
+                .hasMeetCriteriaTvPackageNames(expected);
     }
 
     private static Stream<Arguments> dataProvider() {
@@ -207,23 +181,6 @@ public class FilteredResultControllerIntegrationTest {
                 Arguments.of(criteriaChannelInMainTvPackage, expectedCriteriaChannelInMainTvPackage),
                 Arguments.of(criteriaChannelInExtraTvPackage, expectedCriteriaChannelInExtraTvPackage)
         );
-    }
-
-    private Object[] prepareDataToCompareForAvailableTvPackagesName(ResultTvPackages input) {
-        return input.getResultTvPackages().stream()
-                .flatMap(resultTvPackage -> resultTvPackage.getFilteredTvPackage().getExtraAvailableTvPackages().stream())
-                .map(TvPackage::getName).toArray();
-    }
-
-    private Object[] prepareDataToCompareForMeetCriteriaTvPackagesName(ResultTvPackages input) {
-        return input.getResultTvPackages().stream()
-                .flatMap(resultTvPackage -> resultTvPackage.getFilteredTvPackage().getExtraTvPackagesWhichMeetCriteria().stream())
-                .map(TvPackage::getName).toArray();
-    }
-
-    private Object[] prepareDataToCompareForMainTvPackagesName(ResultTvPackages input) {
-        return input.getResultTvPackages().stream()
-                .map(resultTvPackage -> resultTvPackage.getFilteredTvPackage().getName()).toArray();
     }
 
     private String createURLWithPort(String uri) {
