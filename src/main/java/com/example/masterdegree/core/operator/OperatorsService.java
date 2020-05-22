@@ -22,7 +22,7 @@ public class OperatorsService {
         return getAllOperatorsFromDb().stream().map(operatorMapper::convertToDto).collect(Collectors.toList());
     }
 
-    public List<Operator> getAllOperatorsFromDb() {
+    private List<Operator> getAllOperatorsFromDb() {
         return operatorsRepository.findAll();
     }
 }

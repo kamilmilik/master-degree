@@ -2,9 +2,7 @@ package com.example.masterdegree.core.filteredresult;
 
 import com.example.masterdegree.core.strategyfilters.*;
 import com.example.masterdegree.models.dto.CriteriaRequestDto;
-import com.example.masterdegree.models.dto.ResultTvPackagesResponseDto;
 import com.example.masterdegree.models.mappers.CriteriaMapper;
-import com.example.masterdegree.models.mappers.ResultTvPackagesMapper;
 import com.example.masterdegree.models.model.Criteria;
 import com.example.masterdegree.models.model.MainTvPackage;
 import com.example.masterdegree.models.model.Operator;
@@ -25,16 +23,18 @@ public class FilteredResultService {
 
     private final OperatorsRepository operatorsRepository;
 
-    public ResultTvPackagesResponseDto getFilteredResult(CriteriaRequestDto criteriaRequestDto) {
+    public ResultTvPackages getFilteredResult(CriteriaRequestDto criteriaRequestDto) {
         CriteriaMapper criteriaMapper = new CriteriaMapper();
-        ResultTvPackagesMapper resultTvPackagesMapper = new ResultTvPackagesMapper();
         Criteria criteria = criteriaMapper.convertToEntity(criteriaRequestDto);
+
         List<ResultTvPackage> resultTvPackages = getFilteredResults(criteria);
-        return resultTvPackagesMapper.convertToDto(new ResultTvPackages(resultTvPackages));
+
+        return new ResultTvPackages(resultTvPackages);
     }
 
     private List<ResultTvPackage> getFilteredResults(Criteria criteria) {
         List<ResultTvPackage> resultTvPackages = createResultWithoutFilters();
+
         return filterByCriteria(criteria, resultTvPackages);
     }
 
@@ -47,6 +47,7 @@ public class FilteredResultService {
                 .criteria(new ChannelCriteriaStrategy(criteria))
                 .criteria(new ChannelAndPriceCombinationCriteriaStrategy(criteria))
                 .build();
+
         return andCriteria.getFilteredResult(resultTvPackages);
     }
 

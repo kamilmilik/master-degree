@@ -53,16 +53,7 @@ public class DataCreationUtils {
         return Criteria.newCriteria(null, new Price(price), channelsName, null);
     }
 
-    public static ResultTvPackageResponseDto createResultTvPackageDto(String operatorId, String operatorName, FilteredTvPackageResponseDto filteredTvPackage) {
-        return new ResultTvPackageResponseDto(operatorId, operatorName, "", filteredTvPackage);
+    public static ResultTvPackage createResultTv(String operatorId, String operatorName, FilteredTvPackage filteredTvPackage) {
+        return new ResultTvPackage(operatorId, operatorName, "", filteredTvPackage);
     }
-
-    public static TvPackageResponseDto createTvPackageDto(String name) {
-        return new TvPackageResponseDto(name, "", 0d, "", "", "", "", new LinkedList<>());
-    }
-
-    public static TvPackageResponseDto createTvPackageDto(String name, List<ChannelDto> channels) {
-        return new TvPackageResponseDto(name, "", 0d, "", "", "", "", channels);
-    }
-
 }
