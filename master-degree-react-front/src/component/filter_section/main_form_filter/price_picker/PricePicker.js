@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
 import './PricePicker.css';
-import {setResult, setSelectedPrice} from "../../../../reducers/actions/actions";
+import {setResult, setSelectedPrice} from "../../../../redux/actions/actions";
 import {connect} from "react-redux";
-import {
-    DEFAULT_MIN_PRICE_FILTER_VALUE,
-    MAX_PRICE_FILTER_VALUE,
-    MIN_PRICE_FILTER_VALUE,
-    DEFAULT_MAX_PRICE_FILTER_VALUE
-} from "../Const";
+import {MAX_PRICE_FILTER_VALUE} from "../Const";
 import 'antd/dist/antd.css';
-import {Slider, Switch} from 'antd';
+import {Slider} from 'antd';
 
 class PricePicker extends Component {
 
@@ -55,8 +50,8 @@ class PricePicker extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        result: state.formReducer.result,
-        criteria: state.formReducer.criteria,
+        result: state.reducer.result,
+        criteria: state.reducer.criteria,
     }
 };
 

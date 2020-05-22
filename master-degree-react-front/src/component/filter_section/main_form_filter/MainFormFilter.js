@@ -5,7 +5,7 @@ import PricePicker from "./price_picker/PricePicker";
 import ChannelDataService from "../../../service/ChannelDataService";
 import ChannelChooser from "./channel_chooser/ChannelChooser";
 import TermChooser from "./term_chooser/TermChooser";
-import {setAllChannels, setAllOperators} from "../../../reducers/actions/actions";
+import {setAllChannels, setAllOperators} from "../../../redux/actions/actions";
 import {connect} from "react-redux";
 import ButtonsContainer from "./result_buttons/ButtonsContainer";
 
@@ -72,8 +72,8 @@ class MainFormFilter extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        operatorsDto: state.formReducer.operatorsDto,
-        channelsGroupByCategoryDto: state.formReducer.channelsGroupByCategoryDto
+        operatorsDto: state.reducer.operatorsDto,
+        channelsGroupByCategoryDto: state.reducer.channelsGroupByCategoryDto
     }
 };
 

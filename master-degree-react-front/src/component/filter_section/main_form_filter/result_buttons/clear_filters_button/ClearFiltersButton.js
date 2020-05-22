@@ -3,7 +3,7 @@ import './ClearFiltersButton.css';
 import {Button, Icon} from "semantic-ui-react";
 import {Link} from "react-scroll";
 import {connect} from "react-redux";
-import {clearFilterElements, setIsClearedFilters, setResult} from "../../../../../reducers/actions/actions";
+import {clearFilterElements, setIsClearedFilters} from "../../../../../redux/actions/actions";
 
 class ClearFiltersButton extends Component {
 
@@ -45,7 +45,7 @@ class ClearFiltersButton extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        criteria: state.formReducer.criteria
+        criteria: state.reducer.criteria
     };
 };
 

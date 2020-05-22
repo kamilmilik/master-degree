@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {setResult} from "../../../../reducers/actions/actions";
+import {setResult} from "../../../../redux/actions/actions";
 import {connect} from "react-redux";
 import HorizontalCardResult from "./card_result/HorizontalCardResult";
 import "./ResultsComponent.css";
@@ -51,7 +51,7 @@ class ResultsComponent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        result: state.formReducer.result
+        result: state.reducer.result
     }
 };
 

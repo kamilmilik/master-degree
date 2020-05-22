@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import 'react-image-picker/dist/index.css'
 import '../../../../App.css';
 import './TermChooser.css';
-import {setSelectedTerm} from "../../../../reducers/actions/actions";
+import {setSelectedTerm} from "../../../../redux/actions/actions";
 import {connect} from "react-redux";
 import {
     NUMBER_OF_MONTHS_VALUE_1,
@@ -81,7 +81,7 @@ class TermChooser extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        criteria: state.formReducer.criteria
+        criteria: state.reducer.criteria
     }
 };
 

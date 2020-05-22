@@ -46,9 +46,9 @@ class MainSearchResultComponent extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory,
-        criteria: state.formReducer.criteria,
-        isClearedFilters: state.formReducer.isClearedFilters
+        selectedChannelsByCategory: state.reducer.selectedChannelsByCategory,
+        criteria: state.reducer.criteria,
+        isClearedFilters: state.reducer.isClearedFilters
     };
 };
 

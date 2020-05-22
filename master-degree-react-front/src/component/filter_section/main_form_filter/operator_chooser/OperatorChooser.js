@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import 'react-image-picker/dist/index.css'
 import './OperatorChooser.css';
-import {setIsLoadingFilteredResult, setResult, setSelectedOperators} from "../../../../reducers/actions/actions";
+import {setResult, setSelectedOperators} from "../../../../redux/actions/actions";
 import {connect} from "react-redux";
 import Typography from "@material-ui/core/Typography";
-import {Image, Text, View} from "react-native-web";
-import Checkbox from "@material-ui/core/Checkbox";
+import {Image} from "react-native-web";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
-import {Card, Icon} from "semantic-ui-react";
 
 export const OPERATOR_IMAGE_CLICKED = "operator-image-clicked";
 export const OPERATOR_IMAGE_NOT_CLICKED = "operator-image";
@@ -103,9 +101,9 @@ class OperatorChooser extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        operatorsDto: state.formReducer.operatorsDto,
-        result: state.formReducer.result,
-        criteria: state.formReducer.criteria
+        operatorsDto: state.reducer.operatorsDto,
+        result: state.reducer.result,
+        criteria: state.reducer.criteria
     }
 };
 

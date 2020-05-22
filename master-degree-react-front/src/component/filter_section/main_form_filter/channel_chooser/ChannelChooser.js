@@ -8,7 +8,7 @@ import {
     setSelectedCategories,
     setSelectedChannels,
     setSelectedChannelsByCategory
-} from "../../../../reducers/actions/actions";
+} from "../../../../redux/actions/actions";
 import {connect} from "react-redux";
 import Tooltip from "@material-ui/core/Tooltip";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -249,10 +249,10 @@ class ChannelChooser extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        selectedChannelsByCategory: state.formReducer.selectedChannelsByCategory,
-        channelsGroupByCategoryDto: state.formReducer.channelsGroupByCategoryDto,
-        selectedCategories: state.formReducer.selectedCategories,
-        result: state.formReducer.result,
+        selectedChannelsByCategory: state.reducer.selectedChannelsByCategory,
+        channelsGroupByCategoryDto: state.reducer.channelsGroupByCategoryDto,
+        selectedCategories: state.reducer.selectedCategories,
+        result: state.reducer.result,
     }
 };
 

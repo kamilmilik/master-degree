@@ -36,7 +36,7 @@ const initState = {
 };
 
 // reducers: these are functions that implement the behavior of the actions. They change the state of the app, based on the action description and the state change description.
-const formReducer = (state = initState, action) => {
+const reducer = (state = initState, action) => {
 
     switch (action.type) {
         case SET_ALL_OPERATORS: {
@@ -143,4 +143,4 @@ const formReducer = (state = initState, action) => {
     }
 };
 
-export default formReducer
+export default reducer

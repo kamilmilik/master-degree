@@ -1,8 +1,6 @@
 import React, {Component} from "react";
-import {setResult} from "../../reducers/actions/actions";
+import {setResult} from "../../redux/actions/actions";
 import {connect} from "react-redux";
-import {trackPromise} from "react-promise-tracker";
-import FilteredResultDataService from "../../service/FilteredResultDataService";
 import {LoadingSpinner} from "../loading-spinner/LoadingSpinner";
 import MainSearchResultComponent from "./main_search_result/MainSearchResultComponent";
 
@@ -17,8 +15,8 @@ class ResultSection extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        result: state.formReducer.result,
-        criteria: state.formReducer.criteria
+        result: state.reducer.result,
+        criteria: state.reducer.criteria
     };
 };
 
