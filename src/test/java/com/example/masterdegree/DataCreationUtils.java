@@ -1,10 +1,6 @@
-package com.example.masterdegree.core.strategyfilters;
+package com.example.masterdegree;
 
-import com.example.masterdegree.models.dto.*;
-import com.example.masterdegree.models.model.Channel;
-import com.example.masterdegree.models.model.Criteria;
-import com.example.masterdegree.models.model.Price;
-import com.example.masterdegree.models.model.TvPackage;
+import com.example.masterdegree.models.model.*;
 import com.example.masterdegree.models.model.filter.FilteredTvPackage;
 import com.example.masterdegree.models.model.filter.ResultTvPackage;
 
@@ -17,12 +13,20 @@ public class DataCreationUtils {
         return new ResultTvPackage(operatorId, operatorName, "", filteredTvPackage);
     }
 
+    public static Operator createOperator(String id, String name, List<MainTvPackage> mainTvPackages) {
+        return new Operator(id, name, "", mainTvPackages);
+    }
+
     public static TvPackage createTvPackage(String name) {
         return new TvPackage(name, "", 0d, "", "", "", "", "", new LinkedList<>());
     }
 
     public static TvPackage createTvPackage(String name, double price, List<Channel> channels) {
         return new TvPackage(name, "", price, "", "", "", "", "", channels);
+    }
+
+    public static TvPackage createTvPackage(String name, double price, String term, List<Channel> channels) {
+        return new TvPackage(name, "", price, "", "", "", term, "", channels);
     }
 
     public static TvPackage createTvPackage(String name, String term) {
@@ -41,11 +45,23 @@ public class DataCreationUtils {
         return new TvPackage("", "", 0d, "", "", "", "", "", channels);
     }
 
+    public static MainTvPackage createMainTvPackage(String name, List<Channel> channels, List<TvPackage> extraTvPackages) {
+        return new MainTvPackage(name, "", 0d, "", "", "", "", "", channels, extraTvPackages);
+    }
+
+    public static MainTvPackage createMainTvPackage(String name, double price, String term, List<Channel> channels, List<TvPackage> extraTvPackages) {
+        return new MainTvPackage(name, "", price, "", "", "", term, "", channels, extraTvPackages);
+    }
+
     public static Criteria createCriteria(double price) {
         return Criteria.newCriteria(null, new Price(price), null, null);
     }
 
-    public static Criteria createCriteria(List<String> channelsName) {
+    public static Criteria createCriteriaOperators(List<String> operators) {
+        return Criteria.newCriteria(operators, new Price(0d), null, null);
+    }
+
+    public static Criteria createCriteriaChannels(List<String> channelsName) {
         return Criteria.newCriteria(null, new Price(0d), channelsName, null);
     }
 

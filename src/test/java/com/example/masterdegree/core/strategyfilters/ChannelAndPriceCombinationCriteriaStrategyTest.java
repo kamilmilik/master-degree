@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static com.example.masterdegree.Constants.*;
-import static com.example.masterdegree.core.strategyfilters.DataCreationUtils.*;
+import static com.example.masterdegree.DataCreationUtils.*;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -178,7 +178,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         }
 
         Stream<Arguments> provideDataForCombinedTvPackagesWhereSomeCombinationsContainsAllChannels() {
-            Criteria criteria = createCriteria(asList(HBO_HD_CHANNEL, ELEVEN_SPORTS_1, ADVENTURE, POLSAT));
+            Criteria criteria = createCriteriaChannels(asList(HBO_HD_CHANNEL, ELEVEN_SPORTS_1, ADVENTURE, POLSAT));
             ResultTvPackage inputResultNotImportantExtraAndMeetTvPackages = createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.channel(POLSAT), Channel.channel(TVN))),
                     new ArrayList<>(),
@@ -205,7 +205,7 @@ public class ChannelAndPriceCombinationCriteriaStrategyTest {
         }
 
         Stream<Arguments> provideDataForCombinedTvPackagesNotContainsAllCriteriaChannels() {
-            Criteria criteria = createCriteria(asList(HBO_HD_CHANNEL, ELEVEN_SPORTS_1, ADVENTURE, POLSAT_SPORT_PREMIUM));
+            Criteria criteria = createCriteriaChannels(asList(HBO_HD_CHANNEL, ELEVEN_SPORTS_1, ADVENTURE, POLSAT_SPORT_PREMIUM));
             ResultTvPackage inputResultNotImportantExtraAndMeetTvPackages = createResultTvPackage(CYFROWY_POLSAT_ID, CYFROWY_POLSAT, new FilteredTvPackage(
                     createTvPackage(FAMILY_CYFROWY_POLSAT, 50d, asList(Channel.channel(POLSAT), Channel.channel(TVN))),
                     new ArrayList<>(),

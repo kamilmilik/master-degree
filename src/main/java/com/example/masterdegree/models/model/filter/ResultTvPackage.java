@@ -10,11 +10,11 @@ import lombok.*;
 public class ResultTvPackage {
 
     @NonNull
-    private String operatorId;
+    private final String operatorId;
     @NonNull
-    private String operatorName;
-    private String operatorImg;
+    private final String operatorName;
+    private final String operatorImg;
     @NonNull
-    private FilteredTvPackage filteredTvPackage;
+    private final FilteredTvPackage filteredTvPackage;
 
 }

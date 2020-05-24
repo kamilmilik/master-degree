@@ -16,10 +16,10 @@ public class PriceCriteriaStrategy implements CriteriaStrategy {
 
     @Override
     public List<ResultTvPackage> getFilteredResult(List<ResultTvPackage> resultTvPackages) {
-        return this.getResultFilteredByRangePriceInMainTvPackages(resultTvPackages);
+        return this.getResultFilteredByPriceInMainTvPackages(resultTvPackages);
     }
 
-    public List<ResultTvPackage> getResultFilteredByRangePriceInMainTvPackages(List<ResultTvPackage> resultTvPackages) {
+    private List<ResultTvPackage> getResultFilteredByPriceInMainTvPackages(List<ResultTvPackage> resultTvPackages) {
         return resultTvPackages.stream()
                 .filter(resultTvPackage -> criteria.getPrice().isGreaterThan(resultTvPackage.getFilteredTvPackage().getPrice()))
                 .collect(Collectors.toList());

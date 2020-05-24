@@ -40,7 +40,7 @@ public class ChannelAndPriceCombinationCriteriaStrategy implements CriteriaStrat
                     if (!hasMeetAllCriteriaTvPackages(meetAllCriteriaTvPackages)) {
                         resultsToDelete.add(resultTvPackage);
                     }
-                    resultTvPackage.getFilteredTvPackage().replaceExtraTvPackagesWithGivenList(meetAllCriteriaTvPackages);
+                    resultTvPackage.getFilteredTvPackage().replaceExtraTvPackagesWhichMeetCriteriaWith(meetAllCriteriaTvPackages);
                 }
             });
             resultTvPackages = removeResultsWhichNotMeetCriteria(resultTvPackages, resultsToDelete);

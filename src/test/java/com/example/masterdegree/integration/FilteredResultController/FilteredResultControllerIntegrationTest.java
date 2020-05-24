@@ -26,8 +26,8 @@ import java.util.LinkedList;
 import java.util.stream.Stream;
 
 import static com.example.masterdegree.Constants.*;
-import static com.example.masterdegree.core.strategyfilters.DataCreationUtils.createResultTv;
-import static com.example.masterdegree.core.strategyfilters.DataCreationUtils.createTvPackage;
+import static com.example.masterdegree.DataCreationUtils.createResultTv;
+import static com.example.masterdegree.DataCreationUtils.createTvPackage;
 import static java.util.Arrays.asList;
 
 
@@ -61,7 +61,7 @@ public class FilteredResultControllerIntegrationTest {
     }
 
     private static Stream<Arguments> dataProvider() {
-        CriteriaRequestDto criteriaChannelsDefaultPriceAndTerm = new CriteriaRequestDto(new ArrayList<>(), 400d, asList(NETFLIX_4K, HBO_GO, FOX_PLAY), "24");
+        CriteriaRequestDto criteriaChannelsDefaultPriceAndTerm = new CriteriaRequestDto(new ArrayList<>(), 400d, asList(NETFLIX_4K, HBO_GO, FOX_PLAY), TERM_24);
         ResultTvPackages expectedComfortAndExtra = new ResultTvPackages(asList(
                 createResultTv(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackage(
                         createTvPackage(COMFORT_CANAL_PLUS_NETFLIX),
@@ -102,7 +102,7 @@ public class FilteredResultControllerIntegrationTest {
                 new ArrayList<>(Collections.singletonList("5e77b71972e086126cc4e6b3")),
                 143d,
                 asList(DTX_HD, SPORT_PREMIUM_1, DORCEL_TV_HD),
-                "24");
+                TERM_24);
         ResultTvPackages expectedExtraAndSuperPremium = new ResultTvPackages(asList(
                 createResultTv(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackage(
                         createTvPackage(EXTRA_CANAL_PLUS),
@@ -136,7 +136,7 @@ public class FilteredResultControllerIntegrationTest {
                 ))
         ));
         CriteriaRequestDto criteriaChannelInMainTvPackage = new CriteriaRequestDto(
-                new ArrayList<>(Collections.singletonList("5e77b71972e086126cc4e6b3")), 75d, Collections.singletonList(BOOMERANG_HD), "24"
+                new ArrayList<>(Collections.singletonList("5e77b71972e086126cc4e6b3")), 75d, Collections.singletonList(BOOMERANG_HD), TERM_24
         );
         ResultTvPackages expectedCriteriaChannelInMainTvPackage = new ResultTvPackages(Collections.singletonList(
                 createResultTv(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackage(
@@ -155,7 +155,7 @@ public class FilteredResultControllerIntegrationTest {
         ));
 
         CriteriaRequestDto criteriaChannelInExtraTvPackage = new CriteriaRequestDto(
-                new ArrayList<>(Collections.singletonList("5e77b71972e086126cc4e6b3")), 131d, Collections.singletonList(NETFLIX_4K), "24"
+                new ArrayList<>(Collections.singletonList("5e77b71972e086126cc4e6b3")), 131d, Collections.singletonList(NETFLIX_4K), TERM_24
         );
         ResultTvPackages expectedCriteriaChannelInExtraTvPackage = new ResultTvPackages(Collections.singletonList(
                 createResultTv(CANAL_PLUS_ID, CANAL_PLUS, new FilteredTvPackage(

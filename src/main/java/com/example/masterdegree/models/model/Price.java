@@ -8,7 +8,7 @@ import lombok.Value;
 
 @Value
 public class Price {
-    private final double maxPrice;
+    double maxPrice;
 
     public Price(double price){
         this.maxPrice = price;

@@ -1,33 +1,25 @@
 package com.example.masterdegree.core.strategyfilters;
 
-import com.example.masterdegree.models.model.*;
+import com.example.masterdegree.models.model.Criteria;
+import com.example.masterdegree.models.model.Term;
 import com.example.masterdegree.models.model.filter.FilteredTvPackage;
 import com.example.masterdegree.models.model.filter.ResultTvPackage;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static com.example.masterdegree.Constants.*;
-import static com.example.masterdegree.core.strategyfilters.DataCreationUtils.createResultTvPackage;
-import static com.example.masterdegree.core.strategyfilters.DataCreationUtils.createTvPackage;
+import static com.example.masterdegree.DataCreationUtils.createResultTvPackage;
+import static com.example.masterdegree.DataCreationUtils.createTvPackage;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TermCriteriaStrategyTest {
-
-    private static final String NO_TERM = "0";
-    private static final String TERM_6 = "6";
-    private static final String TERM_12 = "12";
-    private static final String TERM_24 = "24";
 
     @ParameterizedTest
     @MethodSource("provideDataForTermResult")

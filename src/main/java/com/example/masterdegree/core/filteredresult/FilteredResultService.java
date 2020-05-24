@@ -41,11 +41,11 @@ public class FilteredResultService {
     private List<ResultTvPackage> filterByCriteria(Criteria criteria, List<ResultTvPackage> resultTvPackages){
         // Filter order: operators -> term -> channels -> price
         CriteriaStrategy andCriteria = AndCriteria.builder()
-                .criteria(new OperatorCriteriaStrategy(criteria))
-                .criteria(new TermCriteriaStrategy(criteria))
-                .criteria(new PriceCriteriaStrategy(criteria))
-                .criteria(new ChannelCriteriaStrategy(criteria))
-                .criteria(new ChannelAndPriceCombinationCriteriaStrategy(criteria))
+                .criteriaStrategy(new OperatorCriteriaStrategy(criteria))
+                .criteriaStrategy(new TermCriteriaStrategy(criteria))
+                .criteriaStrategy(new PriceCriteriaStrategy(criteria))
+                .criteriaStrategy(new ChannelCriteriaStrategy(criteria))
+                .criteriaStrategy(new ChannelAndPriceCombinationCriteriaStrategy(criteria))
                 .build();
 
         return andCriteria.getFilteredResult(resultTvPackages);

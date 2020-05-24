@@ -8,10 +8,9 @@ import lombok.*;
 @EqualsAndHashCode(of = {"name"})
 public class Channel {
 
-    @NonNull
-    private String name;
-    private String desc;
-    private String imgSrc;
+    @NonNull String name;
+    String desc;
+    String imgSrc;
 
     public static Channel channel(String name){ // To make object immutable. Factory method.
         return new Channel(name, null, null);

@@ -10,16 +10,17 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @Document(collection = "channelsgroupbycategory")
+@EqualsAndHashCode
 public class ChannelsGroupByCategory {
 
     @Id
     @NonNull
-    private String id;
+    private final String id;
     @NonNull
-    private String categoryName;
+    private final String categoryName;
     @NonNull
     @Getter(AccessLevel.NONE)
-    private List<Channel> channels;
+    private final List<Channel> channels;
 
     public List<Channel> getChannels() {
         return Collections.unmodifiableList(channels);

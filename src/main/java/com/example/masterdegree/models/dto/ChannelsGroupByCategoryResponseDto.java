@@ -8,6 +8,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode
 public class ChannelsGroupByCategoryResponseDto {
 
     @Id

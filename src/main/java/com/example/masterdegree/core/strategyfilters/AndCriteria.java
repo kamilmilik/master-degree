@@ -10,12 +10,12 @@ import java.util.List;
 public class AndCriteria implements CriteriaStrategy {
 
     @Singular
-    private final List<CriteriaStrategy> criterias;
+    private final List<CriteriaStrategy> criteriaStrategies;
 
     @Override
     public List<ResultTvPackage> getFilteredResult(List<ResultTvPackage> resultTvPackages) {
         List<ResultTvPackage> filteredResultTvPackages = resultTvPackages;
-        for (CriteriaStrategy criteria : criterias) {
+        for (CriteriaStrategy criteria : criteriaStrategies) {
             filteredResultTvPackages = criteria.getFilteredResult(filteredResultTvPackages);
         }
         return filteredResultTvPackages;

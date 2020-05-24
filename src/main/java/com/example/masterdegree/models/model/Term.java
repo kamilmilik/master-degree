@@ -7,7 +7,7 @@ public class Term {
 
     private static final String NO_TERM = "0";
 
-    private final String term;
+    String term;
 
     public Term(String term) {
         this.term = term;

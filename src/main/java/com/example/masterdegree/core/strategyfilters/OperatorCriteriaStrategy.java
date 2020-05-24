@@ -20,7 +20,7 @@ public class OperatorCriteriaStrategy implements CriteriaStrategy {
     public List<ResultTvPackage> getFilteredResult(List<ResultTvPackage> resultTvPackages) {
         return getResultBySelectedOperators(resultTvPackages);
     }
-    public List<ResultTvPackage> getResultBySelectedOperators(List<ResultTvPackage> resultTvPackages) {
+    private List<ResultTvPackage> getResultBySelectedOperators(List<ResultTvPackage> resultTvPackages) {
         if(!criteria.getOperatorsId().isEmpty()){ // Empty operators id means that all operators are in criteria.
             Set<String> objectIdSet = new HashSet<>(criteria.getOperatorsId());
             resultTvPackages = resultTvPackages.stream().filter(resultTvPackage -> objectIdSet.contains(resultTvPackage.getOperatorId())).collect(Collectors.toList());

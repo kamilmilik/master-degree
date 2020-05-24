@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static com.example.masterdegree.Constants.*;
-import static com.example.masterdegree.core.strategyfilters.DataCreationUtils.*;
+import static com.example.masterdegree.DataCreationUtils.*;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,7 +36,7 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         ));
-        Criteria criteria = createCriteria(Collections.singletonList(FUN_TV));
+        Criteria criteria = createCriteriaChannels(Collections.singletonList(FUN_TV));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
 
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
@@ -76,7 +76,7 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         ));
-        Criteria criteria = createCriteria(Collections.singletonList(ELEVEN_SPORTS_1));
+        Criteria criteria = createCriteriaChannels(Collections.singletonList(ELEVEN_SPORTS_1));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
 
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
@@ -124,7 +124,7 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         ));
-        Criteria criteria = createCriteria(Collections.singletonList(ELEVEN_SPORTS_1));
+        Criteria criteria = createCriteriaChannels(Collections.singletonList(ELEVEN_SPORTS_1));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
 
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
@@ -162,7 +162,7 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         ));
-        Criteria criteria = createCriteria(asList(ELEVEN_SPORTS_1, FOX_PLAY));
+        Criteria criteria = createCriteriaChannels(asList(ELEVEN_SPORTS_1, FOX_PLAY));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
 
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);
@@ -200,7 +200,7 @@ class ChannelCriteriaStrategyTest {
                         )
                 )
         ));
-        Criteria criteria = createCriteria(Collections.singletonList(ELEVEN_SPORTS_1));
+        Criteria criteria = createCriteriaChannels(Collections.singletonList(ELEVEN_SPORTS_1));
         ChannelCriteriaStrategy channelCriteriaStrategy = new ChannelCriteriaStrategy(criteria);
 
         List<ResultTvPackage> actual = channelCriteriaStrategy.getFilteredResult(resultTvPackage);

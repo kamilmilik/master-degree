@@ -23,7 +23,7 @@ public class FilteredTvPackage extends TvPackage {
         this.extraAvailableTvPackages = extraAvailableTvPackages;
     }
 
-    public List<TvPackage> getExtraAvailableTvPackages() { // Getter for mapper.
+    public List<TvPackage> getExtraAvailableTvPackages() {
         return Collections.unmodifiableList(extraAvailableTvPackages);
     }
 
@@ -31,7 +31,7 @@ public class FilteredTvPackage extends TvPackage {
         return extraTvPackagesWhichMeetCriteria.size() > 0;
     }
 
-    public void replaceExtraTvPackagesWithGivenList(List<TvPackage> listToReplace) {
+    public void replaceExtraTvPackagesWhichMeetCriteriaWith(List<TvPackage> listToReplace) {
         extraTvPackagesWhichMeetCriteria = new LinkedList<>();
         extraTvPackagesWhichMeetCriteria.addAll(listToReplace);
     }
@@ -40,10 +40,10 @@ public class FilteredTvPackage extends TvPackage {
         extraAvailableTvPackages.removeAll(tvPackages);
     }
 
-    public void removeGivenTvPackageFromExtraTvPackagesIfContainsAllChannels(List<TvPackage> tvPackages){
-        tvPackages.forEach(meetCriteriaTvPackage -> {
-            extraAvailableTvPackages.removeIf(tvPackage ->
-                    meetCriteriaTvPackage.getChannels().containsAll(tvPackage.getChannels())
+    public void removeGivenTvPackageFromExtraTvPackagesIfContainsAllChannels(List<TvPackage> tvPackages) {
+        tvPackages.forEach(tvPackage -> {
+            extraAvailableTvPackages.removeIf(extraTvPackage ->
+                    tvPackage.getChannels().containsAll(extraTvPackage.getChannels())
             );
         });
     }
