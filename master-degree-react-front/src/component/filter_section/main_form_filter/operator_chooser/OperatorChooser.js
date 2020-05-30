@@ -8,6 +8,7 @@ import {Image} from "react-native-web";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
 import {CHOOSE_OPERATOR, CHOOSE_OPERATOR_DESC} from "../../../../lang/pl";
+import Container from "../../../custom_components/container/Container";
 
 export const OPERATOR_IMAGE_CLICKED = "operator-image-clicked";
 export const OPERATOR_IMAGE_NOT_CLICKED = "operator-image";
@@ -46,58 +47,55 @@ class OperatorChooser extends Component {
     render() {
         const {values} = this.props;
         return (
-            <div className={'container-fluid'} id={"main-operator-chooser-container"}>
-                <div className={"ui segment"} id={"operator-main-segment"}>
-                    <div className={"col-md-12"} id={"operators-list"}>
-                        <div className={"mdb-lightbox no-margin"}>
-                            <div id={"operator-header"}>
-                                <h4>{CHOOSE_OPERATOR}</h4>
-                                {CHOOSE_OPERATOR_DESC}
-                            </div>
-                            <div id={"operator-grid"}>
-                                <div className={"ui segment"} id={"operator-segment"}>
-                                    {
-                                        values.operatorsDto.map((operator) => {
-                                            let classNameString = this.props.criteria.operatorsId.indexOf(operator.id) !== -1 ? OPERATOR_IMAGE_CLICKED : OPERATOR_IMAGE_NOT_CLICKED;
-                                            return (
-                                                <div className={"operator-container"}>
-                                                    <div className={"no-overlay-background" + "-" + classNameString}>
-                                                        <div className={classNameString}
-                                                             onClick={() => this.handleImageClick(operator.id)}
-                                                        >
-                                                            <TooltipMedium title={<React.Fragment><Typography
-                                                                color="inherit">{operator.name} </Typography></React.Fragment>}>
-                                                                <div className={"operator-image-container"}>
-                                                                    <Image
-                                                                        size={"medium"}
-                                                                        style={{width: 70, height: 70}}
-                                                                        source={{uri: operator.imgSrc}}
-                                                                        resizeMode="contain"
-                                                                    />
-                                                                </div>
-                                                            </TooltipMedium>
-                                                        </div>
-                                                        <div className={"check-hover"}>
-                                                            <Image
-                                                                style={{width: 20, height: 20}}
-                                                                source={{uri: "https://img.icons8.com/color/48/000000/checked-2.png"}}
-                                                                resizeMode="contain"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Container
+                headerTitle={CHOOSE_OPERATOR}
+                headerDescription={CHOOSE_OPERATOR_DESC}
+                component={this.operatorComponent(values)}
+            />
         )
     }
 
+    operatorComponent(values) {
+        return (
+            <div id={"operator-grid"}>
+                <div className={"ui segment"} id={"operator-segment"}>
+                    {
+                        values.operatorsDto.map((operator) => {
+                            let classNameString = this.props.criteria.operatorsId.indexOf(operator.id) !== -1 ? OPERATOR_IMAGE_CLICKED : OPERATOR_IMAGE_NOT_CLICKED;
+                            return (
+                                <div className={"operator-container"}>
+                                    <div className={"no-overlay-background" + "-" + classNameString}>
+                                        <div className={classNameString}
+                                             onClick={() => this.handleImageClick(operator.id)}
+                                        >
+                                            <TooltipMedium title={<React.Fragment><Typography
+                                                color="inherit">{operator.name} </Typography></React.Fragment>}>
+                                                <div className={"operator-image-container"}>
+                                                    <Image
+                                                        size={"medium"}
+                                                        style={{width: 70, height: 70}}
+                                                        source={{uri: operator.imgSrc}}
+                                                        resizeMode="contain"
+                                                    />
+                                                </div>
+                                            </TooltipMedium>
+                                        </div>
+                                        <div className={"check-hover"}>
+                                            <Image
+                                                style={{width: 20, height: 20}}
+                                                source={{uri: "https://img.icons8.com/color/48/000000/checked-2.png"}}
+                                                resizeMode="contain"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {

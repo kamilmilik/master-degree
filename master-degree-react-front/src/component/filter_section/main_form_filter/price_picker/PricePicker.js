@@ -6,6 +6,7 @@ import {MAX_PRICE_FILTER_VALUE} from "../Const";
 import 'antd/dist/antd.css';
 import {Slider} from 'antd';
 import {CHOOSE_PRICE, CHOOSE_PRICE_DESC, CURRENCY} from "../../../../lang/pl";
+import Container from "../../../custom_components/container/Container";
 
 class PricePicker extends Component {
 
@@ -20,32 +21,29 @@ class PricePicker extends Component {
 
     render() {
         return (
-            <div className={"container-fluid"} id={"main-price-picker-container"}>
-                <div className={"ui segment"} id={"price-main-segment"}>
-                    <div className={"col-md-12"}>
-                        <div className={"mdb-lightbox no-margin"}>
-                            <div id={"price-header"}>
-                                <h4>{CHOOSE_PRICE}</h4>
-                                {CHOOSE_PRICE_DESC}
-                            </div>
-                            <div className={"ui segment"} id={"price-segment"}>
-
-                                <Slider
-                                    max={MAX_PRICE_FILTER_VALUE}
-                                    defaultValue={MAX_PRICE_FILTER_VALUE}
-                                    value={this.props.criteria.price}
-                                    tipFormatter={value => `${value} ${CURRENCY}`}
-                                    onAfterChange={(e) => this.onPick(e)}
-                                    onChange={(e) => this.onPick(e)}
-                                    tooltipVisible
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <Container
+                headerTitle={CHOOSE_PRICE}
+                headerDescription={CHOOSE_PRICE_DESC}
+                component={this.priceComponent()}
+            />
         )
+    }
+
+    priceComponent() {
+        return (
+            <div className={"ui segment"} id={"price-segment"}>
+
+                <Slider
+                    max={MAX_PRICE_FILTER_VALUE}
+                    defaultValue={MAX_PRICE_FILTER_VALUE}
+                    value={this.props.criteria.price}
+                    tipFormatter={value => `${value} ${CURRENCY}`}
+                    onAfterChange={(e) => this.onPick(e)}
+                    onChange={(e) => this.onPick(e)}
+                    tooltipVisible
+                />
+            </div>
+        );
     }
 }
 
