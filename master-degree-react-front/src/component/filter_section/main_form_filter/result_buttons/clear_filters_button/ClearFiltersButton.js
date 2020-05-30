@@ -4,6 +4,7 @@ import {Button, Icon} from "semantic-ui-react";
 import {Link} from "react-scroll";
 import {connect} from "react-redux";
 import {clearFilterElements, setIsClearedFilters} from "../../../../../redux/actions/actions";
+import {CLEAR_FILTERS} from "../../../../../lang/pl";
 
 class ClearFiltersButton extends Component {
 
@@ -32,7 +33,7 @@ class ClearFiltersButton extends Component {
                             icon labelPosition='left'
                             onClick={this.clearCriteria}
                     >
-                        Wyczysc filtry
+                        {CLEAR_FILTERS}
                         <Icon id={"clear-icon"}
                               name='eraser'
                         />

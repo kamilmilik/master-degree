@@ -10,6 +10,7 @@ import {
     NUMBER_OF_MONTHS_VALUE_3,
     NUMBER_OF_MONTHS_VALUE_NONE
 } from "../Const";
+import {CHOOSE_TERM, CHOOSE_TERM_DESC, LACK, MONTHS, REQUIREMENT_WITH_LACK} from "../../../../lang/pl";
 
 export const TERM_CLICKED = "term-text-clicked";
 export const TERM_NOT_CLICKED = "term-text";
@@ -33,8 +34,8 @@ class TermChooser extends Component {
                     <div className={"col-md-12"}>
                         <div className="mdb-lightbox no-margin">
                             <div id={"term-header"}>
-                                <h4>Wybierz okres</h4>
-                                Wybierz przez jaki okres ma trwac umowa
+                                <h4>{CHOOSE_TERM}</h4>
+                                {CHOOSE_TERM_DESC}
                             </div>
                             <div className={"ui segment"} id={"term-segment"}>
                                 <div className={"container"}>
@@ -43,8 +44,8 @@ class TermChooser extends Component {
                                             {
                                                 terms.map((termValue) => {
                                                     let classNameString = parseInt(this.props.criteria.term, 10) === termValue ? TERM_CLICKED : TERM_NOT_CLICKED;
-                                                    let termTextValue = this.isNoTermRequirements(termValue) ? "brak" : termValue.toString()
-                                                    let termText = this.isNoTermRequirements(termValue) ? "wymagan" : "miesiecy"
+                                                    let termTextValue = this.isNoTermRequirements(termValue) ? `${LACK}` : termValue.toString()
+                                                    let termText = this.isNoTermRequirements(termValue) ? `${REQUIREMENT_WITH_LACK}` : `${MONTHS}`
                                                     let style = this.isTheLastElementOfTerm(terms, termValue) ? {borderRight: "unset"} : {borderRight: "1px solid rgba(34, 36, 38, .15)"}
                                                     return (
                                                         <div id={classNameString} className={"col-sm"}

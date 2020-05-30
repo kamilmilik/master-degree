@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import {Image} from "react-native-web";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
+import {CHOOSE_OPERATOR, CHOOSE_OPERATOR_DESC} from "../../../../lang/pl";
 
 export const OPERATOR_IMAGE_CLICKED = "operator-image-clicked";
 export const OPERATOR_IMAGE_NOT_CLICKED = "operator-image";
@@ -50,8 +51,8 @@ class OperatorChooser extends Component {
                     <div className={"col-md-12"} id={"operators-list"}>
                         <div className={"mdb-lightbox no-margin"}>
                             <div id={"operator-header"}>
-                                <h4>Wybierz operatora</h4>
-                                Wybierajac operatora wybierasz dostawce pakietu telewizyjnego
+                                <h4>{CHOOSE_OPERATOR}</h4>
+                                {CHOOSE_OPERATOR_DESC}
                             </div>
                             <div id={"operator-grid"}>
                                 <div className={"ui segment"} id={"operator-segment"}>

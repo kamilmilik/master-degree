@@ -14,6 +14,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 import {Image} from "react-native-web";
+import {CHOOSE_CHANNELS, CHOOSE_CHANNELS_DESC, HD} from "../../../../lang/pl";
 
 const CLICKED_CATEGORY_BUTTON = "category-button-clicked";
 const NOT_CLICKED_CATEGORY_BUTTON = "category-button";
@@ -154,8 +155,8 @@ class ChannelChooser extends Component {
                 <div className={"col-md-12"}>
                     <div className={"mdb-lightbox no-margin"}>
                         <div id={"channel-header"}>
-                            <h4>Wybierz kanaly</h4>
-                            Wybierz kanaly majace znalezc sie w pakietach
+                            <h4>{CHOOSE_CHANNELS}</h4>
+                            {CHOOSE_CHANNELS_DESC}
                         </div>
                         {
                             values.channelsGroupByCategoryDto.map((categoryWithChannelsDto) => (
@@ -208,7 +209,7 @@ class ChannelChooser extends Component {
                                                                             {
                                                                                 this.isChannelHD(channel.name) ?
                                                                                     <div className={"hd-overlay"}>
-                                                                                        <b>HD</b>
+                                                                                        <b>{HD}</b>
                                                                                     </div> : null
                                                                             }
                                                                         </div>

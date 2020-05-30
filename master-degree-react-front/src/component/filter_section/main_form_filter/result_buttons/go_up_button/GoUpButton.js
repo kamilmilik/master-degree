@@ -2,14 +2,13 @@ import React, {Component} from "react";
 import {Link} from "react-scroll";
 import {Button, Icon} from "semantic-ui-react";
 import './GoUpButton.css';
-import {connect} from "react-redux";
-import App from "../../../../../App";
+import {GO_BACK_TO_FILTERS} from "../../../../../lang/pl";
 
 class GoUpButton extends Component {
 
     render() {
-        return(
-            <div >
+        return (
+            <div>
                 <Link
                     activeClass="active"
                     to="section1"
@@ -22,8 +21,8 @@ class GoUpButton extends Component {
                             id={"go-up-button"}
                             icon labelPosition='left'
                     >
-                        Wroc do filtrow
-                        <Icon  name='arrow up'/>
+                        {GO_BACK_TO_FILTERS}
+                        <Icon name='arrow up'/>
                     </Button>
                 </Link>
             </div>

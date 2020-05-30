@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {MAX_PRICE_FILTER_VALUE} from "../Const";
 import 'antd/dist/antd.css';
 import {Slider} from 'antd';
+import {CHOOSE_PRICE, CHOOSE_PRICE_DESC, CURRENCY} from "../../../../lang/pl";
 
 class PricePicker extends Component {
 
@@ -24,8 +25,8 @@ class PricePicker extends Component {
                     <div className={"col-md-12"}>
                         <div className={"mdb-lightbox no-margin"}>
                             <div id={"price-header"}>
-                                <h4>Wybierz cene</h4>
-                                Wybierz maksymalna cene pakietu telewizyjnego
+                                <h4>{CHOOSE_PRICE}</h4>
+                                {CHOOSE_PRICE_DESC}
                             </div>
                             <div className={"ui segment"} id={"price-segment"}>
 
@@ -33,7 +34,7 @@ class PricePicker extends Component {
                                     max={MAX_PRICE_FILTER_VALUE}
                                     defaultValue={MAX_PRICE_FILTER_VALUE}
                                     value={this.props.criteria.price}
-                                    tipFormatter={value => `${value}zl`}
+                                    tipFormatter={value => `${value} ${CURRENCY}`}
                                     onAfterChange={(e) => this.onPick(e)}
                                     onChange={(e) => this.onPick(e)}
                                     tooltipVisible

@@ -3,6 +3,7 @@ import {setResult} from "../../../../redux/actions/actions";
 import {connect} from "react-redux";
 import HorizontalCardResult from "./card_result/HorizontalCardResult";
 import "./ResultsComponent.css";
+import {IMPROVE_FILTERS, NONE_RESULTS, NONE_RESULTS_DESC} from "../../../../lang/pl";
 
 class ResultsComponent extends Component {
 
@@ -19,9 +20,9 @@ class ResultsComponent extends Component {
                             {
                                 this.isEmptyResult() ?
                                     <div id={"no-result-text"}>
-                                        <h3>Brak wynikow</h3>
-                                        <h5>Zaden pakiet nie spelnia Twoich filtrow<br/>
-                                            Popraw filtry</h5>
+                                        <h3>{NONE_RESULTS}</h3>
+                                        <h5>{NONE_RESULTS_DESC}<br/>
+                                            {IMPROVE_FILTERS}</h5>
                                     </div>
                                     :
                                     this.props.result.map((resultTvPackage) => {

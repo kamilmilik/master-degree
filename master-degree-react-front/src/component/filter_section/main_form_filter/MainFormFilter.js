@@ -50,7 +50,7 @@ class MainFormFilter extends Component {
         const resDataDto = {operatorsDto, channelsGroupByCategoryDto};
 
         return (
-            <div className={"container-fluid"} id={"main-formm-filter"}>
+            <div className={"container-fluid"} id={"main-form-filter"}>
                 <OperatorChooser
                     values={resDataDto}
                 />

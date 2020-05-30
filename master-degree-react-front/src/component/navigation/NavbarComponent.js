@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import logo from "../../logo.svg";
 import {animateScroll as scroll, Link} from "react-scroll";
 import './Navigation.css';
+import {FILTERS, SEARCHED_PACKAGES} from "../../lang/pl";
 
 export default class NavbarComponent extends Component {
     scrollToTop = () => {
@@ -12,12 +12,6 @@ export default class NavbarComponent extends Component {
         return (
             <nav className="nav" id="navbar">
                 <div className="nav-content">
-                    {/*<img*/}
-                    {/*    src={logo}*/}
-                    {/*    className="nav-logo"*/}
-                    {/*    alt="Logo"*/}
-                    {/*    onClick={this.scrollToTop}*/}
-                    {/*/>*/}
                     <ul className="nav-items">
                         <li className="nav-item">
                             <Link
@@ -28,7 +22,7 @@ export default class NavbarComponent extends Component {
                                 offset={-70}
                                 duration={500}
                             >
-                                Filtry
+                                {FILTERS}
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -40,7 +34,7 @@ export default class NavbarComponent extends Component {
                                 offset={-70}
                                 duration={500}
                             >
-                                Wyszukane Pakiety
+                                {SEARCHED_PACKAGES}
                             </Link>
                         </li>
                     </ul>

@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {trackPromise} from "react-promise-tracker";
 import FilteredResultDataService from "../../../../../service/FilteredResultDataService";
 import {setIsClearedFilters, setResult} from "../../../../../redux/actions/actions";
+import {SEARCH_OFFERS} from "../../../../../lang/pl";
 
 class SearchButton extends Component {
 
@@ -45,7 +46,7 @@ class SearchButton extends Component {
                             icon labelPosition='right'
                             onClick={this.searchButtonAction}
                     >
-                        Wyszukaj oferty
+                        {SEARCH_OFFERS}
                         <Icon name='search'/>
                     </Button>
                 </Link>

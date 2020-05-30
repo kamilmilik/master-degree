@@ -10,7 +10,7 @@ class ButtonsContainer extends Component {
         return (
             <div id={"button-group-container"}>
                 <div id={"go-up-button-container"}>
-                    <GoUpButton />
+                    <GoUpButton/>
                 </div>
                 <Button.Group id={"button-group"}>
                     <ClearFiltersButton/>

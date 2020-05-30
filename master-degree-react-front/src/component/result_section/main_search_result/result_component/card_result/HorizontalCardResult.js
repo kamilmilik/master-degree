@@ -1,9 +1,19 @@
 import React from 'react';
 import './HorizontalCardResult.css';
 import {Image} from "react-native-web";
-import {Card, Feed, Icon} from "semantic-ui-react";
-import {Button} from "semantic-ui-react";
-import {Link} from "react-router-dom";
+import {Button, Icon} from "semantic-ui-react";
+import {
+    CHANNELS,
+    CHECK,
+    CURRENCY,
+    EXTRA_AVAILABLE_TV_PACKAGES,
+    EXTRA_PACKAGES,
+    FROM_EXTRA_TV_PACKAGES,
+    FROM_MAIN_TV_PACKAGE,
+    MONTH_SHORTCUT,
+    MONTHS,
+    NO_EXTRA_AVAILABLE_TV_PACKAGES
+} from "../../../../../lang/pl";
 
 
 export default function HorizontalCardResult({data}) {
@@ -24,10 +34,10 @@ export default function HorizontalCardResult({data}) {
                         <div className="grid-item-price">
                             <div id={"price-term-result-container"}>
                                 <h1 id={"price-result-text"}>
-                                    {price}<span> zl/msc</span>
+                                    {price}<span> {CURRENCY}/{MONTH_SHORTCUT}</span>
                                 </h1>
                                 <div id={"term-info-result-container"}>
-                                    czas {data.filteredTvPackage.term} miesiecy
+                                    czas {data.filteredTvPackage.term} {MONTHS}
                                 </div>
                             </div>
                         </div>
@@ -53,7 +63,7 @@ export default function HorizontalCardResult({data}) {
                                 >
                                     {data.filteredTvPackage.name}
                                 </h5>
-                                {hasMeetCriteriaExtraTvPackages ? <span>Pakiety dodatkowe:</span> : null}
+                                {hasMeetCriteriaExtraTvPackages ? <span>{EXTRA_PACKAGES}:</span> : null}
                                 <h6 id={"extra-packages-text"}>
                                     {
                                         hasMeetCriteriaExtraTvPackages ? (
@@ -83,11 +93,11 @@ export default function HorizontalCardResult({data}) {
                             <div id={"channels-result-container"}>
                                 <div>
                                     <h1 id={"channels-result-text"}>
-                                        {data.filteredTvPackage.channels.length}<span> kanalow</span>
+                                        {data.filteredTvPackage.channels.length}<span> {CHANNELS}</span>
                                     </h1>
                                 </div>
                                 <div>
-                                    <span>z pakietu podstawowego</span>
+                                    <span>{FROM_MAIN_TV_PACKAGE}:</span>
                                 </div>
                             </div>
                             {
@@ -96,11 +106,11 @@ export default function HorizontalCardResult({data}) {
                                         <div><h2 id={"add-extra-channels-length-text"}>+</h2></div>
                                         <div>
                                             <h1 id={"channels-result-text"}>
-                                                {numberOfChannelsFromMeetCriteriaPackages}<span> kanalow</span>
+                                                {numberOfChannelsFromMeetCriteriaPackages}<span> {CHANNELS}</span>
                                             </h1>
                                         </div>
                                         <div>
-                                            <span>z pakietow dodatkowych</span>
+                                            <span>{FROM_EXTRA_TV_PACKAGES}</span>
                                         </div>
                                     </div> : null
                             }
@@ -115,7 +125,7 @@ export default function HorizontalCardResult({data}) {
                         <div className="grid-item-extra-packages">
                             {hasExtraTvPackages ?
                                 <div id={"extra-package-main-container"}>
-                                    <h5 id={"extra-packages-info-text"}>Dostepne pakiety dodatkowe:</h5>
+                                    <h5 id={"extra-packages-info-text"}>{EXTRA_AVAILABLE_TV_PACKAGES}:</h5>
                                     {
                                         data.filteredTvPackage.extraAvailableTvPackages.map((availableTvPackage) => {
                                             return (
@@ -138,7 +148,7 @@ export default function HorizontalCardResult({data}) {
                                     }
                                 </div>
                                 :
-                                <h5 id={"extra-packages-info-text"}>Brak dostepnych pakietow dodatkowych</h5>
+                                <h5 id={"extra-packages-info-text"}>{NO_EXTRA_AVAILABLE_TV_PACKAGES}</h5>
                             }
                         </div>
                     </div>
@@ -153,7 +163,7 @@ export default function HorizontalCardResult({data}) {
                                 <a href={data.filteredTvPackage.link}>
                                     <Button id={"link-button"}>
                                         <Icon id={"link-button-icon"} name='arrow alternate circle right outline'/>
-                                        <div id={"link-button-text"}>Zobacz</div>
+                                        <div id={"link-button-text"}>{CHECK}</div>
                                     </Button>
                                 </a>
                             </div>
