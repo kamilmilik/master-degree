@@ -12,33 +12,60 @@ public class Channel {
     String desc;
     String imgSrc;
 
-    public static Channel channel(String name){ // To make object immutable. Factory method.
+    public static Channel channel(String name) { // To make object immutable. Factory method.
         return new Channel(name, null, null);
     }
 
     public boolean isTheSame(String channelName) {
-//        if (isTheSameLength(channel)) {
-//            String channelToCompareName = chooseProperChannelNameToCompareForSymmetryComparision(channel);
-//            return (isChannelsNameStartWithTheSame(channelToCompareName) && isHdChannelName(channelToCompareName));
-//        } else return getName().equalsIgnoreCase(channel.getName());
-        return getName().equalsIgnoreCase(channelName);
+//        return compareWithIgnoreHdInChannelName(channelName);
+//        return getName().equalsIgnoreCase(channelName);
+        return compareWithHdAndNonHdIsTheSame(channelName);
     }
 
-    private boolean isTheSameLength(Channel channel) {
-        return getName().length() != channel.getName().length();
+    private boolean compareWithHdAndNonHdIsTheSame(String channelName) {
+        if (isChannelNameGreaterThan(channelName)) {
+            return channelWithoutHdAndWhiteSpaces(getName()).equalsIgnoreCase(removeAllWhiteSpaces(channelName));
+        } else return getName().equalsIgnoreCase(channelName);
     }
 
-    private String chooseProperChannelNameToCompareForSymmetryComparision(Channel channel) {
-        if (getName().length() > channel.getName().length()) {
+    private boolean compareWithIgnoreHdInChannelName(String channelName) {
+        if (isNotTheSameLength(channelName)) {
+            String channelToCompareName = channelWithLongerName(channelName);
+            return (isChannelsNameStartWithTheSame(channelToCompareName) && getHdDifference(channelToCompareName, getName()));
+        } else return getName().equalsIgnoreCase(channelName);
+    }
+
+    private String channelWithoutHdAndWhiteSpaces(String channelName) {
+        return removeAllWhiteSpaces(channelNameWithoutHd(channelName.toLowerCase()));
+    }
+
+    private String removeAllWhiteSpaces(String channelName) {
+        return channelName.replaceAll(" ", "");
+    }
+
+    private String channelNameWithoutHd(String channelName) {
+        return channelName.replaceAll("hd", "");
+    }
+
+    private boolean isChannelNameGreaterThan(String channelName) {
+        return getName().length() > channelName.length();
+    }
+
+    private boolean isNotTheSameLength(String channelName) {
+        return getName().length() != channelName.length();
+    }
+
+    private String channelWithLongerName(String channelName) {
+        if (getName().length() > channelName.length()) {
             return getName().toLowerCase();
         } else {
-            return channel.getName().toLowerCase();
+            return channelName.toLowerCase();
         }
     }
 
-    private boolean isHdChannelName(String channelName) {
-        String secondPartOfChannelToCompareNameWithoutSpace = channelName.substring(getName().length()).replaceAll(" ", "");
-        return secondPartOfChannelToCompareNameWithoutSpace.equals("hd");
+    private boolean getHdDifference(String sourceChannelName, String differenceChannelName) {
+        String secondPartOfChannelToCompareNameWithoutSpace = sourceChannelName.substring(differenceChannelName.length()).replaceAll(" ", "");
+        return secondPartOfChannelToCompareNameWithoutSpace.equalsIgnoreCase("hd");
     }
 
     private boolean isChannelsNameStartWithTheSame(String channelName) {
