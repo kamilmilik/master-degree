@@ -1,8 +1,8 @@
 import axios from 'axios'
+import {RESULT_API, SERVER_URL} from "../config/config";
 axios.defaults.withCredentials = true;
 
-const MAIN_URL = 'http://localhost:8095';
-const API = `${MAIN_URL}/api/result`;
+const API = `${SERVER_URL}${RESULT_API}`;
 
 class FilteredResultDataService {
 

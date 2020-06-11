@@ -1,8 +1,9 @@
 import axios from 'axios'
+import {OPERATORS_API, SERVER_URL} from "../config/config";
+
 axios.defaults.withCredentials = true;
 
-const MAIN_URL = 'http://localhost:8095';
-const API = `${MAIN_URL}/api/operators`;
+const API = `${SERVER_URL}${OPERATORS_API}`;
 
 class OperatorDataService {
     retrieveAllOperators() {

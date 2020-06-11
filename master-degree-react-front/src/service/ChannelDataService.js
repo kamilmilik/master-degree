@@ -1,7 +1,7 @@
 import axios from 'axios'
+import {CHANNELS_API, SERVER_URL} from "../config/config";
 
-const MAIN_URL = 'http://localhost:8095';
-const API = `${MAIN_URL}/api/channels`;
+const API = `${SERVER_URL}${CHANNELS_API}`;
 
 class ChannelDataService {
     retrieveAllChannels() {
