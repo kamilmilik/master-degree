@@ -14,7 +14,7 @@ import {
     DEFAULT_MIN_PRICE_FILTER_VALUE,
     MAX_PRICE_FILTER_VALUE,
     MIN_PRICE_FILTER_VALUE, NUMBER_OF_MONTHS_VALUE_3
-} from "../component/filter_section/main_form_filter/Const";
+} from "../components/filter_section/main_form_filter/Const";
 import React from "react";
 
 
