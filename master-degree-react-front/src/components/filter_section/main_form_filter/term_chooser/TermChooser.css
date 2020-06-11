@@ -1,0 +1,75 @@
+#main-term-chooser-container {
+    padding: unset;
+    margin-bottom: 25px;
+}
+
+#term-main-segment {
+    padding: unset;
+    background-color: #fcfcfc;
+}
+
+#term-header {
+    margin-top: 14px;
+    margin-bottom: unset;
+    text-align: left;
+}
+
+#term-segment {
+    width: 100%;
+    padding: 10px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    background-color: #f8f8f8;
+}
+
+.container {
+    width: inherit;
+}
+
+.row {
+    width: inherit;
+    display: inline-block;
+}
+
+.center-row {
+    width: inherit;
+    display: inline-flex;
+}
+
+
+#term-text, #term-text-clicked {
+text-align: center;
+position: relative;
+/*padding: 0 10% 0 10%;*/
+/*text-align: left;*/
+display: inline-grid;
+list-style: none;
+cursor: pointer;
+}
+
+#term-text-clicked {
+color: #61a4cf;
+}
+
+#term-text a > span, #term-text-clicked a > span {
+display: block;
+font-size: 18px;
+}
+
+#term-text a, #term-text-clicked a {
+display: table-caption;
+}
+
+@media only screen and (max-width: 620px) {
+    .center-row {
+        display: inline-block;
+    }
+
+    #term-text, #term-text-clicked {
+        border-right: unset !important; /*important override style set in js file */
+    }
+
+    #term-header{
+        text-align: center;
+    }
+}

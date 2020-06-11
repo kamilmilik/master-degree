@@ -1,0 +1,33 @@
+#main-price-picker-container {
+    padding: unset;
+    margin-bottom: 25px;
+}
+
+#price-main-segment {
+    padding: unset;
+    background-color: #fcfcfc;
+}
+
+#price-header{
+    margin-top: 14px;
+    margin-bottom: unset;
+    text-align: left;
+}
+
+#price-segment {
+    width: 100%;
+    padding: 0 10px 0 10px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    background-color: #f8f8f8;
+}
+
+.rc-slider {
+    padding: 50px 0;
+}
+
+@media only screen and (max-width: 620px) {
+    #price-header{
+        text-align: center;
+    }
+}
