@@ -11,7 +11,7 @@ public class GlobalRepositoryRestConfig implements RepositoryRestConfigurer {
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.getCorsRegistry()
                 .addMapping("/**")
-                .allowedOrigins("http://localhost:3000", "http://localhost:4200", "http://localhost:8095")
+                .allowedOrigins("http://localhost:5000","http://localhost:3000", "http://localhost:4200", "http://localhost:8095")
                 .allowedHeaders("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD")
                 .allowCredentials(true);
