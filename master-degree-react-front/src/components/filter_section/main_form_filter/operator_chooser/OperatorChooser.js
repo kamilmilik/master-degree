@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import {Image} from "react-native-web";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
-import {CHOOSE_OPERATOR, CHOOSE_OPERATOR_DESC} from "../../../../lang/pl";
+import {CHOOSE_OPERATOR, CHOOSE_OPERATOR_DESC, CHOOSE_OPERATOR_DESC_DEFAULT} from "../../../../lang/pl";
 import Container from "../../../custom_components/container/Container";
 
 export const OPERATOR_IMAGE_CLICKED = "operator-image-clicked";
@@ -50,6 +50,7 @@ class OperatorChooser extends Component {
             <Container
                 headerTitle={CHOOSE_OPERATOR}
                 headerDescription={CHOOSE_OPERATOR_DESC}
+                headerDefaultDescription={CHOOSE_OPERATOR_DESC_DEFAULT}
                 component={this.operatorComponent(values)}
             />
         )

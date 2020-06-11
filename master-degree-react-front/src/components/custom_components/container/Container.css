@@ -4,10 +4,24 @@
     background-color: #fcfcfc;
 }
 
+#main-container {
+    display: grid;
+}
+
 #container-header {
     margin-top: 14px;
     margin-bottom: unset;
     text-align: left;
+    display: grid;
+}
+
+#header-title {
+    margin-bottom: 1px;
+}
+
+.description-small {
+    align-self: end;
+    font-size: smaller;
 }
 
 @media only screen and (max-width: 620px) {

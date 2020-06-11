@@ -14,7 +14,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 import {Image} from "react-native-web";
-import {CHOOSE_CHANNELS, CHOOSE_CHANNELS_DESC, HD} from "../../../../lang/pl";
+import {CHOOSE_CHANNELS, CHOOSE_CHANNELS_DESC, CHOOSE_CHANNELS_DESC_DEFAULT, HD} from "../../../../lang/pl";
 import Container from "../../../custom_components/container/Container";
 import KeyValueComponent from "../../../custom_components/key_value_container/KeyValueComponent";
 
@@ -157,6 +157,7 @@ class ChannelChooser extends Component {
                 component={this.listOfCategoryWithChannelsComponent(values, selectedChannelsByCategory)}
                 headerTitle={CHOOSE_CHANNELS}
                 headerDescription={CHOOSE_CHANNELS_DESC}
+                headerDefaultDescription={CHOOSE_CHANNELS_DESC_DEFAULT}
             />
         )
     }
