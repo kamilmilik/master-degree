@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {OPERATORS_API, SERVER_URL} from "../config/config";
+import {OPERATORS_API, SERVER_URL} from "../config/Config";
 
 axios.defaults.withCredentials = true;
 

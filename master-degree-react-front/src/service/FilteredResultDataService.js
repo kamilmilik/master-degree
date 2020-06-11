@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {RESULT_API, SERVER_URL} from "../config/config";
+import {RESULT_API, SERVER_URL} from "../config/Config";
 axios.defaults.withCredentials = true;
 
 const API = `${SERVER_URL}${RESULT_API}`;
