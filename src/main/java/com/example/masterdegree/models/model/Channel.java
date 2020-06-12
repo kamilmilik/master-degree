@@ -16,23 +16,23 @@ public class Channel {
         return new Channel(name, null, null);
     }
 
-    public boolean isTheSame(String channelName) {
+    public boolean isTheSame(String searchedChannelName) {
 //        return compareWithIgnoreHdInChannelName(channelName);
 //        return getName().equalsIgnoreCase(channelName);
-        return compareWithHdAndNonHdIsTheSame(channelName);
+        return compareWithHdAndNonHdIsTheSame(searchedChannelName);
     }
 
-    private boolean compareWithHdAndNonHdIsTheSame(String channelName) {
-        if (isChannelNameGreaterThan(channelName)) {
-            return channelWithoutHdAndWhiteSpaces(getName()).equalsIgnoreCase(removeAllWhiteSpaces(channelName));
-        } else return getName().equalsIgnoreCase(channelName);
+    private boolean compareWithHdAndNonHdIsTheSame(String searchedChannelName) {
+        if (isChannelNameLenghtLessThan(searchedChannelName)) {
+            return channelWithoutHdAndWhiteSpaces(searchedChannelName).equalsIgnoreCase(removeAllWhiteSpaces(getName()));
+        } else return getName().equalsIgnoreCase(searchedChannelName);
     }
 
-    private boolean compareWithIgnoreHdInChannelName(String channelName) {
-        if (isNotTheSameLength(channelName)) {
-            String channelToCompareName = channelWithLongerName(channelName);
+    private boolean compareWithIgnoreHdInChannelName(String searchedChannelName) {
+        if (isNotTheSameLength(searchedChannelName)) {
+            String channelToCompareName = channelWithLongerName(searchedChannelName);
             return (isChannelsNameStartWithTheSame(channelToCompareName) && getHdDifference(channelToCompareName, getName()));
-        } else return getName().equalsIgnoreCase(channelName);
+        } else return getName().equalsIgnoreCase(searchedChannelName);
     }
 
     private String channelWithoutHdAndWhiteSpaces(String channelName) {
@@ -47,8 +47,8 @@ public class Channel {
         return channelName.replaceAll("hd", "");
     }
 
-    private boolean isChannelNameGreaterThan(String channelName) {
-        return getName().length() > channelName.length();
+    private boolean isChannelNameLenghtLessThan(String channelName) {
+        return channelName.length() > getName().length();
     }
 
     private boolean isNotTheSameLength(String channelName) {
