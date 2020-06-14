@@ -17,22 +17,40 @@ public class Channel {
     }
 
     public boolean isTheSame(String searchedChannelName) {
-//        return compareWithIgnoreHdInChannelName(channelName);
+        return compareWithIgnoreHdInChannelName(searchedChannelName);
 //        return getName().equalsIgnoreCase(channelName);
-        return compareWithHdAndNonHdIsTheSame(searchedChannelName);
+//        return compareWithHdAndNonHdIsTheSame(searchedChannelName);
     }
 
     private boolean compareWithHdAndNonHdIsTheSame(String searchedChannelName) {
-        if (isChannelNameLenghtLessThan(searchedChannelName)) {
+        if (isChannelNameLengthLessThan(searchedChannelName)) {
             return channelWithoutHdAndWhiteSpaces(searchedChannelName).equalsIgnoreCase(removeAllWhiteSpaces(getName()));
         } else return getName().equalsIgnoreCase(searchedChannelName);
     }
 
     private boolean compareWithIgnoreHdInChannelName(String searchedChannelName) {
         if (isNotTheSameLength(searchedChannelName)) {
-            String channelToCompareName = channelWithLongerName(searchedChannelName);
-            return (isChannelsNameStartWithTheSame(channelToCompareName) && getHdDifference(channelToCompareName, getName()));
-        } else return getName().equalsIgnoreCase(searchedChannelName);
+            if (isHdFor(searchedChannelName)) {
+                return compareWithoutSpaceIgnoreCase(getName(), removeHdFrom(searchedChannelName));
+            } else if (isHdFor(getName())) {
+                return compareWithoutSpaceIgnoreCase(removeHdFrom(getName()), searchedChannelName);
+            } else {
+                return compareWithoutSpaceIgnoreCase(getName(), searchedChannelName);
+            }
+        } else return compareWithoutSpaceIgnoreCase(getName(), searchedChannelName);
+    }
+
+    private boolean isHdFor(String channelName) {
+        int hdIndex = channelName.toLowerCase().indexOf("hd");
+        return hdIndex != -1;
+    }
+
+    private String removeHdFrom(String channelName) {
+        return channelName.toLowerCase().replaceAll("hd", "");
+    }
+
+    private boolean compareWithoutSpaceIgnoreCase(String source, String destination) {
+        return removeAllWhiteSpaces(source).equalsIgnoreCase(removeAllWhiteSpaces(destination));
     }
 
     private String channelWithoutHdAndWhiteSpaces(String channelName) {
@@ -47,30 +65,12 @@ public class Channel {
         return channelName.replaceAll("hd", "");
     }
 
-    private boolean isChannelNameLenghtLessThan(String channelName) {
+    private boolean isChannelNameLengthLessThan(String channelName) {
         return channelName.length() > getName().length();
     }
 
     private boolean isNotTheSameLength(String channelName) {
-        return getName().length() != channelName.length();
+        return removeAllWhiteSpaces(getName()).length() != removeAllWhiteSpaces(channelName).length();
     }
-
-    private String channelWithLongerName(String channelName) {
-        if (getName().length() > channelName.length()) {
-            return getName().toLowerCase();
-        } else {
-            return channelName.toLowerCase();
-        }
-    }
-
-    private boolean getHdDifference(String sourceChannelName, String differenceChannelName) {
-        String secondPartOfChannelToCompareNameWithoutSpace = sourceChannelName.substring(differenceChannelName.length()).replaceAll(" ", "");
-        return secondPartOfChannelToCompareNameWithoutSpace.equalsIgnoreCase("hd");
-    }
-
-    private boolean isChannelsNameStartWithTheSame(String channelName) {
-        return channelName.startsWith(getName().toLowerCase());
-    }
-
 
 }
