@@ -82,6 +82,7 @@ class ChannelTest {
                 Arguments.of("tvnhd 2", "tvn "),
                 Arguments.of("tvn2", "tvn "),
                 Arguments.of("tvn", "tvn 2"),
+                Arguments.of("tvn", "jvm"),
                 Arguments.of("tvn hd", "tvn hd2"),
                 Arguments.of("tvn hd", "tvn hd 2"),
                 Arguments.of("tvn", "Polsat")
