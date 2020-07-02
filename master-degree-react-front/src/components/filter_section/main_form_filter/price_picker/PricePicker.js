@@ -32,7 +32,6 @@ class PricePicker extends Component {
     priceComponent() {
         return (
             <div className={"ui segment"} id={"price-segment"}>
-
                 <Slider
                     max={MAX_PRICE_FILTER_VALUE}
                     defaultValue={MAX_PRICE_FILTER_VALUE}
