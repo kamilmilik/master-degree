@@ -6,7 +6,7 @@
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.9.1",
     "antd": "^4.0.1",
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "bootstrap-3-card": "^0.2.0",
     "formik": "^2.1.2",
